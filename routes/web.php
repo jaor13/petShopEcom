@@ -2,25 +2,32 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\EnsureUserIsAdmin;
+
 
 Route::get('/', function () {
     return view('landing');
-});
+})->name('landing');
 
-// non existing route
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::get('/user/dashboard', function () {
     return view('userDashboard');
-})->middleware(['auth', 'verified','rolemanager:user'])->name('userDashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/admin/dashboard', function () {
-    return view('adminDashboard');
-})->middleware(['auth', 'verified','rolemanager:admin'])->name('adminDashboard');
+// Route::get('/admin', function () {
+//     return redirect()->route('filament.admin.pages.dashboard'); 
+// })->middleware(['auth', 'verified'])->name('adminDashboard');
+
+
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::get('/admin', function () {
+        return redirect()->route('filament.admin.pages.dashboard'); 
+    })->name('adminDashboard');
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

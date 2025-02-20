@@ -48,4 +48,10 @@ class User extends Authenticatable implements MustVerifyEmail
             'updated_at' => 'datetime',
         ];
     }
+
+    public function address()
+{
+    return $this->belongsTo(Address::class);
+}
+
 }
