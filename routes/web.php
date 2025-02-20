@@ -11,21 +11,19 @@ Route::get('/', function () {
 
 
 
-Route::get('/user/dashboard', function () {
-    return view('userDashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-// Route::get('/admin', function () {
-//     return redirect()->route('filament.admin.pages.dashboard'); 
-// })->middleware(['auth', 'verified'])->name('adminDashboard');
-
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin', function () {
-        return redirect()->route('filament.admin.pages.dashboard'); 
+        return redirect()->route('filament.admin.pages.admin-dashboard'); 
     })->name('adminDashboard');
 });
+
+Route::middleware(['auth', 'verified', 'notAdmin'])->group(function () {
+    Route::get('/user/dashboard', function () {
+        return view('userDashboard');
+    })->name('dashboard');
+});
+
 
 
 
