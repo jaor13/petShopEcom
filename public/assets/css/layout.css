@@ -1,0 +1,107 @@
+:root {
+  --black-bean: #2F0911;
+  --desert-sand: #D5BBAA;
+  --champagne-pink: #F0D8C5;
+  --black: #020000;
+  --chestnut: #9A563F;
+}
+
+*{
+  font-family: "Afacad", serif;
+}
+
+
+
+
+.custom-header {
+  background-color: #00DCE3;
+  color: #FFF9EB;
+  padding: .2rem 10rem; /* Adjust vertical spacing */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds a soft shadow below */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+.btn-primary{
+  background-color: #fdfafa;
+  color: rgb(68, 46, 46);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  width:8rem;
+  font-weight: 300;
+  
+}
+
+.btn-outline-primary{
+  color: rgb(68, 46, 46);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  width:8rem;
+}
+
+.btn-primary:hover, 
+.btn-outline-primary:hover {
+  background-color: #fdfafa !important; /* Keeps background unchanged */
+  color: rgb(68, 46, 46) !important; /* Keeps text color unchanged */
+  border: none;
+  box-shadow: none; /* Removes any shadow effect */
+}
+
+.custom-footer{
+  background-color: #00DCE3;
+
+}
+
+.search-container {
+  max-width: 600px; /* Adjust max width as needed */
+  width: 100%; /* Ensures responsiveness */
+  border-radius: 0.5rem; /* Rounded corners */
+  background-color: #fdfafa; /* Light grey background */
+  flex-grow: 1; /* Make search bar take more space */
+  margin-right: 2rem; /* Adjust spacing */
+}
+
+.search-input {
+  padding: .7rem; /* Adjust padding */
+  border: none; /* Remove border */
+  background-color: #fdfafa; /* Light grey background */
+  flex: 1; /* Makes input field fill available space */
+
+}
+
+
+.cart-container {
+  margin: 0 1rem; /* Space between search and nav */
+  position: relative; /* Allows absolute positioning */
+
+}
+
+
+#search-form {
+  color: #495057; /* Dark gray text color */
+  border-radius: 0.5rem;
+  padding: 0rem .5rem 0rem .5rem; 
+}
+
+.brand-logo {
+  max-width: 100px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 2rem; /* Adjust spacing */
+
+}
+
+.slider {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+
