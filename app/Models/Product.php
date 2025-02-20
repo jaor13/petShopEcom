@@ -15,10 +15,11 @@ class Product extends Model
         'images' => 'array',
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
+      
 
     public function orderItems()
     {
