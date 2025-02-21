@@ -20,6 +20,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use File;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -36,7 +37,7 @@ class ProductResource extends Resource
             ->schema([
                 Group::make()->schema([
                     Section::make('Product Information')->schema([
-                        TextInput::make('name')
+                        TextInput::make('product_name')
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
@@ -133,20 +134,22 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('category_id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('product_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
+                ->searchable(),
+
+                Tables\Columns\TagsColumn::make('categories.name')
+                ->sortable(),
+
                 Tables\Columns\TextColumn::make('price')
-                    ->money()
-                    ->sortable(),
+                    ->money('PHP')
+                    ->sortable(),    
+
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
+                    
                 Tables\Columns\IconColumn::make('in_stock')
                     ->boolean(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -157,10 +160,17 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('categories')
+                    ->relationship('categories', 'name')
+                    ->searchable()
+                    ->label('Category'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
