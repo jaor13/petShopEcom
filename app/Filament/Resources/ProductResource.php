@@ -3,13 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Set;
 use Filament\Forms\Components\MultiSelect;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Group;
@@ -19,11 +16,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use File;
-use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\SelectFilter;
 
 class ProductResource extends Resource
 {
@@ -35,32 +29,33 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
+                // Main Product Details
                 Group::make()->schema([
                     Section::make('Product Information')->schema([
                         TextInput::make('product_name')
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(function (string $operation, $state, callable $set)  {
-                                if($operation !== 'create') {
-                                   return;
+                            ->afterStateUpdated(function (string $operation, $state, callable $set) {
+                                if ($operation !== 'create') {
+                                    return;
                                 }
                                 $set('slug', Str::slug($state));
                             }),
-
+    
                         TextInput::make('slug')
                             ->required()
                             ->maxLength(255)
                             ->disabled()
                             ->dehydrated()
                             ->unique(Product::class, 'slug', ignoreRecord: true),
-
-                            MarkdownEditor::make('description')
+    
+                        MarkdownEditor::make('description')
                             ->required()
                             ->columnSpanFull()
-                            ->fileAttachmentsDirectory('products')
+                            ->fileAttachmentsDirectory('products'),
                     ])->columns(2),
-
+    
                     Section::make('Images')->schema([
                         FileUpload::make('images')
                             ->multiple()
@@ -68,65 +63,59 @@ class ProductResource extends Resource
                             ->image()
                             ->maxFiles(5)
                             ->reorderable(),
-                    ]) 
+                    ]),
+                ])->columnSpan(2),
+    
+                // Pricing & Category Section
+                Group::make()->schema([
+                    Section::make('Pricing')->schema([
+                        TextInput::make('price')
+                            ->numeric()
+                            ->prefix('Php')
+                            ->required()
+                            ->disabled(fn (callable $get) => $get('has_variant')),
+    
+                        TextInput::make('stock_quantity')
+                            ->numeric()
+                            ->required(fn (callable $get) => !$get('has_variant'))
+                            ->disabled(fn (callable $get) => $get('has_variant')),
+                    ]),
+    
+                    Section::make('Association')->schema([
+                        MultiSelect::make('categories')
+                            ->relationship('categories', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                    ]),
+                ])->columnSpan(1),
+    
+                // Product Status Section
+                Section::make('Product Status')->schema([
+                    Toggle::make('has_variant')
+                        ->label('Has Variants')
+                        ->default(false)
+                        ->reactive(),
 
-                    ])->columnSpan(2),
-
-
-                    Group::make()->schema([
-                        Section::make('Pricing')->schema([
-                            TextInput::make('price')
-                                ->required()
+                    Forms\Components\Repeater::make('variants')
+                        ->relationship('variants')
+                        ->schema([
+                            TextInput::make('name')->label('Variant Name')->required(),
+                            
+                            TextInput::make('stock_quantity')
+                                ->label('Stock')
                                 ->numeric()
-                                ->prefix('Php'),
-                        ]),
-
-
-                        Section::make('Association')->schema([
-                            MultiSelect::make('categories')
-                                ->relationship('categories', 'name')
-                                ->searchable()
-                                ->preload()
                                 ->required(),
-                        ]),
-                        
-                        Section::make('Status')->schema([
-                            Toggle::make('in_stock')
-                                ->required()
-                                ->default(true),
-
-                            Toggle::make('is_active')
-                                ->required()
-                                ->default(true),
-                        ]),
-
-
-                    ])->columnSpan(1),
-
-
-
-
-                // Forms\Components\TextInput::make('category_id')
-                //     ->required()
-                //     ->numeric(),
-                // Forms\Components\TextInput::make('product_name')
-                //     ->required()
-                //     ->maxLength(255),
-                // Forms\Components\TextInput::make('slug')
-                //     ->required()
-                //     ->maxLength(255),
-                // Forms\Components\Textarea::make('images')
-                //     ->columnSpanFull(),
-                // Forms\Components\Textarea::make('description')
-                //     ->columnSpanFull(),
-                // Forms\Components\TextInput::make('price')
-                //     ->required()
-                //     ->numeric()
-                //     ->prefix('$'),
-                // Forms\Components\Toggle::make('is_active')
-                //     ->required(),
-                // Forms\Components\Toggle::make('in_stock')
-                //     ->required(),
+                                
+                            TextInput::make('price')->numeric()->nullable(),
+                        ])
+                        ->columnSpanFull()
+                        ->hidden(fn (callable $get) => !$get('has_variant')),
+    
+                    Toggle::make('is_active')
+                        ->required()
+                        ->default(true),
+                ])->columnSpanFull(),
             ])->columns(3);
     }
 
@@ -142,13 +131,16 @@ class ProductResource extends Resource
 
                 Tables\Columns\TextColumn::make('price')
                     ->money('PHP')
-                    ->sortable(),    
+                    ->sortable()
+                    ->getStateUsing(fn (Product $record) => $record->price),
 
                 Tables\Columns\IconColumn::make('is_active')
-                    ->boolean(),
-                    
-                Tables\Columns\IconColumn::make('in_stock')
-                    ->boolean(),
+                    ->boolean()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('stock')
+                    ->numeric()
+                    ->getStateUsing(fn (Product $record) => $record->stock),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

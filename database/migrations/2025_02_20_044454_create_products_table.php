@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('slug')->unique();
             $table->json('images')->nullable();
-            $table->longtext('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->boolean('is_active')->default(true);
+            $table->longText('description')->nullable();
+            $table->decimal('price', 10, 2)->nullable();
             $table->boolean('in_stock')->default(true);
+            $table->boolean('is_active')->default(true);
+            $table->boolean('has_variant')->default(false); // Default to false
             $table->timestamps();
         });
     }
