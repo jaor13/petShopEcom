@@ -39,6 +39,8 @@ class ProductVariant extends Model
         return $this->stocks()->sum('stock_quantity');
     }
 
+    
+
     public function setStockQuantityAttribute($value)
     {
         if (!is_null($value)) {
@@ -51,6 +53,9 @@ class ProductVariant extends Model
             );
         }
     }
+
+
+
 
     protected static function boot()
     {
@@ -72,6 +77,8 @@ class ProductVariant extends Model
 
             $variant->product->updateStockAndAvailability();
         });
-}
+    }
+
+    
 
 }

@@ -105,7 +105,13 @@ class ProductResource extends Resource
                             TextInput::make('stock_quantity')
                                 ->label('Stock')
                                 ->numeric()
-                                ->required(),
+                                ->required()
+                                ->default(fn ($record) => $record->stocks()->sum('stock_quantity')),
+
+                            
+
+
+
                                 
                             TextInput::make('price')->numeric()->nullable(),
                         ])

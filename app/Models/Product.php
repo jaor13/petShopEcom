@@ -57,6 +57,9 @@ class Product extends Model
         $this->in_stock = $totalStock > 0;
     }
     
+    
+
+    
     protected static function boot()
     {
         parent::boot();
