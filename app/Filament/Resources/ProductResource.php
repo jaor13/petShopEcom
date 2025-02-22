@@ -18,6 +18,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Tables\Filters\SelectFilter;
+use App\Models\ProductVariant;
+use App\Models\Stock;
 
 class ProductResource extends Resource
 {
@@ -29,9 +31,10 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                // Main Product Details
+
                 Group::make()->schema([
                     Section::make('Product Information')->schema([
+
                         TextInput::make('product_name')
                             ->required()
                             ->maxLength(255)
@@ -54,6 +57,7 @@ class ProductResource extends Resource
                             ->required()
                             ->columnSpanFull()
                             ->fileAttachmentsDirectory('products'),
+
                     ])->columns(2),
     
                     Section::make('Images')->schema([
@@ -64,21 +68,39 @@ class ProductResource extends Resource
                             ->maxFiles(5)
                             ->reorderable(),
                     ]),
+
                 ])->columnSpan(2),
+
     
-                // Pricing & Category Section
                 Group::make()->schema([
                     Section::make('Pricing')->schema([
+
                         TextInput::make('price')
                             ->numeric()
                             ->prefix('Php')
-                            ->required()
+                            ->required(fn (callable $get) => !$get('has_variant')) // Only required if has_variant is false
                             ->disabled(fn (callable $get) => $get('has_variant')),
-    
-                        TextInput::make('stock_quantity')
+
+
+
+                            
+                            TextInput::make('stock_quantity')
+                            ->label('Stock')
                             ->numeric()
+                            // ->default(fn ($record) => optional($record->singleStock)->stock_quantity ?? 0)
+                            ->dehydrateStateUsing(fn ($state, $record) => $record->setStockQuantityAttribute($state))
                             ->required(fn (callable $get) => !$get('has_variant'))
                             ->disabled(fn (callable $get) => $get('has_variant')),
+
+
+
+
+
+
+
+
+
+
                     ]),
     
                     Section::make('Association')->schema([
@@ -90,33 +112,61 @@ class ProductResource extends Resource
                     ]),
                 ])->columnSpan(1),
     
+
+
+
                 // Product Status Section
                 Section::make('Product Status')->schema([
-                    Toggle::make('has_variant')
-                        ->label('Has Variants')
-                        ->default(false)
-                        ->reactive(),
 
+                    Toggle::make('has_variant')
+                    ->label('Has Variants')
+                    ->default(false)
+                    ->reactive()
+                    ->afterStateUpdated(function (callable $get, callable $set, ?bool $state) {
+                        $productId = $get('id');
+                        if (!$productId) {
+                            return;
+                        }
+                        if (!$state) { // If has_variant is turned off
+                            ProductVariant::where('product_id', $productId)->delete(); // Delete all variants
+                            $set('stock_quantity', null); // Reset stock quantity for individual product
+                        } else { // If has_variant is turned on
+                            if ($productId && !ProductVariant::where('product_id', $productId)->exists()) {
+                                // Ensure at least one variant exists
+                                ProductVariant::create([
+                                    'product_id' => $productId,
+                                    'name' => 'Default Variant',
+                                    'price' => 0.00,
+                                ]);
+                            }
+                        }
+                    }),
+
+
+
+                
                     Forms\Components\Repeater::make('variants')
                         ->relationship('variants')
                         ->schema([
-                            TextInput::make('name')->label('Variant Name')->required(),
+                            TextInput::make('name')
+                                ->label('Variant Name')
+                                ->required(),
                             
                             TextInput::make('stock_quantity')
                                 ->label('Stock')
                                 ->numeric()
-                                ->required()
+                                ->required() // Stock is required for each variant
+                                ->dehydrateStateUsing(fn ($state, $record) => $record->setStockQuantityAttribute($state))
                                 ->default(fn ($record) => $record->stocks()->sum('stock_quantity')),
 
-                            
 
-
-
-                                
-                            TextInput::make('price')->numeric()->nullable(),
+    
+                            TextInput::make('price')
+                                ->numeric()
+                                ->required(), // Variant price is required
                         ])
                         ->columnSpanFull()
-                        ->hidden(fn (callable $get) => !$get('has_variant')),
+                        ->hidden(fn (callable $get) => !$get('has_variant')), // Show only if has_variant is true
     
                     Toggle::make('is_active')
                         ->required()
@@ -124,7 +174,7 @@ class ProductResource extends Resource
                 ])->columnSpanFull(),
             ])->columns(3);
     }
-
+    
     public static function table(Table $table): Table
     {
         return $table
@@ -144,9 +194,10 @@ class ProductResource extends Resource
                     ->boolean()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('stock')
-                    ->numeric()
-                    ->getStateUsing(fn (Product $record) => $record->stock),
+               Tables\Columns\TextColumn::make('stock')
+                ->numeric()
+                ->sortable()
+                ->getStateUsing(fn (Product $record) => $record->stock),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -192,4 +243,5 @@ class ProductResource extends Resource
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
+
 }

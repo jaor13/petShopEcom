@@ -15,9 +15,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('variant_id')->nullable()->constrained('product_variants')->onDelete('cascade');
-            $table->integer('stock_quantity');
+            $table->unsignedInteger('stock_quantity')->default(0);
+            $table->timestamp('restocked_at')->nullable();
             $table->timestamps();
+        
+        
+            // Index for faster queries
+            $table->index(['product_id', 'variant_id']);
         });
+        
     }
 
     /**

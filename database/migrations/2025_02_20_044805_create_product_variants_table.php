@@ -13,11 +13,18 @@ return new class extends Migration
     {
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->string('name'); // e.g., "Small - Red"
-            $table->decimal('price', 10, 2)->nullable(); // Optional different price
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade'); // Single foreign key constraint
+            $table->string('name', 100); // e.g., "Small - Red"
+            $table->decimal('price', 10, 2)->default(0.00); // Default instead of nullable
             $table->timestamps();
+        
+            // Prevent duplicate variant names per product
+            $table->unique(['product_id', 'name']);
+        
+            // Index for faster lookups
+            $table->index('product_id');
         });
+        
     }
 
     /**
