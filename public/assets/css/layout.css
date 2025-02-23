@@ -1,107 +1,160 @@
 :root {
-  --black-bean: #2F0911;
-  --desert-sand: #D5BBAA;
-  --champagne-pink: #F0D8C5;
-  --black: #020000;
-  --chestnut: #9A563F;
+  --default-font-family: "Afacad", sans-serif;
+}
+html, body {
+  height: auto;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
-*{
-  font-family: "Afacad", serif;
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+p, span, a {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.search-input, 
+.category-btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400; /* Normal weight */
+    font-size: 16px; /* Adjust as needed */
 }
 
 
+.header-container {
 
-
-.custom-header {
-  background-color: #00DCE3;
-  color: #FFF9EB;
-  padding: .2rem 10rem; /* Adjust vertical spacing */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds a soft shadow below */
+  width: 100%;
+  height: 100px;
+  background: #00dbe3;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+ 
+}
+
+.brown-red-paw {
+  width: 114px;
+  height: 114px;
+  background: url('assets/images/Slide2.png') no-repeat center;
+  background-size: cover;
+  position: relative;
+  margin-left: 150px;
+}
+
+.dropdown.btn:hover{
+  background-color: #00bdc4;
+}
+
+.dropdown-menu.show{
+  width: 206px;
+  border-radius: 0px;
 }
 
 
 
-.btn-primary{
-  background-color: #fdfafa;
-  color: rgb(68, 46, 46);
-  border: none;
-  padding: 0.5rem 1rem;
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #e4e4e4;
+  border-radius: 8px;
+  width: 700px;
+margin-left: 250px;
+margin-right: 120px;
+}
+
+.search-bar input {
+  flex: 1;
+  height: 45px;
+  padding: 10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid #ffffff;
+}
+
+.search-bar .dropdown .btn {
+  height: 45px;
+  border-radius: 0;
+  border: 1px solid #ffffff;
+  margin-left: 2px;
+  background: #ffffff;
+  color: #333;
+}
+
+
+
+.search-bar .btn-primary {
+  height: 45px;
+  width: 65px;
+  background: #00dbe3;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border: 1px solid #ffffff;
+  color: white;
+  font-weight: 600;
+}
+
+.search-bar .btn-primary:hover {
+  background-color: #00bdc4;
+  border-color: #0098b3;
+}
+
+
+
+.iconify-cart {
+  font-size: 35px; /* Adjust size */
+
+  position: relative;
+  top: 2px; /* Adjust vertical alignment */
+  right: 10px; /* Adjust horizontal alignment */
+  color: #ffffff;
+}
+
+
+.button-frame {
+  background: transparent;
+  border: 1px solid #ffffff;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  width:8rem;
-  font-weight: 300;
-  
+  margin-left: 20px;
 }
 
-.btn-outline-primary{
-  color: rgb(68, 46, 46);
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  width:8rem;
+.button-frame:hover {
+  background-color: #00bdc4;
+  border-color: #0098b3;
 }
 
-.btn-primary:hover, 
-.btn-outline-primary:hover {
-  background-color: #fdfafa !important; /* Keeps background unchanged */
-  color: rgb(68, 46, 46) !important; /* Keeps text color unchanged */
-  border: none;
-  box-shadow: none; /* Removes any shadow effect */
+.sign-in {
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.custom-footer{
-  background-color: #00DCE3;
-
+.custom-footer {
+  background-color: #00dbe3;
+  text-align: center;
+  padding: 15px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
-.search-container {
-  max-width: 600px; /* Adjust max width as needed */
-  width: 100%; /* Ensures responsiveness */
-  border-radius: 0.5rem; /* Rounded corners */
-  background-color: #fdfafa; /* Light grey background */
-  flex-grow: 1; /* Make search bar take more space */
-  margin-right: 2rem; /* Adjust spacing */
+.positionbg {
+ margin-left: 170px;
+ margin-right: 170px;
+  max-width: 100%;
 }
 
-.search-input {
-  padding: .7rem; /* Adjust padding */
-  border: none; /* Remove border */
-  background-color: #fdfafa; /* Light grey background */
-  flex: 1; /* Makes input field fill available space */
-
-}
-
-
-.cart-container {
-  margin: 0 1rem; /* Space between search and nav */
-  position: relative; /* Allows absolute positioning */
-
-}
-
-
-#search-form {
-  color: #495057; /* Dark gray text color */
-  border-radius: 0.5rem;
-  padding: 0rem .5rem 0rem .5rem; 
-}
-
-.brand-logo {
-  max-width: 100px; /* Adjust width as needed */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 2rem; /* Adjust spacing */
-
-}
-
-.slider {
-  padding-left: 4rem;
-  padding-right: 4rem;
+.carousel-inner {
+  height: 70%;
+  width: 100%;
 }
 
 
