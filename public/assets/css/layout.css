@@ -1,5 +1,5 @@
 :root {
-  --default-font-family: "Afacad", sans-serif;
+  --default-font-family: "Poppins", sans-serif;
 }
 html, body {
   height: auto;
@@ -7,7 +7,7 @@ html, body {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 h1, h2, h3 {
@@ -24,7 +24,7 @@ p, span, a {
 .category-btn {
     font-family: 'Poppins', sans-serif;
     font-weight: 400; /* Normal weight */
-    font-size: 16px; /* Adjust as needed */
+    font-size: 15px; /* Adjust as needed */
 }
 
 
@@ -40,8 +40,8 @@ p, span, a {
 }
 
 .brown-red-paw {
-  width: 114px;
-  height: 114px;
+  width: 100px;
+  height: 100px;
   background: url('assets/images/Slide2.png') no-repeat center;
   background-size: cover;
   position: relative;
@@ -108,33 +108,30 @@ margin-right: 120px;
 
 
 .iconify-cart {
-  font-size: 35px; /* Adjust size */
-
+  font-size: 35px; 
   position: relative;
-  top: 2px; /* Adjust vertical alignment */
-  right: 10px; /* Adjust horizontal alignment */
+  top: 2px; 
+  right: 10px; 
   color: #ffffff;
 }
 
+.btn-outline-primary {
+  width: 100px;
+  color: #00dbe3 !important; 
+  background-color: #ffffff !important; 
+  border: 2px solid #ffffff !important; 
+  border-radius: 12px; 
+  font-weight: bold; 
+  font-size: 20px; 
+  transition: all 0.3s ease-in-out;
 
-.button-frame {
-  background: transparent;
-  border: 1px solid #ffffff;
-  color: white;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 20px;
 }
 
-.button-frame:hover {
-  background-color: #00bdc4;
-  border-color: #0098b3;
-}
-
-.sign-in {
-  font-size: 13px;
-  font-weight: 600;
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: #00dbe3 !important; 
+  color: #ffffff !important; 
+  border-color: #ffffff !important; 
 }
 
 .custom-footer {

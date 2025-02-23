@@ -16,7 +16,9 @@
 
 <header class="header-container">
     <div class="rectangle"></div>
-    <div class="brown-red-paw"></div>
+        <a href="#" class="brown-red-paw">
+            <img src="{{ asset('assets/images/brand-logo.svg') }}" alt="Brand Logo" class="img-fluid brand-logo">
+        </a>
 
     <!-- Search Bar -->
     <div class="search-bar d-flex align-items-center">
@@ -41,10 +43,10 @@
                 <iconify-icon icon="mdi:cart" class="iconify-cart"></iconify-icon>
 
 
-            <!-- Sign In Button -->
-                <button class="button-frame">
-                <span class="sign-in">Sign in</span>
-                </button>
+                <nav class="d-flex ">
+                <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Sign In</a>
+</nav>
+
 </header>
 
             <main class="positionbg my-4">
