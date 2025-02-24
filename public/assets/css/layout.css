@@ -10,148 +10,232 @@ body {
   font-family: 'Poppins', sans-serif !important;
 }
 
-h1, h2, h3 {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-}
-
-p, span, a {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-}
-
-.search-input, 
-.category-btn {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400; /* Normal weight */
-    font-size: 15px; /* Adjust as needed */
-}
-
-
-.header-container {
-
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100px;
-  background: #00dbe3;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  height: 60px; /* Adjust as needed */
+  background-color: white; /* Ensure visibility */
+  z-index: 1000; /* Keeps it above other elements */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow */
+}
+
+main {
+  margin-top: 60px; /* Adjust this to match the header height */
+  padding: 20px;
+}
+
+
+
+/* Header Styling */
+.header-container {
+  width: 100%;
+  height: 110px;
+  position: fixed;
+  background: #00cfe3;
   display: flex;
   align-items: center;
+  padding: 0 20px;
+}
+
+.brand-logo {
+  max-height: 100px; /* Adjust size */
+  width: auto;
+  margin-right: 170px;
+}
+
+.d-flex.align-items-center {
+  text-decoration: none; /* Remove underline */
+  display: flex;
+  align-items: center;
+}
+
+/* Fix search container issues */
+.search-container {
+  margin-right: 140px;
+  background: #ffffff;
+  border-radius: 8px;
+  width: 600px; /* Adjust width */
+  max-width: 100%;
+  border: 1px solid #ddd;
+  position: relative; /* Needed for dropdown positioning */
+  overflow: visible; /* Prevents dropdown from getting cut */
+}
+/* Fix category dropdown */
+.category-dropdown {
+  display: flex;
+  align-items: center;
+  background: white;
+  height: 45px;
+  position: relative; /* Required for absolute positioning of dropdown */
+
+}
+
+/* Dropdown menu item styles */
+.dropdown-menu .dropdown-item {
+  color: #333; /* Default text color */
+  padding: 10px;
  
 }
 
-.brown-red-paw {
-  width: 100px;
-  height: 100px;
-  background: url('assets/images/Slide2.png') no-repeat center;
-  background-size: cover;
-  position: relative;
-  margin-left: 150px;
+/* Hover effect */
+.dropdown-menu .dropdown-item:hover {
+  background-color: #00dbe3 !important;
+  color: white !important; /* Ensures contrast */
 }
 
-.dropdown.btn:hover{
-  background-color: #00bdc4;
-}
-
-.dropdown-menu.show{
-  width: 206px;
+.category-btn {
+  font-size: 14px;
+  font-weight: normal;
+  color: #999;
+  background: transparent;
+  height: 45px; /* Fixes the 200px issue */
+  border: none; /* Remove default button border */
   border-radius: 0px;
 }
 
-
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  background: #e4e4e4;
-  border-radius: 8px;
-  width: 700px;
-margin-left: 250px;
-margin-right: 120px;
+.category-btn:hover{
+  background: #f0f0f0; 
+  color: #00dbe3;
 }
 
-.search-bar input {
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+  color: #00dbe3;
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Fix dropdown menu positioning */
+.dropdown-menu {
+  position: absolute !important; /* Ensures it displays outside */
+  top: 100%; /* Positions dropdown below button */
+  left: 0;
+  z-index: 1000; /* Ensures it appears above other elements */
+  background: white;
+  border: 2px solid white; /* Set border to white */
+  border-radius: 0px;
+  min-width: 200px;
+  display: none; /* Hide initially */
+}
+
+
+/* Fix search bar input */
+.search-container input {
   flex: 1;
   height: 45px;
   padding: 10px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border: 1px solid #ffffff;
-}
-
-.search-bar .dropdown .btn {
-  height: 45px;
-  border-radius: 0;
-  border: 1px solid #ffffff;
-  margin-left: 2px;
+  border: none;
   background: #ffffff;
-  color: #333;
+  outline: none;
 }
 
-
-
-.search-bar .btn-primary {
+/* Fix search button */
+.search-container .search-btn {
   height: 45px;
-  width: 65px;
+  width: 80px;
   background: #00dbe3;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border: 1px solid #ffffff;
-  color: white;
-  font-weight: 600;
-}
-
-.search-bar .btn-primary:hover {
-  background-color: #00bdc4;
-  border-color: #0098b3;
-}
-
-
-
-.iconify-cart {
-  font-size: 35px; 
-  position: relative;
-  top: 2px; 
-  right: 10px; 
+  border: none;
   color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 0px 8px 8px 0px;
 }
 
+.search-container .search-btn:hover {
+  background: #f0f0f0; 
+  color: #00dbe3;
+
+}
+
+/* Cart Icon Styling */
+.iconify-cart {
+  font-size: 38px; /* Adjust this value as needed */
+  color: #ffffff;
+  margin-right: 40px;
+  margin-top: 10px;
+}
+
+/* Hover Effect */
+.iconify-cart:hover {
+  color: #aaaaaa;
+ 
+}
+
+/* Sign In Button */
 .btn-outline-primary {
-  width: 100px;
-  color: #00dbe3 !important; 
-  background-color: #ffffff !important; 
-  border: 2px solid #ffffff !important; 
-  border-radius: 12px; 
-  font-weight: bold; 
-  font-size: 20px; 
+  width: 120px;
+  color: #00dbe3;
+  background-color: #ffffff;
+  border: 2px solid #ffffff !important;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 16px; /* Slightly larger padding for better clickability */
   transition: all 0.3s ease-in-out;
-
 }
 
-.btn-outline-primary:hover,
-.btn-outline-primary:focus {
-  background-color: #00dbe3 !important; 
-  color: #ffffff !important; 
-  border-color: #ffffff !important; 
+.btn-outline-primary:hover {
+  background-color: #00cfe3 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
 }
 
+
+
+.slider {
+  position: relative;
+  margin-top: 80px;
+}
+
+.carousel-inner img {
+  border-radius: 15px; /* Rounded corners */
+  display: flex;
+}
+
+.intro {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  color: white;
+  text-align: left;
+  max-width: 500px;
+}
+
+.pawsome-essentials {
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+.lorem-ipsum {
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  opacity: 0.9;
+}
+
+.shop-now {
+  border: 2px solid white;
+  transition: 0.3s;
+width: 140px;
+height: 40px;
+border-radius: 20px;
+background-color: transparent;
+color: #ffffff;
+margin-left: 120px;
+}
+
+.shop-now:hover {
+  background: white;
+  color: rgb(4, 199, 233);
+}
 .custom-footer {
   background-color: #00dbe3;
   text-align: center;
   padding: 15px 0;
-  position: fixed;
+
   bottom: 0;
   width: 100%;
 }
-
-.positionbg {
- margin-left: 170px;
- margin-right: 170px;
-  max-width: 100%;
-}
-
-.carousel-inner {
-  height: 70%;
-  width: 100%;
-}
-
-
