@@ -69,7 +69,7 @@
     </div>
 </header>
 
-<main class="container my-4 flex-grow-1">
+<main class="container my-5 flex-grow-1">
     <section class="slider position-relative">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -78,6 +78,15 @@
                 </div>
                 <div class="carousel-item">
                     <img src="{{ asset('assets/images/Slide2.png') }}" class="d-block w-100" alt="Slide 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('assets/images/Slide3.png') }}" class="d-block w-100" alt="Slide 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('assets/images/Slide4.png') }}" class="d-block w-100" alt="Slide 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('assets/images/Slide5.png') }}" class="d-block w-100" alt="Slide 5">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -99,10 +108,12 @@
         
     </section>
 </main>
-<div class="container py-4 h-100">
+
+
+<div class="container py-4 ">
     <div class="row row-cols-1 row-cols-md-5 g-4">
         <div class="col">
-            <div class="card h-100">
+            <div class="card">
                 <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
@@ -117,7 +128,7 @@
         </div>
         
         <div class="col">
-            <div class="card h-100">
+            <div class="card">
                 <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
@@ -132,7 +143,7 @@
         </div>
         
         <div class="col">
-            <div class="card h-100">
+            <div class="card">
                 <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
@@ -146,7 +157,7 @@
             </div>
         </div>
         <div class="col">
-            <div class="card h-100">
+            <div class="card">
                 <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
@@ -161,7 +172,86 @@
         </div>
         
         <div class="col">
-            <div class="card h-100">
+            <div class="card">
+                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
+                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
+                    <div class="d-flex align-items-center">
+                        <span class="me-2">⭐ 3.5</span>
+                        <span class="text-muted">| 100 sold</span>
+                    </div>
+                    <p class="text-muted">A.A Berces Street San Juan</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- ROW 2 -->
+
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+        <div class="col">
+            <div class="card">
+                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
+                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
+                    <div class="d-flex align-items-center">
+                        <span class="me-2">⭐ 3.5</span>
+                        <span class="text-muted">| 100 sold</span>
+                    </div>
+                    <p class="text-muted">A.A Berces Street San Juan</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card">
+                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
+                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
+                    <div class="d-flex align-items-center">
+                        <span class="me-2">⭐ 3.5</span>
+                        <span class="text-muted">| 100 sold</span>
+                    </div>
+                    <p class="text-muted">A.A Berces Street San Juan</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card">
+                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
+                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
+                    <div class="d-flex align-items-center">
+                        <span class="me-2">⭐ 3.5</span>
+                        <span class="text-muted">| 100 sold</span>
+                    </div>
+                    <p class="text-muted">A.A Berces Street San Juan</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
+                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
+                    <div class="d-flex align-items-center">
+                        <span class="me-2">⭐ 3.5</span>
+                        <span class="text-muted">| 100 sold</span>
+                    </div>
+                    <p class="text-muted">A.A Berces Street San Juan</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card">
                 <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
@@ -176,237 +266,8 @@
         </div>
     </div>
 </div>
-<div class="container py-4 h-100">
-    <div class="row row-cols-1 row-cols-md-5 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container py-4 h-100">
-    <div class="row row-cols-1 row-cols-md-5 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container py-4 h-100">
-    <div class="row row-cols-1 row-cols-md-5 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col">
-            <div class="card h-100">
-                <img src="{{ asset('assets/images/placeholder.png') }}" class="card-img-top" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</h5>
-                    <p class="card-text text-danger fw-bold">₱ 439.00</p>
-                    <div class="d-flex align-items-center">
-                        <span class="me-2">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
-                    </div>
-                    <p class="text-muted">A.A Berces Street San Juan</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+
 
 
 <!-- Footer -->

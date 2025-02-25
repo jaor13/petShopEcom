@@ -158,7 +158,7 @@ main {
 
 /* Hover Effect */
 .iconify-cart:hover {
-  color: #aaaaaa;
+  color: #d6eeff;
  
 }
 
@@ -239,3 +239,43 @@ margin-left: 120px;
   bottom: 0;
   width: 100%;
 }
+
+
+.fw-bold {
+  font-weight: 550 !important;
+  font-size: 13px;
+}
+.row{
+  margin-bottom: 10px;
+
+}
+
+.card{
+  margin:5px;
+  
+}
+.card:hover {
+  transform: translateY(-3px); 
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.116); 
+}
+
+.card-img-top {
+            height: 22vh;
+            object-fit: cover; 
+        }
+
+        .row-cols-1 > * { 
+            padding: 0;
+        }
+
+        .g-1, .g-1 > * { 
+            --bs-gutter-x: 0.25rem;
+            --bs-gutter-y: 0;
+        }
+
+.text-muted {
+  --bs-text-opacity: 1;
+  color: var(--bs-secondary-color) !important;
+  font-size: 13px;
+}
+
