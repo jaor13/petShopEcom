@@ -54,4 +54,10 @@ class User extends Authenticatable implements MustVerifyEmail
     return $this->belongsTo(Address::class);
 }
 
+public function getFullNameAttribute()
+{
+    return $this->fname . ' ' . $this->lname;
+}
+
+
 }

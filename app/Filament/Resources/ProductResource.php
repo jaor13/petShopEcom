@@ -27,6 +27,12 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cube';
 
+    protected static ?string $navigationGroup = 'Product Management';
+
+    protected static ?string $slug = 'product-management-products';
+
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -156,8 +162,8 @@ class ProductResource extends Resource
                                 ->label('Stock')
                                 ->numeric()
                                 ->required() // Stock is required for each variant
-                                ->dehydrateStateUsing(fn ($state, $record) => $record->setStockQuantityAttribute($state))
-                                ->default(fn ($record) => $record->stocks()->sum('stock_quantity')),
+                                ->dehydrateStateUsing(fn ($state, $record) => $record->setStockQuantityAttribute($state)),
+                           //     ->default(fn ($record) => $record->stocks()->sum('stock_quantity')),
 
 
     
