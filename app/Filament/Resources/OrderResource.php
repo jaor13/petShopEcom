@@ -16,14 +16,21 @@ use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Hidden;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use NumberFormatter;
+use Filament\Support\Facades\FilamentNumber as Number;
+use Filament\Forms\Components\Group;
+
 
 class OrderResource extends Resource
 {
@@ -97,8 +104,7 @@ class OrderResource extends Resource
                         ->required(),
 
                         Textarea::make('notes')
-                        ->columnSpanFull()
-                        ->required(),
+                        ->columnSpanFull(),
                     ])->columns(2),
 
                         Section::make('Order Items')->schema([
@@ -147,26 +153,82 @@ class OrderResource extends Resource
                                 ->columnSpan(3),
 
                             ])->columns(12),
-                        ])
 
+                            Placeholder::make('grand_total_placeholder')
+                            ->label('Grand Total')
+                            ->content(function(Get $get, Set $set){
+                                $total = 0;
+                                if(!$repeaters = $get('items')){
+                                    return $total;
+                            }
 
-                    ]),
-                ])
-                ->columns(1);
+                            foreach($repeaters as $key => $repetear){
+                                $total += $get("items.{$key}.total_amount");
+                            }
+                            $set ('grand_total', $total);
+                            return '₱' . number_format($total, 2);
+                          }),
+
+                          Hidden::make('grand_total')
+                            ->default(0)
+                    ])
+                ]) ->columns(1),
+                ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
+                TextColumn::make('user.username')
+                ->label('Customer')
+                ->searchable()
+                ->sortable(),
                 //
+
+                TextColumn::make('grand_total')
+                ->numeric()
+                ->sortable()
+                ->money('PHP'),
+
+                TextColumn::make('payment_method')
+                ->sortable()
+                ->searchable(),
+
+                TextColumn::make('payment_status')
+                ->sortable()
+                ->searchable(),
+
+                SelectColumn::make('status')
+                ->options([
+                    'new' => 'New',
+                    'processing'=> 'Processing',
+                    'shipped' => 'Shipped',
+                    'delivered' => 'Delivered',
+                    'cancelled' => 'Cancelled'
+                ])
+                ->sortable()
+                ->searchable(),
+
+                TextColumn::make('shipping_method')
+                ->sortable()
+                ->searchable(),
+
+                TextColumn::make('created_at')
+                ->sortable()
+                ->dateTime()
+                ->toggledHiddenByDefault(true),
+
+              
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -180,6 +242,14 @@ class OrderResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getNavigationBadge(): ?string{
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string{
+        return static::getModel()::count() > 10 ? 'success' : 'danger';
     }
 
     public static function getPages(): array
