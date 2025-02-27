@@ -23,7 +23,6 @@ header {
 
 main {
   margin-top: 70px; /* Adjust this to match the header height */
-
 }
 
 
@@ -148,6 +147,19 @@ main {
 
 }
 
+/* Cart Icon Styling */
+.iconify-cart {
+  font-size: 38px; /* Adjust this value as needed */
+  color: #ffffff;
+  margin-right: 40px;
+  margin-top: 10px;
+}
+
+/* Hover Effect */
+.iconify-cart:hover {
+  color: #d6eeff;
+ 
+}
 
 /* Sign In Button */
 .btn-outline-primary {
@@ -273,4 +285,3 @@ margin-left: 120px;
   color: var(--bs-secondary-color) !important;
   font-size: 13px;
 }
-
