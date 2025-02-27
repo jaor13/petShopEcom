@@ -13,6 +13,7 @@ use Filament\Forms\Components\Group;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -86,30 +87,35 @@ class ProductResource extends Resource
                         TextInput::make('price')
                             ->numeric()
                             ->prefix('Php')
-                            ->required(fn (callable $get) => !$get('has_variant')) // Only required if has_variant is false
+                            ->required(fn (callable $get) => !$get('has_variant')) 
                             ->disabled(fn (callable $get) => $get('has_variant')),
 
 
 
                             
+                            // TextInput::make('stock_quantity')
+                            // ->label('Stock')
+                            // ->numeric()
+                            // ->default(fn ($record) => $record?->has_variant ? null : $record?->stock_quantity ?? 0)
+                            // ->dehydrateStateUsing(fn ($state, $record) => !$record?->has_variant ? $state : null) // Only save if not variant-based
+                            // ->required(fn (callable $get) => !$get('has_variant'))
+                            // ->disabled(fn (callable $get) => $get('has_variant')),
+                        
+                        
+
                             TextInput::make('stock_quantity')
                             ->label('Stock')
                             ->numeric()
-                            // ->default(fn ($record) => optional($record->singleStock)->stock_quantity ?? 0)
-                            ->dehydrateStateUsing(fn ($state, $record) => $record->setStockQuantityAttribute($state))
                             ->required(fn (callable $get) => !$get('has_variant'))
-                            ->disabled(fn (callable $get) => $get('has_variant')),
-
-
-
-
-
-
-
-
-
-
+                            ->disabled(fn (callable $get) => $get('has_variant'))
+                            ->afterStateUpdated(function (callable $get, $state) {
+                                if (!$get('has_variant')) {
+                                    Product::where('id', $get('id'))->update(['stock_quantity' => $state]);
+                                }
+                            }),
+                        
                     ]),
+
     
                     Section::make('Association')->schema([
                         MultiSelect::make('categories')
@@ -121,38 +127,28 @@ class ProductResource extends Resource
                 ])->columnSpan(1),
     
 
-
-
-                // Product Status Section
                 Section::make('Product Status')->schema([
-
                     Toggle::make('has_variant')
                     ->label('Has Variants')
                     ->default(false)
                     ->reactive()
                     ->afterStateUpdated(function (callable $get, callable $set, ?bool $state) {
                         $productId = $get('id');
+
                         if (!$productId) {
                             return;
                         }
-                        if (!$state) { // If has_variant is turned off
+
+                        if (!$state) { // If `has_variant` is turned OFF
                             ProductVariant::where('product_id', $productId)->delete(); // Delete all variants
-                            $set('stock_quantity', null); // Reset stock quantity for individual product
-                        } else { // If has_variant is turned on
-                            if ($productId && !ProductVariant::where('product_id', $productId)->exists()) {
-                                // Ensure at least one variant exists
-                                ProductVariant::create([
-                                    'product_id' => $productId,
-                                    'name' => 'Default Variant',
-                                    'price' => 0.00,
-                                ]);
-                            }
+                            
+                            // Restore stock_quantity from the product itself
+                            $totalStock = Product::where('id', $productId)->value('stock_quantity');
+                            $set('stock_quantity', $totalStock ?? 0);
                         }
                     }),
 
-
-
-                
+                    
                     Forms\Components\Repeater::make('variants')
                         ->relationship('variants')
                         ->schema([
@@ -160,22 +156,18 @@ class ProductResource extends Resource
                                 ->label('Variant Name')
                                 ->required(),
                             
-                            TextInput::make('stock_quantity')
+                                TextInput::make('stock_quantity')
                                 ->label('Stock')
                                 ->numeric()
-                                ->required() // Stock is required for each variant
-                                // ->dehydrateStateUsing(fn ($state, $record) => $record->setStockQuantityAttribute($state))
+                                ->default(fn ($record) => $record?->stock_quantity)
+                                ->required(), // Stock is required for each variant
 
-                                ->dehydrateStateUsing(fn ($state, $record) => $record ? $record->setStockQuantityAttribute($state) : null),
-                           //     ->default(fn ($record) => $record->stocks()->sum('stock_quantity')),
 
-                        
-
-    
-                        
+                             
+                            
                             TextInput::make('price')
                                 ->numeric()
-                                ->required(), // Variant price is required
+                                ->required(), 
                         ])
                         ->columnSpanFull()
                         ->hidden(fn (callable $get) => !$get('has_variant')), // Show only if has_variant is true
@@ -210,7 +202,10 @@ class ProductResource extends Resource
                Tables\Columns\TextColumn::make('stock')
                 ->numeric()
                 ->sortable()
-                ->getStateUsing(fn (Product $record) => $record->stock),
+                ->getStateUsing(fn (Product $record) => $record->has_variant 
+                    ? $record->variants->sum('stock_quantity') 
+                    : $record->stock_quantity
+            ),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
