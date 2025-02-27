@@ -22,8 +22,8 @@ header {
 }
 
 main {
-  margin-top: 60px; /* Adjust this to match the header height */
-  padding: 20px;
+  margin-top: 70px; /* Adjust this to match the header height */
+
 }
 
 
@@ -148,19 +148,6 @@ main {
 
 }
 
-/* Cart Icon Styling */
-.iconify-cart {
-  font-size: 38px; /* Adjust this value as needed */
-  color: #ffffff;
-  margin-right: 40px;
-  margin-top: 10px;
-}
-
-/* Hover Effect */
-.iconify-cart:hover {
-  color: #d6eeff;
- 
-}
 
 /* Sign In Button */
 .btn-outline-primary {
@@ -181,15 +168,27 @@ main {
   border-color: #ffffff !important;
 }
 
-
-
-.slider {
-  position: relative;
-  margin-top: 80px;
+.btn-primary{
+  width: 120px;
+  color: #ffffff;
+  background-color: #ffffff00;
+  border: 2px solid #ffffff !important;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 16px; /* Slightly larger padding for better clickability */
+  transition: all 0.3s ease-in-out;
 }
 
+.btn-primary:hover{
+  background-color: #ffffff !important;
+  color: #00cfe3!important;
+  border-color: #ffffff !important;
+}
+
+
 .carousel-inner img {
-  border-radius: 15px; /* Rounded corners */
+  border-radius: 10px; /* Rounded corners */
   display: flex;
 }
 
@@ -234,7 +233,7 @@ margin-left: 120px;
 .custom-footer {
   background-color: #00dbe3;
   text-align: center;
-  padding: 15px 0;
+  padding: 0px 0;
 
   bottom: 0;
   width: 100%;
@@ -244,10 +243,6 @@ margin-left: 120px;
 .fw-bold {
   font-weight: 550 !important;
   font-size: 13px;
-}
-.row{
-  margin-bottom: 10px;
-
 }
 
 .card{

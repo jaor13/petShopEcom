@@ -52,10 +52,6 @@
                     <iconify-icon icon="tabler:search"></iconify-icon>
                 </button>
             </div>
-            <!-- Cart Icon -->
-            <div class="cart-container">
-                <iconify-icon icon="mdi:cart" class="iconify-cart"></iconify-icon>
-            </div>
             <!-- Navigation Links -->
             <nav class="d-flex align-items-center">
                 <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Sign In</a>
