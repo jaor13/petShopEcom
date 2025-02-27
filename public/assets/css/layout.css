@@ -1,107 +1,281 @@
 :root {
-  --black-bean: #2F0911;
-  --desert-sand: #D5BBAA;
-  --champagne-pink: #F0D8C5;
-  --black: #020000;
-  --chestnut: #9A563F;
+  --default-font-family: "Poppins", sans-serif;
+}
+html, body {
+  height: auto;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
-*{
-  font-family: "Afacad", serif;
+body {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Adjust as needed */
+  background-color: white; /* Ensure visibility */
+  z-index: 1000; /* Keeps it above other elements */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow */
+}
+
+main {
+  margin-top: 60px; /* Adjust this to match the header height */
+  padding: 20px;
 }
 
 
 
-
-.custom-header {
-  background-color: #00DCE3;
-  color: #FFF9EB;
-  padding: .2rem 10rem; /* Adjust vertical spacing */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds a soft shadow below */
+/* Header Styling */
+.header-container {
+  width: 100%;
+  height: 110px;
+  position: fixed;
+  background: #00cfe3;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-
-
-.btn-primary{
-  background-color: #fdfafa;
-  color: rgb(68, 46, 46);
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  width:8rem;
-  font-weight: 300;
-  
-}
-
-.btn-outline-primary{
-  color: rgb(68, 46, 46);
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  width:8rem;
-}
-
-.btn-primary:hover, 
-.btn-outline-primary:hover {
-  background-color: #fdfafa !important; /* Keeps background unchanged */
-  color: rgb(68, 46, 46) !important; /* Keeps text color unchanged */
-  border: none;
-  box-shadow: none; /* Removes any shadow effect */
-}
-
-.custom-footer{
-  background-color: #00DCE3;
-
-}
-
-.search-container {
-  max-width: 600px; /* Adjust max width as needed */
-  width: 100%; /* Ensures responsiveness */
-  border-radius: 0.5rem; /* Rounded corners */
-  background-color: #fdfafa; /* Light grey background */
-  flex-grow: 1; /* Make search bar take more space */
-  margin-right: 2rem; /* Adjust spacing */
-}
-
-.search-input {
-  padding: .7rem; /* Adjust padding */
-  border: none; /* Remove border */
-  background-color: #fdfafa; /* Light grey background */
-  flex: 1; /* Makes input field fill available space */
-
-}
-
-
-.cart-container {
-  margin: 0 1rem; /* Space between search and nav */
-  position: relative; /* Allows absolute positioning */
-
-}
-
-
-#search-form {
-  color: #495057; /* Dark gray text color */
-  border-radius: 0.5rem;
-  padding: 0rem .5rem 0rem .5rem; 
+  padding: 0 20px;
 }
 
 .brand-logo {
-  max-width: 100px; /* Adjust width as needed */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 2rem; /* Adjust spacing */
+  max-height: 100px; /* Adjust size */
+  width: auto;
+  margin-right: 170px;
+}
+
+.d-flex.align-items-center {
+  text-decoration: none; /* Remove underline */
+  display: flex;
+  align-items: center;
+}
+
+/* Fix search container issues */
+.search-container {
+  margin-right: 140px;
+  background: #ffffff;
+  border-radius: 8px;
+  width: 600px; /* Adjust width */
+  max-width: 100%;
+  border: 1px solid #ddd;
+  position: relative; /* Needed for dropdown positioning */
+  overflow: visible; /* Prevents dropdown from getting cut */
+}
+/* Fix category dropdown */
+.category-dropdown {
+  display: flex;
+  align-items: center;
+  background: white;
+  height: 45px;
+  position: relative; /* Required for absolute positioning of dropdown */
 
 }
+
+/* Dropdown menu item styles */
+.dropdown-menu .dropdown-item {
+  color: #333; /* Default text color */
+  padding: 10px;
+ 
+}
+
+/* Hover effect */
+.dropdown-menu .dropdown-item:hover {
+  background-color: #00dbe3 !important;
+  color: white !important; /* Ensures contrast */
+}
+
+.category-btn {
+  font-size: 14px;
+  font-weight: normal;
+  color: #999;
+  background: transparent;
+  height: 45px; /* Fixes the 200px issue */
+  border: none; /* Remove default button border */
+  border-radius: 0px;
+}
+
+.category-btn:hover{
+  background: #f0f0f0; 
+  color: #00dbe3;
+}
+
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+  color: #00dbe3;
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Fix dropdown menu positioning */
+.dropdown-menu {
+  position: absolute !important; /* Ensures it displays outside */
+  top: 100%; /* Positions dropdown below button */
+  left: 0;
+  z-index: 1000; /* Ensures it appears above other elements */
+  background: white;
+  border: 2px solid white; /* Set border to white */
+  border-radius: 0px;
+  min-width: 200px;
+  display: none; /* Hide initially */
+}
+
+
+/* Fix search bar input */
+.search-container input {
+  flex: 1;
+  height: 45px;
+  padding: 10px;
+  border: none;
+  background: #ffffff;
+  outline: none;
+}
+
+/* Fix search button */
+.search-container .search-btn {
+  height: 45px;
+  width: 80px;
+  background: #00dbe3;
+  border: none;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 0px 8px 8px 0px;
+}
+
+.search-container .search-btn:hover {
+  background: #f0f0f0; 
+  color: #00dbe3;
+
+}
+
+/* Cart Icon Styling */
+.iconify-cart {
+  font-size: 38px; /* Adjust this value as needed */
+  color: #ffffff;
+  margin-right: 40px;
+  margin-top: 10px;
+}
+
+/* Hover Effect */
+.iconify-cart:hover {
+  color: #d6eeff;
+ 
+}
+
+/* Sign In Button */
+.btn-outline-primary {
+  width: 120px;
+  color: #00dbe3;
+  background-color: #ffffff;
+  border: 2px solid #ffffff !important;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 16px; /* Slightly larger padding for better clickability */
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-outline-primary:hover {
+  background-color: #00cfe3 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+
 
 .slider {
-  padding-left: 4rem;
-  padding-right: 4rem;
+  position: relative;
+  margin-top: 80px;
 }
 
+.carousel-inner img {
+  border-radius: 15px; /* Rounded corners */
+  display: flex;
+}
+
+.intro {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  color: white;
+  text-align: left;
+  max-width: 500px;
+}
+
+.pawsome-essentials {
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+.lorem-ipsum {
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  opacity: 0.9;
+}
+
+.shop-now {
+  border: 2px solid white;
+  transition: 0.3s;
+width: 140px;
+height: 40px;
+border-radius: 20px;
+background-color: transparent;
+color: #ffffff;
+margin-left: 120px;
+}
+
+.shop-now:hover {
+  background: white;
+  color: rgb(4, 199, 233);
+}
+.custom-footer {
+  background-color: #00dbe3;
+  text-align: center;
+  padding: 15px 0;
+
+  bottom: 0;
+  width: 100%;
+}
+
+
+.fw-bold {
+  font-weight: 550 !important;
+  font-size: 13px;
+}
+.row{
+  margin-bottom: 10px;
+
+}
+
+.card{
+  margin:5px;
+  
+}
+.card:hover {
+  transform: translateY(-3px); 
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.116); 
+}
+
+.card-img-top {
+            height: 22vh;
+            object-fit: cover; 
+        }
+
+        .row-cols-1 > * { 
+            padding: 0;
+        }
+
+        .g-1, .g-1 > * { 
+            --bs-gutter-x: 0.25rem;
+            --bs-gutter-y: 0;
+        }
+
+.text-muted {
+  --bs-text-opacity: 1;
+  color: var(--bs-secondary-color) !important;
+  font-size: 13px;
+}
 
