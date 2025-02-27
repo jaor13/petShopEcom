@@ -1,15 +1,16 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\LandingPage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureUserIsAdmin;
 
 
-Route::get('/', function () {
-    return view('landing');
-})->name('landing');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');
 
-
+Route::get('/', LandingPage::class);
 
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
