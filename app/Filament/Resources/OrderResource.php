@@ -113,6 +113,7 @@ class OrderResource extends Resource
                             ->schema([
                                 Select::make('product_id')
                                 ->relationship('product', 'product_name')
+                                ->getOptionLabelFromRecordUsing(fn (Product $product) => "{$product->product_name} ({$product->variant})")
                                 ->searchable()
                                 ->preload()
                                 ->required()

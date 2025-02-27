@@ -20,6 +20,8 @@ use Illuminate\Support\Str;
 use Filament\Tables\Filters\SelectFilter;
 use App\Models\ProductVariant;
 use App\Models\Stock;
+use App\Filament\Resources\RelationManagers\StocksRelationManager;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 class ProductResource extends Resource
 {
@@ -162,11 +164,15 @@ class ProductResource extends Resource
                                 ->label('Stock')
                                 ->numeric()
                                 ->required() // Stock is required for each variant
-                                ->dehydrateStateUsing(fn ($state, $record) => $record->setStockQuantityAttribute($state)),
+                                // ->dehydrateStateUsing(fn ($state, $record) => $record->setStockQuantityAttribute($state))
+
+                                ->dehydrateStateUsing(fn ($state, $record) => $record ? $record->setStockQuantityAttribute($state) : null),
                            //     ->default(fn ($record) => $record->stocks()->sum('stock_quantity')),
 
+                        
 
     
+                        
                             TextInput::make('price')
                                 ->numeric()
                                 ->required(), // Variant price is required
@@ -181,6 +187,7 @@ class ProductResource extends Resource
             ])->columns(3);
     }
     
+
     public static function table(Table $table): Table
     {
         return $table
@@ -234,12 +241,14 @@ class ProductResource extends Resource
             ]);
     }
 
+    
+
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
+    
 
     public static function getPages(): array
     {
