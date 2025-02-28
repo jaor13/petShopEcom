@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade'); // Single foreign key constraint
             $table->string('name', 100); // e.g., "Small - Red"
             $table->decimal('price', 10, 2)->default(0.00); // Default instead of nullable
+            $table->integer('stock_quantity')->default(0);
             $table->timestamps();
         
             // Prevent duplicate variant names per product

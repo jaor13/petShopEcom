@@ -46,13 +46,19 @@ class OrderResource extends Resource
             ->schema([
                 Group::make()->columnSpanFull()->schema([
                     Section::make('Order Information')->schema([
-                       Select::make('user_id')
+                        Select::make('user_id') // Use 'user_id' since it's the actual value being stored
                         ->label('Customer')
-                        ->options(fn () => \App\Models\User::get()
-                        ->mapWithKeys(fn ($user) => [$user->id => $user->full_name]))                        
                         ->searchable()
                         ->preload()
+                        ->options(fn () => \App\Models\User::pluck('username', 'id')) // Fetch users as [id => username]
+                        ->getSearchResultsUsing(fn (string $search) => 
+                            \App\Models\User::where('username', 'like', "%{$search}%")
+                            ->pluck('username', 'id')
+                        )
+                        ->getOptionLabelUsing(fn ($value) => \App\Models\User::find($value)?->username) // Display username when selected
                         ->required(),
+                    
+
 
                         Select::make('payment_method')
                         ->options([
@@ -107,85 +113,144 @@ class OrderResource extends Resource
                         ->columnSpanFull(),
                     ])->columns(2),
 
-                        Section::make('Order Items')->schema([
-                            Repeater::make('items')
+          
+
+
+                    Section::make('Order Items')->schema([
+                        Repeater::make('items')
                             ->relationship()
                             ->schema([
+                                // Product Selection
                                 Select::make('product_id')
-                                ->relationship('product', 'product_name')
-                                ->getOptionLabelFromRecordUsing(fn (Product $product) => "{$product->product_name} ({$product->variant})")
-                                ->searchable()
-                                ->preload()
-                                ->required()
-                                ->disableOptionsWhenSelectedInSiblingRepeaterItems()
-                                ->columnSpan(4)
-                                ->reactive()
-                                ->afterStateUpdated(fn($state, Set $set) => 
-                                    $set('unit_amount', optional(Product::find($state))->price)
-                            )
-                            ->afterStateUpdated(fn($state, Set $set) => 
-                            $set('total_amount', optional(Product::find($state))->price),
-                    ),
+                                    ->relationship('product', 'product_name')
+                                    ->getOptionLabelFromRecordUsing(fn (Product $product) => "{$product->product_name}")
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->disableOptionsWhenSelectedInSiblingRepeaterItems()
+                                    ->columnSpan(4)
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, Set $set, Get $get) {
+                                        $set('variant_id', null); // Reset variant when product changes
+                                        $product = Product::find($state);
+                                        
+                                        if (!$product) {
+                                            return;
+                                        }
+                                    
+                                        // If no variants, set unit price from product
+                                        if (!\App\Models\ProductVariant::where('product_id', $state)->exists()) {
+                                            $set('unit_amount', $product->price);
+                                            $set('total_amount', $product->price * $get('quantity', 1));
+                                        }
+                                    }),
                     
-                            
-                    TextInput::make('quantity')
-                    ->numeric()
-                    ->required()
-                    ->default(1)
-                    ->minValue(1)
-                    ->columnSpan(2)
-                    ->reactive()
-                    ->afterStateUpdated(fn($state, Set $set, Get $get) => 
-                        $set('total_amount', $get('unit_amount') * $state)
-                    ),
-                
-
+                                // Variant Selection (only visible when product has variants)
+                                Select::make('variant_id')
+                                    ->label('Variant')
+                                    ->options(fn (Get $get) => 
+                                        \App\Models\ProductVariant::where('product_id', $get('product_id'))
+                                            ->pluck('name', 'id')
+                                    )
+                                    ->searchable()
+                                    ->preload()
+                                    ->reactive()
+                                    ->columnSpan(4)
+                                    ->hidden(fn (Get $get) => 
+                                        !\App\Models\ProductVariant::where('product_id', $get('product_id'))->exists()
+                                    )
+                                    ->disabled(fn (Get $get) => !$get('product_id')) // Disable if no product is selected
+                                    ->afterStateUpdated(function($state, Set $set, Get $get) {
+                                        $variant = \App\Models\ProductVariant::find($state);
+                                        if ($variant) {
+                                            $set('unit_amount', $variant->price);
+                                            $set('total_amount', $variant->price * $get('quantity', 1));
+                                        }
+                                    }),
+                    
+                                // Quantity Input
+                                TextInput::make('quantity')
+                                    ->numeric()
+                                    ->required()
+                                    ->default(1)
+                                    ->minValue(1)
+                                    ->columnSpan(2)
+                                    ->reactive()
+                                    ->afterStateUpdated(fn($state, Set $set, Get $get) => 
+                                        $set('total_amount', $get('unit_amount') * $state)
+                                    ),
+                    
+                                // Unit Price
                                 TextInput::make('unit_amount')
-                                ->numeric() 
-                                ->required()
-                                ->disabled()
-                                ->dehydrated()
-                                ->columnSpan(3),
-
+                                    ->numeric()
+                                    ->required()
+                                    ->disabled()
+                                    ->dehydrated()
+                                    ->columnSpan(3),
+                    
+                                // Total Amount
                                 TextInput::make('total_amount')
-                                ->numeric()
-                                ->required()
-                                ->dehydrated()
-                                ->columnSpan(3),
-
+                                    ->numeric()
+                                    ->required()
+                                    ->dehydrated()
+                                    ->columnSpan(3),
                             ])->columns(12),
-
-                            Placeholder::make('grand_total_placeholder')
+                    
+                        // Grand Total Calculation
+                        Placeholder::make('grand_total_placeholder')
                             ->label('Grand Total')
                             ->content(function(Get $get, Set $set){
                                 $total = 0;
                                 if(!$repeaters = $get('items')){
                                     return $total;
-                            }
-
-                            foreach($repeaters as $key => $repetear){
-                                $total += $get("items.{$key}.total_amount");
-                            }
-                            $set ('grand_total', $total);
-                            return '₱' . number_format($total, 2);
-                          }),
-
-                          Hidden::make('grand_total')
-                            ->default(0)
+                                }
+                    
+                                foreach($repeaters as $key => $repeater){
+                                    $total += $get("items.{$key}.total_amount");
+                                }
+                                $set('grand_total', $total);
+                                return '₱' . number_format($total, 2);
+                            }),
+                    
+                        Hidden::make('grand_total')->default(0)
                     ])
-                ]) ->columns(1),
+                ])                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 ]);
+
+
+
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('user.username')
+                TextColumn::make('user_id')
                 ->label('Customer')
+                ->sortable()
                 ->searchable()
-                ->sortable(),
-                //
+                ->formatStateUsing(fn ($state) => \App\Models\User::find($state)?->username ?? 'Unknown'),
+            
 
                 TextColumn::make('grand_total')
                 ->numeric()
@@ -229,6 +294,7 @@ class OrderResource extends Resource
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
                 ]),
             ])
             ->bulkActions([
