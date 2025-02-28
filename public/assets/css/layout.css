@@ -1,5 +1,5 @@
 :root {
-  --default-font-family: "Poppins", sans-serif;
+  --default-font-family: "Afacad", sans-serif;
 }
 html, body {
   height: auto;
@@ -7,7 +7,7 @@ html, body {
 }
 
 body {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Afacad', sans-serif;
 }
 
 header {
