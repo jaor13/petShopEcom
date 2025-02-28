@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_name', 'slug', 'images', 'description', 'price', 'is_active', 'in_stock', 'has_variant'];
+    protected $fillable = ['product_name', 'slug', 'images', 'description', 'price', 'is_active', 'in_stock', 'has_variant', 'stock_quantity'];
 
     protected $casts = [
         'images' => 'array',
@@ -33,15 +33,7 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class, 'product_id');
     }
 
-    public function stocks()
-    {
-        return $this->hasMany(Stock::class);
-    }
-
-    public function singleStock()
-    {
-        return $this->hasOne(Stock::class, 'product_id');
-    }
+   
     
     public function getPriceAttribute()
     {
@@ -49,23 +41,23 @@ class Product extends Model
         // but if may variant naman siya hahanapin niya yung lowest price sa variant table then yun magga update yung base price sa product table sa lowest price
         // based sa variant price
        
-        $basePrice = $this->attributes['price'] ?? 0;
-
         if ($this->has_variant && $this->variants()->exists()) {
-            $minVariantPrice = $this->variants()->min('price');
-            return $minVariantPrice < $basePrice ? $minVariantPrice : $basePrice;
+            return $this->variants()->min('price');
         }
 
-        return $basePrice;
+        return $this->attributes['price'] ?? 0;
     }
 
     public function getStockAttribute()
     {
-        //calculate all stocks of a product/variant
+        //calculate the  sum of stock_quantity of dif varaints of a product 
         //used by the updateStockAndAvailability function in comparing if the product/variant has a stock
-        return $this->has_variant 
-            ? $this->variants()->with('stocks')->get()->sum(fn($variant) => $variant->stocks->sum('stock_quantity'))
-            : optional($this->singleStock)->stock_quantity ?? 0;
+        if ($this->has_variant) {
+            return $this->variants()->sum('stock_quantity') ?? 0; // Ensure it returns 0 if null
+        }
+
+        return $this->attributes['stock_quantity'] ?? 0; // Ensure it returns 0 if null
+ 
     }
 
     public function updateStockAndAvailability()
@@ -73,27 +65,30 @@ class Product extends Model
         // function update the in_stock column in product table
         // if 1 meaning there is a record of a product/variant in stock table
         // if 0 meaning there is no record of a product/variant in stock table
-        $totalStock = $this->getStockAttribute();
+
+        // $totalStock = $this->getStockAttribute();
+        $totalStock = $this->has_variant ? $this->variants()->sum('stock_quantity') : $this->stock_quantity;
+
+
+        $this->stock_quantity = $totalStock;
         $this->in_stock = $totalStock > 0;
-        $this->saveQuietly(); // Prevents triggering infinite loop
+        $this->saveQuietly();  // Prevents the 'saved' event from being triggered
+   
     }
     public function updatePrice()
     {
         //update price column in product table
         if ($this->has_variant && $this->variants()->exists()) {
-            $this->update(['price' => $this->variants()->min('price')]);
+            $this->price = $this->variants()->min('price');
+            $this->saveQuietly();  // Prevents the 'saved' event from being triggered
         }
     }
 
 
     public function setStockQuantityAttribute($value)
     {
-        if (!is_null($value)) {
-            $this->stocks()->updateOrCreate(
-                ['product_id' => $this->id], // Ensure it updates the correct stock record
-                ['stock_quantity' => (int) $value] // Set the new stock quantity
-            );
-        }
+        //updates or create stock quantity in product table
+        $this->attributes['stock_quantity'] = $value;
     }
     
 
@@ -104,26 +99,21 @@ class Product extends Model
         static::saved(function (Product $product) {
             // Update stock availability after saving
             $product->updateStockAndAvailability();
+            $product->updatePrice();
 
-            // Handle stock updates only for non-variant products
-            if (!$product->has_variant && $product->wasChanged('stock_quantity')) {
-                $stockQuantity = request()->input('stock_quantity'); // null igtatao
-
-                logger()->info('Updating stock for product', [
-                    'product_id' => $product->id,
-                    'stock_quantity' => $stockQuantity
-                ]);
-
-                Stock::updateOrCreate(
-                    ['product_id' => $product->id],
-                    ['stock_quantity' => $stockQuantity]
-                );
-            }
         });
 
         static::deleted(function (Product $product) {
+            // Delete all variants when a product is deleted
             $product->variants()->delete();
-            $product->singleStock()->delete();
+        });
+
+        ProductVariant::saved(function (ProductVariant $variant) {
+            $variant->product->updateStockAndAvailability();
+        });
+    
+        ProductVariant::deleted(function (ProductVariant $variant) {
+            $variant->product->updateStockAndAvailability();
         });
     }
 
