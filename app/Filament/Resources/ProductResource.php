@@ -187,6 +187,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('product_name')
                 ->searchable(),
 
+                Tables\Columns\ImageColumn::make('images')
+                ->label('Image'),
+
                 Tables\Columns\TagsColumn::make('categories.name')
                 ->sortable(),
 
