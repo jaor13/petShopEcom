@@ -50,14 +50,19 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function address()
-{
-    return $this->belongsTo(Address::class);
-}
+    {
+        return $this->belongsTo(Address::class);
+    }
 
-public function getFullNameAttribute()
-{
-    return $this->fname . ' ' . $this->lname;
-}
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->fname . ' ' . $this->lname;
+    }
 
 
 }
