@@ -25,6 +25,11 @@ class ProductVariant extends Model
     {
         return $this->belongsTo(Product::class);
     }
+    
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 
   
     protected static function boot()
@@ -35,6 +40,16 @@ class ProductVariant extends Model
         static::saving(function (ProductVariant $variant) {
             $variant->product->updatePrice();
         });
+
+        // // Update stock after saving the variant added
+
+        // static::updated(function ($variant) {
+        //     $variant->product->updateStockFromVariants();
+        // });
+    
+        // static::deleted(function ($variant) {
+        //     $variant->product->updateStockFromVariants();
+        // });
     
        
         // When deleting, update price and remove stock records
