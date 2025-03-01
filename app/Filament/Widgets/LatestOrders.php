@@ -46,7 +46,7 @@ class LatestOrders extends BaseWidget
                         'cancelled' => 'red',
                     })
                     ->icon(fn(string $state) => match ($state) {
-                        'new' => 'heroicon-m-spakrles',
+                        'new' => 'heroicon-m-sparkles',
                         'processing' => 'heroicon-m-arrow-path',
                         'shipped' => 'heroicon-m-truck',
                         'delivered' => 'heroicon-m-check-badge',

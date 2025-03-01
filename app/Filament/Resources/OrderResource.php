@@ -63,8 +63,8 @@ class OrderResource extends Resource
 
                         Select::make('payment_method')
                         ->options([
+                            'cod' => 'Cash on Delivery',
                             'gcash' => 'GCash',
-                            'cod' => 'Cash on Delivery'
                         ])
                         ->required(),
 
@@ -105,8 +105,9 @@ class OrderResource extends Resource
 
                        Select::make('shipping_method')
                         ->options([
-                            'pickup' => 'Pickup',
-                            'delivery' => 'Delivery'
+                            'jnt' => 'J&T Express',
+                            'flash' => 'Flash Express',
+                            'ninjavan' => 'Ninja Van',
                         ])
                         ->required(),
 
@@ -196,19 +197,29 @@ class OrderResource extends Resource
                                     ->dehydrated()
                                     ->columnSpan(3),
                             ])->columns(12),
-                    
+                                
+                            Placeholder::make('shipping_amount_placeholder')
+                            ->label('Shipping Fee')
+                            ->content('₱56.00'),
+                        
+                            Hidden::make('shipping_amount')
+                                ->default(56),
+                        
+
                         // Grand Total Calculation
                         Placeholder::make('grand_total_placeholder')
                             ->label('Grand Total')
                             ->content(function(Get $get, Set $set){
                                 $total = 0;
-                                if(!$repeaters = $get('items')){
-                                    return $total;
+                                if (!$repeaters = $get('items')) {
+                                    return '₱56.00'; // Default to shipping fee if no items
                                 }
                     
                                 foreach($repeaters as $key => $repeater){
                                     $total += $get("items.{$key}.total_amount");
                                 }
+
+                                $total += 56; // Add the fixed shipping amount
                                 $set('grand_total', $total);
                                 return '₱' . number_format($total, 2);
                             }),
