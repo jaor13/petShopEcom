@@ -20,13 +20,13 @@ use App\Http\Middleware\EnsureUserIsAdmin;
 Route::get('/', LandingPage::class);
 Route::get('/products', ProductsPage::class);
 Route::get('/cart', CartPage::class);
-Route::get('/product/{productID}', ProductDetailPage::class);
+Route::get('/product/{slug}', ProductDetailPage::class);
 Route::get('/checkout', CheckoutPage::class);
 Route::get('/orders', OrdersPage::class);
 Route::get('/orders/{orderID}', OrderDetailsPage::class);
 
 Route::get('/login', LoginPage::class);
-Route::get('/refister', RegisterPage::class);
+Route::get('/register', RegisterPage::class);
 Route::get('/forgot-password', ForgotPasswordPage::class);
 Route::get('/reset-password', ResetPasswordPage::class);
 Route::get('/success', SuccessPage::class);

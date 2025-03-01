@@ -26,15 +26,15 @@
                         {{ request('category', 'All Categories') }}
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ url('products?category=Dog') }}" >Dog</a></li>
-                        <li><a class="dropdown-item" href="{{ url('products?category=Cat') }}" >Cat</a></li>
-                        <li><a class="dropdown-item" href="{{ url('products?category=Rabbit') }}" >Rabbit</a></li>
-                        <li><a class="dropdown-item" href="{{ url('products?category=Fish') }}" >Fish</a></li>
-                        <li><a class="dropdown-item" href="{{ url('products?category=Bird') }}" >Bird</a></li>
-                        <li><a class="dropdown-item" href="{{ url('products?category=Hamster') }}" >Hamster</a></li>
-                        <li><a class="dropdown-item" href="{{ url('products') }}" >All Categories</a></li>
+                        <li><a class="dropdown-item" href="{{ url('products') }}">All Categories</a></li>
+                        @foreach ($categories as $category)
+                            <li><a class="dropdown-item"
+                                    href="{{ url('products?category=' . $category->name) }}">{{ $category->name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
+
+
 
                 <!-- Search Button -->
                 <button type="submit" class="btn btn-primary search-btn">
