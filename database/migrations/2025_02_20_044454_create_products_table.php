@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('slug')->unique()->index();
             $table->json('images')->nullable(); // Consider a separate product_images table
             $table->longText('description')->nullable();
-            $table->decimal('price', 10, 2)->default(0.00); ///must change to nullable
+            $table->decimal('price', 10, 2)->nullable(); 
             $table->boolean('in_stock')->default(true)->index();
+            $table->integer('stock_quantity')->default(0);
             $table->boolean('is_active')->default(true)->index();
             $table->boolean('has_variant')->default(false);
             $table->timestamps();
