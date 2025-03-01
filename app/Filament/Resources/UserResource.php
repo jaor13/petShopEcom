@@ -34,6 +34,8 @@ class UserResource extends Resource
 
     protected static ?string $slug = 'user-management-users';
 
+    protected static ?string $recordTitleAttribute = 'username';
+
 
 
 

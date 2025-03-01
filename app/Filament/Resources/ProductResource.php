@@ -34,6 +34,9 @@ class ProductResource extends Resource
 
     protected static ?string $slug = 'product-management-products';
 
+    protected static ?string $recordTitleAttribute = 'product_name';
+
+
 
 
     public static function form(Form $form): Form

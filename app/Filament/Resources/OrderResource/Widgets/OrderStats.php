@@ -8,6 +8,8 @@ use App\Models\Order;
 
 class OrderStats extends BaseWidget
 {
+    protected static ?int $sort = 2;
+
     protected function getStats(): array
     {
         return [
