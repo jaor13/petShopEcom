@@ -63,8 +63,8 @@
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <a href="{{ route('login') }}" class="signup-link">Already have an account? Sign in</a>
-                    <button type="submit" class="btn">Sign Up</button>
+                    <p class="signim-link">Already have an account? <a id="show-signup" href="{{ route('login') }}">Login</a></p>
+                   
                 </div>
             </form>
         </div>

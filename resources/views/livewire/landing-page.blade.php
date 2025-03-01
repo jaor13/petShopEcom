@@ -52,7 +52,7 @@
                     </button>
                 </div>
                 <nav class="d-flex align-items-center">
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Sign In</a>
+                    <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Login</a>
                     <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
                 </nav>
             </div>

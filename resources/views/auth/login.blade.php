@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link href="{{ asset('assets/css/signin-up.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/Login.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -51,11 +51,11 @@
                             {{ __('Forgot your password?') }}
                         </a>
                     @endif
-                    <button type="submit" class="btn">Sign In</button>
+                    <button type="submit" class="btn">Login</button>
                 </div>
             </form>
 
-            <p class="signup-link">Don't have an account? <a id="show-signup" href="{{ route('register') }}">Sign up</a></p>
+            <p class="signup-link">Don't have an account? <a id="show-signup" href="{{ route('register') }}">Register</a></p>
         </div>
     </div>
 
