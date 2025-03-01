@@ -26,16 +26,6 @@
             <h1>Pawsome Essentials Delivered with Love!</h1>
             <p>This is some example text inside the container.You can add more text and other elements as needed.</p>
         </div>
-        <div class="form-container sign-in" id="signin-container">
-            <h2>Welcome Back!</h2>
-            <p>Log In To Your Account</p>
-            <input type="text" class="form-control" placeholder="Username">
-            <input type="password" class="form-control" placeholder="Password">
-            <a href="#" class="forgot-password">Forgot Password?</a>
-            <button class="btn">Sign In</button>
-            <p class="signup-link">Don't have an account? <a id="show-signup" href="#">Sign up</a></p>
-        
-        </div>
       
         <div class="form-container sign-up" id="signup-container">
             <h2>Create Account</h2>
@@ -60,13 +50,7 @@
 
 
     <script>
-    document.getElementById("show-signup").addEventListener("click", function() {
-        document.getElementById("main-container").classList.add("active");
-    });
-    
-    document.getElementById("show-signin").addEventListener("click", function() {
-        document.getElementById("main-container").classList.remove("active");
-    });
+   
     </script>
 </body>
 </html>
