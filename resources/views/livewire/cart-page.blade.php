@@ -15,11 +15,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+               @forelse ($cart_items as $item)
+               <tr wire:key="{{ $item['product_id'] }}">
                 <td class="py-4">
                   <div class="flex items-center">
-                    <img class="h-16 w-16 mr-4" src="https://via.placeholder.com/150" alt="Product image">
-                    <span class="font-semibold">Product name</span>
+                    <img class="h-16 w-16 mr-4" src="{{ url('storage', $item['image']) }}" alt="{{ $item['name'] }}">
+                    <span class="font-semibold">{{ $item['name'] }}</span>
                   </div>
                 </td>
                 <td class="py-4">$19.99</td>
@@ -33,7 +34,8 @@
                 <td class="py-4">$19.99</td>
                 <td><button class="bg-slate-300 border-2 border-slate-400 rounded-lg px-3 py-1 hover:bg-red-500 hover:text-white hover:border-red-700">Remove</button></td>
               </tr>
-              <!-- More product rows -->
+              @empty
+              @endforelse
             </tbody>
           </table>
         </div>

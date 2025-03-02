@@ -148,10 +148,13 @@ main {
 }
 
 /* Cart Icon Styling */
+.cart-container {
+margin-right: 40px;
+}
+
 .iconify-cart {
   font-size: 38px; /* Adjust this value as needed */
   color: #ffffff;
-  margin-right: 40px;
   margin-top: 10px;
 }
 

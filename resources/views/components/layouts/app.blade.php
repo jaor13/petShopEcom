@@ -28,6 +28,9 @@
     </main>
     @livewireScripts
     @livewire('partials.footer')
+    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <x-livewire-alert::scripts />
 
     <!-- Scripts -->
     <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>

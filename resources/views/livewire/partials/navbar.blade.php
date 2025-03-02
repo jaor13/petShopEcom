@@ -43,11 +43,13 @@
             </form>
         </div>
 
-
         <!-- Cart Icon -->
         <div class="cart-container">
-            <a href="{{ url('cart/') }}" wire:navigate>
-                <iconify-icon icon="mdi:cart" class="iconify-cart"></iconify-icon>
+            <a href="{{ url('cart/') }}" wire:navigate class="relative flex items-center space-x-1">
+                <span><iconify-icon icon="mdi:cart" class="iconify-cart"></iconify-icon></span>
+                <span
+                    class="py-0.5 px-1.5 rounded-full text-xs font-medium bg-blue-50 border border-blue-200 text-blue-600">{{ $total_count }}</span>
+            </a>
         </div>
 
         <!-- Navigation Links -->
