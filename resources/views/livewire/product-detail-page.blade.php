@@ -23,7 +23,7 @@
                 <h2 class="text-lg font-bold text-gray-700 dark:text-gray-400">Product Specification</h2>
                 <p class="max-w-md text-gray-700 dark:text-gray-400 ml-4"></p>
                 <p class="max-w-md text-gray-700 dark:text-gray-400 ml-4">
-                  Category:
+                  Category: {{ $product->category->name }}
                 </p>
                 <p class="max-w-md text-gray-700 dark:text-gray-400 ml-4">
                   Stocks: {{ $product->stock_quantity }}
@@ -80,8 +80,8 @@
             <div class="flex flex-wrap items-center gap-4">
               <button wire:click="addToCart({{ $product->id }})"
                 class="w-full p-4 bg-blue-500 rounded-md lg:w-2/5 dark:text-gray-200 text-gray-50 hover:bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-700">
-                <span wire:loading.remove class="block" wire:target="addItemToCartWithQty({{ $product->id }})">Add to cart</span>
-                <span wire:loading class="hidden block" wire:target="addItemToCartWithQty({{ $product->id }})">Adding to cart</span>
+                <span wire:loading.remove class="block" wire:target="addToCart({{ $product->id }})">Add to cart</span>
+                <span wire:loading class="hidden block" wire:target="addToCart({{ $product->id }})">Adding to cart</span>
               </button>
             </div>
           </div>
