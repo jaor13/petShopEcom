@@ -23,7 +23,7 @@ class ProductGrid extends Component
 
     // add to cart
     public function addToCart($product_id) {
-        usleep(200000); // 0.2-second delay (200ms)
+        usleep(200000); // 0.2 second delay (200ms)
 
         $total_count = CartManagement::addItemToCart($product_id);
         // dd($total_count, $product_id);
