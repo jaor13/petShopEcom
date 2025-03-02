@@ -52,20 +52,26 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
     }
 
     public function address()
-{
-    return $this->belongsTo(Address::class);
-}
-public function canAccessPanel(\Filament\Panel $panel): bool
-{
-    return $this->role === 'admin'; // Allow only admins
-}
+    {
+        return $this->belongsTo(Address::class);
+    }
 
-public function getFullNameAttribute()
-{
-    return $this->fname . ' ' . $this->lname;
-}
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
-public function getFilamentName(): string
+    public function canAccessPanel(\Filament\Panel $panel): bool
+    {
+        return $this->role === 'admin'; // Allow only admins
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->fname . ' ' . $this->lname;
+    }
+
+    public function getFilamentName(): string
     {
         return "{$this->fname} {$this->lname}";
     }
