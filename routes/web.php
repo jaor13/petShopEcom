@@ -21,21 +21,18 @@ Route::get('/', LandingPage::class);
 Route::get('/products', ProductsPage::class);
 Route::get('/cart', CartPage::class);
 Route::get('/product/{slug}', ProductDetailPage::class);
-Route::get('/checkout', CheckoutPage::class);
-Route::get('/orders', OrdersPage::class);
-Route::get('/orders/{orderID}', OrderDetailsPage::class);
 
-Route::get('/login', LoginPage::class);
-Route::get('/register', RegisterPage::class);
-Route::get('/forgot-password', ForgotPasswordPage::class);
-Route::get('/reset-password', ResetPasswordPage::class);
-Route::get('/success', SuccessPage::class);
-Route::get('/cancel', CancelPage::class);
+Route::middleware('guest')->group(function () {
+    Route::get('/login', LoginPage::class);
+    Route::get('/register', RegisterPage::class);
+    Route::get('/forgot-password', ForgotPasswordPage::class);
+    Route::get('/reset-password', ResetPasswordPage::class);
+});
 
 //
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin', function () {
-        return redirect()->route('filament.admin.pages.admin-dashboard'); 
+        return redirect()->route('filament.admin.pages.admin-dashboard');
     })->name('adminDashboard');
 });
 
@@ -49,6 +46,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //new
+    Route::get('/checkout', CheckoutPage::class);
+    Route::get('/orders', OrdersPage::class);
+    Route::get('/orders/{orderID}', OrderDetailsPage::class);
+
+    Route::get('/success', SuccessPage::class);
+    Route::get('/cancel', CancelPage::class);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
