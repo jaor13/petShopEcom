@@ -118,4 +118,15 @@ class Product extends Model
         });
     }
 
+
+
+//     //
+//     public function updateStockFromVariants()
+// {
+//     $this->update([
+//         'stock_quantity' => $this->variants()->sum('stock_quantity'),
+//     ]);
+// }
+
+
 }
