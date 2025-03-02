@@ -16,29 +16,36 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     overflow: hidden;
     padding: 0;
+    
 }
 
 .overlay-container {
-    background-color: #00CED1; /* Dark Turquoise */
+    background-color: #00DCE3; /* Dark Turquoise */
     color: white;
     width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 30px;
 }
 
 .overlay-container h1 {
     font-size: 3em;
-    margin-top: 20px;
+    font-weight: 600;
     text-align: center;
+    color: #363636;
+    line-height: 1.0; /* Adjust this value to bring the lines closer */
+    margin-bottom: 10px; /* Optionally, reduce the bottom margin */
 }
 
 .overlay-container p {
     font-size: 1em;
     text-align: center;
     margin-top: 10px;
+    color: #363636;
+    margin-left: 60px;
+    margin-right: 60px;
 }
 
 .form-container {
@@ -47,13 +54,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 50px;
+    padding: 40px;
     background: #ffffff;
   
 }
 
 .form-container h2 {
-    font-size: 3em;
+    font-size: 3.5em;
     margin-bottom: 10px;
     color: #333;
 }
@@ -66,8 +73,8 @@ body {
 
 .form-container form {
     width: 80%;
+    max-width: 350px;
 }
-
 .form-container input[type="text"],
 .form-container input[type="email"],
 .form-container input[type="password"] {
@@ -76,52 +83,62 @@ body {
     padding: 10px;
     margin-bottom: 10px;
     background: #ececec;
-
     border-radius: 5px;
     box-sizing: border-box;
 }
 
 .form-container input[type="checkbox"] {
-    margin-right: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .form-container .terms-container {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 .form-container .terms-container label {
     font-size: 0.9em;
     color: #666;
+    display: inline-flex;
 }
 
+
 .form-container .terms-container a {
-    color: #00CED1; /* Dark Turquoise */
+    color:#006ae3; /* Dark Turquoise */
     text-decoration: none;
 }
 
 .form-container .btn {
-    background-color: #00CED1; /* Dark Turquoise */
+    background-color: #00DCE3; /* Dark Turquoise */
     color: white;
+    margin-top: 15px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    font-size: 20px;
 }
 
 .form-container .btn:hover {
     background-color: #00B2B5; /* Slightly darker Turquoise */
 }
 
-.form-container .signim-link {
+.form-container .signin-link {
     font-size: 0.9em;
     color: #666;
     margin-top: 10px;
 }
 
-.form-container .signim-link a {
-    color: #00CED1; /* Dark Turquoise */
+.form-container .signin-link a {
+    color:#006ae3;
     text-decoration: none;
+}
+
+.d-flex {
+    display: flex !important;
+    flex-direction: column;
+    margin-top: 10px;
 }

@@ -33,7 +33,7 @@ main {
   width: 100%;
   height: 110px;
   position: fixed;
-  background: #00cfe3;
+  background: #00DCE3;
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -81,7 +81,7 @@ main {
 
 /* Hover effect */
 .dropdown-menu .dropdown-item:hover {
-  background-color: #00dbe3 !important;
+  background-color: #00DCE3 !important;
   color: white !important; /* Ensures contrast */
 }
 
@@ -97,7 +97,7 @@ main {
 
 .category-btn:hover{
   background: #f0f0f0; 
-  color: #00dbe3;
+  color: #00DCE3;
 }
 
 .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
@@ -134,7 +134,7 @@ main {
 .search-container .search-btn {
   height: 45px;
   width: 80px;
-  background: #00dbe3;
+  background: #00DCE3;
   border: none;
   color: #ffffff;
   font-size: 20px;
@@ -152,7 +152,7 @@ main {
 /* Sign In Button */
 .btn-outline-primary {
   width: 120px;
-  color: #00dbe3;
+  color: #00DCE3;
   background-color: #ffffff;
   border: 2px solid #ffffff !important;
   border-radius: 8px;
@@ -163,7 +163,7 @@ main {
 }
 
 .btn-outline-primary:hover {
-  background-color: #00cfe3 !important;
+  background-color: #00DCE3 !important;
   color: #ffffff !important;
   border-color: #ffffff !important;
 }
@@ -241,8 +241,8 @@ margin-left: 120px;
 
 
 .fw-bold {
-  font-weight: 550 !important;
-  font-size: 13px;
+  font-weight: 650!important;
+  font-size: 17px;
 }
 
 .card{

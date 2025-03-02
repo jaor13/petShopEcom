@@ -17,7 +17,7 @@
 <body>
     <div class="container" id="main-container">
         <div class="overlay-container">
-            <img src="{{ asset('assets/images/brand-logo.svg') }}" alt="Description of the image" style="width: 300px; height: 300px;">
+            <img src="{{ asset('assets/images/overlay-logo.svg') }}" alt="Description of the image" style="width: 400px; height: 300px;">
             <h1>Pawsome Essentials Delivered with Love!</h1>
             <p>This is some example text inside the container. You can add more text and other elements as needed.</p>
         </div>
@@ -38,22 +38,20 @@
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
 
-                <div class="mb-3">
-                    <label for="remember_me" class="form-check-label">
-                        <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
-                        {{ __('Remember me') }}
-                    </label>
-                </div>
+                <div class="remember-forgot">
+        <label for="remember_me" class="form-check-label">
+            <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
+            {{ __('Remember me') }}
+        </label>
+        @if (Route::has('password.request'))
+            <a href="{{ route('password.request') }}" class="forgot-password">
+                {{ __('Forgot your password?') }}
+            </a>
+        @endif
+    </div>
 
-                <div class="d-flex justify-content-between align-items-center">
-                    @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}" class="forgot-password">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif
-                    <button type="submit" class="btn">Login</button>
-                </div>
-            </form>
+    <button type="submit" class="btn">Login</button>
+</form>
 
             <p class="signup-link">Don't have an account? <a id="show-signup" href="{{ route('register') }}">Register</a></p>
         </div>
@@ -63,5 +61,7 @@
     <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+ 
+
 </body>
 </html>
