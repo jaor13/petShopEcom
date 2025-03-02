@@ -10,16 +10,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="{{ asset('assets/css/Register.css') }}" rel="stylesheet">
  
 </head>
 <body>
     <div class="container" id="main-container">
-        <div class="overlay-container">
-            <img src="{{ asset('assets/images/brand-logo.svg') }}" alt="Description of the image" style="width: 300px; height: 300px;">
-            <h1>Pawsome Essentials Delivered with Love!</h1>
-            <p>This is some example text inside the container. You can add more text and other elements as needed.</p>
-        </div>
         <div class="form-container sign-up" id="signup-container">
             <h2>Create Account</h2>
             <p>Join us by filling out the details</p>
@@ -61,12 +56,17 @@
                     <input type="checkbox" name="terms" id="terms">
                     <label for="terms">Agree with <a href="#">Terms of Service</a></label>
                 </div>
-
+                <button type="submit" class="btn">Login</button>
                 <div class="d-flex justify-content-between align-items-center">
                     <p class="signim-link">Already have an account? <a id="show-signup" href="{{ route('login') }}">Login</a></p>
                    
                 </div>
             </form>
+        </div>
+        <div class="overlay-container">
+            <img src="{{ asset('assets/images/brand-logo.svg') }}" alt="Description of the image" style="width: 300px; height: 300px;">
+            <h1>Pawsome Essentials Delivered with Love!</h1>
+            <p>This is some example text inside the container. You can add more text and other elements as needed.</p>
         </div>
     </div>
 
