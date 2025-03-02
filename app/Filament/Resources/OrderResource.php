@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use NumberFormatter;
 use Filament\Support\Facades\FilamentNumber as Number;
 use Filament\Forms\Components\Group;
+use App\Filament\Resources\OrderResource\Pages\Invoice;
+
 
 
 class OrderResource extends Resource
@@ -307,13 +309,18 @@ class OrderResource extends Resource
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
-                ]),
+                    Tables\Actions\Action::make("view_invoice")
+                        ->label('View Invoice')
+                        ->icon('heroicon-o-document-text')
+                        ->url(fn($record) => self::getUrl('invoice', ['record' => $record->id]))
+                        ->openUrlInNewTab(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ]);            
     }
 
     public static function getRelations(): array
@@ -338,6 +345,7 @@ class OrderResource extends Resource
             'create' => Pages\CreateOrder::route('/create'),
             'view' => Pages\ViewOrder::route('/{record}'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
+            'invoice' => Pages\Invoice::route('/{record}/invoice'), // Add this line
         ];
     }
 }
