@@ -32,12 +32,16 @@ class ProductVariant extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+
+    
   
     protected static function boot()
     {
         parent::boot();
     
-        // Update price before saving the variant
+        // already in sql trigger
+        // update price kang base price sa products table based sa lowest price sa variants table
+        // function is nasa product model igcall lang
         static::saving(function (ProductVariant $variant) {
             $variant->product->updatePrice();
         });
@@ -53,20 +57,17 @@ class ProductVariant extends Model
         // });
     
        
-        // When deleting, update price and remove stock records
+        // already in sql trigger
+        // pag nagdelete ki variant it must update price based sa pinakamababang price sa variant table if may variant pang  iba
         static::deleting(function (ProductVariant $variant) {
-            logger()->info('Deleting variant stock', [
-                'variant_id' => $variant->id,
-                'product_id' => $variant->product_id
-            ]);
-    
             $variant->product->updatePrice();
         });
     
+        //already in sql trigger
         // After deletion, handle stock cleanup
         static::deleted(function (ProductVariant $variant) {
 
-            // If no more variants exist, update product stock
+        // if wala nang stock yung product/variant then update yung in_stock column sa product table
             if ($variant->product->variants()->count() === 0) {
                 $variant->product->updateStockAndAvailability();
             }
