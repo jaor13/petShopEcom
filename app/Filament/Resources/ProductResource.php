@@ -34,6 +34,9 @@ class ProductResource extends Resource
 
     protected static ?string $slug = 'product-management-products';
 
+    protected static ?string $recordTitleAttribute = 'product_name';
+
+
 
 
     public static function form(Form $form): Form
@@ -187,6 +190,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('product_name')
                 ->searchable(),
 
+                Tables\Columns\ImageColumn::make('images')
+                ->label('Image'),
+
                 Tables\Columns\TagsColumn::make('categories.name')
                 ->sortable(),
 
@@ -195,9 +201,18 @@ class ProductResource extends Resource
                     ->sortable()
                     ->getStateUsing(fn (Product $record) => $record->price),
 
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean()
-                    ->sortable(),
+                // Tables\Columns\IconColumn::make('is_active')
+                //     ->boolean()
+                //     ->sortable(),
+
+                Tables\Columns\TextColumn::make('sold_count')
+                    ->label('Number of Sold')
+                    ->sortable()
+                    ->getStateUsing(fn (Product $record) => $record->has_variant 
+                        ? $record->variants->sum('sold_count') 
+                        : $record->sold_count
+                    ),
+
 
                Tables\Columns\TextColumn::make('stock')
                 ->numeric()

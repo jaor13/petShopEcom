@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
  
-class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasName{
+class User extends Authenticatable implements MustVerifyEmail{
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -52,18 +52,21 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
     }
 
     public function address()
-{
-    return $this->belongsTo(Address::class);
-}
-public function canAccessPanel(\Filament\Panel $panel): bool
-{
-    return $this->role === 'admin'; // Allow only admins
-}
 
-public function getFullNameAttribute()
-{
-    return $this->fname . ' ' . $this->lname;
-}
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->fname . ' ' . $this->lname;
+    }
 
 public function getFilamentName(): string
     {
