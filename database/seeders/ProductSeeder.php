@@ -16,7 +16,6 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             [
                 'product_name' => 'Grand Plus',
-                'category_id' => 2,
                 'slug' => 'grand-plus',
                 'images' => '["products\/Grandplus.png","products\/Grand2.png"]',
                 'description' => 
@@ -39,7 +38,6 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product_name' => 'Cat Litter',
-                'category_id' => 1,
                 'slug' => 'cat-litter-a',
                 'images' => '["products\/Cat-Litter-A.png","products\/Cat-Litter-B.png"]',
                 'description' => 'fdskfdjkf',

@@ -5,8 +5,8 @@
             <div class="col" wire:key="{{ $product->id }}">
                 <div class="card">
                     <a href="{{ url('product/' . $product->slug) }}">
-                        <img src="{{ asset('storage/' . $product->images[0]) }}" class="card-img-top"
-                            alt="{{ $product->product_name }}">
+
+                    <img src="{{ url('storage/' . $product->images[0]) }}" class="card-img-top" alt="{{ $product->product_name }}">
                     </a>
 
                     <div class="card-body">

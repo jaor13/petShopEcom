@@ -42,7 +42,7 @@ class ProductGrid extends Component
         $products = Product::where('is_active', 1);
 
         if ($this->category) {
-            $products->whereHas('category', function ($q) {
+            $products->whereHas('categories', function ($q) {
                 $q->where('name', 'like', '%' . $this->category . '%');
             });
         }

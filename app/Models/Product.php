@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_name', 'category_id', 'slug', 'images', 'description', 'price', 'is_active', 'in_stock', 'has_variant', 'stock_quantity'];
+    protected $fillable = ['product_name', 'slug', 'images', 'description', 'price', 'is_active', 'in_stock', 'has_variant', 'stock_quantity', 'sold_count'];
 
     protected $casts = [
         'images' => 'array',
@@ -18,10 +18,11 @@ class Product extends Model
         'in_stock' => 'boolean',
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsToMany(Category::class, 'category_product');
     }
+
 
 
     public function orderItems()
@@ -120,7 +121,7 @@ class Product extends Model
 
 
 
-//     //
+    //     //
 //     public function updateStockFromVariants()
 // {
 //     $this->update([
