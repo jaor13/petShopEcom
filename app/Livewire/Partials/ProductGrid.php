@@ -21,7 +21,7 @@ class ProductGrid extends Component
         $this->category = $category;
     }
 
-    // add to cart
+    // Add to cart
     public function addToCart($product_id) {
         usleep(200000); // 0.2 second delay (200ms)
 
@@ -38,21 +38,36 @@ class ProductGrid extends Component
     }
 
     public function render()
-    {
-        $products = Product::where('is_active', 1);
+{
+    $products = Product::where('is_active', 1);
 
+    // Check if the query matches a category name
+    $matchingCategories = \App\Models\Category::where('name', 'like', '%' . $this->query . '%')->pluck('id');
+
+    $products->where(function ($query) use ($matchingCategories) {
+        // If a category is selected, filter by that category
         if ($this->category) {
-            $products->whereHas('categories', function ($q) {
+            $query->whereHas('categories', function ($q) {
                 $q->where('name', 'like', '%' . $this->category . '%');
             });
         }
 
-        if ($this->query) {
-            $products->where('product_name', 'like', '%' . $this->query . '%');
+        // If the query matches a category name, filter by those categories
+        if ($matchingCategories->isNotEmpty()) {
+            $query->orWhereHas('categories', function ($q) use ($matchingCategories) {
+                $q->whereIn('id', $matchingCategories);
+            });
         }
 
-        return view('livewire.partials.product-grid', [
-            'products' => $products->get()
-        ]);
-    }
+        // Also search by product name
+        if ($this->query) {
+            $query->orWhere('product_name', 'like', '%' . $this->query . '%');
+        }
+    });
+
+    return view('livewire.partials.product-grid', [
+        'products' => $products->get()
+    ]);
+}
+
 }
