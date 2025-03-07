@@ -58,9 +58,15 @@ class User extends Authenticatable implements MustVerifyEmail{
     }
 
 
+
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function canAccessPanel(\Filament\Panel $panel): bool
+    {
+        return $this->role === 'admin'; // Allow only admins
     }
 
     public function getFullNameAttribute()
@@ -68,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail{
         return $this->fname . ' ' . $this->lname;
     }
 
-public function getFilamentName(): string
+    public function getFilamentName(): string
     {
         return "{$this->fname} {$this->lname}";
     }

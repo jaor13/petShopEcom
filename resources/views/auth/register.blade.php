@@ -58,7 +58,7 @@
         Agree with <a href="#">Terms of Service</a>
     </label> 
                 </div>
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn">Register</button>
                 <div class="d-flex justify-content-between align-items-center">
                     <p class="signin-link">Already have an account? <a id="show-signup" href="{{ route('login') }}">Login</a></p>
                    
