@@ -30,37 +30,67 @@ class ReviewResource extends Resource
         return $form
             ->schema([
 
-                // Forms\Components\Select::make('product_id')
-                // ->label('Product')
-                // ->relationship('product', 'product_name')
-                // ->options(function () {
-                //     return auth()->user()
-                //         ->orders()
-                //         ->whereHas('OrderItems', function ($query) {
-                //             $query->whereHas('order', function ($orderQuery) {
-                //                 $orderQuery->where('status', 'delivered'); // Only delivered orders
-                //             });
-                //         })
-                //         ->with('orderItems.product')
-                //         ->get()
-                //         ->pluck('orderItems.product.product_name', 'orderItems.product.id');
-                // })
-                // ->required()
-                // ->searchable(),
 
-            Forms\Components\Select::make('variant_id')
-                ->label('Product Variant')
-                ->options(function (callable $get) {
-                    $productId = $get('product_id');
-                    if (!$productId) {
-                        return [];
-                    }
-                    return \App\Models\ProductVariant::where('product_id', $productId)
-                        ->pluck('variant_name', 'id');
+                Forms\Components\Hidden::make('user_id')
+                ->default(fn () => auth()->id()), // Automatically set user_id
+
+                
+                Forms\Components\Select::make('product_id')
+                ->label('Product')
+                ->relationship('product', 'product_name')
+                ->options(function () {
+                    return auth()->user()
+                        ->orders()
+                        ->whereHas('orderItems', function ($query) {
+                            $query->whereHas('order', function ($orderQuery) {
+                                $orderQuery->where('status', 'delivered'); // Only delivered orders
+                            });
+                        })
+                        ->with('orderItems.product') // Load product relationship
+                        ->get()
+                        ->flatMap(function ($order) {
+                            return $order->orderItems->map(function ($item) {
+                                return [
+                                    'id' => $item->product->id,
+                                    'name' => $item->product->product_name
+                                ];
+                            });
+                        })
+                        ->pluck('name', 'id'); // Correct pluck usage
                 })
-                ->nullable()
+                 
+                
                 ->searchable(),
 
+                Forms\Components\Select::make('variant_id')
+                ->label('Product Variant')
+                ->options(function (callable $get) {
+                    $productId = $get('product_id'); // Get selected product ID
+                    if (!$productId) return [];
+            
+                    $user = auth()->user();
+            
+                    // Find the ordered variant of the selected product (if exists)
+                    $variant = \App\Models\OrderItem::whereHas('order', function ($query) use ($user) {
+                            $query->where('user_id', $user->id)
+                                  ->where('status', 'delivered'); // Only delivered orders
+                        })
+                        ->where('product_id', $productId)
+                        ->whereNotNull('variant_id') // Ensure the product has a variant
+                        ->first();
+            
+                    if ($variant) {
+                        return [$variant->variant_id => $variant->variant->variant_name]; // Auto-select the ordered variant
+                    }
+            
+                    return []; // No variant found
+                })
+                ->reactive() // Ensures automatic updates when product changes
+                ->afterStateUpdated(fn (callable $set) => $set('variant_id', null)) // Reset if product changes
+                ->nullable() // Allows it to be empty if no variant exists
+                ->searchable(),
+            
+            
 
             Forms\Components\Radio::make('rating')
                 ->label('Rating')
@@ -84,7 +114,6 @@ class ReviewResource extends Resource
                 ->label('Review Images')
                 ->multiple() // Allows multiple file uploads
                 ->directory('reviews') // Store in 'storage/app/public/reviews'
-                ->storeFileNamesIn('images') // Save as JSON in the DB
                 ->image() // Restrict to image files
                 ->nullable(),
             ]);
@@ -94,16 +123,13 @@ class ReviewResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('ID')
-                    ->sortable(),
     
-                Tables\Columns\TextColumn::make('user.name') // Assuming a relationship with User
+                Tables\Columns\TextColumn::make('user.email') // Assuming a relationship with User
                     ->label('User')
                     ->sortable()
                     ->searchable(),
     
-                Tables\Columns\TextColumn::make('product.name') // Assuming a relationship with Product
+                Tables\Columns\TextColumn::make('product.product_name') // Assuming a relationship with Product
                     ->label('Product')
                     ->sortable()
                     ->searchable(),
@@ -120,8 +146,7 @@ class ReviewResource extends Resource
     
                 Tables\Columns\ImageColumn::make('images')
                     ->label('Review Images')
-                    ->disk('public') // Ensure storage is set correctly
-                    ->limit(3), // Display up to 3 images
+                    ->limit(3), 
                 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created At')
