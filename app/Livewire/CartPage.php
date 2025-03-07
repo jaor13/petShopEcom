@@ -4,8 +4,6 @@ namespace App\Livewire;
 
 use App\Helpers\CartManagement;
 use App\Livewire\Partials\Navbar;
-// use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -28,12 +26,7 @@ class CartPage extends Component
     
         $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
     
-        LivewireAlert::title('Product removed successfully!')
-            ->success()
-            ->position('bottom-end')
-            ->timer(3000)
-            ->toast()
-            ->show();
+        
     }
     public function increaseQty($product_id) {
         $this->cart_items = CartManagement::incrementQuantityToCartItem($product_id);

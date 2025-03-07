@@ -4,8 +4,6 @@ namespace App\Livewire\Partials;
 
 use App\Helpers\CartManagement;
 use App\Models\Product;
-// use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Component;
 
 class ProductGrid extends Component
@@ -30,13 +28,6 @@ class ProductGrid extends Component
 
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
 
-
-        LivewireAlert::title('Product added to cart successfully!')
-            ->success()
-            ->position('bottom-end')
-            ->timer(3000)
-            ->toast()
-            ->show();
     }
 
     public function render()
