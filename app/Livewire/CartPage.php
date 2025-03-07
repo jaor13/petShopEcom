@@ -11,8 +11,6 @@ use Livewire\Component;
 #[Title("Cart - Aricuz")]
 class CartPage extends Component
 {
-    use LivewireAlert;
-
     public $cart_items = [];
     public $grand_total;
 
@@ -23,17 +21,18 @@ class CartPage extends Component
 
     public function removeItem($product_id) {
         usleep(200000); // 0.2 second delay (200ms)
-
+    
         $this->cart_items = CartManagement::removeCartItem($product_id);
         $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
-
+    
         $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
-        
-        $this->alert('success', 'Product removed successfully!', [
-            'position' => 'bottom-end',
-            'timer' => 3000,
-            'toast' => true,
-        ]);
+    
+        LivewireAlert::title('Product removed successfully!')
+            ->success()
+            ->position('bottom-end')
+            ->timer(3000)
+            ->toast()
+            ->show();
     }
     public function increaseQty($product_id) {
         $this->cart_items = CartManagement::incrementQuantityToCartItem($product_id);
