@@ -45,23 +45,27 @@ class ProductGrid extends Component
     $matchingCategories = \App\Models\Category::where('name', 'like', '%' . $this->query . '%')->pluck('id');
 
     $products->where(function ($query) use ($matchingCategories) {
-        // If a category is selected, filter by that category
+        // If a category is selected, filter by that category first
         if ($this->category) {
             $query->whereHas('categories', function ($q) {
                 $q->where('name', 'like', '%' . $this->category . '%');
             });
-        }
 
-        // If the query matches a category name, filter by those categories
-        if ($matchingCategories->isNotEmpty()) {
-            $query->orWhereHas('categories', function ($q) use ($matchingCategories) {
-                $q->whereIn('id', $matchingCategories);
-            });
-        }
+            // If the user is searching within a selected category, only match product names
+            if ($this->query) {
+                $query->where('product_name', 'like', '%' . $this->query . '%');
+            }
+        } else {
+            // If no category is selected, allow searching by product name or category name
+            if ($matchingCategories->isNotEmpty()) {
+                $query->orWhereHas('categories', function ($q) use ($matchingCategories) {
+                    $q->whereIn('id', $matchingCategories);
+                });
+            }
 
-        // Also search by product name
-        if ($this->query) {
-            $query->orWhere('product_name', 'like', '%' . $this->query . '%');
+            if ($this->query) {
+                $query->orWhere('product_name', 'like', '%' . $this->query . '%');
+            }
         }
     });
 
@@ -69,5 +73,6 @@ class ProductGrid extends Component
         'products' => $products->get()
     ]);
 }
+
 
 }
