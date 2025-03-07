@@ -16,6 +16,7 @@ class ProductVariant extends Model
         'price',
         'stock_quantity',
         'sold_count',
+        'image', 
     ];
 
     protected $casts = [
