@@ -79,7 +79,7 @@
         <!-- Guest Navigation Links -->
         @guest
             <nav class="d-flex align-items-center">
-                <a href="{{ route('login') }}" class="btn btn-outline-primary me-2" wire:navigate>Sign In</a>
+                <a href="{{ route('login') }}" class="btn btn-outline-primary me-2" wire:navigate>Login</a>
                 <a href="{{ route('register') }}" class="btn btn-primary" wire:navigate>Register</a>
             </nav>
         @endguest
