@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
  
-class User extends Authenticatable implements MustVerifyEmail{
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasName{
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -52,12 +52,9 @@ class User extends Authenticatable implements MustVerifyEmail{
     }
 
     public function address()
-
     {
         return $this->belongsTo(Address::class);
     }
-
-
 
     public function orders()
     {
