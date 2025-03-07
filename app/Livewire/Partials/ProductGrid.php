@@ -4,13 +4,12 @@ namespace App\Livewire\Partials;
 
 use App\Helpers\CartManagement;
 use App\Models\Product;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
+// use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Component;
 
 class ProductGrid extends Component
 {
-
-    use LivewireAlert;
 
     public $query;
     public $category;
