@@ -30,6 +30,8 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cube';
 
+    protected static ?string $label = 'Product Listing & Stock'; 
+
     protected static ?string $navigationGroup = 'Product Management';
 
     protected static ?string $slug = 'product-management-products';

@@ -39,6 +39,7 @@ class Product extends Model
 
     public function getPriceAttribute()
     {
+        // already in sql trigger
         // function will return the mninimum price of product e.g sa product table if walang variant then price column will be the base price
         // but if may variant naman siya hahanapin niya yung lowest price sa variant table then yun magga update yung base price sa product table sa lowest price
         // based sa variant price
@@ -52,18 +53,19 @@ class Product extends Model
 
     public function getStockAttribute()
     {
+        // already in sql trigger
         //calculate the  sum of stock_quantity of dif varaints of a product 
         //used by the updateStockAndAvailability function in comparing if the product/variant has a stock
         if ($this->has_variant) {
-            return $this->variants()->sum('stock_quantity') ?? 0; // Ensure it returns 0 if null
+            return $this->variants()->sum('stock_quantity') ?? 0; 
         }
 
-        return $this->attributes['stock_quantity'] ?? 0; // Ensure it returns 0 if null
-
+        return $this->attributes['stock_quantity'] ?? 0; 
     }
 
     public function updateStockAndAvailability()
     {
+        // already in sql trigger
         // function update the in_stock column in product table
         // if 1 meaning there is a record of a product/variant in stock table
         // if 0 meaning there is no record of a product/variant in stock table
@@ -79,6 +81,7 @@ class Product extends Model
     }
     public function updatePrice()
     {
+        // already in sql trigger
         //update price column in product table
         if ($this->has_variant && $this->variants()->exists()) {
             $this->price = $this->variants()->min('price');
@@ -98,6 +101,7 @@ class Product extends Model
     {
         parent::boot();
 
+        // already in sql trigger
         static::saved(function (Product $product) {
             // Update stock availability after saving
             $product->updateStockAndAvailability();
@@ -110,10 +114,13 @@ class Product extends Model
             $product->variants()->delete();
         });
 
+
+        // already in sql trigger
         ProductVariant::saved(function (ProductVariant $variant) {
             $variant->product->updateStockAndAvailability();
         });
-
+    
+        // already in sql trigger
         ProductVariant::deleted(function (ProductVariant $variant) {
             $variant->product->updateStockAndAvailability();
         });
@@ -122,12 +129,15 @@ class Product extends Model
 
 
     //     //
-//     public function updateStockFromVariants()
-// {
-//     $this->update([
-//         'stock_quantity' => $this->variants()->sum('stock_quantity'),
-//     ]);
-// }
+    //     public function updateStockFromVariants()
+    // {
+    //     $this->update([
+    //         'stock_quantity' => $this->variants()->sum('stock_quantity'),
+    //     ]);
+    // }
+
+
+
 
 
 }
