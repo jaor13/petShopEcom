@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @livewireStyles
     <link href="{{ asset('assets/css/layout.css') }}" rel="stylesheet">
-
- 
-
 </head>
 
     <body class="d-flex flex-column min-vh-100">
@@ -55,12 +51,10 @@
                 </div>
             </header>
         
-
             <main class="container my-5 flex-grow-1 bg-red" id="profile-container">
                 <section class="my-section">
                     <div class="container-fluid">
                         <div class="row">
-                            <!-- Sidebar starts here -->
                             <nav id="sidebar" class="col-md-4 col-lg-3 d-md-block bg-light sidebar">
                                 <div class="position-sticky">
                                     <div class="profile text-center py-4">
@@ -74,8 +68,8 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link section-link" href="#" data-target="purchase-history">
-                                                <i class="fas fa-history"></i> Purchase History
+                                            <a class="nav-link section-link" href="#" data-target="my-purchases">
+                                                <i class="fas fa-history"></i> My Purchases
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -91,65 +85,161 @@
                                     </ul>
                                 </div>
                             </nav>
-                            <!-- Sidebar ends here -->
-
-                            <!-- Main content starts here -->
-                            <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4 custom-main">
-                                
-                            <div id="my-account" class="section-content">
-                            <h2 class="section-title">Manage your Account Details</h2>
-                            <p class="section-description">Update your account's profile information and email address.</p>
-
-                         
+                                <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4 custom-main">
+                                    <div id="my-account" class="section-content d-none">
+                                        <h2 class="section-title">Manage your Account Details</h2>
+                                        <p class="section-description">Update your account's profile information and email address.</p>
                                         @livewire('my-account')
+                                    </div>
+                                    <div id="my-purchases" class="section-content d-none">
+                                        <h2>My Purchases</h2>
+                                        @livewire('orders')
+                                    </div>
+                                    <div id="ratings-reviews" class="section-content d-none">
+                                        <h2>Ratings and Reviews</h2>
 
-                            </div>
+                                        <div class="container border border-light border-3 rounded-2 p-0">
+    <!-- Order Completion Header -->
+    <div>
+        <h4 class="text-white text-center w-100 m-0 rounded-2" style="background-color: #00DCE3;">
+            Your order is complete
+        </h4>
+    </div>
+
+    <!-- Delivery Information -->
+    <div class="p-4 mb-2">
+        <h6 class="w-100 border-bottom pb-2">Delivery Information</h6>
+
+        <!-- Row with Icon and Delivery Text -->
+        <div class="ms-4 d-flex align-items-center mt-3">
+            <i class="fa-solid fa-map-marker fa-2x" 
+               style="color: red; background-color: white; border-radius: 50%; padding: 5px;"></i>
+            
+            <div class="ms-5">
+                <h6 class="mb-1">Lily T. Ann</h6>
+                <p class="mb-1">(+63) 908 103 9509</p>
+                <p>Zone 2, Di Makita, Saan Tinago City, Albay, 4511</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Items Summary -->
+    <div class="p-4 mb-2">
+        <h6 class="w-100 border-bottom pb-2">Items Summary</h6>
+
+        <!-- Item 1 -->
+        <div class="d-flex mb-3">
+            <img src="cat-litter.jpg" alt="Cat Litter" class="img-thumbnail" style="width: 100px;">
+            <div class="ms-3 flex-grow-1">
+                <p><strong>The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 6L</strong></p>
+                <p><strong>Quantity:</strong> 2</p>
+                <div class="d-flex justify-content-between">
+                    <p class="mb-0"><strong>Price:</strong> ₱469.00 each</p>
+                    <p class="mb-0"><strong>Total Price:</strong> ₱938.00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="d-flex mb-3">
+            <img src="cat-litter.jpg" alt="Cat Litter" class="img-thumbnail" style="width: 100px;">
+            <div class="ms-3 flex-grow-1">
+                <p><strong>The Fur Life (The Purr Life) Tofu Fragrance Free Cat Litter 5L</strong></p>
+                <p><strong>Quantity:</strong> 2</p>
+                <div class="d-flex justify-content-between">
+                    <p class="mb-0"><strong>Price:</strong> ₱469.00 each</p>
+                    <p class="mb-0"><strong>Total Price:</strong> ₱938.00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4">
+    <!-- Subtotal Row with Border Bottom -->
+    <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+        <p class="mb-0"><strong>Subtotal:</strong></p>
+        <p class="mb-0">₱1,407.00</p>
+    </div>
+
+    <!-- Delivery Fee Row with Border Bottom -->
+    <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+        <p class="mb-0"><strong>Delivery Fee:</strong></p>
+        <p class="mb-0">₱49.00</p>
+    </div>
+
+    <!-- Order Total Row Aligned to the End -->
+    <div class="text-end mt-3">
+        <p class="mb-0"><strong>Order Total:</strong> ₱1,465.00</p>
+    </div>
+</div>
+
+
+    <!-- Order Details -->
+    <div class="p-4">
+    
+    <!-- Order ID -->
+    <div class="d-flex justify-content-between">
+        <h5 class="mb-1"><strong>Order ID:</strong></h5>
+        <p class="mb-1">#0-12345678910</p>
+    </div>
+
+    <!-- Paid Method -->
+    <div class="d-flex justify-content-between mb-2">
+        <p class="mb-1">Paid Method:</strong></p>
+        <p class="mb-1">Cash on Delivery</p>
+    </div>
+
+    <!-- E-Invoice -->
+    <div class="border-bottom mb-4 d-flex justify-content-between">
+        <p class="mb-1">E-Invoice:</strong></p>
+        <p class="mb-1"><a href="#">View</a></p>
+    </div>
+
+    <!-- Order Time -->
+    <div class="d-flex justify-content-between">
+        <p class="mb-1">Order Time:</strong></p>
+        <p class="mb-1">14-12-2024 02:10</p>
+    </div>
+
+    <!-- Payment Time -->
+    <div class="d-flex justify-content-between">
+        <p class="mb-1">Payment Time:</strong></p>
+        <p class="mb-1">14-12-2024 13:30</p>
+    </div>
+
+    <!-- Ship Time -->
+    <div class="d-flex justify-content-between">
+        <p class="mb-1">Ship Time:</strong></p>
+        <p class="mb-1">14-12-2024 08:30</p>
+    </div>
+
+    <!-- Completed Time -->
+    <div class="border-bottom d-flex justify-content-between">
+        <p class="mb-0">Completed Time:</strong></p>
+        <p class="mb-0">14-12-2024 15:30</p>
+    </div>
+</div>
 
 
 
 
 
+</div>
+
+                              
+                                       
 
 
-
-                                
-
-                                <div id="purchase-history" class="section-content d-none">
-                                    <h2>Purchase History</h2>
-                                    <p>View your past orders here.</p>
-                                </div>
-
-                                <div id="ratings-reviews" class="section-content d-none">
-                                    <h2>Ratings and Reviews</h2>
-                                    <p>Check your reviews and ratings.</p>
-                                </div>
-
-                                <div id="liked-products" class="section-content d-none">
-                                    <h2>Liked Products</h2>
-                                    <p>See the products you have liked.</p>
-                                </div>
-                            </main>
-                            <!-- Main content ends here -->
+                                    </div>
+                                    <div id="liked-products" class="section-content d-none">
+                                        <h2>Liked Products</h2>
+                                        <p>See the products you have liked.</p>
+                                    </div>
+                                </main>
                         </div>
                     </div>
                 </section>
             </main>
-
-
-
-                        
-
-                
-
-
-
-
-
-
-
-
-
-        
 
             <footer class="container-fluid custom-footer text-white py-3 mt-auto">
                 <div class="container text-center">
@@ -159,53 +249,41 @@
 
         </div> 
         
-        
-        
-    
-
         <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
         <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
        
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-    const links = document.querySelectorAll(".section-link");
-    const sections = document.querySelectorAll(".section-content");
+                    document.addEventListener("DOMContentLoaded", function () {
+                    const links = document.querySelectorAll(".section-link");
+                    const sections = document.querySelectorAll(".section-content");
 
-    // Default active section (My Account)
-    const defaultSection = document.getElementById("my-account");
-    defaultSection.classList.remove("d-none"); // Ensure it's visible
-    document.querySelector(".section-link[data-target='my-account']").classList.add("active");
+                    const defaultSection = document.getElementById("my-account");
+                    defaultSection.classList.remove("d-none"); // Ensure it's visible
+                    document.querySelector(".section-link[data-target='my-account']").classList.add("active");
 
-    links.forEach(link => {
-        link.addEventListener("click", function (e) {
-            e.preventDefault(); // Prevent page reload
+                        links.forEach(link => {
+                            link.addEventListener("click", function (e) {
+                            e.preventDefault(); 
 
-            // Hide all sections
-            sections.forEach(section => section.classList.add("d-none"));
+                            sections.forEach(section => section.classList.add("d-none"));
 
-            // Remove 'active' class from all links
-            links.forEach(l => l.classList.remove("active"));
+                            links.forEach(l => l.classList.remove("active"));
 
-            // Show the selected section
-            const targetId = this.getAttribute("data-target");
-            document.getElementById(targetId).classList.remove("d-none");
+                            const targetId = this.getAttribute("data-target");
+                            document.getElementById(targetId).classList.remove("d-none");
 
-            // Add 'active' class to clicked link
-            this.classList.add("active");
+                            this.classList.add("active");
+                        });
+                });
         });
-    });
-});
-
         </script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <x-livewire-alert::scripts />
-        @livewireScripts        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <x-livewire-alert::scripts />
+        @livewireScripts
 
-        
     </body>
+
 </html>
-
-
