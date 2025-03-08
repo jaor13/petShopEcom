@@ -17,12 +17,12 @@ use App\Livewire\SuccessPage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureUserIsAdmin;
 
+Route::get('/', LandingPage::class)->name('home');
 Route::get('/products', ProductsPage::class);
 Route::get('/cart', CartPage::class);
 Route::get('/product/{slug}', ProductDetailPage::class);
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', LandingPage::class)->name('home');
     Route::get('/login', LoginPage::class);
     Route::get('/register', RegisterPage::class);
     Route::get('/forgot-password', ForgotPasswordPage::class);
