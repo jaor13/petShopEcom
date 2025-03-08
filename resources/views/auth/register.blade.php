@@ -53,11 +53,11 @@
                 </div>
 
                 <div class="terms-container mb-3">
-                <label for="terms" class="form-check-label">
-        <input type="checkbox" name="terms" id="terms" class="form-check-input">
+    <label for="terms" class="form-check-label">
+        <input type="checkbox" name="terms" id="terms" class="form-check-input" required>
         Agree with <a href="#">Terms of Service</a>
-    </label> 
-                </div>
+    </label>
+</div>
                 <button type="submit" class="btn">Register</button>
                 <div class="d-flex justify-content-between align-items-center">
                     <p class="signin-link">Already have an account? <a id="show-signup" href="{{ route('login') }}">Login</a></p>
