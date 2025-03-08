@@ -280,6 +280,8 @@ img {
     }
 
     .chatbox_body {
+        overflow: hidden;
+        overflow-y: scroll;
         width: 100%;
         position: absolute;
         top: 60px;
@@ -324,11 +326,12 @@ img {
     .chatbox_footer {
         height: 60px;
         width: 100%;
-        border-top: 1px solid blue;
+        border-top: 1px solid rgb(192, 192, 192);
         position: absolute;
         bottom: 0;
         display: flex;
         flex-wrap: nowrap;
+        background-color: rgb(255, 246, 246);
 
         .custom_form_group{
 

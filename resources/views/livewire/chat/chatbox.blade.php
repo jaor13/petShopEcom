@@ -64,5 +64,39 @@
                 </div>
             </div>
         </div>
+
+        <div class="msg_body msg_body_me">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, numquam. Non enim expedita facilis,
+            officiis consequuntur numquam veniam cum quae accusantium molestiae, porro harum odio eligendi, sequi
+            similique perferendis magni.
+            <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis, consequuntur!
+            <div class="msg_body_footer">
+
+                <div class="date">
+                    1 hour ago
+                </div>
+
+                <div class="read">
+                    <i class="bi bi-check"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="msg_body msg_body_me">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, numquam. Non enim expedita facilis,
+            officiis consequuntur numquam veniam cum quae accusantium molestiae, porro harum odio eligendi, sequi
+            similique perferendis magni.
+            <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis, consequuntur!
+            <div class="msg_body_footer">
+
+                <div class="date">
+                    1 hour ago
+                </div>
+
+                <div class="read">
+                    <i class="bi bi-check"></i>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
