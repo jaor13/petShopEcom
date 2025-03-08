@@ -4,39 +4,38 @@
       <div class="flex flex-wrap -mx-4">
         <!-- Product Image and Slideshow -->
         <div class="w-full mb-8 md:w-1/2 md:mb-0" x-data="{ 
-        mainImages: @js(collect($product->images)->map(fn($image) => url('storage', $image))->toArray()), 
-        images: @js(collect($product->images)->map(fn($image) => url('storage', $image))->toArray()), 
-        mainImageIndex: 0, 
-        selectedVariant: null, 
-        variantName: '{{ $product->variants->count() }} Variations Available',
-        stock: {{ $product->stock_quantity }}, 
-        price: {{ $product->price }}, 
-        nextImage() {
-          this.mainImageIndex = (this.mainImageIndex + 1) % this.images.length;
-        },
-        prevImage() {
-          this.mainImageIndex = (this.mainImageIndex - 1 + this.images.length) % this.images.length;
-        },
-        selectVariant(variant, image, stock, price) {
-          if (this.selectedVariant === variant) {
-            this.selectedVariant = null;
-            this.images = this.mainImages;
-            this.variantName = '{{ $product->variants->count() }} Variations Available';
-            this.stock = {{ $product->stock_quantity }};
-            this.price = {{ $product->price }};  // Reset to base price
-          } else {
-            this.selectedVariant = variant;
-            this.images = [image];
-            this.variantName = variant;
-            this.stock = stock;
-            
-            // Convert price to a number before assigning (to prevent Alpine.js from ignoring it)
-            this.price = Number(price);
+          mainImages: @js(collect($product->images)->map(fn($image) => url('storage', $image))->toArray()), 
+          images: @js(collect($product->images)->map(fn($image) => url('storage', $image))->toArray()), 
+          mainImageIndex: 0, 
+          selectedVariant: null, 
+          variantName: '{{ $product->variants->count() }} Variations Available',
+          stock: {{ $product->stock_quantity }}, 
+          price: {{ $product->price }}, 
+          nextImage() {
+            this.mainImageIndex = (this.mainImageIndex + 1) % this.images.length;
+          },
+          prevImage() {
+            this.mainImageIndex = (this.mainImageIndex - 1 + this.images.length) % this.images.length;
+          },
+          selectVariant(variant, image, stock, price) {
+            if (this.selectedVariant === variant) {
+              this.selectedVariant = null;
+              this.images = this.mainImages;
+              this.variantName = '{{ $product->variants->count() }} Variations Available';
+              this.stock = {{ $product->stock_quantity }};
+              this.price = {{ $product->price }};  // Reset to base price
+            } else {
+              this.selectedVariant = variant;
+              this.images = [image];
+              this.variantName = variant;
+              this.stock = stock;
+              
+              // Convert price to a number before assigning (to prevent Alpine.js from ignoring it)
+              this.price = Number(price);
+            }
+            this.mainImageIndex = 0;
           }
-          this.mainImageIndex = 0;
-        }
-
-      }" x-init="setInterval(() => { nextImage() }, 3000)">
+        }" x-init="setInterval(() => { nextImage() }, 3000)">
           <div class="sticky top-0 z-50 overflow-hidden">
             <!-- Slideshow -->
             <div class="relative mb-6 lg:mb-10 lg:h-2/4">
@@ -53,13 +52,13 @@
             <!-- Variant Images -->
             <div class="flex-wrap hidden md:flex">
               @foreach ($product->variants as $variant)
-                <div class="w-1/2 p-2 sm:w-1/4"
-                x-on:click="selectVariant('{{ $variant->name }}', '{{ url('storage', $variant->image) }}', {{ $variant->stock_quantity }}, {{ $variant->price }})">
-                <img src="{{ url('storage', $variant->image) }}" alt="{{ $variant->name }}"
-                  class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-blue-500"
-                  :class="selectedVariant === '{{ $variant->name }}' ? 'border-2 border-blue-500' : ''">
-                </div>
-              @endforeach
+          <div class="w-1/2 p-2 sm:w-1/4" wire:click="$set('variant_name', '{{ $variant->name }}')"
+          x-on:click="selectVariant('{{ $variant->name }}', '{{ url('storage', $variant->image) }}', {{ $variant->stock_quantity }}, {{ $variant->price }})">
+          <img src="{{ url('storage', $variant->image) }}" alt="{{ $variant->name }}"
+            class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-blue-500"
+            :class="selectedVariant === '{{ $variant->name }}' ? 'border-2 border-blue-500' : ''">
+          </div>
+        @endforeach
             </div>
           </div>
 
@@ -114,16 +113,21 @@
               </div>
             </div>
 
+
             <!-- Add to Cart Button -->
-            <div class="flex flex-wrap items-center gap-4">
-              <a href="{{ auth()->check() ? '#' : route('login') }}" @if(auth()->check())
-                wire:click.prevent="addToCart({{ $product->id }})" @endif
-                class="w-full p-4 bg-blue-500 rounded-md lg:w-2/5 dark:text-gray-200 text-gray-50 hover:bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-700">
-                <span wire:loading.remove class="block" wire:target="addToCart({{ $product->id }})">Add to cart</span>
-                <span wire:loading class="hidden block" wire:target="addToCart({{ $product->id }})">Adding to
-                  cart</span>
-              </a>
-            </div>
+            @if(auth()->check())
+    <button wire:click.prevent="addToCart({{ $product->id }})"
+        class="w-full p-4 bg-blue-500 rounded-md lg:w-2/5 text-gray-50 hover:bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-700">
+        <span wire:loading.remove wire:target="addToCart({{ $product->id }})">Add to cart</span>
+    </button>
+@else
+    <a href="{{ route('login') }}"
+        class="w-full p-4 bg-blue-500 rounded-md lg:w-2/5 text-gray-50 hover:bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-700">
+        Login to Add to Cart
+    </a>
+@endif
+
+
           </div>
         </div>
       </div>

@@ -208,29 +208,34 @@
 						BASKET SUMMARY
 					</div>
 					<ul class="divide-y divide-gray-200 dark:divide-gray-700" role="list">
-						@foreach ($cart_items as $ci)
-							<li class="py-3 sm:py-4" wire:key=" {{ $ci['product_id'] }}">
-								<div class="flex items-center">
-									<div class="flex-shrink-0">
-										<img alt="{{ $ci['name'] }}" class="w-12 h-12 rounded-full"
-											src="{{ url('storage', $ci['image']) }}">
-										</img>
-									</div>
-									<div class="flex-1 min-w-0 ms-4">
-										<p class="text-sm font-medium text-gray-900 truncate">
-											{{ $ci['name'] }}
-										</p>
-										<p class="text-sm text-gray-500 truncate dark:text-gray-400">
-											{{ $ci['quantity'] }}
-										</p>
-									</div>
-									<div class="inline-flex items-center text-base font-semibold text-gray-900">
-										{{ Number::currency($ci['total_amount'], 'PHP') }}
-									</div>
-								</div>
-							</li>
-						@endforeach
-					</ul>
+    @foreach ($cart_items as $ci)
+        <li class="py-3 sm:py-4" wire:key=" {{ $ci['product_id'] }}">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <img alt="{{ $ci['name'] }}" class="w-12 h-12 rounded-full"
+                        src="{{ url('storage', $ci['image']) }}">
+                </div>
+                <div class="flex-1 min-w-0 ms-4">
+                    <p class="text-sm font-medium text-gray-900 truncate">
+                        {{ $ci['name'] }}
+                    </p>
+                    @if (!empty($ci['variant_name'])) 
+                        <p class="text-xs text-gray-500 truncate dark:text-gray-400">
+                            Variant: {{ $ci['variant_name'] }}
+                        </p>
+                    @endif
+                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                        Quantity: {{ $ci['quantity'] }}
+                    </p>
+                </div>
+                <div class="inline-flex items-center text-base font-semibold text-gray-900">
+                    {{ Number::currency($ci['total_amount'], 'PHP') }}
+                </div>
+            </div>
+        </li>
+    @endforeach
+</ul>
+
 				</div>
 			</div>
 		</div>

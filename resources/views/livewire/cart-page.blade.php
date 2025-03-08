@@ -15,37 +15,51 @@
               </tr>
             </thead>
             <tbody>
-               @forelse ($cart_items as $item)
-               <tr wire:key="{{ $item['product_id'] }}">
-                <td class="py-4">
-                  <div class="flex items-center">
-                    <img class="h-16 w-16 mr-4" src="{{ url('storage', $item['image']) }}" alt="{{ $item['name'] }}">
-                    <span class="font-semibold">{{ $item['name'] }}</span>
-                  </div>
-                </td>
-                <td class="py-4">{{ Number::currency($item['unit_amount'], 'PHP') }}</td>
-                <td class="py-4">
-                  <div class="flex items-center">
-                    <button  wire:click="decreaseQty({{ $item['product_id'] }})" class="border rounded-md py-2 px-4 mr-2">-</button>
-                    <span class="text-center w-8">{{ $item['quantity'] }}</span>
-                    <button wire:click="increaseQty({{ $item['product_id'] }})" class="border rounded-md py-2 px-4 ml-2">+</button>
-                  </div>
-                </td>
-                <td class="py-4">{{ Number::currency($item['total_amount'], 'PHP') }}</td>
-                <td>
-                  <button wire:click="removeItem({{ $item['product_id'] }})" class="bg-slate-300 border-2 border-slate-400 rounded-lg px-3 py-1 hover:bg-red-500 hover:text-white hover:border-red-700">
-                    <span wire:loading.remove class="block" wire:target="removeItem({{ $item['product_id'] }})">Remove</span>
-                    <span wire:loading class="hidden block" wire:target="removeItem({{ $item['product_id'] }})">Removing</span>
-                  </button>
-                  </td>
-              </tr>
-              @empty
-              <tr>
-                <td colspan="5" class="text-center py-5 text-2xl text-slate-500">
-                  No iems available in cart
-                </td>
-              </tr>
-              @endforelse
+              @forelse ($cart_items as $item)
+              <tr wire:key="{{ $item['product_id'] }}">
+              <td class="py-4">
+                <div class="flex items-center">
+                <a href="{{ url('/product/' . $item['slug']) }}">
+
+                  <img class="h-16 w-16 mr-4 cursor-pointer" src="{{ url('storage', $item['image']) }}"
+                  alt="{{ $item['name'] }}">
+                </a>
+            <div>
+              <span class="font-semibold block">{{ $item['name'] }}</span>
+              @if (!empty($item['variant_name']))
+                <span class="text-sm text-gray-500">Variant: {{ $item['variant_name'] }}</span>
+              @endif
+            </div>
+            </div>
+          </td>
+          <td class="py-4">{{ Number::currency($item['unit_amount'], 'PHP') }}</td>
+          <td class="py-4">
+            <div class="flex items-center">
+            <button wire:click="decreaseQty({{ $item['product_id'] }})"
+              class="border rounded-md py-2 px-4 mr-2">-</button>
+            <span class="text-center w-8">{{ $item['quantity'] }}</span>
+            <button wire:click="increaseQty({{ $item['product_id'] }})"
+              class="border rounded-md py-2 px-4 ml-2">+</button>
+            </div>
+          </td>
+          <td class="py-4">{{ Number::currency($item['total_amount'], 'PHP') }}</td>
+          <td>
+            <button wire:click="removeItem({{ $item['product_id'] }}, '{{ $item['variant_name'] }}')"
+            class="bg-slate-300 border-2 border-slate-400 rounded-lg px-3 py-1 hover:bg-red-500 hover:text-white hover:border-red-700">
+            <span wire:loading.remove class="block"
+              wire:target="removeItem({{ $item['product_id'] }}, '{{ $item['variant_name'] }}')">Remove</span>
+            <span wire:loading class="hidden block"
+              wire:target="removeItem({{ $item['product_id'] }}, '{{ $item['variant_name'] }}')">Removing</span>
+            </button>
+          </td>
+          </tr>
+        @empty
+        <tr>
+        <td colspan="5" class="text-center py-5 text-2xl text-slate-500">
+          No items available in cart
+        </td>
+        </tr>
+      @endforelse
             </tbody>
           </table>
         </div>
@@ -67,8 +81,9 @@
             <span class="font-semibold">{{ Number::currency($grand_total, 'PHP') }}</span>
           </div>
           @if($cart_items)
-          <a href="/checkout" class="bg-blue-500 text-white block text-center py-2 px-4 rounded-lg mt-4 w-full">Checkout</a>
-          @endif
+        <a href="/checkout"
+        class="bg-blue-500 text-white block text-center py-2 px-4 rounded-lg mt-4 w-full">Checkout</a>
+      @endif
         </div>
       </div>
     </div>

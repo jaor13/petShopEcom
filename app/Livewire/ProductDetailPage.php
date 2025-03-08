@@ -19,6 +19,8 @@ class ProductDetailPage extends Component
 
     public $quantity = 1;
 
+    public $variant_name = null;
+
     public function mount($slug)
     {
         $this->slug = $slug;
@@ -37,9 +39,11 @@ class ProductDetailPage extends Component
     }
 
     public function addToCart($product_id) {
+        // dd($product_id);
+        // dd($this->variant_name);
         usleep(200000); // 0.2-second delay (200ms)
 
-        $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity);
+        $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity, $this->variant_name);
         // dd($total_count, $product_id);
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
         
