@@ -13,6 +13,6 @@
     </div>
 
     <div class="chatbox_footer">
-        footer
+        bitis
     </div>
 </div>

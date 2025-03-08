@@ -1,3 +1,5 @@
+@import url("breakpoints.scss");
+/*---------------------------*/
 .chat_container {
   position: fixed;
   width: 95%;
@@ -11,6 +13,7 @@
       flex-wrap: nowrap;
 }
 
+/*---------------------------*/
 .chat_list_container {
   border: 1px solid gray;
   width: 25%;
@@ -20,6 +23,7 @@
   border: 1px solid gray;
   height: 60px;
 }
+/*---------------------------*/
 .chat_box {
   position: relative;
   border: 1px solid rgb(116, 116, 116);
