@@ -17,12 +17,12 @@
         <div class="chatlist_item">
 
             <div class="chatlist_img_container">
-                <img src="https://picsum.photos/id/12/200/300" alt="dogo">
+                <img src="https://picsum.photos/id/1/200/300" alt="dogo">
             </div>
 
             <div class="chatlist_info">
                 <div class="top_row">
-                    <div class="list_username"> Luse </div>
+                    <div class="list_username"> Laiza </div>
                     <span class="date">2d</span>
                 </div>
 
