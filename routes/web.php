@@ -36,9 +36,9 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     })->name('adminDashboard');
 });
 
-Route::middleware(['auth', 'verified', 'notAdmin'])->group(function () {
-    Route::get('/', LandingPage::class)->name('home');
-});
+// Route::middleware(['auth', 'verified', 'notAdmin'])->group(function () {
+//     Route::get('/', LandingPage::class)->name('home');
+// });
 
 // Route::get('/user/dashboard', function () {
 //     return view('userDashboard');
