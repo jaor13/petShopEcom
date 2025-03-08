@@ -1,13 +1,12 @@
-<div>
-    @if (session()->has('success'))
+<div class="container">
+    <div class="bg-light p-3 rounded shadow-sm" >
+    <h4>Change Username & Email</h4>
+           @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-
-    <h2 class="section-title">Manage your Account Details</h2>
-    <p class="section-description">Update your account's profile information and email address.</p>
 
     <form wire:submit.prevent="updateProfile" class="mt-3">
         <!-- Name Field -->
@@ -43,4 +42,61 @@
             <button type="submit" class="btn btn-success">Save</button>
         </div>
     </form>
+
+    </div>
+
+    <div class="bg-light p-3 mt-3 rounded shadow-sm">
+    <h4>Change Password</h4>
+    <form wire:submit.prevent="updatePassword" class="mt-3">
+        <!-- Current Password Field -->
+        <div class="mb-3">
+            <label for="currentPassword" class="form-label">Current Password</label>
+            <input type="password" class="form-control" id="currentPassword" wire:model="currentPassword" required>
+            @error('currentPassword') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+        </div>
+
+        <!-- New Password Field -->
+        <div class="mb-3">
+    <label for="newPassword" class="form-label">New Password</label>
+    <input type="password" class="form-control" id="newPassword" wire:model="newPassword" required>
+    @error('newPassword') <div class="text-danger mt-1">{{ $message }}</div> @enderror
 </div>
+
+<div class="mb-3">
+    <label for="newPasswordConfirmation" class="form-label">Confirm Password</label>
+    <input type="password" class="form-control" id="newPasswordConfirmation" wire:model="newPasswordConfirmation" required>
+    @error('newPasswordConfirmation') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+</div>
+
+        <!-- Save Button -->
+        <div class="d-flex align-items-center gap-3">
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </form>
+</div>
+
+
+
+<div class="bg-light p-3 mt-3 rounded shadow-sm">
+    <h4>Delete Account</h4>
+    <form wire:submit.prevent="confirmDelete" class="mt-3">
+    <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" wire:model="password" required>
+            @error('password') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+            <button type="submit" class="btn btn-danger">Delete Account</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+</div>
+
+

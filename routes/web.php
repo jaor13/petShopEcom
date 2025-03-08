@@ -51,8 +51,8 @@ Route::middleware('auth')->group(function () {
 
     //Custom Profile Controller
     Route::get('/profile', [CustomProfileController::class, 'show'])->name('profile.show');
-    Route::patch('/profile/custom-update', [CustomProfileController::class, 'update'])->name('profile.custom-update');
-    Route::delete('/profile/delete', [CustomProfileController::class, 'destroy'])->name('profile.delete');
+    // Route::patch('/profile/custom-update', [CustomProfileController::class, 'update'])->name('profile.custom-update');
+    // Route::delete('/profile/delete', [CustomProfileController::class, 'destroy'])->name('profile.delete');
 
 
     //new
