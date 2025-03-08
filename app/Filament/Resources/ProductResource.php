@@ -173,6 +173,12 @@ class ProductResource extends Resource
                             TextInput::make('price')
                                 ->numeric()
                                 ->required(), 
+
+                                Section::make('Image')->schema([
+                                    FileUpload::make('image')
+                                        ->directory('products')
+                                        ->image()
+                                ]),    
                         ])
                         ->columnSpanFull()
                         ->hidden(fn (callable $get) => !$get('has_variant')), // Show only if has_variant is true
