@@ -19,3 +19,10 @@ require __DIR__.'/auth.php';
 
 Route::get('/users',CreateChat::class)->name('users');
 Route::get('/chat{key?}',Main::class)->name('chat');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->name('logout');
