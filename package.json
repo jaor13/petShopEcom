@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.0.12",
-        "preline": "^2.7.0"
+        "preline": "^2.7.0",
+        "sass": "^1.85.1"
     }
 }
