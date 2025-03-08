@@ -17,7 +17,7 @@ use App\Livewire\SuccessPage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureUserIsAdmin;
 
-Route::get('/', LandingPage::class);
+Route::get('/', LandingPage::class)->name('home');
 Route::get('/products', ProductsPage::class);
 Route::get('/cart', CartPage::class);
 Route::get('/product/{slug}', ProductDetailPage::class);
