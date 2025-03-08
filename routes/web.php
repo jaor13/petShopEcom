@@ -37,10 +37,12 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'notAdmin'])->group(function () {
-    Route::get('/user/dashboard', function () {
-        return view('userDashboard');
-    })->name('dashboard');
+    Route::get('/', LandingPage::class)->name('home');
 });
+
+// Route::get('/user/dashboard', function () {
+//     return view('userDashboard');
+// })->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
