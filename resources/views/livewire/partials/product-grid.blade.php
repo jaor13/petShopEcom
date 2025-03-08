@@ -20,7 +20,7 @@
                     </div>
                     <a href="{{ auth()->check() ? '#' : route('login') }}" @if(auth()->check())
                     wire:click.prevent="addToCart({{ $product->id }})" @endif
-                        class="text-gray-500 flex items-center space-x-2 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-300">
+                        class="text-gray-500 flex items-center space-x-2 hover:text-red-500">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="w-4 h-4 bi bi-cart3 " viewBox="0 0 16 16">
                             <path

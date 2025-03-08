@@ -105,7 +105,7 @@
 							<input wire:model="payment_method" class="hidden peer" id="hosting-small" required=""
 								type="radio" value="cod" />
 							<label
-								class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+								class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100"
 								for="hosting-small">
 								<div class="block">
 									<div class="w-full text-lg font-semibold">
@@ -124,7 +124,7 @@
 							<input wire:model="payment_method" class="hidden peer" id="hosting-big" type="radio"
 								value="gcash">
 							<label
-								class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+								class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100"
 								for="hosting-big">
 								<div class="block">
 									<div class="w-full text-lg font-semibold">
@@ -144,7 +144,7 @@
 							<input wire:model="payment_method" class="hidden peer" id="hosting-big" type="radio"
 								value="paymaya">
 							<label
-								class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+								class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100"
 								for="hosting-big">
 								<div class="block">
 									<div class="w-full text-lg font-semibold">
@@ -168,8 +168,8 @@
 				<!-- End Card -->
 			</div>
 			<div class="md:col-span-12 lg:col-span-4 col-span-12">
-				<div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-					<div class="text-xl font-bold underline text-gray-700 dark:text-white mb-2">
+				<div class="bg-white rounded-xl shadow p-4 sm:p-7">
+					<div class="text-xl font-bold underline text-gray-700 mb-2">
 						ORDER SUMMARY
 					</div>
 					<div class="flex justify-between mb-2 font-bold">
@@ -203,11 +203,11 @@
 					class="bg-green-500 mt-4 w-full p-3 rounded-lg text-lg text-white hover:bg-green-600">
 					Place Order
 				</button>
-				<div class="bg-white mt-4 rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-					<div class="text-xl font-bold underline text-gray-700 dark:text-white mb-2">
+				<div class="bg-white mt-4 rounded-xl shadow p-4 sm:p-7">
+					<div class="text-xl font-bold underline text-gray-700 mb-2">
 						BASKET SUMMARY
 					</div>
-					<ul class="divide-y divide-gray-200 dark:divide-gray-700" role="list">
+					<ul class="divide-y divide-gray-200" role="list">
 						@foreach ($cart_items as $ci)
 							<li class="py-3 sm:py-4" wire:key=" {{ $ci['product_id'] }}">
 								<div class="flex items-center">
@@ -220,7 +220,7 @@
 										<p class="text-sm font-medium text-gray-900 truncate">
 											{{ $ci['name'] }}
 										</p>
-										<p class="text-sm text-gray-500 truncate dark:text-gray-400">
+										<p class="text-sm text-gray-500 truncate">
 											{{ $ci['quantity'] }}
 										</p>
 									</div>
