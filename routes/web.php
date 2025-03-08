@@ -17,12 +17,12 @@ use App\Livewire\SuccessPage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureUserIsAdmin;
 
-Route::get('/', LandingPage::class);
 Route::get('/products', ProductsPage::class);
 Route::get('/cart', CartPage::class);
 Route::get('/product/{slug}', ProductDetailPage::class);
 
 Route::middleware('guest')->group(function () {
+    Route::get('/', LandingPage::class)->name('home');
     Route::get('/login', LoginPage::class);
     Route::get('/register', RegisterPage::class);
     Route::get('/forgot-password', ForgotPasswordPage::class);
@@ -36,11 +36,13 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     })->name('adminDashboard');
 });
 
-Route::middleware(['auth', 'verified', 'notAdmin'])->group(function () {
-    Route::get('/user/dashboard', function () {
-        return view('userDashboard');
-    })->name('dashboard');
-});
+// Route::middleware(['auth', 'verified', 'notAdmin'])->group(function () {
+//     Route::get('/', LandingPage::class)->name('home');
+// });
+
+// Route::get('/user/dashboard', function () {
+//     return view('userDashboard');
+// })->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
