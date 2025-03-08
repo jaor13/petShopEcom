@@ -23,6 +23,7 @@ header {
 
 main {
   margin-top: 70px; /* Adjust this to match the header height */
+
 }
 
 
@@ -147,28 +148,6 @@ main {
 
 }
 
-/* Cart Icon Styling */
-.cart-container {
-margin-right: 40px;
-}
-
-.iconify-cart {
-  font-size: 38px; /* Adjust this value as needed */
-  color: #ffffff;
-  margin-top: 10px;
-}
-
-.iconify-user {
-  font-size: 38px; /* Adjust this value as needed */
-  color: #ffffff;
-  margin-top: 10px;
-}
-
-/* Hover Effect */
-.iconify-cart:hover {
-  color: #d6eeff;
- 
-}
 
 /* Sign In Button */
 .btn-outline-primary {

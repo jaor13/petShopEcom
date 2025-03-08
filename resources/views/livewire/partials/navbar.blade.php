@@ -46,13 +46,19 @@
 
         <!-- Cart Icon -->
         @auth
-            <div class="cart-container">
-                <a href="{{ url('cart/') }}" wire:navigate class="relative flex items-center space-x-1">
-                    <span><iconify-icon icon="mdi:cart" class="iconify-cart"></iconify-icon></span>
-                    <span
-                        class="py-0.5 px-1.5 rounded-full text-xs font-medium bg-blue-50 border border-blue-200 text-blue-600">{{ $total_count }}</span>
-                </a>
-            </div>
+        <div style="position: relative;">
+            <a href="{{ url('cart/') }}" wire:navigate style="display: inline-flex; align-items: center; text-decoration: none;">
+                <iconify-icon icon="mdi:cart" style="font-size: 50px; color: white;"></iconify-icon>
+                <span style="position: absolute; top: -10px; right: -5px; background-color: #ff9800; color: white; border-radius: 50%; padding: 5px 10px; font-size: 14px;">{{ $total_count }}</span>
+            </a>
+        </div>
+            
+
+            <div class="heart-container"> 
+           <a href="{{ url('wishlist/') }}" wire:navigate class="relative flex items-center space-x-1"> 
+            <span><iconify-icon icon="mdi:heart" class="iconify-heart"></iconify-heart></span>
+            </a>
+          </div>
             <!-- User Profile Icon with Dropdown (Alpine.js) -->
             <div class="relative" x-data="{ open: false }">
                 <!-- User Icon Button -->
@@ -79,7 +85,7 @@
         <!-- Guest Navigation Links -->
         @guest
             <nav class="d-flex align-items-center">
-                <a href="{{ route('login') }}" class="btn btn-outline-primary me-2" wire:navigate>Sign In</a>
+                <a href="{{ route('login') }}" class="btn btn-outline-primary me-2" wire:navigate>Login</a>
                 <a href="{{ route('register') }}" class="btn btn-primary" wire:navigate>Register</a>
             </nav>
         @endguest
