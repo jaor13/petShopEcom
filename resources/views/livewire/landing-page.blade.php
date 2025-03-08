@@ -14,7 +14,7 @@
 
     <link href="{{ asset('assets/css/layout.css') }}" rel="stylesheet">
     <!-- Main Content -->
-    <main class="container my-5 flex-grow-1 bg-red">
+    <main class="container my-2 flex-grow-1 bg-red">
             <section class="slider position-relative">
                 <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -43,7 +43,6 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-
             <!-- Intro Section (Overlay on Top of Carousel) -->
             <div class="intro">
                     <h1 class="pawsome-essentials">Pawsome Essentials<br>Delivered with Love!</h1>

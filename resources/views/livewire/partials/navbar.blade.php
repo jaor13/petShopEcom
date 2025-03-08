@@ -53,6 +53,12 @@
                         class="py-0.5 px-1.5 rounded-full text-xs font-medium bg-blue-50 border border-blue-200 text-blue-600">{{ $total_count }}</span>
                 </a>
             </div>
+            
+            <div class="heart-container"> 
+           <a href="{{ url('wishlist/') }}" wire:navigate class="relative flex items-center space-x-1"> 
+            <span><iconify-icon icon="mdi:heart" class="iconify-heart"></iconify-heart></span>
+            </a>
+          </div>
             <!-- User Profile Icon with Dropdown (Alpine.js) -->
             <div class="relative" x-data="{ open: false }">
                 <!-- User Icon Button -->
