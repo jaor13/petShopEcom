@@ -65,8 +65,4 @@
             </div>
         </div>
     </div>
-
-    <div class="chatbox_footer">
-        bitis
-    </div>
 </div>

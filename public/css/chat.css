@@ -1,8 +1,18 @@
 @import url("breakpoints.scss");
 @import url("https://fonts.googleapis.com/css2?family=Afacad:wght@400;700&display=swap");
+* {
+  font-family: "Afacad", sans-serif;
+}
+
+html,
+body {
+  background-color: #ebebeb;
+}
+
 .msg_body_me {
   background-color: rgb(230, 226, 226);
   margin-left: auto;
+  border-bottom-right-radius: 0 !important;
 }
 .msg_body_me .read {
   color: #0077ff;
@@ -11,18 +21,10 @@
 .msg_body_receiver {
   background-color: #29b3f3;
   color: white;
+  border-bottom-left-radius: 0 !important;
 }
 .msg_body_receiver .read {
   color: #f5f5f5;
-}
-
-* {
-  font-family: "Afacad", sans-serif;
-}
-
-html,
-body {
-  background-color: #ebebeb;
 }
 
 img {
@@ -290,7 +292,55 @@ img {
   height: 60px;
   width: 100%;
   border-top: 1px solid blue;
-  border-radius: 0px 0px 12px 0px;
   position: absolute;
   bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+.chat_box .chatbox_footer .custom_form_group {
+  margin: auto 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  width: 100%;
+  padding: 2px 6px;
+}
+.chat_box .chatbox_footer .custom_form_group .control {
+  padding: 16px;
+  margin: auto 0;
+  width: 100%;
+  height: 40px;
+  border: 0;
+  outline: 0;
+  -webkit-box-shadow: 0;
+          box-shadow: 0;
+  background-color: rgb(221, 221, 221);
+  border-radius: 11px;
+}
+.chat_box .chatbox_footer .custom_form_group .control::-webkit-input-placeholder {
+  font-size: 16px;
+}
+.chat_box .chatbox_footer .custom_form_group .control::-moz-placeholder {
+  font-size: 16px;
+}
+.chat_box .chatbox_footer .custom_form_group .control:-ms-input-placeholder {
+  font-size: 16px;
+}
+.chat_box .chatbox_footer .custom_form_group .control::-ms-input-placeholder {
+  font-size: 16px;
+}
+.chat_box .chatbox_footer .custom_form_group .control::placeholder {
+  font-size: 16px;
+}
+.chat_box .chatbox_footer .custom_form_group .submit {
+  font-size: 17px;
+  font-weight: bold;
+  padding: 4px 5px;
+  color: #29b3f3;
+  width: 10%;
 }
