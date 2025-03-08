@@ -4,13 +4,11 @@ namespace App\Livewire\Partials;
 
 use App\Helpers\CartManagement;
 use App\Models\Product;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class ProductGrid extends Component
 {
 
-    use LivewireAlert;
 
     public $query;
     public $category;
@@ -30,11 +28,6 @@ class ProductGrid extends Component
         
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
         
-        $this->alert('success', 'Product added to cart successfully!', [
-            'position' => 'bottom-end',
-            'timer' => 3000,
-            'toast' => true,
-        ]);
     }
 
     public function render()
