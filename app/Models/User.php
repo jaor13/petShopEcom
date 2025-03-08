@@ -8,8 +8,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
- 
-class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasName{
+
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasName
+{
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -20,9 +21,18 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
      * @var list<string>
      */
     protected $fillable = [
-        'username', 'fname', 'lname', 'cp_num', 'email',
-        'password', 'address_id', 
-        'role', 'status', 'profile_picture', 'created_at', 'updated_at'
+        'username',
+        'fname',
+        'lname',
+        'cp_num',
+        'email',
+        'password',
+        'address_id',
+        'role',
+        'status',
+        'profile_picture',
+        'created_at',
+        'updated_at'
     ];
 
     /**
