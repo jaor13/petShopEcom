@@ -16,31 +16,31 @@
             </thead>
             <tbody>
               @forelse ($cart_items as $item)
-              <tr wire:key="{{ $item['product_id'] }}">
-              <td class="py-4">
-                <div class="flex items-center">
-                <a href="{{ url('/product/' . $item['slug']) }}">
+          <tr wire:key="{{ $item['product_id'] }}">
+          <td class="py-4">
+            <div class="flex items-center">
+            <a href="{{ url('/product/' . $item['slug']) }}">
 
-                  <img class="h-16 w-16 mr-4 cursor-pointer" src="{{ url('storage', $item['image']) }}"
-                  alt="{{ $item['name'] }}">
-                </a>
+              <img class="h-16 w-16 mr-4 cursor-pointer" src="{{ url('storage', $item['image']) }}"
+              alt="{{ $item['name'] }}">
+            </a>
             <div>
               <span class="font-semibold block">{{ $item['name'] }}</span>
               @if (!empty($item['variant_name']))
-                <span class="text-sm text-gray-500">Variant: {{ $item['variant_name'] }}</span>
-              @endif
+          <span class="text-sm text-gray-500">Variant: {{ $item['variant_name'] }}</span>
+        @endif
             </div>
             </div>
           </td>
           <td class="py-4">{{ Number::currency($item['unit_amount'], 'PHP') }}</td>
           <td class="py-4">
             <div class="flex items-center">
-            <button wire:click="decreaseQty({{ $item['product_id'] }})"
+            <button wire:click="decreaseQty({{ $item['product_id'] }}, '{{ $item['variant_name'] ?? '' }}')"
               class="border rounded-md py-2 px-4 mr-2">-</button>
             <span class="text-center w-8">{{ $item['quantity'] }}</span>
-            <button wire:click="increaseQty({{ $item['product_id'] }})"
-              class="border rounded-md py-2 px-4 ml-2">+</button>
-            </div>
+            <button wire:click="increaseQty({{ $item['product_id'] }}, '{{ $item['variant_name'] ?? '' }}')"
+              class="border rounded-md py-2 px-4 ml-2">+
+            </button>
           </td>
           <td class="py-4">{{ Number::currency($item['total_amount'], 'PHP') }}</td>
           <td>

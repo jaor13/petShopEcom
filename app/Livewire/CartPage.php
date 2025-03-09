@@ -35,13 +35,13 @@ class CartPage extends Component
             'toast' => true,
         ]);
     }
-    public function increaseQty($product_id) {
-        $this->cart_items = CartManagement::incrementQuantityToCartItem($product_id);
-        $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
+    public function increaseQty($product_id, $variant_name = null) {
+        $this->cart_items = CartManagement::incrementQuantityToCartItem($product_id, $variant_name);
+        $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items,);
     }
 
-    public function decreaseQty($product_id) {
-        $this->cart_items = CartManagement::decrementQuantityToCartItem($product_id);
+    public function decreaseQty($product_id, $variant_name = null) {
+        $this->cart_items = CartManagement::decrementQuantityToCartItem($product_id, $variant_name);
         $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
     }
 
