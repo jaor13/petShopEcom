@@ -52,15 +52,15 @@ img {
 .chat_container {
     position: fixed;
     width: 100%;
-    height:100%;
+    height: 100%;
     left: 0;
     top: 0;
     background-color: rgb(255, 255, 248);
     border-radius: 0;
     display: -webkit-box;
-  display: -ms-flexbox;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
     display: flex;
     flex-wrap: wrap;
     padding: 5px 6px;
@@ -72,57 +72,60 @@ img {
         top: unset;
         height: 90%;
     }
-    
+
     @media (min-width: 1024px) {
-            position: fixed;
-            width: 95%;
-            height: 75%;
-            left: 2.5%;
-            background-color: rgb(245, 245, 220);
-            border-radius: 12px;
+        position: fixed;
+        width: 95%;
+        height: 75%;
+        left: 2.5%;
+        background-color: rgb(245, 245, 220);
+        border-radius: 12px;
     }
-    
-/* Scrollbar width */
-::-webkit-scrollbar {
-    width: 7px;
-}
 
-/* Track (background) */
-::-webkit-scrollbar-track {
-    background: #f5f5dc; /* Beige */
-    border-radius: 10px;
-}
+    /* Scrollbar width */
+    ::-webkit-scrollbar {
+        width: 7px;
+    }
 
-/* Handle (draggable thumb) */
-::-webkit-scrollbar-thumb {
-    background: #888; /* Gray */
-    border-radius: 10px;
-}
+    /* Track (background) */
+    ::-webkit-scrollbar-track {
+        background: #f5f5dc;
+        /* Beige */
+        border-radius: 10px;
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
+    /* Handle (draggable thumb) */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        /* Gray */
+        border-radius: 10px;
+    }
 
-/* Scrollbar buttons (arrows) */
-::-webkit-scrollbar-button {
-    background: #888; /* Gray background */
-    height: 20px;
-    width: 10px;
-    border-radius: 5px;
-}
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
 
-/* Up arrow */
-::-webkit-scrollbar-button:vertical:start {
-    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><polygon points="12,5 5,15 19,15" fill="%23888"/></svg>') no-repeat center;
-    background-size: 15px;
-}
+    /* Scrollbar buttons (arrows) */
+    ::-webkit-scrollbar-button {
+        background: #888;
+        /* Gray background */
+        height: 20px;
+        width: 10px;
+        border-radius: 5px;
+    }
 
-/* Down arrow */
-::-webkit-scrollbar-button:vertical:end {
-    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><polygon points="5,9 12,19 19,9" fill="%23888"/></svg>') no-repeat center;
-    background-size: 15px;
-}
+    /* Up arrow */
+    ::-webkit-scrollbar-button:vertical:start {
+        background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><polygon points="12,5 5,15 19,15" fill="%23888"/></svg>') no-repeat center;
+        background-size: 15px;
+    }
+
+    /* Down arrow */
+    ::-webkit-scrollbar-button:vertical:end {
+        background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><polygon points="5,9 12,19 19,9" fill="%23888"/></svg>') no-repeat center;
+        background-size: 15px;
+    }
 
 
 
@@ -148,7 +151,7 @@ img {
 
     .chatlist_header {
         border-bottom: 1px solid rgb(201, 201, 201);
-        height: 60px; 
+        height: 60px;
         display: flex;
         flex-wrap: nowrap;
 
@@ -273,9 +276,9 @@ img {
 .chat_box {
 
     position: relative;
-    border-radius: 0px 12px 12px 0px;
-    height: 100%;
+    display: block;
     width: 100%;
+    height: 100%;
 
     @media (min-width: 768px) {
         width: calc(100% - 296px);
@@ -285,12 +288,13 @@ img {
     .chatbox_header {
         width: 100%;
         position: absolute;
-      
-        border-bottom: 1px solid rgb(72, 255, 0);
-        border-radius: 0px 12px 0px 0px;
+        top: 0;
+        border-bottom: 1px solid rgba(219, 219, 219, 0.952);
         height: 60px;
-
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
 
         .img_container {
