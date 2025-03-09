@@ -1,17 +1,19 @@
 <div>
-    {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
+    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
 
 
-    @foreach ($users as $user)
+    <ul class="list-group w-75 mx-auto mt-3 container-fluid" style="height: 1000px">
+        <!-- @foreach ($users as $user)
+            <li class="list-group-item list-group-item-action" wire:click="checkconversation({{ $user->id }})">
+                {{ $user->username }}
+            </li>
+        @endforeach-->
 
+        @foreach($users as $user)
+            <div wire:click="checkconversation({{ $user->id }})">
+                {{ $user->name }}
+            </div>
+        @endforeach
 
-
-    <ul class="list-group w-75 mx-auto mt-3 container-fluid">
-
-    <li class="list-group-item list-group-item-action">{{$user->username}}</li>
-    
     </ul>
-
-    @endforeach
-
 </div>
