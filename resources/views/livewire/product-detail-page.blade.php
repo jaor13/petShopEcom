@@ -123,7 +123,7 @@
         <div class="flex items-start mb-2">
           <div class="rounded-full bg-gray-200 w-8 h-8 mr-2"></div>
           <div>
-            <div class="font-medium text-black-900">Fabian</div>
+            <div class="font-medium text-black-900">Febby</div>
             <div class="text-yellow-500">⭐⭐⭐⭐☆</div>
             <div class="text-sm text-gray-500">2025-02-14 16:36 | Variation</div>
           </div>
