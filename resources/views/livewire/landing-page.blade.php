@@ -124,10 +124,11 @@
       });
     </script>
 
-    <div class="container py-4 mb-4">
+  <div class="container p-3">
+
       <!-- New Products Section -->
-      <div>
-        <h3 style="display: inline-block; font-weight: bold; color: gray;">New Products</h3>
+      <div class="container p-3 rounded-3" style="background-color: white;">
+      <h3 style="display: inline-block; font-weight: bold; color: gray;">New Products</h3>
         <a href="{{ route('products', ['type' => 'latest']) }}" style="float: right; font-size: 0.9em; color: gray;">
           View All >
         </a>
@@ -135,9 +136,9 @@
       </div>
     </div>
 
-    <div class="container py-4">
-      <!-- Best Sellers Section -->
-      <div class="bests py-4">
+    <div class="container p-3">
+
+    <div class="container p-3 rounded-3" style="background-color: white;">
         <h3 style="display: inline-block; font-weight: bold; color: gray;">Best Selling</h3>
         <a href="{{ route('products', ['type' => 'best_sellers']) }}"
           style="float: right; font-size: 0.9em; color: gray;">
@@ -146,6 +147,6 @@
         @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
       </div>
     </div>
-
+</div>
 
 </div>
