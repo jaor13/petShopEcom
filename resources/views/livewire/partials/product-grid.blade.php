@@ -5,9 +5,9 @@
             <div class="col" wire:key="{{ $product->id }}">
                 <div class="card">
                     <a href="{{ url('product/' . $product->slug) }}">
-
-                    <img src="{{ url('storage/' . $product->images[0]) }}" class="card-img-top" alt="{{ $product->product_name }}">
-                    </a>
+                        <img src="{{ $product->images && count($product->images) > 0 ? url('storage/' . $product->images[0]) : ($product->variants->count() > 0 ? url('storage/' . $product->variants[0]->image) : asset('default-image.jpg')) }}"
+                            class="card-img-top" alt="{{ $product->product_name }}"> 
+                   
 
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ $product->product_name }}</h5>
@@ -31,6 +31,7 @@
                             cart</span>
                         <span wire:loading class="hidden block" wire:target="addToCart({{ $product->id }})">Adding to
                             cart</span>
+                    </a>
                     </a>
                 </div>
             </div>
