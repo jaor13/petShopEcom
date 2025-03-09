@@ -10,3 +10,4 @@ window.Swal = Swal
 window.Alpine = Alpine;
 
 Alpine.start();
+
