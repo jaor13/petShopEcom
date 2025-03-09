@@ -8,7 +8,7 @@
         </a>
 
         <!-- Search Bar with Categories -->
-        <div class="d-none d-md-flex flex-grow-1 align-items-center search-container">
+        <div class="d-none d-md-flex  align-items-center search-container">
             <form id="search-form" class="d-flex align-items-center w-100" action="{{ url('products') }}" method="GET">
                 <!-- Search Input -->
                 <input type="text" name="query" class="form-control search-input" placeholder="Search in Aricuz"
@@ -46,13 +46,12 @@
 
         <!-- Cart Icon -->
         @auth
-        <div style="position: relative;">
-            <a href="{{ url('cart/') }}" wire:navigate style="display: inline-flex; align-items: center; text-decoration: none;">
-                <iconify-icon icon="mdi:cart" style="font-size: 50px; color: white;"></iconify-icon>
-                <span style="position: absolute; top: -10px; right: -5px; background-color: #ff9800; color: white; border-radius: 50%; padding: 5px 10px; font-size: 14px;">{{ $total_count }}</span>
-            </a>
-        </div>
-            
+            <div class="cart-container">
+                <a href="{{ url('cart/') }}" wire:navigate class="relative flex items-center space-x-1">
+                    <span><iconify-icon icon="mdi:cart" class="iconify-cart"></iconify-icon></span>
+                    <span> {{ $total_count }}</span>
+                </a>
+            </div>
 
             <div class="heart-container"> 
            <a href="{{ url('wishlist/') }}" wire:navigate class="relative flex items-center space-x-1"> 
@@ -84,7 +83,7 @@
 
         <!-- Guest Navigation Links -->
         @guest
-            <nav class="d-flex align-items-center">
+            <nav class="d-flex align-items-center custom-ml">
                 <a href="{{ route('login') }}" class="btn btn-outline-primary me-2" wire:navigate>Login</a>
                 <a href="{{ route('register') }}" class="btn btn-primary" wire:navigate>Register</a>
             </nav>

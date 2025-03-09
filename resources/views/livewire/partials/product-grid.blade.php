@@ -1,8 +1,9 @@
 <div class="container py-4">
-    <h3> New Prodcuts </h3>
+  <h3 style="display: inline-block; font-weight: bold; color: gray;">New Products</h3>
+  <a href="#" style="float: right; font-size: 0.9em; color: gray;">View All ></a> 
     <div class="row row-cols-1 row-cols-md-5 g-4"> @foreach ($products as $product)
             <div class="col" wire:key="{{ $product->id }}">
-                <div class="card h-100"> <a href="{{ url('product/' . $product->slug) }}">
+                <div class="card h-100 p-2"> <a href="{{ url('product/' . $product->slug) }}">
                         <img src="{{ url('storage/' . $product->images[0]) }}" class="card-img-top" alt="{{ $product->product_name }}" style="object-fit: cover; height: 200px;"> </a>
                     <div class="card-body d-flex flex-column"> <h5 class="card-title fw-bold">{{ $product->product_name }}</h5>
                         <p class="card-text text-danger fw-bold">{{ number_format($product->price, 2) }} PHP</p>
@@ -32,8 +33,8 @@
         @endforeach
     </div>
     <div class="bests py-4">
-    <h3> Best Selling </h3>
-    ADD THIS LINE A VIEW ALL
+    <h3 style="display: inline-block; font-weight: bold; color: gray;">Best Selling</h3>
+    <a href="#" style="float: right; font-size: 0.9em; color: gray;">View All ></a> 
     </div>
 </div>
 

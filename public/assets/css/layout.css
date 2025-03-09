@@ -8,6 +8,7 @@ html, body {
 
 body {
   font-family: 'Afacad', sans-serif;
+background: #ececec;
 }
 
 header {
@@ -16,7 +17,7 @@ header {
   left: 0;
   width: 100%;
   height: 60px; /* Adjust as needed */
-  background-color: white; /* Ensure visibility */
+  background-color: rgb(235, 235, 235); /* Ensure visibility */
   z-index: 1000; /* Keeps it above other elements */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow */
 }
@@ -25,8 +26,6 @@ main {
   margin-top: 70px; /* Adjust this to match the header height */
 
 }
-
-
 
 /* Header Styling */
 .header-container {
@@ -51,12 +50,14 @@ main {
   align-items: center;
 }
 
+
+
 /* Fix search container issues */
 .search-container {
-  margin-right: 140px;
+ 
   background: #ffffff;
   border-radius: 8px;
-  width: 600px; /* Adjust width */
+  width: 80%; /* Adjust width */
   max-width: 100%;
   border: 1px solid #ddd;
   position: relative; /* Needed for dropdown positioning */
@@ -85,6 +86,7 @@ main {
   color: white !important; /* Ensures contrast */
 }
 
+
 .category-btn {
   font-size: 14px;
   font-weight: normal;
@@ -106,21 +108,21 @@ main {
   border-color: #ffffff;
 }
 
-/* Fix dropdown menu positioning */
+/* DROP DOWN CATEGORIES */
 .dropdown-menu {
-  position: absolute !important; /* Ensures it displays outside */
-  top: 100%; /* Positions dropdown below button */
+  position: absolute !important; 
+  top: 100%; 
   left: 0;
-  z-index: 1000; /* Ensures it appears above other elements */
+  z-index: 1000; 
   background: white;
-  border: 2px solid white; /* Set border to white */
+  border: 2px solid white; 
   border-radius: 0px;
   min-width: 200px;
-  display: none; /* Hide initially */
+  display: none; 
 }
 
 
-/* Fix search bar input */
+/* SEARCH BAR INPUT */
 .search-container input {
   flex: 1;
   height: 45px;
@@ -130,7 +132,7 @@ main {
   outline: none;
 }
 
-/* Fix search button */
+/* SEARCH BUTTON */
 .search-container .search-btn {
   height: 45px;
   width: 80px;
@@ -149,16 +151,16 @@ main {
 }
 
 
-/* Sign In Button */
+/* SIGN IN BUTTON */
 .btn-outline-primary {
-  width: 120px;
+  width: 100px;
   color: #00DCE3;
   background-color: #ffffff;
   border: 2px solid #ffffff !important;
   border-radius: 8px;
   font-size: 16px;
   font-weight: bold;
-  padding: 8px 16px; /* Slightly larger padding for better clickability */
+  padding: 8px 16px;
   transition: all 0.3s ease-in-out;
 }
 
@@ -169,7 +171,7 @@ main {
 }
 
 .btn-primary{
-  width: 120px;
+  width: 100px;
   color: #ffffff;
   background-color: #ffffff00;
   border: 2px solid #ffffff !important;
@@ -223,7 +225,7 @@ height: 40px;
 border-radius: 20px;
 background-color: transparent;
 color: #ffffff;
-margin-left: 120px;
+margin-left: 0px;
 }
 
 .shop-now:hover {
@@ -245,9 +247,13 @@ margin-left: 120px;
   font-size: 17px;
 }
 
-.card{
-  margin:5px;
-  
+.card {
+  margin-right: 15px; /* Adjust the value as needed for the desired space */
+
+}
+ 
+.py-4{
+  background: #ffffff;
 }
 .card:hover {
   transform: translateY(-3px); 
@@ -275,3 +281,85 @@ margin-left: 120px;
 }
 
 
+
+
+/* LANDING PAGE SPACING IN LOGIN/REGISTER */
+.custom-ml {
+    margin-left: 2.5rem; 
+}
+
+
+
+
+
+
+/* NAV ICON CART */
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 20px; /* Spacing between icons */
+}
+
+.iconify-cart, .iconify-heart, .iconify-user {
+  font-size: 35px;
+  color: white;
+  margin-left: 20px;
+  
+}
+
+.iconify-cart{
+  margin-left: 100px;
+}
+.iconify-user {
+  color: rgb(255, 255, 255); /* User icon is black */
+}
+
+.cart-container span:last-child {
+  position: absolute;
+
+  top: -10px;
+  right: -5px;
+  background-color: #ff9800;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 100;
+ }
+
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+
+
+
+
+
+#chat-window {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 350px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

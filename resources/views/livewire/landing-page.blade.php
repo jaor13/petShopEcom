@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -19,19 +20,19 @@
                 <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="10000">
-                            <img src="{{ asset('assets/images/Slide1.png') }}" class="d-block w-100" alt="Slide 1">
+                            <img src="{{ asset('assets/images/Slide1.svg') }}" class="d-block w-100" alt="Slide 1">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('assets/images/Slide2.png') }}" class="d-block w-100" alt="Slide 2">
+                            <img src="{{ asset('assets/images/Slide2.svg') }}" class="d-block w-100" alt="Slide 2">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('assets/images/Slide3.png') }}" class="d-block w-100" alt="Slide 3">
+                            <img src="{{ asset('assets/images/Slide3.svg') }}" class="d-block w-100" alt="Slide 3">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('assets/images/Slide4.png') }}" class="d-block w-100" alt="Slide 4">
+                            <img src="{{ asset('assets/images/Slide4.svg') }}" class="d-block w-100" alt="Slide 4">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('assets/images/Slide5.png') }}" class="d-block w-100" alt="Slide 5">
+                            <img src="{{ asset('assets/images/Slide5.svg') }}" class="d-block w-100" alt="Slide 5">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -44,13 +45,74 @@
                     </button>
                 </div>
             <!-- Intro Section (Overlay on Top of Carousel) -->
+
+            @auth
             <div class="intro">
+                    <h1 class="pawsome-essentials">Pawsome Essentials<br>Delivered with Love!</h1>
+                    <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. Integer ut sed praesent eget auctor donec egestas orci amet.</p>
+                   
+                </div>
+             @endauth
+
+             @guest
+             <div class="intro">
                     <h1 class="pawsome-essentials">Pawsome Essentials<br>Delivered with Love!</h1>
                     <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. Integer ut sed praesent eget auctor donec egestas orci amet.</p>
                     <button class="shop-now">Shop Now</button>
                 </div>
+                @endguest
         </section>
-    </main>
+        
+
+        @auth
+        <div id="chat-button-container" style="position: fixed; bottom: 20px; right: 175px;">
+  <button id="chat-button" style="background-color: #00D1D8; color: white; border: none; padding: 10px 10px; border-radius: 10px; font-weight: bold; font-size: 1.5rem">
+    <i class="fas fa-comments" style="font-size: 1.5em; margin-right: 5px; "></i> Chat
+  </button>
+</div>
+
+<div id="chat-window" style="display: none; position: fixed; bottom: 10px; right: 100px; width: 350px; background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+  <div style="background-color:#00DCE3; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+    <div>
+    <img src="{{ asset('assets/images/brand-logo.svg') }}" alt="Petshop Logo" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px; align-items:center;">
+      Aricuz Petshop
+    </div>
+    <button id="close-chat" style="background: none; border: none; font-size: 1.2em;">×</button>
+  </div>
+  <div style="padding: 15px; height: 300px; overflow-y: auto;">
+    <p>Welcome to Pet Haven! Ready to find the best pet care essentials? Let us know how we can help.</p>
+    </div>
+    <div style="padding: 10px; border-top: 1px solid #ddd; display: flex; align-items: center;">
+  <button style="background: none; border: none; font-size: 1.5em;">
+    <i class="fas fa-image"></i> </button>
+  <input type="text" placeholder="Type a message" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px; margin: 0 10px;">
+  <button style="background: none; border: none; font-size: 1.5em; color: #00DCE3;">
+    <i class="fas fa-paper-plane"></i> </button>
+</div>
+</div>
+@endauth
+
+
+
+</main>
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+  const chatButton = document.getElementById('chat-button');
+  const chatWindow = document.getElementById('chat-window');
+  const closeChatButton = document.getElementById('close-chat');
+
+  chatButton.addEventListener('click', function() {
+    chatWindow.style.display = 'block';
+    chatButton.style.display = 'none'; // Hide the chat button
+  });
+
+  closeChatButton.addEventListener('click', function() {
+    chatWindow.style.display = 'none';
+    chatButton.style.display = 'block'; // Show the chat button
+  });
+});
+</script>
 
     <!-- Product Grid -->
     @livewire('partials.product-grid')
