@@ -15,10 +15,16 @@ class ProductGrid extends Component
     public $query;
     public $category;
 
-    public function mount($query = null, $category = null)
+    public $limit;
+
+    public $type;
+
+    public function mount($query = null, $category = null, $limit = null, $type = null)
     {
         $this->query = $query;
         $this->category = $category;
+        $this->limit = $limit;
+        $this->type = $type;
     }
 
     // add to cart
@@ -49,6 +55,18 @@ class ProductGrid extends Component
 
         if ($this->query) {
             $products->where('product_name', 'like', '%' . $this->query . '%');
+        }
+
+        // Apply sorting based on type
+        if ($this->type === 'latest') {
+            $products->orderBy('created_at', 'desc'); // Latest products
+        } elseif ($this->type === 'best_sellers') {
+            $products->orderBy('sold_count', 'desc'); // Best sellers
+        }
+
+        // Apply limit if provided
+        if ($this->limit) {
+            $products->take($this->limit);
         }
 
         return view('livewire.partials.product-grid', [
