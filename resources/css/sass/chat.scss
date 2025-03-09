@@ -51,30 +51,104 @@ img {
 /*---------------------------*/
 .chat_container {
     position: fixed;
-    width: 95%;
-    height: 70%;
-    left: 2.5%;
-    background-color: beige;
-    border-radius: 12px;
+    width: 100%;
+    height:100%;
+    left: 0;
+    top: 0;
+    background-color: rgb(255, 255, 248);
+    border-radius: 0;
+    display: -webkit-box;
+  display: -ms-flexbox;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     padding: 5px 6px;
+
+    z-index: 10;
+    background-color: #ffff;
+
+    @media (min-width: 768px) {
+        top: unset;
+        height: 90%;
+    }
+    
+    @media (min-width: 1024px) {
+            position: fixed;
+            width: 95%;
+            height: 75%;
+            left: 2.5%;
+            background-color: rgb(245, 245, 220);
+            border-radius: 12px;
+    }
+    
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 7px;
 }
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+    background: #f5f5dc; /* Beige */
+    border-radius: 10px;
+}
+
+/* Handle (draggable thumb) */
+::-webkit-scrollbar-thumb {
+    background: #888; /* Gray */
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Scrollbar buttons (arrows) */
+::-webkit-scrollbar-button {
+    background: #888; /* Gray background */
+    height: 20px;
+    width: 10px;
+    border-radius: 5px;
+}
+
+/* Up arrow */
+::-webkit-scrollbar-button:vertical:start {
+    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><polygon points="12,5 5,15 19,15" fill="%23888"/></svg>') no-repeat center;
+    background-size: 15px;
+}
+
+/* Down arrow */
+::-webkit-scrollbar-button:vertical:end {
+    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><polygon points="5,9 12,19 19,9" fill="%23888"/></svg>') no-repeat center;
+    background-size: 15px;
+}
+
+
+
+}
+
+
+
 
 //chat list
 /*---------------------------*/
 .chat_list_container {
-    border-right: 1px solid rgb(117, 117, 117);
-    background-color: beige;
-    margin-right: 20px;
+    border-right: 0;
+    //margin-right: 20px;
     border-radius: 4px;
-    width: 25%;
+    width: 100px;
     height: 100%;
+
+    @media (min-width: 768px) {
+        width: 296px;
+        border-right: 1px solid rgb(117, 117, 117);
+    }
 
 
     .chatlist_header {
         border-bottom: 1px solid rgb(201, 201, 201);
-        height: 60px;
+        height: 60px; 
         display: flex;
         flex-wrap: nowrap;
 
@@ -201,13 +275,17 @@ img {
     position: relative;
     border-radius: 0px 12px 12px 0px;
     height: 100%;
-    width: 75%;
+    width: 100%;
+
+    @media (min-width: 768px) {
+        width: calc(100% - 296px);
+    }
 
 
     .chatbox_header {
         width: 100%;
         position: absolute;
-        top: 0;
+      
         border-bottom: 1px solid rgb(72, 255, 0);
         border-radius: 0px 12px 0px 0px;
         height: 60px;
@@ -327,32 +405,32 @@ img {
 
     .chatbox_footer {
         height: 50px;
-        width: 100.5%;
+        width: 98.1%;
         // border-top: 1px solid rgb(192, 192, 192);
         position: absolute;
         bottom: 0;
         margin-bottom: -5px;
-        margin-left: -20px;
+        margin-left: 0px;
         display: flex;
         flex-wrap: nowrap;
         background-color: rgb(255, 246, 246);
 
-        .custom_form_group{
+        .custom_form_group {
 
-           
+
             display: flex;
             flex-wrap: nowrap;
-            width: 120%;
+            width: 100%;
 
             padding: 2px 30px;
 
-            .control{
+            .control {
                 padding: 16px;
                 margin: auto 0;
                 width: 110%;
                 height: 35px;
 
-                border:0;
+                border: 0;
                 outline: 0;
                 box-shadow: 0;
                 background-color: rgb(221, 221, 221);
@@ -362,8 +440,8 @@ img {
             .control::placeholder {
                 font-size: 16px;
             }
-            
-            .submit{
+
+            .submit {
                 font-size: 17px;
                 font-weight: bold;
                 padding: 4px 5px;
@@ -371,7 +449,7 @@ img {
                 color: $base_color;
                 width: 10%;
             }
-        }   
-    
+        }
+
     }
 }
