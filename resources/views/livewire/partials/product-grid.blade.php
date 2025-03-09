@@ -10,7 +10,7 @@
                     <p class="card-text text-danger fw-bold">{{ number_format($product->price, 2) }} PHP</p>
                     <div class="d-flex align-items-center">
                         <span class="me-2 text-muted">⭐ 3.5</span>
-                        <span class="text-muted">| 100 sold</span>
+                        <span class="text-muted">| {{ $product->sold_count }} sold</span>
                     </div>
                     <p class="text-muted">A.A Berces Street San Juan</p>
                     <div class="mt-auto"> <a href="{{ auth()->check() ? '#' : route('login') }}" @if(auth()->check())
