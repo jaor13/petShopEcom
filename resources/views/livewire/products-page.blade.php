@@ -15,11 +15,24 @@
         @endif
     </h1>
 
-    <!-- Product Grid -->
-    @livewire('partials.product-grid', [
-        'limit' => 20,
-        'query' => request('query'),
-        'category' => request('category'),
-        'type' => request('type')
-    ])
+    <!-- If there's a filter (category, search, or type), show the Product Grid normally -->
+    @if(request('query') || request('category') || request('type'))
+        @livewire('partials.product-grid', [
+            'limit' => 20,
+            'query' => request('query'),
+            'category' => request('category'),
+            'type' => request('type')
+        ])
+    @else
+        <!-- Show All Products Grouped by Category -->
+        @foreach ($groupedProducts as $categoryName => $products)
+            <h2 class="text-xl font-bold mt-4">{{ $categoryName }}</h2>
+            @livewire('partials.product-grid', [
+                'limit' => 20,
+                'query' => null,
+                'category' => $categoryName,
+                'type' => null
+            ])
+        @endforeach
+    @endif
 </div>
