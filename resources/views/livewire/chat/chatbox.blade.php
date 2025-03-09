@@ -1,11 +1,10 @@
 <div>
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
     <div class="chatbox_header">
+
         <div class="return">
             <i class="bi bi-arrow-left"></i>
         </div>
-
-
 
         <div class="img_container">
             <img src="https://picsum.photos/id/1/200/300" alt="">
