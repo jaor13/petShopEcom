@@ -102,9 +102,6 @@
       </div>
       </div>
     @endauth
-
-
-
     </main>
 
     <script>
@@ -129,7 +126,9 @@
       <!-- New Products Section -->
       <div>
         <h3 style="display: inline-block; font-weight: bold; color: gray;">New Products</h3>
-        <a href="#" style="float: right; font-size: 0.9em; color: gray;">View All ></a>
+        <a href="{{ route('products', ['type' => 'latest']) }}" style="float: right; font-size: 0.9em; color: gray;">
+          View All >
+        </a>
         @livewire('partials.product-grid', ['limit' => 5, 'type' => 'latest'])
       </div>
     </div>
@@ -138,7 +137,10 @@
       <!-- Best Sellers Section -->
       <div class="bests py-4">
         <h3 style="display: inline-block; font-weight: bold; color: gray;">Best Selling</h3>
-        <a href="#" style="float: right; font-size: 0.9em; color: gray;">View All ></a>
+        <a href="{{ route('products', ['type' => 'best_sellers']) }}"
+          style="float: right; font-size: 0.9em; color: gray;">
+          View All >
+        </a>
         @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
       </div>
     </div>
