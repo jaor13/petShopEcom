@@ -176,7 +176,7 @@ class ProductResource extends Resource
 
                                 Section::make('Image')->schema([
                                     FileUpload::make('image')
-                                        ->directory('products')
+                                        ->directory('products/variants')
                                         ->image()
                                 ]),
                         ])
