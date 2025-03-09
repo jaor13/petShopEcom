@@ -201,13 +201,39 @@ main {
   transform: translateY(-50%);
   color: white;
   text-align: left;
-  max-width: 500px;
+  max-width: 50rem;
 }
 
 .pawsome-essentials {
   font-size: 2.5rem;
   line-height: 1.2;
 }
+
+@media (max-width: 768px) {
+  .intro h1 {
+    font-size: 1.5rem; /* Reduce font size on smaller screens */
+  }
+  .intro p {
+    font-size: 1rem;
+  }
+  .shop-now {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+
+.slider {
+  overflow: hidden; /* Prevent elements from overflowing */
+  max-width: 100%; /* Ensure it stays within the screen width */
+  margin: 0 auto; /* Center horizontally */
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto; /* Adjust height automatically */
+  object-fit: cover; /* Maintain content fitting */
+}
+
 
 .lorem-ipsum {
   font-size: 15px;
