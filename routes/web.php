@@ -19,6 +19,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/users',CreateChat::class)->name('users');
 Route::get('/chat{key?}',Main::class)->name('chat');
+Route::get('/chat', CreateChat::class)->middleware('auth');
 
 Route::post('/logout', function () {
     Auth::logout();
