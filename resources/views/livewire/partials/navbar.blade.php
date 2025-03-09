@@ -8,7 +8,7 @@
         </a>
 
         <!-- Search Bar with Categories -->
-        <div class="d-none d-md-flex flex-grow-1 align-items-center search-container">
+        <div class="d-none d-md-flex  align-items-center search-container">
             <form id="search-form" class="d-flex align-items-center w-100" action="{{ url('products') }}" method="GET">
                 <!-- Search Input -->
                 <input type="text" name="query" class="form-control search-input" placeholder="Search in Aricuz"
@@ -49,10 +49,15 @@
             <div class="cart-container">
                 <a href="{{ url('cart/') }}" wire:navigate class="relative flex items-center space-x-1">
                     <span><iconify-icon icon="mdi:cart" class="iconify-cart"></iconify-icon></span>
-                    <span
-                        class="py-0.5 px-1.5 rounded-full text-xs font-medium bg-blue-50 border border-blue-200 text-blue-600">{{ $total_count }}</span>
+                    <span> {{ $total_count }}</span>
                 </a>
             </div>
+
+            <div class="heart-container"> 
+           <a href="{{ url('wishlist/') }}" wire:navigate class="relative flex items-center space-x-1"> 
+            <span><iconify-icon icon="mdi:heart" class="iconify-heart"></iconify-heart></span>
+            </a>
+          </div>
             <!-- User Profile Icon with Dropdown (Alpine.js) -->
             <div class="relative" x-data="{ open: false }">
                 <!-- User Icon Button -->
@@ -65,7 +70,7 @@
                 <div x-show="open" x-transition class="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                     <p class="block px-4 py-2 text-gray-700">{{ auth()->user()->username }}</p>
                     <hr>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                    <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit"
@@ -78,8 +83,8 @@
 
         <!-- Guest Navigation Links -->
         @guest
-            <nav class="d-flex align-items-center">
-                <a href="{{ route('login') }}" class="btn btn-outline-primary me-2" wire:navigate>Sign In</a>
+            <nav class="d-flex align-items-center custom-ml">
+                <a href="{{ route('login') }}" class="btn btn-outline-primary me-2" wire:navigate>Login</a>
                 <a href="{{ route('register') }}" class="btn btn-primary" wire:navigate>Register</a>
             </nav>
         @endguest
