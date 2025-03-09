@@ -70,7 +70,7 @@
                 <div x-show="open" x-transition class="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                     <p class="block px-4 py-2 text-gray-700">{{ auth()->user()->username }}</p>
                     <hr>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                    <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit"

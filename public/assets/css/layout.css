@@ -281,6 +281,21 @@ margin-left: 0px;
 }
 
 
+.profile-img {
+  width: 6em; /* Set fixed width */
+  height: 6em; /* Set fixed height */
+  object-fit: cover; /* Ensures the image fills the area without distortion */
+  border-radius: 50%; /* Ensures it's a perfect circle */
+}
+
+.custom-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-section{
+  margin-top: 6em;
+}
 
 
 /* LANDING PAGE SPACING IN LOGIN/REGISTER */
