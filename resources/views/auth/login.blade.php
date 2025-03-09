@@ -32,11 +32,12 @@
                     <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required autofocus autocomplete="username">
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
-
-                <div class="mb-3">
+                
+               <div class="mb-3">
+                    
                     <input type="password" name="password" class="form-control" placeholder="Password" required autocomplete="current-password">
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
+                </div> 
 
                 <div class="remember-forgot">
         <label for="remember_me" class="form-check-label">
@@ -61,7 +62,6 @@
     <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
- 
 
 </body>
 </html>
