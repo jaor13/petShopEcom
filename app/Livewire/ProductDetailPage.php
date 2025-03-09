@@ -20,10 +20,15 @@ class ProductDetailPage extends Component
     public $quantity = 1;
 
     public $variant_name = null;
+    public $variant_price;
+    public $stock_quantity;
 
     public function mount($slug)
     {
+        $product = Product::where('slug', $slug)->firstOrFail();
         $this->slug = $slug;
+        $this->variant_price = $product->price;
+        $this->stock_quantity = $product->stock_quantity;
     }
 
     public function increaseQty()
@@ -38,12 +43,26 @@ class ProductDetailPage extends Component
         }
     }
 
+    public function selectVariant($variantName, $price, $stock)
+    {
+        if ($this->variant_name === $variantName) {
+            $product = Product::where('slug', $this->slug)->first();
+            $this->variant_name = null;
+            $this->variant_price = $product->price;
+            $this->stock_quantity = $product->stock_quantity;
+        } else {
+            $this->variant_name = $variantName;
+            $this->variant_price = $price;
+            $this->stock_quantity = $stock;
+        }
+    }
+
     public function addToCart($product_id) {
         // dd($product_id);
         // dd($this->variant_name);
         usleep(200000); // 0.2-second delay (200ms)
 
-        $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity, $this->variant_name);
+        $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity, $this->variant_name, $this->variant_price);
         // dd($total_count, $product_id);
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
         
@@ -56,7 +75,6 @@ class ProductDetailPage extends Component
 
     public function render()
     {
-
         return view('livewire.product-detail-page', [
             'product' => Product::where('slug', $this->slug)->first(),
         ]);
