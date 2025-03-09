@@ -14,9 +14,5 @@
     <!-- Product Grid -->
     @livewire('partials.product-grid', ['query' => request('query'), 'category' => request('category')])
 
-    <!-- Pagination Links -->
-    <div class="mt-4">
-        {{ $products->links() }}
-    </div>
 </div>
 </div>
