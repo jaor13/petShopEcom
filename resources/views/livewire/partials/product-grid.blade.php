@@ -16,7 +16,7 @@
             <p class="card-text text-danger fw-bold">₱ {{ number_format($product->price, 2) }}</p>
             <div class="d-flex align-items-center">
               <span class="me-1 text-muted" style="margin-left:-4px">⭐ 3.5</span>
-              <span class="text-muted">| 100 sold</span>
+              <span class="text-muted">| {{ $product->sold_count }} sold</span>
             </div>
             <p class="text-muted">
   <i class="fa-solid fa-location-dot" style="opacity: 0.7; margin-right: 4px;"></i> A.A Berces Street San Juan
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <!-- Best Selling Section -->
+  <!-- Best Selling Section
   <div class="container p-3 rounded-3 mt-3" style="background-color: white;">
     <h3 style="display: inline-block; font-weight: bold; color: gray;">Best Selling</h3>
     <a href="#" style="float: right; font-size: 0.9em; color: gray;">View All ></a> 
@@ -76,5 +76,5 @@
       </div>
       @endforeach
     </div>
-  </div>
+  </div> -->
 </div>

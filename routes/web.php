@@ -20,7 +20,8 @@ use App\Http\Controllers\CustomProfileController;
 
 
 Route::get('/', LandingPage::class)->name('home');
-Route::get('/products', ProductsPage::class);
+Route::get('/', LandingPage::class)->name('home');
+Route::get('/products', ProductsPage::class)->name('products');
 Route::get('/cart', CartPage::class);
 Route::get('/product/{slug}', ProductDetailPage::class);
 

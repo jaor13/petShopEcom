@@ -30,6 +30,8 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cube';
 
+    protected static ?string $label = 'Product Listing & Stock'; 
+
     protected static ?string $navigationGroup = 'Product Management';
 
     protected static ?string $slug = 'product-management-products';
@@ -165,16 +167,22 @@ class ProductResource extends Resource
                                 ->default(fn ($record) => $record?->stock_quantity)
                                 ->required(), // Stock is required for each variant
 
-
+                                
                              
                             
                             TextInput::make('price')
                                 ->numeric()
                                 ->required(), 
+
+                                Section::make('Image')->schema([
+                                    FileUpload::make('image')
+                                        ->directory('products/variants')
+                                        ->image()
+                                ]),
                         ])
                         ->columnSpanFull()
                         ->hidden(fn (callable $get) => !$get('has_variant')), // Show only if has_variant is true
-    
+                            
                     Toggle::make('is_active')
                         ->required()
                         ->default(true),
