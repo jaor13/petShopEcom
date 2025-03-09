@@ -14,34 +14,45 @@
     </div>
 
     <div class="chatlist_body">
-        <div class="chatlist_item">
 
-            <div class="chatlist_img_container">
-                <img src="https://picsum.photos/id/1/200/300" alt="dogo">
-            </div>
+        @if(count($conversations) > 0)
 
-            <div class="chatlist_info">
-                <div class="top_row">
-                    <div class="list_username"> Laiza </div>
-                    <span class="date">2d</span>
-                </div>
+            @foreach ($conversations->unique('receiver_id') as $conversation)
 
-                <div class="bottom_row">
+                <div class="chatlist_item">
 
-                    <div class="message_body text-truncate">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam excepturi reprehenderit
-                        doloremque id explicabo voluptatum assumenda commodi ipsa harum fugit, ut facere. Quae
-                        temporibus est blanditiis amet inventore. Minus repellat placeat dolorem minima iste nesciunt!
-                        Hic provident incidunt ipsum perferendis, eaque odit doloribus amet odio voluptas, consequatur
-                        esse nobis officia!
+                    <div class="chatlist_img_container">
+                        <img src="https://picsum.photos/id/{{ $this->getChatUserInstance($conversation, $username = 'id') }}/200/300"
+                            alt="dogo">
                     </div>
 
-                    <div class="unread_count">
-                        56
+                    <div class="chatlist_info">
+                        <div class="top_row">
+                            <div class="list_username"> {{ $this->getChatUserInstance($conversation, $username = 'username') }}
+                            </div>
+                            <span class="date">{{ $conversation->messages->last()?->created_at }}</span>
+                        </div>
+
+                        <div class="bottom_row">
+
+                            <div class="message_body text-truncate">
+                                {{ $conversation->latestMessage->body ?? 'No messages yet' }}
+                            </div>
+
+
+                            <div class="unread_count">
+                                56
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
+            @endforeach
+        @else
+            you have no conversations
+
+        @endif
+
     </div>
 
 </div>

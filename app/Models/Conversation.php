@@ -19,10 +19,15 @@ class Conversation extends Model
 
     public function messages()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Message::class, 'id')->orderBy('created_at', 'ASC');
 
         # code...
     }
+    public function latestMessage()
+{
+    return $this->hasOne(Message::class, 'id')->latest();
+}
+
 
     public function user()
     {
