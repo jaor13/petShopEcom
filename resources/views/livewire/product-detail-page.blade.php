@@ -142,7 +142,70 @@
                   cart</span>
               </a>
             </div>
+        </div>
+    </section>
+
+    <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 font-normal font-['Poppins'] mb-7">
+    <div class="px-20 pb-6 mt-6 "> 
+        <div class="flex flex-col mt-6">
+        <div style="background-color: #E0F2F7; padding: 10px; border-radius: 5px;">
+  <h2 class="text-xl font-light text-black-300 dark:text-black-400">Product Specification</h2> 
+</div>
+            <p class="max-w-md text-black-300 dark:text-black-400 ml-4">
+                Category: {{ $product->categories->pluck('name')->join(', ') }}
+            </p>
+            <p class="max-w-md text-gray-300 dark:text-gray-400 ml-4">
+                Stocks: {{ $product->stock_quantity }}
+            </p>
+        </div>
+        <div class="flex flex-col mt-6 [&>ul]:list-disc [&>ul]:ml-8">
+        <div style="background-color: #E0F2F7;margin-bottom: 10px; padding: 10px; border-radius: 5px;">
+  <h2 class="text-xl font-light text-black-300 dark:text-black-400">Product Description</h2> 
+</div>
+            <p class="max-w-md text-gray-300 dark:text-gray-400 ">
+                {!! Str::markdown($product->description) !!}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="overflow-hidden bg-white py-11  dark:bg-gray-800 font-normal font-['Poppins'] mb-7">
+<div class="px-20 pb-6 mt-6 "> 
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-semibold text-gray-900">
+        4.6 <span class="text-yellow-500">★</span> Product Ratings (10)
+      </h2>
+      <a href="#" class="text-black-600 hover:text-indigo-800">
+        View All <span aria-hidden="true">></span>
+      </a>
+    </div>
+    <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000;">
+    <div class="space-y-4">
+      <div class="bg-white rounded-lg p-4 shadow-sm ">
+        <div class="flex items-start mb-2">
+          <div class="rounded-full bg-gray-200 w-8 h-8 mr-2"></div>
+          <div>
+            <div class="font-medium text-black-900">Febby</div>
+            <div class="text-yellow-500">⭐⭐⭐⭐☆</div>
+            <div class="text-sm text-gray-500">2025-02-14 16:36 | Variation</div>
           </div>
+        </div>
+        <p class="text-sm text-black-700">Performance: makunit, garo karton</p>
+        <p class="text-sm text-black-700">Product Quality: haluyon pa ideilver</p>
+      </div>
+
+      <div class="bg-white rounded-lg p-4 shadow-sm ">
+        <div class="flex items-start mb-2">
+          <div class="rounded-full bg-gray-200 w-8 h-8 mr-2"></div>
+          <div>
+            <div class="font-medium text-black-900">Fabian</div>
+            <div class="text-yellow-500">⭐⭐⭐⭐☆</div>
+            <div class="text-sm text-gray-500">2025-02-14 16:36 | Variation</div>
+          </div>
+        </div>
+        <p class="text-sm text-black-700">Performance: makunit, garo karton</p>
+        <p class="text-sm text-black-700">Product Quality: haluyon pa ideilver</p>
+      </div>
 
         </div>
       </div>
