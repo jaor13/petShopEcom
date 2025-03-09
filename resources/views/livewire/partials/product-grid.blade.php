@@ -1,7 +1,7 @@
 <div class="container p-3">
   <!-- New Products Section -->
 
-  <div class="container p-3 rounded-3 w-90" style="background-color: white;">
+  <div class="container p-3 rounded-3" style="background-color: white;">
         <h3 style="display: inline-block; font-weight: bold; color: gray;">New Products</h3>
     <a href="#" style="float: right; font-size: 0.9em; color: gray;">View All ></a> 
     <div class="row row-cols-1 row-cols-md-5 g-4"> 
@@ -40,7 +40,7 @@
   </div>
 
   <!-- Best Selling Section -->
-  <div class="container p-3 rounded-3 w-90 mt-3" style="background-color: white;">
+  <div class="container p-3 rounded-3 mt-3" style="background-color: white;">
     <h3 style="display: inline-block; font-weight: bold; color: gray;">Best Selling</h3>
     <a href="#" style="float: right; font-size: 0.9em; color: gray;">View All ></a> 
     <div class="row row-cols-1 row-cols-md-5 g-4">
