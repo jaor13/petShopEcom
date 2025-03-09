@@ -43,12 +43,12 @@
 
           <!-- Slideshow -->
           <div class="relative mb-6 lg:mb-10 lg:h-2/4">
-            <button @click="prevImage"
-              class="absolute left-2 top-1/2 bg-gray-600 text-white px-2 py-1 rounded-l-md">❮</button>
+            <!-- <button @click="prevImage"
+              class="absolute left-2 top-1/2 text-gray-400 px-2 py-1 rounded-l-md">❮</button> -->
             <img x-bind:src="images[mainImageIndex]" alt=""
               class="object-cover w-full lg:h-full transition-opacity duration-500">
-            <button @click="nextImage"
-              class="absolute right-2 top-1/2 bg-gray-600 text-white px-2 py-1 rounded-r-md">❯</button>
+            <!-- <button @click="nextImage"
+              class="absolute right-2 top-1/2 text-gray-400 px-2 py-1 rounded-r-md">❯</button> -->
           </div>
 
           <p class="max-w-md text-gray-700 dark:text-gray-400" x-text="variantName"></p>
