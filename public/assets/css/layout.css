@@ -8,8 +8,9 @@ html, body {
 
 body {
   font-family: 'Afacad', sans-serif;
-background: #ececec;
+  background: #ececec;
 }
+
 
 header {
   position: fixed;
@@ -270,13 +271,11 @@ margin-left: 0px;
 
 .fw-bold {
   font-weight: 650!important;
-  font-size: 17px;
+  font-size: 1.2em;
 }
 
-.card {
-  margin-right: 15px; /* Adjust the value as needed for the desired space */
 
-}
+
  
 
 .card:hover {

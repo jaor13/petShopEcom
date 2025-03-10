@@ -106,24 +106,36 @@
 
 <div class="container p-3">
     <!-- New Products Section -->
-
-    <div class="container p-3 rounded-3" style="background-color: white;">
-      <h3 style="display: inline-block; font-weight: bold; color: gray;">New Products</h3>
-      <a href="{{ route('products', ['type' => 'latest']) }}" style="float: right; font-size: 0.9em; color: gray;">
-        View All >
-      </a>
-      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'latest'])
-    </div>
-
-  <!-- Best Selling Section -->
-  <div class="container p-3 rounded-3 mt-3" style="background-color: white;">
-    <h3 style="display: inline-block; font-weight: bold; color: gray;">Best Selling</h3>
-    <a href="{{ route('products', ['type' => 'best_sellers']) }}" style="float: right; font-size: 0.9em; color: gray;">
-      View All >
+    <div class="container-fluid p-2 rounded-3" style="background-color: white;">
+  <div style=" display: flex; justify-content: space-between; align-items: center;">
+    <h1 style="font-weight: bold; color: gray; font-size: xx-large; margin:0.4em 0em 0em 1em;">
+      New Released Products
+    </h1>
+    <a href="{{ route('products', ['type' => 'latest']) }}" style="font-size: 1.2em; color: gray; margin-right: 1.7em; text-decoration: none;">
+      View All
     </a>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+    @livewire('partials.product-grid', ['limit' => 5, 'type' => 'latest'])
+  </div>
+</div>
+
+
+
+<div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+  <div style=" display: flex; justify-content: space-between; align-items: center;">
+    <h1 style="font-weight: bold; color: gray; font-size: xx-large; margin:0.4em 0em 0em 1em;">
+     Best Seller Products
+    </h1>
+    <a href="{{ route('products', ['type' => 'best_sellers']) }}" style="font-size: 1.2em; color: gray; margin-right: 1.7em; text-decoration: none;">
+      View All
+    </a>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
     @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
   </div>
 </div>
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
 </div>
