@@ -3,8 +3,11 @@
 namespace App\Livewire;
 
 use App\Helpers\CartManagement;
+use App\Helpers\LikedProductManagement;
 use App\Livewire\Partials\Navbar;
+use App\Models\LikedProducts;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -65,6 +68,14 @@ class ProductDetailPage extends Component
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
         
     }
+
+    // Add a product to the liked table
+    public function addToLiked($product_id)
+{
+    $response = LikedProductManagement::addToLiked($product_id);
+
+    return $response;
+}
 
     public function render()
     {
