@@ -53,39 +53,41 @@
                 </a>
             </div>
 
-            <div class="heart-container"> 
-           <a href="{{ url('wishlist/') }}" wire:navigate class="relative flex items-center space-x-1"> 
-            <span><iconify-icon icon="mdi:heart" class="iconify-heart"></iconify-heart></span>
-            </a>
-          </div>
+            <div class="heart-container">
+                <a href="{{ url('wishlist/') }}" wire:navigate class="relative flex items-center space-x-1">
+                    <span><iconify-icon icon="mdi:heart" class="iconify-heart"></iconify-heart></span>
+                </a>
+            </div>
             <!-- User Profile Icon with Dropdown (Alpine.js) -->
             <div class="relative" x-data="{ open: false }">
-               <!-- User Icon Button -->
-    <button @click="open = !open" @click.away="open = false"
-        class="flex items-center space-x-1 focus:outline-none">
-        @auth
-            @if(auth()->user()->profile_picture)
-            <div class="w-9 h-9 rounded-full overflow-hidden border-1 border-gray-200 flex items-center justify-center ml-4 mb-2">
-                <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('assets/images/default-profile.png') }}"
-                    alt="Profile Picture"
-                    class="w-full h-full object-cover">
-            </div>
+                <!-- User Icon Button -->
+                <button @click="open = !open" @click.away="open = false"
+                    class="flex items-center space-x-1 focus:outline-none">
+                    @auth
+                        @if(auth()->user()->profile_picture)
+                            <div
+                                class="w-9 h-9 rounded-full overflow-hidden border-1 border-gray-200 flex items-center justify-center ml-4 mb-2">
+                                <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('assets/images/default-profile.png') }}"
+                                    alt="Profile Picture" class="w-full h-full object-cover">
+                            </div>
 
-            @else
-                <!-- Display Default Icon -->
-                <i class="fa-solid fa-user-circle iconify-user text-gray-500" style="font-size: 2rem; margin-bottom: 6px;"></i>
+                        @else
+                            <!-- Display Default Icon -->
+                            <i class="fa-solid fa-user-circle iconify-user text-gray-500"
+                                style="font-size: 2rem; margin-bottom: 6px;"></i>
 
-            @endif
-        @else
-            <!-- Display Default Icon for Guests -->
-            <i class="fa-solid fa-user-circle iconify-user text-gray-500 text-xl"></i>
-        @endauth
-    </button>
+                        @endif
+                    @else
+                        <!-- Display Default Icon for Guests -->
+                        <i class="fa-solid fa-user-circle iconify-user text-gray-500 text-xl"></i>
+                    @endauth
+                </button>
                 <!-- Dropdown Menu -->
                 <div x-show="open" x-transition class="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                     <p class="block px-4 py-2 text-gray-700">{{ auth()->user()->username }}</p>
                     <hr>
-                    <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                    <a href="{{ route('profile.show') }}"
+                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit"
@@ -93,7 +95,6 @@
                     </form>
                 </div>
             </div>
-
         @endauth
 
         <!-- Guest Navigation Links -->
