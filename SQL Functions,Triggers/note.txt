@@ -14,45 +14,57 @@ function in product_variants model:
 	3)has_variants
 
 	
+Paste this on SQL Query for Trigger: 
 
-product variant table:
 
-	CREATE TRIGGER `before_update_product_stock` BEFORE UPDATE ON `products`
- FOR EACH ROW BEGIN
+DELIMITER $$
+
+CREATE TRIGGER `before_update_product_stock` 
+BEFORE UPDATE ON `products`
+FOR EACH ROW 
+BEGIN
     -- Set in_stock to 1 if stock_quantity is greater than 0, else set to 0
     SET NEW.in_stock = IF(NEW.stock_quantity > 0, 1, 0);
-END
+END$$
 
-CREATE TRIGGER `update_product_price_after_variant_delete` AFTER DELETE ON `product_variants`
- FOR EACH ROW BEGIN
+CREATE TRIGGER `update_product_price_after_variant_delete` 
+AFTER DELETE ON `product_variants`
+FOR EACH ROW 
+BEGIN
     UPDATE products 
-   SET 
+    SET 
         price = get_lowest_variant_price(OLD.product_id),
         in_stock = has_stock(OLD.product_id),
-        has_variant = has_variants(OLD.product_id)  -- Check if any variants remain
+        has_variant = has_variants(OLD.product_id) /* Check if any variants remain */
     WHERE id = OLD.product_id;
-END
+END$$
 
-CREATE TRIGGER `update_product_price_after_variant_insert` AFTER INSERT ON `product_variants`
- FOR EACH ROW BEGIN
+CREATE TRIGGER `update_product_price_after_variant_insert` 
+AFTER INSERT ON `product_variants`
+FOR EACH ROW 
+BEGIN
     UPDATE products 
-   SET 
+    SET 
         price = get_lowest_variant_price(NEW.product_id),
         in_stock = has_stock(NEW.product_id)
     WHERE id = NEW.product_id;
-END
+END$$
 
-CREATE TRIGGER `update_product_price_after_variant_update` AFTER UPDATE ON `product_variants`
- FOR EACH ROW BEGIN
+CREATE TRIGGER `update_product_price_after_variant_update` 
+AFTER UPDATE ON `product_variants`
+FOR EACH ROW 
+BEGIN
     UPDATE products 
-     SET 
+    SET 
         price = get_lowest_variant_price(NEW.product_id),
         in_stock = has_stock(NEW.product_id)
     WHERE id = NEW.product_id;
-END
+END$$
 
-CREATE TRIGGER `update_product_stock` AFTER INSERT ON `product_variants`
- FOR EACH ROW BEGIN
+CREATE TRIGGER `update_product_stock` 
+AFTER INSERT ON `product_variants`
+FOR EACH ROW 
+BEGIN
     UPDATE products
     SET stock_quantity = (
         SELECT COALESCE(SUM(stock_quantity), 0) 
@@ -60,10 +72,12 @@ CREATE TRIGGER `update_product_stock` AFTER INSERT ON `product_variants`
         WHERE product_id = NEW.product_id
     )
     WHERE id = NEW.product_id;
-END
+END$$
 
-CREATE TRIGGER `update_product_stock_on_delete` AFTER DELETE ON `product_variants`
- FOR EACH ROW BEGIN
+CREATE TRIGGER `update_product_stock_on_delete` 
+AFTER DELETE ON `product_variants`
+FOR EACH ROW 
+BEGIN
     UPDATE products
     SET stock_quantity = (
         SELECT COALESCE(SUM(stock_quantity), 0) 
@@ -71,10 +85,12 @@ CREATE TRIGGER `update_product_stock_on_delete` AFTER DELETE ON `product_variant
         WHERE product_id = OLD.product_id
     )
     WHERE id = OLD.product_id;
-END
+END$$
 
-CREATE TRIGGER `update_product_stock_on_update` AFTER UPDATE ON `product_variants`
- FOR EACH ROW BEGIN
+CREATE TRIGGER `update_product_stock_on_update` 
+AFTER UPDATE ON `product_variants`
+FOR EACH ROW 
+BEGIN
     UPDATE products
     SET stock_quantity = (
         SELECT COALESCE(SUM(stock_quantity), 0) 
@@ -82,13 +98,6 @@ CREATE TRIGGER `update_product_stock_on_update` AFTER UPDATE ON `product_variant
         WHERE product_id = NEW.product_id
     )
     WHERE id = NEW.product_id;
-END
+END$$
 
-
-product table: 
-
-CREATE TRIGGER `before_update_product_stock` BEFORE UPDATE ON `products`
- FOR EACH ROW BEGIN
-    -- Set in_stock to 1 if stock_quantity is greater than 0, else set to 0
-    SET NEW.in_stock = IF(NEW.stock_quantity > 0, 1, 0);
-END
+DELIMITER ;
