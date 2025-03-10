@@ -2,9 +2,10 @@
 
 namespace App\Helpers;
 
+use App\Models\Cart;
 use App\Models\Product;
+use Auth;
 use Illuminate\Console\View\Components\Alert;
-use Illuminate\Support\Facades\Cookie;
 
 class CartManagement
 {
@@ -13,7 +14,7 @@ class CartManagement
     {
         // dd($product_id);
         \Log::info("Adding to cart: Product ID {$product_id}, Variant: {$variant_name}");
-        $cart_items = self::getCartItemsFromCookie();
+        $cart_items = self::getCartItemsFromDB();
 
         $existing_item = null;
 
@@ -44,7 +45,7 @@ class CartManagement
             }
         }
 
-        self::addCartItemsToCookie($cart_items);
+        self::addCartItemsToDB($cart_items);
         return count($cart_items);
     }
 
@@ -52,7 +53,7 @@ class CartManagement
     // Includes variant's name and price
     static public function addItemToCartWithQty($product_id, $qty = 1, $variant_name = null, $variant_price = null)
     {
-        $cart_items = self::getCartItemsFromCookie();
+        $cart_items = self::getCartItemsFromDB();
 
         $existing_item = null;
 
@@ -64,15 +65,12 @@ class CartManagement
         }
 
         if ($existing_item !== null) {
-            // If the item exists, update quantity and total price
             $cart_items[$existing_item]['quantity'] = $qty;
             $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount'];
         } else {
-            // Fetch product details
             $product = Product::where('id', $product_id)->with('variants')->first(['id', 'product_name', 'slug', 'price', 'images']);
 
             if ($product) {
-                // Use the variant price if a variant is selected, otherwise use the product price
                 $unit_price = $variant_price ?? $product->price;
 
                 // If base product's image is empty
@@ -84,7 +82,6 @@ class CartManagement
                     }
                 }
 
-                // Add new item to cart
                 $cart_items[] = [
                     'product_id' => $product_id,
                     'name' => $product->product_name,
@@ -98,7 +95,7 @@ class CartManagement
             }
         }
 
-        self::addCartItemsToCookie($cart_items);
+        self::addCartItemsToDB($cart_items);
         return count($cart_items);
     }
 
@@ -106,51 +103,106 @@ class CartManagement
     // Remove item from cart
     static public function removeCartItem($product_id, $variant_name = null)
     {
-        $cart_items = self::getCartItemsFromCookie();
+        $query = Cart::where('product_id', $product_id);
 
-        foreach ($cart_items as $key => $item) {
-            if ($item['product_id'] == $product_id && ($item['variant_name'] === $variant_name || $item['variant_name'] === null)) {
-                unset($cart_items[$key]);
-                break; // Stop after removing the first matching item
+        if (auth()->check()) {
+            $query->where('user_id', auth()->id());
+        } else {
+            $query->where('session_id', session()->getId());
+        }
+
+        // Ensure it deletes even if `variant_name` is NULL
+        $query->where(function ($q) use ($variant_name) {
+            if ($variant_name !== null) {
+                $q->where('variant_name', $variant_name)
+                    ->orWhereNull('variant_name'); // Include items with NULL variant
+            } else {
+                $q->whereNull('variant_name'); // Only delete items without a variant
+            }
+        });
+
+        // dd($query->toSql(), $query->getBindings());
+
+        $query->delete(); 
+
+        return self::getCartItemsFromDB();
+
+    }
+
+
+    // Add cart items to db
+    static public function addCartItemsToDB($cart_items)
+    {
+        // dd($cart_items);
+        // self::clearCartItems();
+        foreach ($cart_items as $item) {
+            $user_id = Auth::id();
+            $session_id = $user_id ? null : session()->getId(); // Use session for guest users
+
+            // Check if the product with the same variant already exists in the cart
+            $existingCartItem = Cart::where('product_id', $item['product_id'])
+                ->where('variant_name', $item['variant_name'])
+                ->where(function ($query) use ($user_id, $session_id) {
+                    if ($user_id) {
+                        $query->where('user_id', $user_id);
+                    } else {
+                        $query->where('session_id', $session_id);
+                    }
+                })
+                ->first();
+
+            if ($existingCartItem) {
+                $existingCartItem->quantity += $item['quantity'];
+                $existingCartItem->total_amount = $existingCartItem->quantity * $existingCartItem->unit_amount;
+                $existingCartItem->save();
+            } else {
+                Cart::create([
+                    'user_id' => $user_id,
+                    'session_id' => $user_id ? null : $session_id,
+                    'product_id' => $item['product_id'],
+                    'name' => $item['name'],
+                    'slug' => $item['slug'],
+                    'variant_name' => $item['variant_name'],
+                    'image' => $item['image'],
+                    'quantity' => $item['quantity'],
+                    'unit_amount' => $item['unit_amount'],
+                    'total_amount' => $item['total_amount'],
+                ]);
             }
         }
-
-        self::addCartItemsToCookie(array_values($cart_items));
-
-        return $cart_items;
     }
 
-
-
-    // Add cart items to cookie
-    static public function addCartItemsToCookie($cart_items)
-    {
-        // dd($cart_items);
-        Cookie::queue('cart_items', json_encode($cart_items), 60 * 24 * 30); //saved to browser for 30 days
-    }
-
-    // Clear cart items from cookie
+    // Clear cart items from db
     static public function clearCartItems()
     {
-        Cookie::queue(Cookie::forget('cart_items'));
+        $user_id = Auth::id();
+        $session_id = session()->getId(); // Get session ID for guest users
+
+        // Delete cart items for logged-in users or guest users
+        Cart::where(function ($query) use ($user_id, $session_id) {
+            if ($user_id) {
+                $query->where('user_id', $user_id);
+            } else {
+                $query->where('session_id', $session_id);
+            }
+        })->delete();
     }
 
-    // Get all cart items from cookie
-    static public function getCartItemsFromCookie()
+    // Get all cart items from db
+    static public function getCartItemsFromDB()
     {
-        $cart_items = json_decode(Cookie::get('cart_items'), true);
-        if (!$cart_items) {
-            $cart_items = [];
+        if (Auth::check()) {
+            return Cart::where('user_id', Auth::id())->get()->toArray();
+        } else {
+            $session_id = session()->getId();
+            return Cart::where('session_id', $session_id)->get()->toArray();
         }
-
-        // dd($cart_items);
-        return $cart_items;
     }
 
     // Increment item quantity
     static public function incrementQuantityToCartItem($product_id, $variant_name = null)
     {
-        $cart_items = self::getCartItemsFromCookie();
+        $cart_items = self::getCartItemsFromDB();
 
         foreach ($cart_items as $key => $item) {
             if ($item['product_id'] == $product_id && $item['variant_name'] == $variant_name) {
@@ -159,7 +211,7 @@ class CartManagement
             }
         }
 
-        self::addCartItemsToCookie($cart_items);
+        self::addCartItemsToDB($cart_items);
         return $cart_items;
     }
 
@@ -167,7 +219,7 @@ class CartManagement
     // Decrement item quantity
     static public function decrementQuantityToCartItem($product_id, $variant_name = null)
     {
-        $cart_items = self::getCartItemsFromCookie();
+        $cart_items = self::getCartItemsFromDB();
 
         foreach ($cart_items as $key => $item) {
             if ($item['product_id'] == $product_id && $item['variant_name'] == $variant_name) {
@@ -178,7 +230,7 @@ class CartManagement
             }
         }
 
-        self::addCartItemsToCookie($cart_items);
+        self::addCartItemsToDB($cart_items);
         return $cart_items;
     }
 

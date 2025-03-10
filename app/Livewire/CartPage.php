@@ -15,7 +15,7 @@ class CartPage extends Component
     public $grand_total;
 
     public function mount(){
-        $this->cart_items = CartManagement::getCartItemsFromCookie();
+        $this->cart_items = CartManagement::getCartItemsFromDB();
         $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
     }
 

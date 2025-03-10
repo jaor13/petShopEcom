@@ -35,7 +35,7 @@ class CheckoutPage extends Component
 
     public function render()
     {
-        $cart_items = CartManagement::getCartItemsFromCookie();
+        $cart_items = CartManagement::getCartItemsFromDB();
         $grand_total = CartManagement::calculateGrandTotal($cart_items);
 
         return view('livewire.checkout-page', [
