@@ -18,15 +18,15 @@ class Conversation extends Model
     //relationships
 
     public function messages()
-    {
-        return $this->hasMany(Message::class, 'id')->orderBy('created_at', 'ASC');
-
-        # code...
-    }
-    public function latestMessage()
 {
-    return $this->hasOne(Message::class, 'id')->latest();
+    return $this->hasMany(Message::class, 'conversation_id')->orderBy('created_at', 'ASC');
 }
+
+public function latestMessage()
+{
+    return $this->hasOne(Message::class, 'conversation_id')->latest();
+}
+
 
 
     public function user()

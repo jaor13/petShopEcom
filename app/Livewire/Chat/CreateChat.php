@@ -11,7 +11,7 @@ use Livewire\Component;
 class CreateChat extends Component
 {
     public $users;
-    public $message = 'okayy na timezone T_T, su logic baq';
+    public $message = 'makakareview na aq T_T';
 
     public function checkconversation($receiver_id)
     {
@@ -25,33 +25,32 @@ class CreateChat extends Component
         })->first(); // Use first() instead of get()
     
         if (!$checkedConversation) {
-            // Create a new conversation with current datetime for last_time_message
             $createdConversation = Conversation::create([
                 'receiver_id' => $receiver_id,
                 'sender_id' => auth()->user()->id,
-                'last_time_message' => Carbon::now() // Use current datetime
+                'last_time_message' => Carbon::now()
             ]);
-    
-            // Create the first message
+        
             $createdMessage = Message::create([
                 'conversation_id' => $createdConversation->id,
                 'sender_id' => auth()->user()->id,
                 'receiver_id' => $receiver_id,
                 'body' => $this->message,
             ]);
-    
-            // Update last_time_message timestamp
+        
             $createdConversation->update(['last_time_message' => $createdMessage->created_at]);
-    
+        
+        
             dd('saved');
         } else {
             // Conversation exists - append a message instead
             Message::create([
-                'id' => $checkedConversation->id,
+                'conversation_id' => $checkedConversation->id, // Use conversation_id
                 'sender_id' => auth()->user()->id,
                 'receiver_id' => $receiver_id,
                 'body' => $this->message,
             ]);
+            
     
             $checkedConversation->update(['last_time_message' => Carbon::now()]);
     

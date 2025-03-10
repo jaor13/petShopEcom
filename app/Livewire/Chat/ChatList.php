@@ -16,24 +16,28 @@ class ChatList extends Component
     public function getChatUserInstance(Conversation $conversation, $request)
     {
         $this->auth_id = auth()->id();
+        $this->receiverInstance = User::firstWhere('id', 
+        $conversation->sender_id == $this->auth_id 
+            ? $conversation->receiver_id 
+            : $conversation->sender_id
+    );
+    
 
-        if ($conversation->sender_id == $this->auth_id) {
-            $this->receiverInstance = User::firstWhere('id', $conversation->receiver_id);
-        } else {
-            $this->receiverInstance = User::firstWhere('id', $conversation->sender_id);
-        }
+    return optional($this->receiverInstance)->{$request} ?? 'Unknown';
 
-        return $this->receiverInstance ? $this->receiverInstance->{$request} : null;
     }
 
     public function mount()
-    {
-        $this->auth_id = auth()->id();
-        $this->conversations = Conversation::where('sender_id', $this->auth_id)
-            ->orWhere('receiver_id', $this->auth_id)
-            ->orderBy('last_time_message', 'DESC')
-            ->get();
-    }
+{
+    $this->conversations = Conversation::with(['latestMessage', 'messages'])
+    ->where(function ($query) {
+        $query->where('sender_id', auth()->id())
+              ->orWhere('receiver_id', auth()->id());
+    })
+    ->orderBy('last_time_message', 'DESC')
+    ->get();
+}
+
 
     public function render()
     {
