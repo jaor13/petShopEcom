@@ -123,7 +123,7 @@ class CartManagement
 
         // dd($query->toSql(), $query->getBindings());
 
-        $query->delete(); 
+        $query->delete();
 
         return self::getCartItemsFromDB();
 
@@ -202,37 +202,59 @@ class CartManagement
     // Increment item quantity
     static public function incrementQuantityToCartItem($product_id, $variant_name = null)
     {
-        $cart_items = self::getCartItemsFromDB();
+        $query = Cart::where('product_id', $product_id);
 
-        foreach ($cart_items as $key => $item) {
-            if ($item['product_id'] == $product_id && $item['variant_name'] == $variant_name) {
-                $cart_items[$key]['quantity']++;
-                $cart_items[$key]['total_amount'] = $cart_items[$key]['quantity'] * $cart_items[$key]['unit_amount'];
-            }
+        if (auth()->check()) {
+            $query->where('user_id', auth()->id());
+        } else {
+            $query->where('session_id', session()->getId());
         }
 
-        self::addCartItemsToDB($cart_items);
-        return $cart_items;
-    }
+        if ($variant_name) {
+            $query->where('variant_name', $variant_name);
+        } else {
+            $query->whereNull('variant_name');
+        }
 
+        $cart_item = $query->first();
+
+        if ($cart_item) {
+            $cart_item->quantity += 1; // Increase by 1
+            $cart_item->total_amount = $cart_item->quantity * $cart_item->unit_amount;
+            $cart_item->save();
+        }
+
+        return self::getCartItemsFromDB();
+    }
 
     // Decrement item quantity
     static public function decrementQuantityToCartItem($product_id, $variant_name = null)
     {
-        $cart_items = self::getCartItemsFromDB();
+        $query = Cart::where('product_id', $product_id);
 
-        foreach ($cart_items as $key => $item) {
-            if ($item['product_id'] == $product_id && $item['variant_name'] == $variant_name) {
-                if ($cart_items[$key]['quantity'] > 1) {
-                    $cart_items[$key]['quantity']--;
-                    $cart_items[$key]['total_amount'] = $cart_items[$key]['quantity'] * $cart_items[$key]['unit_amount'];
-                }
-            }
+        if (auth()->check()) {
+            $query->where('user_id', auth()->id());
+        } else {
+            $query->where('session_id', session()->getId());
         }
 
-        self::addCartItemsToDB($cart_items);
-        return $cart_items;
+        if ($variant_name) {
+            $query->where('variant_name', $variant_name);
+        } else {
+            $query->whereNull('variant_name');
+        }
+
+        $cart_item = $query->first();
+
+        if ($cart_item && $cart_item->quantity > 1) {
+            $cart_item->quantity -= 1; // Decrease by 1
+            $cart_item->total_amount = $cart_item->quantity * $cart_item->unit_amount;
+            $cart_item->save();
+        }
+
+        return self::getCartItemsFromDB();
     }
+
 
     // Calculate grand total
     static public function calculateGrandTotal($items)
