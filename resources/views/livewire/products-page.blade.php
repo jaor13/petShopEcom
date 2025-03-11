@@ -18,7 +18,7 @@
     <!-- If there's a filter (category, search, or type), show the Product Grid normally -->
     @if(request('query') || request('category') || request('type'))
         @livewire('partials.product-grid', [
-            
+            'limit' => 20,
             'query' => request('query'),
             'category' => request('category'),
             'type' => request('type')
@@ -28,7 +28,6 @@
         @foreach ($groupedProducts as $categoryName => $products)
             <h2 class="text-xl font-bold mt-4">{{ $categoryName }}</h2>
             @livewire('partials.product-grid', [
-                'limit' => 20,
                 'query' => null,
                 'category' => $categoryName,
                 'type' => null
