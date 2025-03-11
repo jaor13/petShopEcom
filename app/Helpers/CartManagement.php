@@ -13,7 +13,6 @@ class CartManagement
     static public function addItemToCart($product_id, $variant_name = null)
     {
         // // dd($product_id,  $variant_name);
-        // \Log::info("Adding to cart: Product ID {$product_id}, Variant: {$variant_name}");
         $cart_items = self::getCartItemsFromDB();
         // dd($cart_items);
         $existing_item = null;

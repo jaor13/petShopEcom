@@ -76,7 +76,6 @@ class ProductDetailPage extends Component
             'timer' => 3000,
             'toast' => true,
         ]);
-
     }
 
     // Add a product to the liked table
