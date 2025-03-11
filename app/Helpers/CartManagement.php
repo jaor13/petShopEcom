@@ -12,12 +12,13 @@ class CartManagement
     // Add item to cart
     static public function addItemToCart($product_id, $variant_name = null)
     {
-        // dd($product_id);
-        \Log::info("Adding to cart: Product ID {$product_id}, Variant: {$variant_name}");
+        // // dd($product_id,  $variant_name);
+        // \Log::info("Adding to cart: Product ID {$product_id}, Variant: {$variant_name}");
         $cart_items = self::getCartItemsFromDB();
-
+        // dd($cart_items);
         $existing_item = null;
 
+        //check if nasa cart na su item
         foreach ($cart_items as $key => $item) {
             if ($item['product_id'] == $product_id && $item['variant_name'] == $variant_name) {
                 $existing_item = $key;
@@ -25,10 +26,12 @@ class CartManagement
             }
         }
 
+        // dd($existing_item);
         if ($existing_item !== null) {
-            $cart_items[$existing_item]['quantity']++;
-            $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount'];
-        } else {
+            $cart_items[$existing_item]['quantity'] = 1; 
+            $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount']; // Update total price
+        }
+         else {
             $product = Product::where('id', $product_id)->first(['id', 'product_name', 'slug', 'price', 'images']);
 
             if ($product) {
@@ -44,6 +47,7 @@ class CartManagement
                 ];
             }
         }
+        // dd($cart_items);
 
         self::addCartItemsToDB($cart_items);
         return count($cart_items);
@@ -100,6 +104,7 @@ class CartManagement
     }
 
 
+
     // Remove item from cart
     static public function removeCartItem($product_id, $variant_name = null)
     {
@@ -151,11 +156,13 @@ class CartManagement
                 })
                 ->first();
 
-            if ($existingCartItem) {
-                $existingCartItem->quantity += $item['quantity'];
-                $existingCartItem->total_amount = $existingCartItem->quantity * $existingCartItem->unit_amount;
-                $existingCartItem->save();
-            } else {
+                if ($existingCartItem) {
+                    // If the item already exists in the cart, update its quantity and total price
+                    $existingCartItem->quantity = $item['quantity']; // Set the quantity to the new value (not incrementing)
+                    $existingCartItem->total_amount = $item['quantity'] * $existingCartItem->unit_amount; // Update the total price
+                    $existingCartItem->save(); // Save the updated record to the database
+                }
+                 else {
                 Cart::create([
                     'user_id' => $user_id,
                     'session_id' => $user_id ? null : $session_id,

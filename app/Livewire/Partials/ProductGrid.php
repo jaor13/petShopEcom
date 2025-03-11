@@ -8,8 +8,6 @@ use Livewire\Component;
 
 class ProductGrid extends Component
 {
-
-
     public $query;
     public $category;
 

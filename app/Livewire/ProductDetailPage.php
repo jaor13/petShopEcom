@@ -64,7 +64,7 @@ class ProductDetailPage extends Component
         usleep(200000); // 0.2-second delay (200ms)
 
         $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity, $this->variant_name, $this->variant_price);
-        // dd($total_count, $product_id);
+        // dd($total_count, $this->quantity);
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
         
     }
