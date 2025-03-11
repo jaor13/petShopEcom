@@ -17,6 +17,7 @@ use App\Livewire\SuccessPage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Controllers\CustomProfileController;
+use App\Http\Controllers\order;
 
 
 Route::get('/', LandingPage::class)->name('home');
@@ -65,6 +66,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/success', SuccessPage::class);
     Route::get('/cancel', CancelPage::class);
+
+
+    // Route::get('/order/success/{order}', SuccessPage::class)->name('order.success');
+    Route::get('/order/success/{order}', SuccessPage::class)->name('order.success');
+
+
 });
 
 require __DIR__ . '/auth.php';
