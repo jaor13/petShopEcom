@@ -15,13 +15,15 @@ class ProductGrid extends Component
 
     public $query;
     public $category;
+    public $type;
     public $limit;
     public $likedProducts = [];
 
-    public function mount($query = null, $category = null, $limit = null, $likedProducts = [])
+    public function mount($query = null, $category = null, $type = null, $limit = null, $likedProducts = [])
     {
         $this->query = $query;
         $this->category = $category;
+        $this->type = $type;
         $this->limit = $limit;
         $this->likedProducts = $likedProducts;
     }
@@ -59,6 +61,12 @@ class ProductGrid extends Component
 
         if ($this->query) {
             $products->where('product_name', 'like', '%' . $this->query . '%');
+        }
+
+        if ($this->type === 'latest') {
+            $products->orderBy('created_at', 'desc'); 
+        } elseif ($this->type === 'best_sellers') {
+            $products->orderBy('sold_count', 'desc'); 
         }
 
         if ($this->limit) {
