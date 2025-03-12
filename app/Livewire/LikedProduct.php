@@ -12,5 +12,18 @@ use Illuminate\Support\Facades\Auth;
 
 class LikedProduct extends Component
 {
-    //
+
+    public $likedProducts = [];
+
+    public function mount()
+    {
+        if (Auth::check()) {
+            $this->likedProducts = LikedProductManagement::showLiked();
+        }
+    }
+
+    public function render()
+    {
+        return view('livewire.liked-product');
+    }
 }

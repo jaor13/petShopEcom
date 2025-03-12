@@ -3,6 +3,7 @@
 namespace App\Livewire\Partials;
 
 use App\Helpers\CartManagement;
+use App\Helpers\LikedProductManagement;
 use App\Models\Product;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -15,23 +16,26 @@ class ProductGrid extends Component
     public $query;
     public $category;
     public $limit;
+    public $likedProducts = [];
 
-    public function mount($query = null, $category = null, $limit = null)
+    public function mount($query = null, $category = null, $limit = null, $likedProducts = [])
     {
         $this->query = $query;
         $this->category = $category;
         $this->limit = $limit;
+        $this->likedProducts = $likedProducts;
     }
 
     // add to cart
-    public function addToCart($product_id) {
+    public function addToCart($product_id)
+    {
         usleep(200000); // 0.2 second delay (200ms)
 
         $total_count = CartManagement::addItemToCart($product_id);
         // dd($total_count, $product_id);
-        
+
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
-        
+
         $this->alert('success', 'Product added to cart successfully!', [
             'position' => 'bottom-end',
             'timer' => 3000,
@@ -42,6 +46,10 @@ class ProductGrid extends Component
     public function render()
     {
         $products = Product::where('is_active', 1);
+
+        if (!empty($this->likedProducts)) {
+            $products->whereIn('id', $this->likedProducts);
+        }
 
         if ($this->category) {
             $products->whereHas('categories', function ($q) {
@@ -56,7 +64,7 @@ class ProductGrid extends Component
         if ($this->limit) {
             $products->limit($this->limit);
         }
-        
+
         return view('livewire.partials.product-grid', [
             'products' => $products->get()
         ]);

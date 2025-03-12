@@ -38,4 +38,13 @@ class LikedProductManagement
 
         return ['success' => 'Product removed from liked items!'];
     }
+
+    public static function showLiked()
+    {
+        if (!Auth::check()) {
+            return []; 
+        }
+
+        return LikedProduct::where('user_id', Auth::id())->pluck('product_id')->toArray();
+    }
 }
