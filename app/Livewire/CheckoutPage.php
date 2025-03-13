@@ -45,8 +45,8 @@ class CheckoutPage extends Component
             session()->flash('error', 'Your cart is empty!');
             return redirect()->route('/');
         }
-    
 
+    
         $order = Order::create([
             'user_id' => auth()->id(),
             'grand_total' => $grand_total,
@@ -82,12 +82,53 @@ class CheckoutPage extends Component
             ]);
         }
     
-        // Step 6: Clear the Cart
-        CartManagement::clearCartItems();
+            // Initialize PayMongo Payment Link
+        $secretKey = config('services.paymongo.secret_key');
+        $amount = $grand_total * 100; // Convert to centavos
+
+
+        $data = [
+            "data" => [
+                "attributes" => [
+                    "amount" => $amount,
+                    "currency" => "PHP",
+                    "description" => "Payment for Order #{$order->id}",
+                    "remarks" => "Order Payment",
+                    "checkout_url" => route('order.success', ['order' => $order->id])
+                ]
+            ]
+        ];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://api.paymongo.com/v1/links");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Content-Type: application/json",
+            "Authorization: Basic " . base64_encode($secretKey . ":")
+        ]);
     
-        // Step 7: Redirect with Success Message
-        session()->flash('success', 'Your order has been placed successfully!');
-        return redirect()->route('order.success', ['order' => $order->id]);
+        $result = curl_exec($ch);
+        curl_close($ch);
+    
+        $response = json_decode($result, true);
+    
+        // Check if Payment Link was created successfully
+        if (isset($response['data']['attributes']['checkout_url'])) {
+            return redirect()->away($response['data']['attributes']['checkout_url']);
+        } else {
+            session()->flash('error', 'Failed to create payment link. Please try again.');
+            return redirect()->route('checkout');
+        }
+
+        
+
+        // // Step 6: Clear the Cart
+        // CartManagement::clearCartItems();
+    
+        // // Step 7: Redirect with Success Message
+        // session()->flash('success', 'Your order has been placed successfully!');
+        // return redirect()->route('order.success', ['order' => $order->id]);
     }
 
 
