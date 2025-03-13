@@ -23,6 +23,7 @@ class CheckoutPage extends Component
     public $zip_code;
     public $payment_method;
 
+
     public function placeOrder() {
         $this->validate([
             'first_name' => 'required',
@@ -35,7 +36,7 @@ class CheckoutPage extends Component
             'payment_method' => 'required',
         ]);
     
-        // retrieve cart items
+        // Retrieve cart items
         $cart_items = CartManagement::getCartItemsFromDB();
         $grand_total = CartManagement::calculateGrandTotal($cart_items);
         $shipping_amount = 0; 
@@ -45,20 +46,21 @@ class CheckoutPage extends Component
             session()->flash('error', 'Your cart is empty!');
             return redirect()->route('/');
         }
-
     
+        // Create Order
         $order = Order::create([
             'user_id' => auth()->id(),
             'grand_total' => $grand_total,
             'shipping_amount' => $shipping_amount,
             'payment_method' => $this->payment_method,
-            'payment_status' => 'pending', 
+            'payment_status' => ($this->payment_method === 'cod') ? 'pending' : 'unpaid',
             'status' => 'new', 
             'currency' => 'PHP',
             'notes' => null, 
             'shipping_method' => 'standard',
         ]);
     
+        // Create Address
         Address::create([
             'order_id' => $order->id,
             'first_name' => $this->first_name,
@@ -70,7 +72,7 @@ class CheckoutPage extends Component
             'zip_code' => $this->zip_code,
         ]);
     
-        
+        // Add Order Items
         foreach ($cart_items as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
@@ -82,11 +84,20 @@ class CheckoutPage extends Component
             ]);
         }
     
-            // Initialize PayMongo Payment Link
+        // Handle Cash on Delivery (COD)
+        if ($this->payment_method === 'cod') {
+            // Clear Cart
+            CartManagement::clearCartItems();
+    
+            // Redirect with Success Message
+            session()->flash('success', 'Your order has been placed successfully! Payment will be collected upon delivery.');
+            return redirect()->route('order.success', ['order' => $order->id]);
+        }
+    
+        // Handle Online Payment (PayMongo)
         $secretKey = config('services.paymongo.secret_key');
         $amount = $grand_total * 100; // Convert to centavos
-
-
+    
         $data = [
             "data" => [
                 "attributes" => [
@@ -94,11 +105,11 @@ class CheckoutPage extends Component
                     "currency" => "PHP",
                     "description" => "Payment for Order #{$order->id}",
                     "remarks" => "Order Payment",
-                    "checkout_url" => route('order.success', ['order' => $order->id])
+                    "checkout_url" => route('order.success', ['order' => $order->id]),
                 ]
             ]
         ];
-
+    
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://api.paymongo.com/v1/links");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -120,16 +131,8 @@ class CheckoutPage extends Component
             session()->flash('error', 'Failed to create payment link. Please try again.');
             return redirect()->route('checkout');
         }
-
-        
-
-        // // Step 6: Clear the Cart
-        // CartManagement::clearCartItems();
-    
-        // // Step 7: Redirect with Success Message
-        // session()->flash('success', 'Your order has been placed successfully!');
-        // return redirect()->route('order.success', ['order' => $order->id]);
     }
+    
 
 
 
