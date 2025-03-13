@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Helpers\LikedProductManagement;
 use App\Models\LikedProducts;
+use App\Models\Product;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ class LikedProduct extends Component
 {
 
     public $likedProducts = [];
+    public $selectedProducts = [];
 
     public function mount()
     {
@@ -24,6 +26,15 @@ class LikedProduct extends Component
 
     public function render()
     {
-        return view('livewire.liked-product');
+        $products = Product::where('is_active', 1);
+
+        if (!empty($this->likedProducts)) {
+            $products->whereIn('id', $this->likedProducts);
+        }
+
+        return view('livewire.liked-product', [
+            'products' => $products->get() // Fetch the results
+        ]);
     }
+
 }

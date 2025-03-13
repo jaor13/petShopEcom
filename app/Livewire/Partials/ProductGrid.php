@@ -3,7 +3,6 @@
 namespace App\Livewire\Partials;
 
 use App\Helpers\CartManagement;
-use App\Helpers\LikedProductManagement;
 use App\Models\Product;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -17,15 +16,13 @@ class ProductGrid extends Component
     public $category;
     public $type;
     public $limit;
-    public $likedProducts = [];
 
-    public function mount($query = null, $category = null, $type = null, $limit = null, $likedProducts = [])
+    public function mount($query = null, $category = null, $type = null, $limit = null)
     {
         $this->query = $query;
         $this->category = $category;
         $this->type = $type;
         $this->limit = $limit;
-        $this->likedProducts = $likedProducts;
     }
 
     // add to cart
@@ -48,10 +45,6 @@ class ProductGrid extends Component
     public function render()
     {
         $products = Product::where('is_active', 1);
-
-        if (!empty($this->likedProducts)) {
-            $products->whereIn('id', $this->likedProducts);
-        }
 
         if ($this->category) {
             $products->whereHas('categories', function ($q) {
