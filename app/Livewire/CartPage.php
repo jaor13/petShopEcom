@@ -25,26 +25,15 @@ class CartPage extends Component
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
 
-
     public function updatedSelectedItems()
     {
         session()->put('selected_cart_items', $this->selected_items);
-        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
+
     public function updateSummary()
     {
-        // Just trigger a re-render
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
-
-
-
-    // public function placeOrder()
-    // {
-    //     // Get selected cart item IDs
-    //     $cartItemIds = CartManagement::getCartItemIds();
-    //     // Debugging
-    //     dd($cartItemIds);
-    // }
 
     public function goToCheckout()
     {
@@ -60,8 +49,6 @@ class CartPage extends Component
         // dd($this->selected_items);       
         return redirect()->route('checkout');
     }
-
-
 
     public function removeItem($product_id, $variant_name = null)
     {
@@ -79,6 +66,7 @@ class CartPage extends Component
         ]);
 
     }
+
     public function increaseQty($product_id, $variant_name = null)
     {
         CartManagement::incrementQuantityToCartItem($product_id, $variant_name);
@@ -94,7 +82,6 @@ class CartPage extends Component
         $this->cart_items = CartManagement::getCartItemsFromDB();
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
-
 
     public function render()
     {
