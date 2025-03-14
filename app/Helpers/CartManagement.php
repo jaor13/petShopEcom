@@ -224,7 +224,7 @@ class CartManagement
                 ->toArray();
         }
 
-        dd($cart_ids); 
+        dd($cart_ids);
 
         return $cart_ids;
     }
@@ -288,10 +288,19 @@ class CartManagement
     }
 
 
-    // Calculate grand total
-    static public function calculateGrandTotal($items)
+    static public function calculateGrandTotal($selected_items = [])
     {
-        return array_sum(array_column($items, 'total_amount'));
+        if (empty($selected_items)) {
+            return 0;
+        }
+
+        $cart_items = array_filter(self::getCartItemsFromDB(), function ($item) use ($selected_items) {
+            return in_array($item['cart_id'], $selected_items);
+        });
+
+        return array_sum(array_column($cart_items, 'total_amount'));
     }
+
+
 
 }

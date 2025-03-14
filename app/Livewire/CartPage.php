@@ -21,12 +21,15 @@ class CartPage extends Component
     public function mount()
     {
         $this->cart_items = CartManagement::getCartItemsFromDB();
-        $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
+        $this->selected_items = session()->get('selected_cart_items', []);
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
+
 
     public function updatedSelectedItems()
     {
-        $this->dispatch('refreshSelectedItems');
+        session()->put('selected_cart_items', $this->selected_items);
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
 
 
