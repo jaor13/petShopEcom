@@ -77,7 +77,14 @@ class CartPage extends Component
         usleep(200000); // 0.2 second delay (200ms)
 
         $this->cart_items = CartManagement::removeCartItem($product_id, $variant_name);
-        $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
+
+        $this->selected_items = array_filter($this->selected_items, function ($cart_id) {
+            return collect($this->cart_items)->contains('cart_id', $cart_id);
+        });
+
+        session()->put('selected_cart_items', $this->selected_items);
+
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
 
         $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
 
@@ -86,7 +93,6 @@ class CartPage extends Component
             'timer' => 3000,
             'toast' => true,
         ]);
-
     }
 
     public function increaseQty($product_id, $variant_name = null)
