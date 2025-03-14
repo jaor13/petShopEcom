@@ -112,26 +112,32 @@ class CartPage extends Component
 
     public function removeSelectedItems()
     {
-        if (!empty($this->selected_items)) {
-            foreach ($this->selected_items as $cart_id) {
-                $this->cart_items = CartManagement::removeCartItemById($cart_id);
-            }
-
-            // Remove deleted items from selected_items
-            $this->selected_items = array_filter($this->selected_items, function ($cart_id) {
-                return collect($this->cart_items)->contains('cart_id', $cart_id);
-            });
-
-            session()->put('selected_cart_items', $this->selected_items);
-            $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
-
-            $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
-            $this->alert('success', 'Selected items removed.', [
+        if (empty($this->selected_items)) {
+            $this->alert('error', 'No items selected for removal.', [
                 'position' => 'bottom-end',
                 'timer' => 3000,
                 'toast' => true,
             ]);
+            return;
         }
+
+        foreach ($this->selected_items as $cart_id) {
+            $this->cart_items = CartManagement::removeCartItemById($cart_id);
+        }
+
+        $this->selected_items = array_filter($this->selected_items, function ($cart_id) {
+            return collect($this->cart_items)->contains('cart_id', $cart_id);
+        });
+
+        session()->put('selected_cart_items', $this->selected_items);
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+
+        $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
+        $this->alert('success', 'Selected items removed.', [
+            'position' => 'bottom-end',
+            'timer' => 3000,
+            'toast' => true,
+        ]);
     }
 
     public function render()
