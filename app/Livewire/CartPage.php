@@ -17,18 +17,40 @@ class CartPage extends Component
     public $cart_items = [];
     public $selected_items = [];
     public $grand_total;
+    public $selectAll = false;
 
     public function mount()
     {
         $this->cart_items = CartManagement::getCartItemsFromDB();
         $this->selected_items = session()->get('selected_cart_items', []);
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+
+        $this->selectAll = count($this->selected_items) === count($this->cart_items);
+
     }
 
     public function updatedSelectedItems()
     {
         session()->put('selected_cart_items', $this->selected_items);
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+
+        $this->selectAll = count($this->selected_items) === count($this->cart_items);
     }
+
+    public function toggleSelectAll()
+    {
+        if (count($this->selected_items) === count($this->cart_items)) {
+            $this->selected_items = [];
+            $this->selectAll = false;
+        } else {
+            $this->selected_items = collect($this->cart_items)->pluck('cart_id')->toArray();
+            $this->selectAll = true;
+        }
+
+        session()->put('selected_cart_items', $this->selected_items);
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+    }
+
 
     public function updateSummary()
     {

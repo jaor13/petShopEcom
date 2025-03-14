@@ -9,8 +9,8 @@
               <tr>
                 <th class="whitespace-nowrap text-left">
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" wire:model="selected_items" value="all" class="w-4 h-4 cursor-pointer"
-                      id="selectAll">
+                    <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll"
+                      class="w-4 h-4 cursor-pointer">
                     <span class="text-sm font-thin">Select All</span>
                   </div>
                 </th>
