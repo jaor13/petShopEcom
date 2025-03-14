@@ -33,6 +33,14 @@ class ProductDetailPage extends Component
         $this->slug = $slug;
         $this->variant_price = $product->price;
         $this->stock_quantity = $product->stock_quantity;
+
+        if (request()->has('variant_alert')) {
+            $this->alert('warning', 'Please select a variant before adding to cart.', [
+                'position' => 'bottom-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);
+        }
     }
 
     public function increaseQty()
@@ -65,6 +73,18 @@ class ProductDetailPage extends Component
     {
         // dd($product_id);
         // dd($this->variant_name);
+        $product = Product::with('variants')->find($product_id);
+
+        // Check if the product has variants and if no variant is selected
+        if ($product && $product->variants->count() > 0 && !$this->variant_name) {
+            $this->alert('warning', 'Please select a variant before adding to cart.', [
+                'position' => 'bottom-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);
+            return;
+        }
+
         usleep(200000); // 0.2-second delay (200ms)
 
         $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity, $this->variant_name, $this->variant_price);

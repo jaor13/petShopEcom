@@ -28,8 +28,13 @@ class ProductGrid extends Component
     // add to cart
     public function addToCart($product_id)
     {
-        usleep(200000); // 0.2 second delay (200ms)
+        $product = Product::with('variants')->find($product_id);
 
+        if ($product && $product->variants->count() > 0) {
+            return redirect()->to(url('product/' . $product->slug . '?variant_alert=1'));
+        }
+
+        usleep(200000); // 0.2 second delay (200ms)
         $total_count = CartManagement::addItemToCart($product_id);
         // dd($total_count, $product_id);
 
@@ -41,6 +46,7 @@ class ProductGrid extends Component
             'toast' => true,
         ]);
     }
+
 
     public function render()
     {

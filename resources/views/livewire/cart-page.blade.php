@@ -38,7 +38,6 @@
           <td class="py-4">
             <input type="checkbox" wire:model="selected_items" value="{{ $item['cart_id'] }}"
             class="w-4 h-4 cursor-pointer" wire:change="updateSummary">
-
           </td>
           <td class="py-4">
             <div class="flex items-center">
