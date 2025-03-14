@@ -15,14 +15,41 @@ class CartPage extends Component
     use LivewireAlert;
 
     public $cart_items = [];
+    public $selected_items = [];
     public $grand_total;
 
-    public function mount(){
+    public function mount()
+    {
         $this->cart_items = CartManagement::getCartItemsFromDB();
         $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
     }
 
-    public function removeItem($product_id, $variant_name = null) {
+    public function updatedSelectedItems()
+    {
+        $this->dispatch('refreshSelectedItems');
+    }
+
+
+    // public function placeOrder()
+    // {
+    //     // Get selected cart item IDs
+    //     $cartItemIds = CartManagement::getCartItemIds();
+    //     // Debugging
+    //     dd($cartItemIds);
+    // }
+
+    public function goToCheckout()
+    {
+
+        session()->put('selected_cart_items', $this->selected_items);
+        // dd($this->selected_items);       
+        return redirect()->route('checkout');
+    }
+
+
+
+    public function removeItem($product_id, $variant_name = null)
+    {
         usleep(200000); // 0.2 second delay (200ms)
 
         $this->cart_items = CartManagement::removeCartItem($product_id, $variant_name);
@@ -35,14 +62,16 @@ class CartPage extends Component
             'timer' => 3000,
             'toast' => true,
         ]);
-    
+
     }
-    public function increaseQty($product_id, $variant_name = null) {
+    public function increaseQty($product_id, $variant_name = null)
+    {
         $this->cart_items = CartManagement::incrementQuantityToCartItem($product_id, $variant_name);
-        $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items,);
+        $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items, );
     }
 
-    public function decreaseQty($product_id, $variant_name = null) {
+    public function decreaseQty($product_id, $variant_name = null)
+    {
         $this->cart_items = CartManagement::decrementQuantityToCartItem($product_id, $variant_name);
         $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
     }

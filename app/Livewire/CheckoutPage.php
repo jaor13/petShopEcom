@@ -20,7 +20,18 @@ class CheckoutPage extends Component
     public $zip_code;
     public $payment_method;
 
-    public function placeOrder() {
+    public function mount()
+    {
+        $this->selected_items = session()->get('selected_cart_items', []);
+
+        if (empty($this->selected_items)) {
+            return redirect()->route('cart')->with('error', 'No items selected for checkout.');
+        }
+    }
+
+
+    public function placeOrder()
+    {
         $this->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -35,7 +46,12 @@ class CheckoutPage extends Component
 
     public function render()
     {
-        $cart_items = CartManagement::getCartItemsFromDB();
+        $selected_items = session()->get('selected_cart_items', []);
+
+        $cart_items = array_filter(CartManagement::getCartItemsFromDB(), function ($item) use ($selected_items) {
+            return in_array($item['cart_id'], $selected_items);
+        });
+
         $grand_total = CartManagement::calculateGrandTotal($cart_items);
 
         return view('livewire.checkout-page', [
@@ -43,4 +59,5 @@ class CheckoutPage extends Component
             'grand_total' => $grand_total,
         ]);
     }
+
 }

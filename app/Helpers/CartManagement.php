@@ -27,10 +27,9 @@ class CartManagement
 
         // dd($existing_item);
         if ($existing_item !== null) {
-            $cart_items[$existing_item]['quantity'] = 1; 
+            $cart_items[$existing_item]['quantity'] = 1;
             $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount']; // Update total price
-        }
-         else {
+        } else {
             $product = Product::where('id', $product_id)->first(['id', 'product_name', 'slug', 'price', 'images']);
 
             if ($product) {
@@ -155,13 +154,12 @@ class CartManagement
                 })
                 ->first();
 
-                if ($existingCartItem) {
-                    // If the item already exists in the cart, update its quantity and total price
-                    $existingCartItem->quantity = $item['quantity']; // Set the quantity to the new value (not incrementing)
-                    $existingCartItem->total_amount = $item['quantity'] * $existingCartItem->unit_amount; // Update the total price
-                    $existingCartItem->save(); // Save the updated record to the database
-                }
-                 else {
+            if ($existingCartItem) {
+                // If the item already exists in the cart, update its quantity and total price
+                $existingCartItem->quantity = $item['quantity']; // Set the quantity to the new value (not incrementing)
+                $existingCartItem->total_amount = $item['quantity'] * $existingCartItem->unit_amount; // Update the total price
+                $existingCartItem->save(); // Save the updated record to the database
+            } else {
                 Cart::create([
                     'user_id' => $user_id,
                     'session_id' => $user_id ? null : $session_id,
@@ -198,12 +196,40 @@ class CartManagement
     static public function getCartItemsFromDB()
     {
         if (Auth::check()) {
-            return Cart::where('user_id', Auth::id())->get()->toArray();
+            return Cart::where('user_id', Auth::id())
+                ->select('id as cart_id', 'product_id', 'name', 'slug', 'variant_name', 'image', 'quantity', 'unit_amount', 'total_amount')
+                ->get()
+                ->toArray();
         } else {
             $session_id = session()->getId();
-            return Cart::where('session_id', $session_id)->get()->toArray();
+            return Cart::where('session_id', $session_id)
+                ->select('id as cart_id', 'product_id', 'name', 'slug', 'variant_name', 'image', 'quantity', 'unit_amount', 'total_amount')
+                ->get()
+                ->toArray();
         }
     }
+
+
+    static public function getCartItemIds()
+    {
+        if (Auth::check()) {
+            $cart_ids = Cart::where('user_id', Auth::id())
+                ->whereIn('id', session()->get('selected_cart_items', []))
+                ->pluck('id')
+                ->toArray();
+        } else {
+            $cart_ids = Cart::where('session_id', session()->getId())
+                ->whereIn('id', session()->get('selected_cart_items', []))
+                ->pluck('id')
+                ->toArray();
+        }
+
+        dd($cart_ids); 
+
+        return $cart_ids;
+    }
+
+
 
     // Increment item quantity
     static public function incrementQuantityToCartItem($product_id, $variant_name = null)

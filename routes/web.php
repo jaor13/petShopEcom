@@ -23,7 +23,7 @@ use App\Http\Controllers\CustomProfileController;
 Route::get('/', LandingPage::class)->name('home');
 Route::get('/', LandingPage::class)->name('home');
 Route::get('/products', ProductsPage::class)->name('products');
-Route::get('/cart', CartPage::class);
+Route::get('/cart', CartPage::class)->name('cart');
 Route::get('/product/{slug}', ProductDetailPage::class);
 
 Route::middleware('guest')->group(function () {
@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
     //new
     Route::get('/liked-product', LikedProduct::class)->name('liked-product');
     //new
-    Route::get('/checkout', CheckoutPage::class);
+    Route::get('/checkout', CheckoutPage::class)->name('checkout');
     Route::get('/orders', OrdersPage::class);
     Route::get('/orders/{orderID}', OrderDetailsPage::class);
 

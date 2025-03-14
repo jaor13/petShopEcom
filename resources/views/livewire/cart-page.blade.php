@@ -7,16 +7,28 @@
           <table class="w-full">
             <thead>
               <tr>
-                <th class="text-left font-semibold">Product</th>
-                <th class="text-left font-semibold">Price</th>
-                <th class="text-left font-semibold">Quantity</th>
-                <th class="text-left font-semibold">Total</th>
-                <th class="text-left font-semibold"></th>
+                <th class="whitespace-nowrap text-left">
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" wire:model="selected_items" value="all" class="w-4 h-4 cursor-pointer"
+                      id="selectAll">
+                    <span class="text-sm font-thin">Select All</span>
+                  </div>
+                </th>
+                <th class="text-center font-semibold">Product</th>
+                <th class="text-center font-semibold">Price</th>
+                <th class="text-center font-semibold">Quantity</th>
+                <th class="text-center font-semibold">Total</th>
+                <th class="text-center font-semibold"></th>
               </tr>
             </thead>
             <tbody>
               @forelse ($cart_items as $item)
           <tr wire:key="{{ $item['product_id'] }}">
+          <td class="py-4">
+            <input type="checkbox" wire:model="selected_items"
+           value="{{ $item['cart_id'] }}"
+            class="w-4 h-4 cursor-pointer">
+          </td>
           <td class="py-4">
             <div class="flex items-center">
             <a href="{{ url('/product/' . $item['slug']) }}">
@@ -81,10 +93,22 @@
             <span class="font-semibold">{{ Number::currency($grand_total, 'PHP') }}</span>
           </div>
           @if($cart_items)
-        <a href="/checkout"
-        class="bg-blue-500 text-white block text-center py-2 px-4 rounded-lg mt-4 w-full">Checkout</a>
+          <button wire:click="goToCheckout"
+    class="bg-blue-500 text-white block text-center py-2 px-4 rounded-lg mt-4 w-full">
+    Checkout
+</button>
+
       @endif
         </div>
+        <div class="bg-gray-100 p-4 rounded-lg mt-4" wire:poll.500ms>
+          <h2 class="text-lg font-semibold mb-2">Selected Items:</h2>
+          <ul>
+            @foreach ($selected_items as $selected)
+        <li class="text-sm text-gray-700">{{ $selected }}</li>
+      @endforeach
+          </ul>
+        </div>
+
       </div>
     </div>
   </div>
