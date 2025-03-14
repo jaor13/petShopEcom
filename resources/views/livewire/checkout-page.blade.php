@@ -173,7 +173,7 @@
 			</div>
 			<div class="md:col-span-12 lg:col-span-4 col-span-12">
 				<div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-					<div class="text-xl font-bold underline text-gray-700 dark:text-white mb-2">
+					<div class="text-xl font-bold underline text-gray-700 mb-2">
 						ORDER SUMMARY
 					</div>
 					<div class="flex justify-between mb-2 font-bold">
@@ -208,7 +208,7 @@
 					Place Order
 				</button>
 				<div class="bg-white mt-4 rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-					<div class="text-xl font-bold underline text-gray-700 dark:text-white mb-2">
+					<div class="text-xl font-bold underline text-gray-700 mb-2">
 						BASKET SUMMARY
 					</div>
 					<ul class="divide-y divide-gray-200 dark:divide-gray-700" role="list">
