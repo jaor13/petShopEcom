@@ -40,7 +40,14 @@ class CartPage extends Component
 
     public function goToCheckout()
     {
-
+        if (empty($this->selected_items)) {
+            $this->alert('error', 'No items selected for checkout.', [
+                'position' => 'bottom-end',
+                'timer' => 3000,
+                'toast' => true,
+            ]);
+            return;
+        }
         session()->put('selected_cart_items', $this->selected_items);
         // dd($this->selected_items);       
         return redirect()->route('checkout');

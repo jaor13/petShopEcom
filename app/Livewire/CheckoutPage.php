@@ -23,10 +23,6 @@ class CheckoutPage extends Component
     public function mount()
     {
         $this->selected_items = session()->get('selected_cart_items', []);
-
-        if (empty($this->selected_items)) {
-            return redirect()->route('cart')->with('error', 'No items selected for checkout.');
-        }
     }
 
 
