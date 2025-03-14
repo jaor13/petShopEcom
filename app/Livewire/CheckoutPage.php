@@ -89,9 +89,8 @@ class CheckoutPage extends Component
             // Clear Cart
             CartManagement::clearCartItems();
     
-            // Redirect with Success Message
-            session()->flash('success', 'Your order has been placed successfully! Payment will be collected upon delivery.');
-            return redirect()->route('order.success', ['order' => $order->id]);
+            return redirect()->route('my-purchases');
+
         }
     
         // Handle Online Payment (PayMongo)

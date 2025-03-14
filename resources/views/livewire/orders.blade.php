@@ -31,17 +31,17 @@
                 </div>
 
                 @foreach ($order['items'] as $item)
-                    <div class="d-flex mb-3 align-items-center">
-                        <img src="cat-litter.jpg" alt="Product Image" class="img-thumbnail" style="width: 100px;">
-                        <div class="ms-3 flex-grow-1">
-                            <p><strong>{{ $item['name'] }}</strong></p>
-                            <p>Variation:</p>
-                        </div>
-                        <div class="text-end">
-                            <p><strong>x {{ $item['qty'] }}</strong></p>
-                            <p><strong>₱{{ number_format($item['price'] * $item['qty'], 2) }}</strong></p>
-                        </div>
+                <div class="d-flex mb-3 align-items-center">
+                    <img src="{{ $item['image'] ? url('storage', $item['image']) : '' }}" alt="Product Image" class="img-thumbnail" style="width: 100px;">
+                    <div class="ms-3 flex-grow-1">
+                        <p><strong>{{ $item['name'] }}</strong></p>
+                        <p>Variation: {{ $item['variant'] ?? 'N/A' }}</p>
                     </div>
+                    <div class="text-end">
+                        <p><strong>x {{ $item['qty'] }}</strong></p>
+                        <p><strong>₱{{ number_format($item['price'] * $item['qty'], 2) }}</strong></p>
+                    </div>
+                </div>
                 @endforeach
 
                 <div class="mt-3 text-end pt-3">

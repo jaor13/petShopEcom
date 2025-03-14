@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Livewire;
-
+use App\Models\User;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Orders extends Component
@@ -16,35 +18,54 @@ class Orders extends Component
 
     public function fetchOrders()
     {
-        // Sample order data (replace with DB query)
-        $this->orders = [
-            [
-                'id' => 'O-12345678914',
-                'date' => 'February 14, 2025, 11:10',
-                'status' => 'to_ship',
-                'items' => [
-                    ['name' => 'Tofu Fragrance Free Cat Litter 6L', 'qty' => 1, 'price' => 469.00],
-                    ['name' => 'Tofu Fragrance Free Cat Litter 6L', 'qty' => 2, 'price' => 469.00],
-                ],
-                'total_price' => 986.00,
-                'message' => 'Aricuz is preparing your order'
-            ],
-            [
-                'id' => 'O-98765432100',
-                'date' => 'March 3, 2025, 14:00',
-                'status' => 'completed',
-                'items' => [
-                    ['name' => 'Premium Cat Food', 'qty' => 1, 'price' => 799.00],
-                ],
-                'total_price' => 799.00,
-                'message' => 'Order completed successfully'
-            ]
-        ];
+        // Get orders for the authenticated user
+        $query = Order::where('user_id', Auth::id())
+            ->with('items.product') // Assuming you have a relationship for order items
+            ->orderBy('created_at', 'desc');
+
+        if ($this->status !== 'all') {
+            $query->where('status', $this->status);
+        }
+        
+        $this->orders = $query->get()->map(function ($order) {
+            return [
+                'id' => $order->id,
+                'date' => $order->created_at->format('F j, Y, H:i'),
+                'status' => $order->status,
+                'items' => $order->items->map(function ($item) {
+                    $product = $item->product;
+                    $variant = $item->variant;
+        
+                    // Default to the first product image if available, otherwise use a default image
+                    $image = !empty($product->images) ? $product->images[0] : 'default-image.jpg';
+        
+                    // If a variant exists and has an image, use it instead
+                    if ($variant && !empty($variant->image)) {
+                        $image = $variant->image;
+                    }
+        
+                    return [
+                        'name' => $variant ? $variant->name : $product->product_name,
+                        'qty' => $item->quantity,
+                        'price' => $item->unit_amount,
+                        'total' => $item->total_amount,
+                        'image' => $image, // Uses the selected image logic
+                    ];
+                })->toArray(),
+                'total_price' => $order->grand_total,
+                'payment_method' => $order->payment_method,
+                'payment_status' => $order->payment_status,
+                'message' => $this->getStatusMessage($order->status),
+            ];
+        
+        
+        })->toArray();
     }
 
     public function filterOrders($status)
     {
         $this->status = $status;
+        $this->fetchOrders(); // Refresh orders based on new filter
     }
 
     public function getFilteredOrders()
@@ -56,10 +77,20 @@ class Orders extends Component
         return array_filter($this->orders, fn ($order) => $order['status'] === $this->status);
     }
 
+    public function getStatusMessage($status)
+    {
+        return match ($status) {
+            'to_ship' => 'Your order is being prepared.',
+            'completed' => 'Order completed successfully.',
+            'canceled' => 'Your order was canceled.',
+            default => 'Order status unknown.',
+        };
+    }
+
     public function render()
     {
         return view('livewire.orders', [
-            'filteredOrders' => $this->getFilteredOrders(),
+            'filteredOrders' => $this->orders,
         ]);
     }
 }

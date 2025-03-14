@@ -72,6 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/order/success/{order}', SuccessPage::class)->name('order.success');
 
 
+    Route::get('/my-purchases', App\Livewire\Orders::class)->name('my-purchases');
+
+
 });
 
 
