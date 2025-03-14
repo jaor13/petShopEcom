@@ -25,9 +25,9 @@
               @forelse ($cart_items as $item)
           <tr wire:key="{{ $item['product_id'] }}">
           <td class="py-4">
-            <input type="checkbox" wire:model="selected_items"
-           value="{{ $item['cart_id'] }}"
-            class="w-4 h-4 cursor-pointer">
+            <input type="checkbox" wire:model="selected_items" value="{{ $item['cart_id'] }}"
+            class="w-4 h-4 cursor-pointer" wire:change="updateSummary">
+
           </td>
           <td class="py-4">
             <div class="flex items-center">
@@ -93,22 +93,12 @@
             <span class="font-semibold">{{ Number::currency($grand_total, 'PHP') }}</span>
           </div>
           @if($cart_items)
-          <button wire:click="goToCheckout"
-    class="bg-blue-500 text-white block text-center py-2 px-4 rounded-lg mt-4 w-full">
-    Checkout
-</button>
-
+        <button wire:click="goToCheckout"
+        class="bg-blue-500 text-white block text-center py-2 px-4 rounded-lg mt-4 w-full">
+        Checkout
+        </button>
       @endif
         </div>
-        <div class="bg-gray-100 p-4 rounded-lg mt-4" wire:poll.500ms>
-          <h2 class="text-lg font-semibold mb-2">Selected Items:</h2>
-          <ul>
-            @foreach ($selected_items as $selected)
-        <li class="text-sm text-gray-700">{{ $selected }}</li>
-      @endforeach
-          </ul>
-        </div>
-
       </div>
     </div>
   </div>

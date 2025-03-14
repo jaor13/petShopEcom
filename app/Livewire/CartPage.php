@@ -31,6 +31,11 @@ class CartPage extends Component
         session()->put('selected_cart_items', $this->selected_items);
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
+    public function updateSummary()
+    {
+        // Just trigger a re-render
+    }
+
 
 
     // public function placeOrder()
@@ -76,15 +81,20 @@ class CartPage extends Component
     }
     public function increaseQty($product_id, $variant_name = null)
     {
-        $this->cart_items = CartManagement::incrementQuantityToCartItem($product_id, $variant_name);
-        $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items, );
+        CartManagement::incrementQuantityToCartItem($product_id, $variant_name);
+
+        $this->cart_items = CartManagement::getCartItemsFromDB();
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
 
     public function decreaseQty($product_id, $variant_name = null)
     {
-        $this->cart_items = CartManagement::decrementQuantityToCartItem($product_id, $variant_name);
-        $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
+        CartManagement::decrementQuantityToCartItem($product_id, $variant_name);
+
+        $this->cart_items = CartManagement::getCartItemsFromDB();
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
+
 
     public function render()
     {
