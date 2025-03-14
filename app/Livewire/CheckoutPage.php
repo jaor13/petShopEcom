@@ -53,7 +53,7 @@ class CheckoutPage extends Component
             'grand_total' => $grand_total,
             'shipping_amount' => $shipping_amount,
             'payment_method' => $this->payment_method,
-            'payment_status' => ($this->payment_method === 'cod') ? 'pending' : 'unpaid',
+            'payment_status' => ($this->payment_method === 'cod') ? 'unpaid' : 'processing',
             'status' => 'new', 
             'currency' => 'PHP',
             'notes' => null, 

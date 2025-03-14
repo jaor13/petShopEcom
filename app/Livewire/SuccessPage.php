@@ -9,9 +9,9 @@ class SuccessPage extends Component
 {
     public $order;
 
-    public function mount($order_id)
+    public function mount($order)
     {
-        $this->order = Order::findOrFail($order_id);
+        $this->order = Order::findOrFail($order);
     }
 
     public function render()
