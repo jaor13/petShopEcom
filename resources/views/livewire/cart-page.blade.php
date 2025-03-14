@@ -18,7 +18,18 @@
                 <th class="text-center font-semibold">Price</th>
                 <th class="text-center font-semibold">Quantity</th>
                 <th class="text-center font-semibold">Total</th>
-                <th class="text-center font-semibold"></th>
+                <th class="text-center font-semibold">
+                  <button wire:click="removeSelectedItems" class="text-red-500 hover:text-red-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                          d="M6 8a1 1 0 011 1v5a1 1 0 01-2 0V9a1 1 0 011-1zm4 0a1 1 0 011 1v5a1 1 0 01-2 0V9a1 1 0 011-1zm4 0a1 1 0 011 1v5a1 1 0 01-2 0V9a1 1 0 011-1z"
+                          clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd"
+                          d="M2 5a1 1 0 011-1h2.586A2 2 0 018 3h4a2 2 0 011.414.586L16 4h2a1 1 0 011 1v1a1 1 0 01-1 1h-1v8a3 3 0 01-3 3H6a3 3 0 01-3-3V7H2a1 1 0 01-1-1V5z"
+                          clip-rule="evenodd"></path>
+                      </svg>
+                    </button>
+                </th>
               </tr>
             </thead>
             <tbody>

@@ -101,8 +101,6 @@ class CartManagement
         return count($cart_items);
     }
 
-
-
     // Remove item from cart
     static public function removeCartItem($product_id, $variant_name = null)
     {
@@ -129,9 +127,22 @@ class CartManagement
         $query->delete();
 
         return self::getCartItemsFromDB();
-
     }
 
+    static public function removeCartItemById($cart_id)
+    {
+        $query = Cart::where('id', $cart_id);
+
+        if (auth()->check()) {
+            $query->where('user_id', auth()->id());
+        } else {
+            $query->where('session_id', session()->getId());
+        }
+
+        $query->delete();
+
+        return self::getCartItemsFromDB();
+    }
 
     // Add cart items to db
     static public function addCartItemsToDB($cart_items)
@@ -209,7 +220,6 @@ class CartManagement
         }
     }
 
-
     static public function getCartItemIds()
     {
         if (Auth::check()) {
@@ -228,8 +238,6 @@ class CartManagement
 
         return $cart_ids;
     }
-
-
 
     // Increment item quantity
     static public function incrementQuantityToCartItem($product_id, $variant_name = null)
@@ -287,9 +295,12 @@ class CartManagement
         return self::getCartItemsFromDB();
     }
 
-
     static public function calculateGrandTotal($selected_items = [])
     {
+        if (!is_array($selected_items)) {
+            return 0; // Return 0 if $selected_items is not an array
+        }
+        
         if (empty($selected_items)) {
             return 0;
         }
@@ -300,7 +311,4 @@ class CartManagement
 
         return array_sum(array_column($cart_items, 'total_amount'));
     }
-
-
-
 }

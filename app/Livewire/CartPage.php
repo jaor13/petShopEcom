@@ -22,11 +22,13 @@ class CartPage extends Component
     public function mount()
     {
         $this->cart_items = CartManagement::getCartItemsFromDB();
-        $this->selected_items = session()->get('selected_cart_items', []);
+        $this->selected_items = is_array(session()->get('selected_cart_items'))
+            ? session()->get('selected_cart_items')
+            : [];
+
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
 
         $this->selectAll = count($this->selected_items) === count($this->cart_items);
-
     }
 
     public function updatedSelectedItems()
@@ -34,23 +36,20 @@ class CartPage extends Component
         session()->put('selected_cart_items', $this->selected_items);
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
 
-        $this->selectAll = count($this->selected_items) === count($this->cart_items);
+        $this->selectAll = count((array) $this->selected_items) === count($this->cart_items);
     }
 
     public function toggleSelectAll()
     {
-        if (count($this->selected_items) === count($this->cart_items)) {
+        if (count((array) $this->selected_items) === count($this->cart_items)) {
             $this->selected_items = [];
-            $this->selectAll = false;
         } else {
             $this->selected_items = collect($this->cart_items)->pluck('cart_id')->toArray();
-            $this->selectAll = true;
         }
 
         session()->put('selected_cart_items', $this->selected_items);
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
-
 
     public function updateSummary()
     {
@@ -70,6 +69,22 @@ class CartPage extends Component
         session()->put('selected_cart_items', $this->selected_items);
         // dd($this->selected_items);       
         return redirect()->route('checkout');
+    }
+
+    public function increaseQty($product_id, $variant_name = null)
+    {
+        CartManagement::incrementQuantityToCartItem($product_id, $variant_name);
+
+        $this->cart_items = CartManagement::getCartItemsFromDB();
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+    }
+
+    public function decreaseQty($product_id, $variant_name = null)
+    {
+        CartManagement::decrementQuantityToCartItem($product_id, $variant_name);
+
+        $this->cart_items = CartManagement::getCartItemsFromDB();
+        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
     }
 
     public function removeItem($product_id, $variant_name = null)
@@ -95,20 +110,28 @@ class CartPage extends Component
         ]);
     }
 
-    public function increaseQty($product_id, $variant_name = null)
+    public function removeSelectedItems()
     {
-        CartManagement::incrementQuantityToCartItem($product_id, $variant_name);
+        if (!empty($this->selected_items)) {
+            foreach ($this->selected_items as $cart_id) {
+                $this->cart_items = CartManagement::removeCartItemById($cart_id);
+            }
 
-        $this->cart_items = CartManagement::getCartItemsFromDB();
-        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
-    }
+            // Remove deleted items from selected_items
+            $this->selected_items = array_filter($this->selected_items, function ($cart_id) {
+                return collect($this->cart_items)->contains('cart_id', $cart_id);
+            });
 
-    public function decreaseQty($product_id, $variant_name = null)
-    {
-        CartManagement::decrementQuantityToCartItem($product_id, $variant_name);
+            session()->put('selected_cart_items', $this->selected_items);
+            $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
 
-        $this->cart_items = CartManagement::getCartItemsFromDB();
-        $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+            $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
+            $this->alert('success', 'Selected items removed.', [
+                'position' => 'bottom-end',
+                'timer' => 3000,
+                'toast' => true,
+            ]);
+        }
     }
 
     public function render()
