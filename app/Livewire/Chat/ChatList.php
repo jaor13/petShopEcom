@@ -49,24 +49,24 @@ class ChatList extends Component
 
     
 
-    public function mount()
-    {
-        $this->auth_id = auth()->id();
-    
-        $this->conversations = Conversation::with([
-                'latestMessage' => function ($query) {
-                    $query->latest(); // Get the most recent message
-                }, 
-                'messages'
-            ])
-            ->where(function ($query) {
-                $query->where('sender_id', $this->auth_id)
-                      ->orWhere('receiver_id', $this->auth_id);
-            })
-            ->orderByRaw('(SELECT MAX(created_at) FROM messages WHERE messages.conversation_id = conversations.id) DESC')
-            ->get();
-    }
-    
+   public function mount()
+{
+    $this->auth_id = auth()->id();
+
+    $this->conversations = Conversation::with([
+            'latestMessage' => function ($query) {
+                $query->latest(); // Get the most recent message
+            }, 
+            'messages'
+        ])
+        ->where(function ($query) {
+            $query->where('sender_id', $this->auth_id)
+                  ->orWhere('receiver_id', $this->auth_id);
+        })
+        ->orderByRaw('(SELECT MAX(created_at) FROM messages WHERE messages.conversation_id = conversations.id) DESC')
+        ->get();
+}
+
 
  
     public function render()
