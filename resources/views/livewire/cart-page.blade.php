@@ -73,12 +73,12 @@
           </div>
           <div class="flex justify-between mb-2">
             <span>Shipping</span>
-            <span>{{ Number::currency(0, 'PHP') }}</span>
+            <span>{{ Number::currency($shipping_fee, 'PHP') }}</span>
           </div>
           <hr class="my-2">
           <div class="flex justify-between mb-2">
             <span class="font-semibold">Grand Total</span>
-            <span class="font-semibold">{{ Number::currency($grand_total, 'PHP') }}</span>
+            <span class="font-semibold">{{ Number::currency($grand_total + $shipping_fee, 'PHP') }}</span>
           </div>
           @if($cart_items)
         <a href="/checkout"

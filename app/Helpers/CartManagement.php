@@ -263,6 +263,18 @@ class CartManagement
     }
 
 
+    public static function calculateShipping($cart_items) {
+        if (empty($cart_items)) {
+            return 0.0;
+        }
+    
+        $base_shipping = 50; // Default base cost
+        $per_item_cost = 10; // Additional per-item cost
+    
+        return (float) ($base_shipping + (count($cart_items) * $per_item_cost));
+    }
+    
+
     // Calculate grand total
     static public function calculateGrandTotal($items)
     {

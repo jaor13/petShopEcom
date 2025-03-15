@@ -148,7 +148,7 @@
 							Shipping Cost
 						</span>
 						<span>
-							{{ Number::currency(0, 'PHP') }}
+							{{ Number::currency($shipping_amount, 'PHP') }}
 						</span>
 					</div>
 					<hr class="bg-slate-400 my-4 h-1 rounded">
@@ -157,7 +157,7 @@
 							Grand Total
 						</span>
 						<span>
-							{{ Number::currency($grand_total, 'PHP') }}
+							{{ Number::currency($grand_total + $shipping_amount, 'PHP') }}
 						</span>
 					</div>
 					</hr>

@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Facades\Log;
 
 class Orders extends Component
 {
@@ -23,15 +24,25 @@ class Orders extends Component
             ->with('items.product') // Assuming you have a relationship for order items
             ->orderBy('created_at', 'desc');
 
-        if ($this->status !== 'all') {
-            $query->where('status', $this->status);
-        }
+            if ($this->status !== 'all') {
+                $query->whereIn('status', match ($this->status) {
+                    'to_ship' => ['processing', 'to_ship'],
+                    'to_receive' => ['shipped'],
+                    'completed' => ['delivered'],
+                    default => [$this->status],
+                });
+            }
         
         $this->orders = $query->get()->map(function ($order) {
             return [
                 'id' => $order->id,
                 'date' => $order->created_at->format('F j, Y, H:i'),
-                'status' => $order->status,
+                'status' => match ($order->status) {
+                    'processing' => 'to_ship',
+                    'shipped' => 'to_receive',
+                    'delivered' => 'completed',
+                    default => $order->status,
+                },
                 'items' => $order->items->map(function ($item) {
                     $product = $item->product;
                     $variant = $item->variant;
@@ -73,19 +84,34 @@ class Orders extends Component
         if ($this->status === 'all') {
             return $this->orders;
         }
-
-        return array_filter($this->orders, fn ($order) => $order['status'] === $this->status);
+    
+        return array_filter($this->orders, function ($order) {
+            if ($this->status === 'to_ship') {
+                return in_array($order['status'], ['to_ship', 'processing']);
+            }
+            if ($this->status === 'to_receive') {
+                return in_array($order['status'], ['to_receive', 'shipped']);
+            }
+            if ($this->status === 'completed') {
+                return in_array($order['status'], ['completed', 'delivered']);
+            }
+            return $order['status'] === $this->status;
+        });
     }
-
+    
+    
     public function getStatusMessage($status)
     {
         return match ($status) {
-            'to_ship' => 'Your order is being prepared.',
-            'completed' => 'Order completed successfully.',
+            'new', => 'Your order is being processed.',
+            'processing', 'to_ship' => 'Your order is being prepared for shipping.',
+            'to_receive', 'shipped' => 'Your order is on its way to you.',
+            'completed', 'delivered' => 'Order completed successfully.',
             'canceled' => 'Your order was canceled.',
             default => 'Order status unknown.',
         };
     }
+    
 
     public function render()
     {

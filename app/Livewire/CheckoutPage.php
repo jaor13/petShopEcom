@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Jobs\ProcessOrderStatus;
 
 #[Title("Checkout - Aricuz")]
 class CheckoutPage extends Component
@@ -39,18 +40,23 @@ class CheckoutPage extends Component
         // Retrieve cart items
         $cart_items = CartManagement::getCartItemsFromDB();
         $grand_total = CartManagement::calculateGrandTotal($cart_items);
-        $shipping_amount = 0; 
     
         // Check if the cart is empty
         if (count($cart_items) === 0) {
             session()->flash('error', 'Your cart is empty!');
             return redirect()->route('/');
         }
+
+        $num_items = collect($cart_items)->sum('quantity'); // Sum up all quantities
+        $base_rate = 50; // Fixed base shipping fee
+        $additional_rate = 10; // Extra charge per additional item
+    
+        $shipping_amount = $base_rate + (($num_items - 1) * $additional_rate);
     
         // Create Order
         $order = Order::create([
             'user_id' => auth()->id(),
-            'grand_total' => $grand_total,
+            'grand_total' => $grand_total + $shipping_amount, // Add shipping
             'shipping_amount' => $shipping_amount,
             'payment_method' => $this->payment_method,
             'payment_status' => ($this->payment_method === 'cod') ? 'unpaid' : 'processing',
@@ -59,6 +65,8 @@ class CheckoutPage extends Component
             'notes' => null, 
             'shipping_method' => 'standard',
         ]);
+
+        ProcessOrderStatus::dispatch($order)->delay(now()->addMinutes(1));
     
         // Create Address
         Address::create([
@@ -133,17 +141,25 @@ class CheckoutPage extends Component
     }
     
 
-
+  
 
 
     public function render()
     {
         $cart_items = CartManagement::getCartItemsFromDB();
         $grand_total = CartManagement::calculateGrandTotal($cart_items);
-
+    
+        // Calculate Shipping
+        $num_items = collect($cart_items)->sum('quantity');
+        $base_rate = 50;
+        $additional_rate = 10;
+        $shipping_amount = $base_rate + (($num_items - 1) * $additional_rate);
+    
         return view('livewire.checkout-page', [
             'cart_items' => $cart_items,
             'grand_total' => $grand_total,
+            'shipping_amount' => $shipping_amount, // Pass shipping amount
         ]);
     }
+    
 }
