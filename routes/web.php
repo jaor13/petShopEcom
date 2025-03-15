@@ -19,6 +19,9 @@ use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Controllers\CustomProfileController;
 use App\Models\Order;
 use App\Http\Controllers\PaymentController;
+use App\Livewire\UserProfile;
+
+
 
 
 Route::get('/', LandingPage::class)->name('home');
@@ -41,13 +44,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     })->name('adminDashboard');
 });
 
-// Route::middleware(['auth', 'verified', 'notAdmin'])->group(function () {
-//     Route::get('/', LandingPage::class)->name('home');
-// });
 
-// Route::get('/user/dashboard', function () {
-//     return view('userDashboard');
-// })->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -73,18 +70,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/order/success/{order}', SuccessPage::class)->name('order.success');
 
 
-    Route::get('/profile/my-purchases', function () {
-        return view('userProfile');
-    })->name('my-purchases');
+    // Route::get('/profile/my-purchases', function () {
+    //     return view('userProfile');
+    // })->name('my-purchases');
 
 
-
-
-
-
-
-
-
+Route::get('/profile', UserProfile::class)->name('profile.show');
 
 
 });

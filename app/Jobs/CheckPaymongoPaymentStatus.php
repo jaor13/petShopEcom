@@ -10,6 +10,9 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\Order;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use App\Helpers\CartManagement;
+
+
 
 class CheckPaymongoPaymentStatus implements ShouldQueue
 {
@@ -50,18 +53,19 @@ class CheckPaymongoPaymentStatus implements ShouldQueue
     
     switch ($status) {
         case 'paid':
-            $this->order->update(['payment_status' => 'paid', 'status' => 'processing']);
+            $this->order->update(['payment_status' => 'paid']);
             break;
         case 'failed':
         case 'expired':
             $this->order->update(['payment_status' => 'failed', 'status' => 'cancelled']);
             break;
         case 'unpaid':
-            $this->order->update(['payment_status' => 'unpaid']);
+            $this->order->update(['payment_status' => 'unpaid', 'status' => 'processing']);
             break;
         default:
             Log::info('Unhandled PayMongo status', ['status' => $status, 'order_id' => $this->order->id]);
-    }
+            break;
+    }    
     
 }
 
