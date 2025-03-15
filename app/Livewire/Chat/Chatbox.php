@@ -17,8 +17,24 @@ class Chatbox extends Component
 
     public $messages;
     public $paginateVar = 10;
-    protected $listeners = ['loadConversation', 'updateSendMessage'];
+    protected $listeners = ['loadConversation', 'updateSendMessage', 'pushMessage'];
 
+
+    public function pushMessage($messageId)
+{
+    $newMessage = Message::find($messageId);
+
+    if ($newMessage instanceof Message) {  // Ensure it's a single message instance
+        if (!$this->messages instanceof \Illuminate\Support\Collection) {
+            $this->messages = collect($this->messages);
+        }
+
+        $this->messages->push($newMessage);
+    }
+}
+
+
+    
 
     public function loadConversation(Conversation $conversation, User $receiver)
     {
