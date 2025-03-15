@@ -64,7 +64,7 @@ img {
     background-color: #ffffff;
     /* Use hex code for consistency */
 
-    /*@mixin media($size) {
+    @mixin media($size) {
         @if $size == '<desktop' {
             @media (max-width: 1024px) {
                 @content;
@@ -80,7 +80,7 @@ img {
         top: 0;
         border-radius: 0;
         margin-top: -15px;
-    }*/
+    }
     
 
     @media (min-width: 768px) {

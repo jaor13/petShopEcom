@@ -21,14 +21,21 @@ class ChatList extends Component
 {
     // Fetch the conversation and receiver
     $this->selectedConversation = Conversation::findOrFail($conversation_id);
-    $receiverInstance = User::findOrFail($receiver_id);
+    $receiverInstance = User::where('id', $receiver_id)->firstOrFail();
+
+    
+
+    $this->dispatch('chat.chatbox','loadConversation',$this->selectedConversation,$receiverInstance);
 
     // Emit to specific Livewire components
     $this->dispatch('loadConversation', $this->selectedConversation, $receiverInstance)
-         ->to('chat.chatbox');
+    ->to('chat.chatbox');
+
 
     $this->dispatch('updateSendMessage', $this->selectedConversation, $receiverInstance)
          ->to('chat.send-message');
+    
+        // dd($selectedConversation, $receiverInstance);
 }
 
 

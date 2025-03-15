@@ -1,101 +1,68 @@
 <div>
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
-    <div class="chatbox_header">
 
-        <div class="return">
-            <i class="bi bi-arrow-left"></i>
-        </div>
+    @if ($selectedConversation)
 
-        <div class="img_container">
-            <img src="https://picsum.photos/id/1/200/300" alt="">
+        <div class="chatbox_header">
 
-        </div>
-
-        <div class="name">
-            Laiza
-        </div>
-
-        <div class="info">
-
-            <div class="info_item">
-                <i class="bi bi-image-fill"></i>
+            <div class="return">
+                <i class="bi bi-arrow-left"></i>
             </div>
 
-            <div class="info_item">
-                <i class="bi bi-info-circle-fill"></i>
+            <div class="img_container">
+                <img src="https://picsum.photos/id/{{ $receiverInstance->id }}/200/300" alt="">
+
             </div>
-        </div>
 
-    </div>
+            <div class="name">
+                {{ $receiverInstance->username  }}
+            </div>
 
-    <div class="chatbox_body">
+            <div class="info">
 
-        <div class="msg_body msg_body_receiver">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, numquam. Non enim expedita facilis,
-            officiis consequuntur numquam veniam cum quae accusantium molestiae, porro harum odio eligendi, sequi
-            similique perferendis magni.
-            <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis, consequuntur!
-            <div class="msg_body_footer">
-
-                <div class="date">
-                    1 hour ago
+                <div class="info_item">
+                    <i class="bi bi-image-fill"></i>
                 </div>
 
-                <div class="read">
-                    <i class="bi bi-check"></i>
+                <div class="info_item">
+                    <i class="bi bi-info-circle-fill"></i>
                 </div>
             </div>
+
         </div>
 
-        <div class="msg_body msg_body_me">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, numquam. Non enim expedita facilis,
-            officiis consequuntur numquam veniam cum quae accusantium molestiae, porro harum odio eligendi, sequi
-            similique perferendis magni.
-            <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis, consequuntur!
-            <div class="msg_body_footer">
+        <div class="chatbox_body">
+            @foreach ($messages as $message)
 
-                <div class="date">
-                    1 hour ago
-                </div>
+                <div class="msg_body msg_body_receiver">
 
-                <div class="read">
-                    <i class="bi bi-check"></i>
+                    {{ $message->body }}
+                    <div class="msg_body_footer">
+
+                        <div class="date">
+                            {{ $message->created_at->format('m: i a') }}
+                        </div>
+
+                        <div class="read">
+                            <i class="bi bi-check"></i>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endforeach
+
+
+
+
+
         </div>
 
-        <div class="msg_body msg_body_me">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, numquam. Non enim expedita facilis,
-            officiis consequuntur numquam veniam cum quae accusantium molestiae, porro harum odio eligendi, sequi
-            similique perferendis magni.
-            <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis, consequuntur!
-            <div class="msg_body_footer">
+    @else
 
-                <div class="date">
-                    1 hour ago
-                </div>
-
-                <div class="read">
-                    <i class="bi bi-check"></i>
-                </div>
-            </div>
+        <div class="fs-4 text-center text-primary mt-5">
+            No Conversation Selected
         </div>
-        
-        <div class="msg_body msg_body_me">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, numquam. Non enim expedita facilis,
-            officiis consequuntur numquam veniam cum quae accusantium molestiae, porro harum odio eligendi, sequi
-            similique perferendis magni.
-            <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis, consequuntur!
-            <div class="msg_body_footer">
 
-                <div class="date">
-                    1 hour ago
-                </div>
 
-                <div class="read">
-                    <i class="bi bi-check"></i>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endif
+
 </div>
