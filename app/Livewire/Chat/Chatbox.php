@@ -17,7 +17,8 @@ class Chatbox extends Component
 
     public $messages;
     public $paginateVar = 10;
-    protected $listeners = ['loadConversation'];
+    protected $listeners = ['loadConversation', 'updateSendMessage'];
+
 
     public function loadConversation(Conversation $conversation, User $receiver)
     {

@@ -18,25 +18,30 @@ class ChatList extends Component
     protected $listeners = ['chatUserSelected'];
 
     public function chatUserSelected(int $conversation_id, int $receiver_id)
-{
-    // Fetch the conversation and receiver
-    $this->selectedConversation = Conversation::findOrFail($conversation_id);
-    $receiverInstance = User::where('id', $receiver_id)->firstOrFail();
-
-    
-
-    $this->dispatch('chat.chatbox','loadConversation',$this->selectedConversation,$receiverInstance);
-
-    // Emit to specific Livewire components
-    $this->dispatch('loadConversation', $this->selectedConversation, $receiverInstance)
-    ->to('chat.chatbox');
+    {
+        // Fetch the conversation and receiver
+        $this->selectedConversation = Conversation::findOrFail($conversation_id);
+        $receiverInstance = User::where('id', $receiver_id)->firstOrFail();
 
 
-    $this->dispatch('updateSendMessage', $this->selectedConversation, $receiverInstance)
-         ->to('chat.send-message');
-    
+
+        $this->dispatch('chat.chatbox', 'loadConversation', $this->selectedConversation, $receiverInstance);
+
+        // Emit to specific Livewire components
+        $this->dispatch('loadConversation', $this->selectedConversation, $receiverInstance)
+            ->to('chat.chatbox');
+
+
+        $this->dispatch('updateSendMessage', $this->selectedConversation, $receiverInstance)
+            ->to('chat.send-message');
+
+
+            $this->dispatch('updateSendMessage', $this->selectedConversation, $this->receiverInstance)
+            ->to('chat.send-message');
+       
+        
         // dd($selectedConversation, $receiverInstance);
-}
+    }
 
 
     public function getChatUserInstance(Conversation $conversation, $request)
@@ -54,28 +59,28 @@ class ChatList extends Component
 
     }
 
-    
 
-   public function mount()
-{
-    $this->auth_id = auth()->id();
 
-    $this->conversations = Conversation::with([
+    public function mount()
+    {
+        $this->auth_id = auth()->id();
+
+        $this->conversations = Conversation::with([
             'latestMessage' => function ($query) {
                 $query->latest(); // Get the most recent message
-            }, 
+            },
             'messages'
         ])
-        ->where(function ($query) {
-            $query->where('sender_id', $this->auth_id)
-                  ->orWhere('receiver_id', $this->auth_id);
-        })
-        ->orderByRaw('(SELECT MAX(created_at) FROM messages WHERE messages.conversation_id = conversations.id) DESC')
-        ->get();
-}
+            ->where(function ($query) {
+                $query->where('sender_id', $this->auth_id)
+                    ->orWhere('receiver_id', $this->auth_id);
+            })
+            ->orderByRaw('(SELECT MAX(created_at) FROM messages WHERE messages.conversation_id = conversations.id) DESC')
+            ->get();
+    }
 
 
- 
+
     public function render()
     {
         return view('livewire.chat.chat-list');

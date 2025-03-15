@@ -34,13 +34,14 @@
         <div class="chatbox_body">
             @foreach ($messages as $message)
 
-                <div class="msg_body msg_body_receiver">
+                <div class="msg_body {{ auth()->id()== $message->sender_id? 'msg_body_me':'msg_body_receiver' }}">
 
                     {{ $message->body }}
                     <div class="msg_body_footer">
 
                         <div class="date">
-                            {{ $message->created_at->format('m: i a') }}
+                        {{ $message->created_at->timezone('Asia/Manila')->format('h:i A') }}
+
                         </div>
 
                         <div class="read">
