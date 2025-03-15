@@ -10,6 +10,7 @@ use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Jobs\ProcessOrderStatus;
+use Illuminate\Support\Facades\Log;
 
 #[Title("Checkout - Aricuz")]
 class CheckoutPage extends Component
@@ -101,45 +102,71 @@ class CheckoutPage extends Component
 
         }
     
-        // Handle Online Payment (PayMongo)
-        $secretKey = config('services.paymongo.secret_key');
-        $amount = $grand_total * 100; // Convert to centavos
+       // Handle Online Payment (PayMongo)
+$secretKey = config('services.paymongo.secret_key');
+$amount = ($grand_total + $shipping_amount) * 100; // Convert to centavos
+
+$data = [
+    "data" => [
+        "attributes" => [
+            "amount" => $amount,
+            "currency" => "PHP",
+            "description" => "Payment for Order #{$order->id}",
+            "remarks" => "Order Payment",
+            "metadata" => [
+                "reference_number" => $order->id, 
+            ],
+        ]
+    ]
+];
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://api.paymongo.com/v1/links");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Content-Type: application/json",
+    "Authorization: Basic " . base64_encode($secretKey . ":")
+]);
+
+$result = curl_exec($ch);
+$result = curl_exec($ch);
+
+if ($result === false) {
+    $curlError = curl_error($ch);
+    curl_close($ch);
     
-        $data = [
-            "data" => [
-                "attributes" => [
-                    "amount" => $amount,
-                    "currency" => "PHP",
-                    "description" => "Payment for Order #{$order->id}",
-                    "remarks" => "Order Payment",
-                    "checkout_url" => route('order.success', ['order' => $order->id]),
-                ]
-            ]
-        ];
-    
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api.paymongo.com/v1/links");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Content-Type: application/json",
-            "Authorization: Basic " . base64_encode($secretKey . ":")
+    Log::error('cURL error', ['error' => $curlError]);
+    session()->flash('error', 'An error occurred while processing your payment. Please try again.');
+    return redirect()->route('checkout');
+}
+
+curl_close($ch);
+$response = json_decode($result, true);
+
+curl_close($ch);
+
+$response = json_decode($result, true);
+
+// Check if Payment Link was created successfully
+if (isset($response['data']['attributes']['checkout_url'])) {
+    // Store the PayMongo reference number
+    if (isset($response['data']['attributes']['reference_number'])) {
+        $order->update([
+            'paymongo_reference' => $response['data']['attributes']['reference_number'],
         ]);
-    
-        $result = curl_exec($ch);
-        curl_close($ch);
-    
-        $response = json_decode($result, true);
-    
-        // Check if Payment Link was created successfully
-        if (isset($response['data']['attributes']['checkout_url'])) {
-            return redirect()->away($response['data']['attributes']['checkout_url']);
-        } else {
-            session()->flash('error', 'Failed to create payment link. Please try again.');
-            return redirect()->route('checkout');
-        }
     }
-    
+
+    return redirect()->away($response['data']['attributes']['checkout_url']);
+} else {
+    Log::error('PayMongo failed to create payment link', [
+        'response' => $response,
+        'order_id' => $order->id
+    ]);
+    session()->flash('error', 'Failed to create payment link. Please try again.');
+    return redirect()->route('checkout');
+}
+    }
 
   
 
@@ -161,5 +188,6 @@ class CheckoutPage extends Component
             'shipping_amount' => $shipping_amount, // Pass shipping amount
         ]);
     }
+    
     
 }

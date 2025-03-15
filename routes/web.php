@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Controllers\CustomProfileController;
 use App\Models\Order;
+use App\Http\Controllers\PaymentController;
 
 
 Route::get('/', LandingPage::class)->name('home');
@@ -77,54 +78,18 @@ Route::middleware('auth')->group(function () {
     })->name('my-purchases');
 
 
+
+
+
+
+
+
+
+
+
 });
 
 
-Route::post('/paymongo/webhook', function (Request $request) {
-    // Get the JSON payload
-    $payload = $request->getContent();
-    $data = json_decode($payload, true);
 
-    // Log the payload for debugging (Optional)
-    Log::info('PayMongo Webhook Received:', $data);
-
-    if (!isset($data['data']['attributes'])) {
-        return response()->json(['error' => 'Invalid payload'], 400);
-    }
-
-    $attributes = $data['data']['attributes'];
-    $eventType = $data['data']['type']; // e.g., "payment.paid"
-
-    // Check if it's a successful payment event
-    if ($eventType === 'payment.paid') {
-        $payment_id = $data['data']['id'];
-        $payment_status = $attributes['status']; // should be "paid"
-        $payment_amount = $attributes['amount'] / 100; // Convert from centavos to PHP
-
-        // Retrieve order using metadata (if you sent order_id in description)
-        preg_match('/Order #(\d+)/', $attributes['description'], $matches);
-        if (!isset($matches[1])) {
-            return response()->json(['error' => 'Order ID not found'], 400);
-        }
-
-        $orderId = $matches[1];
-        $order = Order::find($orderId);
-
-        if (!$order) {
-            return response()->json(['error' => 'Order not found'], 404);
-        }
-
-        // Update order status in the database
-        $order->update([
-            'payment_status' => 'paid',
-            'status' => 'processing',
-            'transaction_id' => $payment_id,
-        ]);
-
-        Log::info("Order #$orderId marked as paid.");
-    }
-
-    return response()->json(['message' => 'Webhook received'], 200);
-});
 
 require __DIR__ . '/auth.php';

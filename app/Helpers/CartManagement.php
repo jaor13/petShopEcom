@@ -268,11 +268,16 @@ class CartManagement
             return 0.0;
         }
     
-        $base_shipping = 50; // Default base cost
-        $per_item_cost = 10; // Additional per-item cost
+        $base_rate = 50; // Fixed base shipping fee
+        $additional_rate = 10; // Additional charge per extra item
     
-        return (float) ($base_shipping + (count($cart_items) * $per_item_cost));
+        // Sum the total quantity of all products in the cart
+        $num_items = collect($cart_items)->sum('quantity');
+    
+        // Ensure at least the base rate applies, then add extra charges for additional units
+        return (float) ($base_rate + (($num_items - 1) * $additional_rate));
     }
+    
     
 
     // Calculate grand total

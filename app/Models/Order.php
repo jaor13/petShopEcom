@@ -19,6 +19,7 @@ class Order extends Model
         'shipping_amount',
         'shipping_method',
         'notes',
+        'paymongo_reference',
     ];
 
     public function users()
