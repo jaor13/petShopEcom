@@ -41,22 +41,15 @@ class LikedProduct extends Component
 
     public function toggleProductSelection($productId)
     {
-        $likedProduct = \App\Models\LikedProduct::where('user_id', auth()->id())
-            ->where('product_id', $productId)
-            ->first();
-
-        if ($likedProduct) {
-            $likedProductId = $likedProduct->id;
-
-            if (in_array($likedProductId, array_column($this->selectedProducts, 'id'))) {
-                $this->selectedProducts = array_filter($this->selectedProducts, function ($item) use ($likedProductId) {
-                    return $item['id'] !== $likedProductId;
-                });
-            } else {
-                $this->selectedProducts[] = ['id' => $likedProductId];
-            }
-            $this->dispatch('updatedSelectedProducts');
+        if (in_array($productId, array_column($this->selectedProducts, 'product_id'))) {
+            $this->selectedProducts = array_filter($this->selectedProducts, function ($item) use ($productId) {
+                return $item['product_id'] !== $productId;
+            });
+        } else {
+            $this->selectedProducts[] = ['product_id' => $productId];
         }
+
+        $this->dispatch('updatedSelectedProducts');
     }
 
     public function toggleSelectAll()
@@ -65,8 +58,8 @@ class LikedProduct extends Component
 
         if ($this->selectAll) {
             $this->selectedProducts = \App\Models\LikedProduct::where('user_id', Auth::id())
-                ->pluck('id')
-                ->map(fn($id) => ['id' => $id])
+                ->pluck('product_id')
+                ->map(fn($product_id) => ['product_id' => $product_id])
                 ->toArray();
         } else {
             $this->selectedProducts = [];
@@ -93,7 +86,7 @@ class LikedProduct extends Component
             return;
         }
 
-        $likedProductIds = array_map(fn($product) => $product['id'], $this->selectedProducts);
+        $likedProductIds = array_map(fn($product) => $product['product_id'], $this->selectedProducts);
 
         LikedProductManagement::removeFromLikedProductsTable($likedProductIds);
 
@@ -114,7 +107,7 @@ class LikedProduct extends Component
     {
         if (empty($this->likedProducts)) {
             return view('livewire.liked-product', [
-                'products' => collect([]) 
+                'products' => collect([])
             ]);
         }
 
@@ -125,7 +118,7 @@ class LikedProduct extends Component
                 $likedProduct = \App\Models\LikedProduct::where('user_id', auth()->id())
                     ->where('product_id', $product->id)
                     ->first();
-                $product->liked_product_id = $likedProduct ? $likedProduct->id : null; 
+                $product->liked_product_id = $likedProduct ? $likedProduct->id : null;
                 return $product;
             });
 

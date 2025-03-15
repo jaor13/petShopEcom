@@ -20,7 +20,6 @@ class LikedProductManagement
             ->first();
 
         if ($existing) {
-            // if existing, delete
             return self::removeFromLikedProductsTable($product_id);
         }
 
@@ -32,23 +31,24 @@ class LikedProductManagement
         return ['success' => 'Product added to liked items!'];
     }
 
-    public static function removeFromLikedProductsTable(array $likedProductIds)
+    public static function removeFromLikedProductsTable($likedProductIds)
     {
-        // dd($likedProductIds);
+        if (!is_array($likedProductIds)) {
+            $likedProductIds = [$likedProductIds];
+        }
+
         LikedProduct::where('user_id', Auth::id())
-            ->whereIn('id', $likedProductIds) // Delete by liked_products.id, not product_id
+            ->whereIn('product_id', $likedProductIds)
             ->delete();
 
         return ['success' => 'Selected products removed from liked items!'];
     }
-
 
     public static function showLiked()
     {
         if (!Auth::check()) {
             return [];
         }
-
         return LikedProduct::where('user_id', Auth::id())->pluck('product_id')->toArray();
     }
 }
