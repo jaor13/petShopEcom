@@ -3,7 +3,7 @@
 namespace App\Livewire\Chat;
 
 use App\Models\Conversation;
-use App\Models\Message; // Ensure Message model is imported
+use App\Models\Message;
 use App\Models\User;
 use Livewire\Component;
 
@@ -13,8 +13,7 @@ class SendMessage extends Component
     public $selectedConversation;
     public $body;
 
-    protected $listeners = ['loadConversation', 'updateSendMessage'];
-
+    protected $listeners = ['loadConversation', 'updateSendMessage', 'pushMessage'];
 
     public function updateSendMessage(Conversation $conversation, User $receiver)
     {
@@ -24,11 +23,11 @@ class SendMessage extends Component
 
     public function sendMessage()
     {
-        if ($this->body == null) {
+
+        if (empty($this->body)) {
             return;
         }
 
-        // Fixed incorrect variable reference ($this->$selectedConversation -> should be $this->selectedConversation)
         $createdMessage = Message::create([
             'conversation_id' => $this->selectedConversation->id,
             'sender_id' => auth()->id(),
@@ -36,22 +35,17 @@ class SendMessage extends Component
             'body' => $this->body,
         ]);
 
-        $this->selectedConversation->last_time_message= $createdMessage->created_at;
+        $this->selectedConversation->last_time_message = $createdMessage->created_at;
         $this->selectedConversation->save();
-        // Clear message input field after sending
-     
-        
-        $this->dispatch('pushMessage', messageId: $createdMessage->id)
-        ->to('chat.chatbox');   
-        
-       // Refresh conversation list
-$this->dispatch('refresh')->to('chat.chat-list'); 
-$this->reset('body');
 
-// Dispatch event to self
-$this->dispatch('dispatchMessageSent');
+        // Dispatch message event
+        $this->dispatch('pushMessage', messageId: $createdMessage->id)->to('chat.chatbox');
 
+        // Refresh conversation list
+        $this->dispatch('refresh')->to('chat.chat-list');
 
+        // Reset the input field
+        $this->reset('body');
     }
 
     public function render()
