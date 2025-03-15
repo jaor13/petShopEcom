@@ -46,6 +46,8 @@ class SendMessage extends Component
 
         // Reset the input field
         $this->reset('body');
+
+        
     }
 
     public function render()
