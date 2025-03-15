@@ -53,19 +53,18 @@ class CheckPaymongoPaymentStatus implements ShouldQueue
     
     switch ($status) {
         case 'paid':
-            $this->order->update(['payment_status' => 'paid']);
+            Log::info("Order marked as PAID", ['order_id' => $this->order->id]);
+            $this->order->fresh()->update(['payment_status' => 'paid']);
             break;
         case 'failed':
         case 'expired':
-            $this->order->update(['payment_status' => 'failed', 'status' => 'cancelled']);
-            break;
-        case 'unpaid':
-            $this->order->update(['payment_status' => 'unpaid', 'status' => 'processing']);
+            Log::info("Order marked as FAILED", ['order_id' => $this->order->id]);
+            $this->order->fresh()->update(['payment_status' => 'failed', 'status' => 'cancelled']);
             break;
         default:
-            Log::info('Unhandled PayMongo status', ['status' => $status, 'order_id' => $this->order->id]);
-            break;
-    }    
+            Log::info("Unhandled PayMongo status", ['status' => $status, 'order_id' => $this->order->id]);
+    }
+    
     
 }
 

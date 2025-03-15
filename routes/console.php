@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Models\Order;
 use App\Jobs\CheckPaymongoPaymentStatus;
+use App\Jobs\CheckUnpaidPaymongoOrders;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
@@ -16,3 +17,7 @@ Schedule::call(function () {
         CheckPaymongoPaymentStatus::dispatch($order);
     }
 })->everyMinute();
+
+Schedule::job(new CheckUnpaidPaymongoOrders())->everyMinute();
+
+Log::info('Scheduled tasks executed.');

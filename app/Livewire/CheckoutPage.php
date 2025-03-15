@@ -155,9 +155,7 @@ class CheckoutPage extends Component
                     'paymongo_reference' => $response['data']['attributes']['reference_number'],
                 ]);
             }
-            $this->dispatchBrowserEvent('open-paymongo', ['url' => $response['data']['attributes']['checkout_url']]);
-            return;
-
+            return redirect()->away($response['data']['attributes']['checkout_url']);
         } else {
             Log::error('PayMongo failed to create payment link', [
                 'response' => $response,
