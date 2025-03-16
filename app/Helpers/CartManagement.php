@@ -12,12 +12,9 @@ class CartManagement
     // Add item to cart
     static public function addItemToCart($product_id, $variant_name = null)
     {
-        // // dd($product_id,  $variant_name);
         $cart_items = self::getCartItemsFromDB();
-        // dd($cart_items);
         $existing_item = null;
 
-        //check if nasa cart na su item
         foreach ($cart_items as $key => $item) {
             if ($item['product_id'] == $product_id && $item['variant_name'] == $variant_name) {
                 $existing_item = $key;
@@ -25,16 +22,26 @@ class CartManagement
             }
         }
 
-        // dd($existing_item);
         if ($existing_item !== null) {
             $cart_items[$existing_item]['quantity'] = 1;
-            $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount']; // Update total price
+            $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount'];
         } else {
-            $product = Product::where('id', $product_id)->first(['id', 'product_name', 'slug', 'price', 'images']);
+            $product = Product::where('id', $product_id)
+                ->with('variants')
+                ->first(['id', 'product_name', 'slug', 'price', 'images']);
+            $variant_id = null;
+
+            if ($product && $variant_name) {
+                $variant = $product->variants->firstWhere('name', $variant_name);
+                if ($variant) {
+                    $variant_id = $variant->id;
+                }
+            }
 
             if ($product) {
                 $cart_items[] = [
                     'product_id' => $product_id,
+                    'variant_id' => $variant_id, // Ensure variant_id is set here
                     'name' => $product->product_name,
                     'slug' => $product->slug,
                     'image' => $product->images[0],
@@ -45,7 +52,6 @@ class CartManagement
                 ];
             }
         }
-        // dd($cart_items);
 
         self::addCartItemsToDB($cart_items);
         return count($cart_items);
@@ -56,7 +62,6 @@ class CartManagement
     static public function addItemToCartWithQty($product_id, $qty = 1, $variant_name = null, $variant_price = null)
     {
         $cart_items = self::getCartItemsFromDB();
-
         $existing_item = null;
 
         foreach ($cart_items as $key => $item) {
@@ -70,22 +75,32 @@ class CartManagement
             $cart_items[$existing_item]['quantity'] = $qty;
             $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount'];
         } else {
-            $product = Product::where('id', $product_id)->with('variants')->first(['id', 'product_name', 'slug', 'price', 'images']);
+            $product = Product::where('id', $product_id)
+                ->with('variants')
+                ->first(['id', 'product_name', 'slug', 'price', 'images']);
+            $variant_id = null;
+
+            if ($product && $variant_name) {
+                $variant = $product->variants->firstWhere('name', $variant_name);
+                if ($variant) {
+                    $variant_id = $variant->id;
+                }
+            }
 
             if ($product) {
                 $unit_price = $variant_price ?? $product->price;
-
-                // If base product's image is empty
                 $image = !empty($product->images) ? $product->images[0] : 'default-image.jpg';
+
                 if ($variant_name) {
                     $variant = $product->variants->where('name', $variant_name)->first();
                     if ($variant) {
-                        $image = $variant->image ?? $image; // Use variant image if available
+                        $image = $variant->image ?? $image;
                     }
                 }
 
                 $cart_items[] = [
                     'product_id' => $product_id,
+                    'variant_id' => $variant_id, // Ensure variant_id is set here
                     'name' => $product->product_name,
                     'slug' => $product->slug,
                     'image' => $image,
@@ -175,6 +190,7 @@ class CartManagement
                     'user_id' => $user_id,
                     'session_id' => $user_id ? null : $session_id,
                     'product_id' => $item['product_id'],
+                    'variant_id' => $item['variant_id'],
                     'name' => $item['name'],
                     'slug' => $item['slug'],
                     'variant_name' => $item['variant_name'],
@@ -208,13 +224,13 @@ class CartManagement
     {
         if (Auth::check()) {
             return Cart::where('user_id', Auth::id())
-                ->select('id as cart_id', 'product_id', 'name', 'slug', 'variant_name', 'image', 'quantity', 'unit_amount', 'total_amount')
+                ->select('id as cart_id', 'product_id', 'name', 'slug', 'variant_name', 'variant_id','image', 'quantity', 'unit_amount', 'total_amount')
                 ->get()
                 ->toArray();
         } else {
             $session_id = session()->getId();
             return Cart::where('session_id', $session_id)
-                ->select('id as cart_id', 'product_id', 'name', 'slug', 'variant_name', 'image', 'quantity', 'unit_amount', 'total_amount')
+                ->select('id as cart_id', 'product_id', 'name', 'slug', 'variant_name', 'variant_id','image', 'quantity', 'unit_amount', 'total_amount')
                 ->get()
                 ->toArray();
         }

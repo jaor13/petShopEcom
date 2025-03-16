@@ -1,206 +1,227 @@
-<div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
-    <h1 class="text-2xl font-bold text-gray-800 mb-4">
+<div class="container py-5">
+    <h1 class="h2 font-weight-bold text-dark mb-4">
         Checkout
     </h1>
     <form wire:submit.prevent="placeOrder">
-        <div class="grid grid-cols-12 gap-4">
-            <div class="md:col-span-12 lg:col-span-8 col-span-12">
-                <!-- Card -->
-                <div class="bg-white rounded-xl shadow p-4 sm:p-7">
-                    <!-- Shipping Address -->
-                    <div class="mb-6">
-                        <h2 class="text-xl font-bold underline text-gray-700 mb-2">
-                            Shipping Address
-                        </h2>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-gray-700 mb-1" for="first_name">
-                                    First Name
-                                </label>
-                                <input wire:model="first_name"
-                                    class="w-full rounded-lg border py-2 px-3 @error('first_name') !border-red-500 focus:ring-red-300 @enderror"
-                                    id="first_name" type="text">
-                                </input>
-                                @error('first_name')
-                                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 mb-1" for="last_name">
-                                    Last Name
-                                </label>
-                                <input wire:model="last_name"
-                                    class="w-full rounded-lg border py-2 px-3 @error('last_name') !border-red-500 focus:ring-red-300 @enderror"
-                                    id="last_name" type="text">
-                                </input>
-                                @error('last_name')
-                                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <label class="block mb-1" for="phone">
-                                Phone
-                            </label>
-                            <input wire:model="phone"
-                                class="w-full rounded-lg border py-2 px-3 @error('phone') !border-red-500 focus:ring-red-300 @enderror"
-                                id="phone" type="text">
-                            </input>
-                            @error('phone')
-                                <div class="text-red-500 text-sm">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mt-4">
-                            <label class="block mb-1" for="address">
-                                Address
-                            </label>
-                            <input wire:model="street_address"
-                                class="w-full rounded-lg border py-2 px-3 @error('street_address') !border-red-500 focus:ring-red-300 @enderror"
-                                id="address" type="text">
-                            </input>
-                            @error('street_address')
-                                <div class="text-red-500 text-sm">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mt-4">
-                            <label class="block mb-1" for="city">
-                                City
-                            </label>
-                            <input wire:model="city"
-                                class="w-full rounded-lg border py-2 px-3 @error('city') !border-red-500 focus:ring-red-300 @enderror"
-                                id="city" type="text">
-                            </input>
-                            @error('city')
-                                <div class="text-red-500 text-sm">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 mt-4">
-                            <div>
-                                <label class="block text-gray-700 mb-1" for="state">
-                                    State
-                                </label>
-                                <input wire:model="state"
-                                    class="w-full rounded-lg border py-2 px-3 @error('state') !border-red-500 focus:ring-red-300 @enderror"
-                                    id="state" type="text">
-                                </input>
-                                @error('state')
-                                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 mb-1" for="zip">
-                                    ZIP Code
-                                </label>
-                                <input wire:model="zip_code"
-                                    class="w-full rounded-lg border py-2 px-3 @error('zip_code') !border-red-500 focus:ring-red-300 @enderror"
-                                    id="zip" type="text">
-                                </input>
-                                @error('zip_code')
-                                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-lg font-semibold mb-4">
-                        Select Payment Method
-                    </div>
-                    
-<ul class="grid w-full gap-6 md:grid-cols-2">
-    <li>
-        <input wire:model="payment_method" class="hidden peer" id="cod" required="" type="radio" value="cod" />
-        <label class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer hover:text-gray-600 hover:bg-gray-100" for="cod">
-            <div class="block">
-                <div class="w-full text-lg font-semibold">Cash on Delivery</div>
-            </div>
-        </label>
-    </li>
-    <li>
-        <input wire:model="payment_method" class="hidden peer" id="paymongo" type="radio" value="paymongo" />
-        <label class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer hover:text-gray-600 hover:bg-gray-100" for="paymongo">
-            <div class="block">
-                <div class="w-full text-lg font-semibold">Pay with PayMongo</div>
-            </div>
-        </label>
-    </li>
-</ul>
-@error('payment_method')
-    <div class="text-red-500 text-sm">{{ $message }}</div>
-@enderror
+        <div class="row">
 
-                </div>
-                <!-- End Card -->
-            </div>
-            <div class="md:col-span-12 lg:col-span-4 col-span-12">
-                <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-                    <div class="text-xl font-bold underline text-gray-700 mb-2">
-                        ORDER SUMMARY
-                    </div>
-                    <div class="flex justify-between mb-2 font-bold">
-                        <span>
-                            Subtotal
-                        </span>
-                        <span>
-                            {{ Number::currency($grand_total - $shipping_amount, 'PHP') }}
-                        </span>
-                    </div>
-                    <div class="flex justify-between mb-2 font-bold">
-                        <span>
-                            Shipping Cost
-                        </span>
-                        <span>
-                            {{ Number::currency($shipping_amount, 'PHP') }}
-                        </span>
-                    </div>
-                    <hr class="bg-slate-400 my-4 h-1 rounded">
-                    <div class="flex justify-between mb-2 font-bold">
-                        <span>
-                            Grand Total
-                        </span>
-                        <span>
-                            {{ Number::currency($grand_total , 'PHP') }}
-                        </span>
-                    </div>
-                    </hr>
-                </div>
-                <button type="submit"
-                    class="bg-green-500 mt-4 w-full p-3 rounded-lg text-lg text-white hover:bg-green-600">
-                    Place Order
-                </button>
-                <div class="bg-white mt-4 rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-                    <div class="text-xl font-bold underline text-gray-700 mb-2">
-                        BASKET SUMMARY
-                    </div>
-                    <ul class="divide-y divide-gray-200 dark:divide-gray-700" role="list">
-                        @foreach ($cart_items as $ci)
-                            <li class="py-3 sm:py-4" wire:key=" {{ $ci['product_id'] }}">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <img alt="{{ $ci['name'] }}" class="w-12 h-12 rounded-full"
-                                            src="{{ url('storage', $ci['image']) }}">
-                                    </div>
-                                    <div class="flex-1 min-w-0 ms-4">
-                                        <p class="text-sm font-medium text-gray-900 truncate">
-                                            {{ $ci['name'] }}
-                                        </p>
-                                        @if (!empty($ci['variant_name']))
-                                            <p class="text-xs text-gray-500 truncate dark:text-gray-400">
-                                                Variant: {{ $ci['variant_name'] }}
+            <div class="col-lg-8 mb-4">
+                <div class="card custom-card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="border p-4 mb-4 rounded-3 shadow-sm">
+                            <!-- Check if the user has an address -->
+                            @if (!$use_existing_address)
+                                <!-- Add Address Button -->
+                                <button type="button" class="btn " wire:click="openAddressModal">
+                                    <i class="fas fa-plus-circle mr-2"></i> 
+                                    Add Address
+                                </button>
+                            @else
+
+                                <!-- Non-Editing View -->
+                                @if (!$is_editing)
+                                    <div class="d-flex align-items-center">
+                                        <!-- Location Pin Icon -->
+                                        <div class="text-primary flex-shrink-0">
+                                            <i class="fa-solid fa-location-dot fa-lg"></i>
+                                        </div>
+
+                                        <!-- Address Details -->
+                                        <div class="ml-3 flex-grow-1">
+                                            <h5 class="font-semibold text-dark mb-1">
+                                                {{ $first_name }} {{ $last_name }}
+                                            </h5>
+                                            <p class="text-muted small mb-0">
+                                                (+63) {{ $phone }}
                                             </p>
-                                        @endif
-                                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                            Quantity: {{ $ci['quantity'] }}
-                                        </p>
+                                            <p class="text-muted small mb-0">
+                                                {{ $street_address }}, {{ $province }}
+                                            </p>
+                                        </div>
+
+                                        <!-- Edit Icon -->
+                                        <div class="ml-auto">
+                                            <button type="button" class="btn btn-link text-primary p-0" wire:click="openAddressModal(true)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            Edit
+                                        </div>
                                     </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                        {{ Number::currency($ci['total_amount'], 'PHP') }}
+                                @endif
+                            @endif
+                        </div>
+
+                        <div class="mt-4">
+                            <h5 class="font-weight-bold text-dark mb-3">
+                                Product Ordered
+                            </h5>
+                            <ul class="list-unstyled">
+                                @foreach ($cart_items as $ci)
+                                    <li class="py-3 border-bottom" wire:key="{{ $ci['product_id'] }}">
+                                        <div class="d-flex align-items-center">
+                                            <img alt="{{ $ci['name'] }}" class="img-fluid" style="width: 15%; height: 15%;" src="{{ url('storage', $ci['image']) }}">
+                                            <div class="ml-4 flex-grow-1">
+                                                <p class="h6 font-weight-medium text-dark mb-1">
+                                                    {{ $ci['name'] }}
+                                                </p>
+                                                @if (!empty($ci['variant_name']))
+                                                    <p class="text-muted small mb-1">
+                                                        Variant: {{ $ci['variant_name'] }}
+                                                    </p>
+                                                @endif
+                                                <div class="font-weight-semibold text-danger">
+                                                    {{ Number::currency($ci['total_amount'], 'PHP') }}
+                                                </div>
+                                            </div>
+                                            <p class="h6 text-muted mb-0">
+                                                x{{ $ci['quantity'] }}
+                                            </p>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="font-weight-bold text-dark mb-3">
+                            Payment Methods
+                        </h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <label class="d-flex align-items-center p-2 bg-white border rounded cursor-pointer">
+                                    <div class="ml-2 d-flex align-items-center">
+                                        <img src="{{ asset('assets/images/cod.svg') }}" class="mr-2" style="height: 1.25rem;">
+                                        <span class="h6 font-weight-medium text-dark">Cash on Delivery</span>
+                                        <div class="form-check ml-auto">
+                                            <input class="form-check-input" type="radio" name="payment_method" value="cod" wire:model="payment_method">
+                                        </div>
                                     </div>
-                                </div>
+                                </label>
                             </li>
-                        @endforeach
-                    </ul>
+                            <li>
+                                <label class="d-flex align-items-start p-2 bg-white border rounded cursor-pointer">
+                                    <div class="ml-2 flex-grow-1">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <img src="{{ asset('assets/images/wallet.svg') }}" class="mr-2" style="height: 1.25rem;">
+                                            <span class="h6 font-weight-medium text-dark">E-Wallet Payment</span>
+                                            <div class="form-check ml-auto">
+                                                <input class="form-check-input" type="radio" name="payment_method" value="paymongo" wire:model="payment_method">
+                                            </div>
+                                        </div>
+                                        <ul class="list-unstyled ml-4 mt-3">
+                                            <li class="d-flex align-items-center mb-2">
+                                                <img src="{{ asset('assets/images/Gcash.svg') }}" class="mr-2" style="height: 1.25rem;">
+                                                <span class="small text-dark">GCash</span>
+                                                <span class="small text-muted ml-3">Payment should be completed within 30 minutes.</span>
+                                            </li>
+                                            <li class="d-flex align-items-center">
+                                                <img src="{{ asset('assets/images/maya.svg') }}" class="mr-2" style="height: 1.25rem;">
+                                                <span class="small text-dark">PayMaya</span>
+                                                <span class="small text-muted ml-3">Payment should be completed within 30 minutes.</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </label>
+                            </li>
+                        </ul>
+                        @error('payment_method')
+                            <div class="text-danger small">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="font-weight-bold text-center text-dark mb-3">
+                            ORDER SUMMARY
+                        </h5>
+                        <div class="d-flex justify-content-between font-weight-bold mb-3">
+                            <span>Subtotal</span>
+                            <span>{{ Number::currency($grand_total - $shipping_amount, 'PHP') }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between font-weight-bold mb-3">
+                            <span>Shipping Cost</span>
+                            <span>{{ Number::currency($shipping_amount, 'PHP') }}</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between font-weight-bold mb-3">
+                            <span>Grand Total</span>
+                            <span>{{ Number::currency($grand_total, 'PHP') }}</span>
+                        </div>
+                        <button type="submit" class="btn btn-danger btn-block">
+                            Place Order
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
 
+    <!-- Address Modal -->
+    @if ($showAddressModal)
+        <div class="fixed inset-0 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-xl  z-50">
+                <div class="modal-header border-bottom pb-2">
+                    <h4 class="modal-title">{{ $is_editing ? 'Edit Address' : 'Add your deliver address.' }}</h4>
+                    <button type="button" class="btn-close" wire:click="closeAddressModal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form wire:submit.prevent="saveAddress">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="first_name" class="form-label">First Name</label>
+                                <input wire:model="first_name" id="first_name" class="form-control" type="text">
+                                @error('first_name') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label for="last_name" class="form-label">Last Name</label>
+                                <input wire:model="last_name" id="last_name" class="form-control" type="text">
+                                @error('last_name') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <label for="street_address" class="form-label">Street Address</label>
+                            <input wire:model="street_address" id="street_address" class="form-control" type="text">
+                            @error('street_address') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mt-3">
+                            <label for="city" class="form-label">City</label>
+                            <input wire:model="city" id="city" class="form-control" type="text">
+                            @error('city') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="province" class="form-label">Province</label>
+                                <input wire:model="province" id="province" class="form-control" type="text">
+                                @error('province') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label for="zip_code" class="form-label">ZIP Code</label>
+                                <input wire:model="zip_code" id="zip_code" class="form-control" type="text">
+                                @error('zip_code') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input wire:model="phone" id="phone" class="form-control" type="text">
+                            @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mt-4 flex justify-end">
+                            <button type="submit" class="btn  btn-outline-success ">{{ $is_editing ? 'Save Changes' : 'Add Address' }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="fixed inset-0 bg-black opacity-50 z-40"></div>
+    @endif
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
 </div>

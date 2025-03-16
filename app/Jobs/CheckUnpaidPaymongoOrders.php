@@ -33,7 +33,7 @@ class CheckUnpaidPaymongoOrders implements ShouldQueue
 
         // Retrieve unpaid PayMongo orders older than 20 minutes
         $orders = Order::where('payment_method', 'paymongo')
-            ->where('payment_status', 'unpaid')
+            ->where('payment_status', 'unpaid || processing') //unpaid lang uni initially
             ->where('created_at', '<=', $cutoffTime)
             ->get();
 

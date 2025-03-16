@@ -56,7 +56,8 @@ class Orders extends Component
                     }
         
                     return [
-                        'name' => $variant ? $variant->name : $product->product_name,
+                        'name' => $product->product_name,
+                        'variant_name' => $variant ? $variant->name : 'N/A',
                         'qty' => $item->quantity,
                         'price' => $item->unit_amount,
                         'total' => $item->total_amount,

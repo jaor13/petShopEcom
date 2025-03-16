@@ -152,6 +152,10 @@ class CartPage extends Component
 
     public function calculateShipping()
     {
+        if (empty($this->selected_items)) {
+            return 0; // No shipping fee if no items are selected
+        }
+        
         $base_rate = 50;
         $additional_rate = 20;
         $total_quantity = 0;

@@ -439,3 +439,17 @@ margin-left: 0px;
   color: white; 
   font-weight: bold;
 }
+
+
+
+.custom-card{
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: none;
+}
+
+.custom-card:hover {
+  transform: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

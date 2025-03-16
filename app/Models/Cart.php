@@ -13,6 +13,7 @@ class Cart extends Model
         'user_id',
         'session_id',
         'product_id',
+        'variant_id',
         'name',
         'slug',
         'variant_name',

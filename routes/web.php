@@ -53,7 +53,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //Custom Profile Controller
-    Route::get('/profile', [CustomProfileController::class, 'show'])->name('profile.show');
     // Route::patch('/profile/custom-update', [CustomProfileController::class, 'update'])->name('profile.custom-update');
     // Route::delete('/profile/delete', [CustomProfileController::class, 'destroy'])->name('profile.delete');
 
@@ -72,12 +71,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/order/success/{order}', SuccessPage::class)->name('order.success');
 
 
-    Route::get('/profile/my-purchases', function () {
-        return view('userProfile');
-    })->name('my-purchases');
+    Route::get('/profile/my-purchases', UserProfile::class)->name('my-purchases'); 
 
 
-Route::get('/profile', UserProfile::class)->name('profile.show');
+   Route::get('/profile', UserProfile::class)->name('profile.show');
 
 
 });

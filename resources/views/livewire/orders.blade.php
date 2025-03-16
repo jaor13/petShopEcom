@@ -38,7 +38,7 @@
                     <img src="{{ $item['image'] ? url('storage', $item['image']) : '' }}" alt="Product Image" class="img-thumbnail" style="width: 100px;">
                     <div class="ms-3 flex-grow-1">
                         <p><strong>{{ $item['name'] }}</strong></p>
-                        <p>Variation: {{ $item['variant'] ?? 'N/A' }}</p>
+                        <p>Variation: {{ $item['variant_name'] ?? 'N/A' }}</p>
                     </div>
                     <div class="text-end">
                         <p><strong>x {{ $item['qty'] }}</strong></p>
