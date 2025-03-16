@@ -32,14 +32,28 @@
             </button>
 
             <button wire:click="toggleEditMode" style="background: none; border: none; color: #00DCE3; cursor: pointer;"
-                {{ $editMode ? 'hidden' : '' }}>
+                @if($products->isEmpty()) disabled @endif {{ $editMode ? 'hidden' : '' }}>
                 Edit
             </button>
+
 
         </div>
     </div>
 
     <div class="container-fluid ms-0 me-3 rounded-3">
+        @if($products->isEmpty())
+            <div class="text-center p-5">
+                <p class="mt-3">No liked products yet</p>
+                <p>
+                    <span>
+                        <a href="{{ url('/products') }}" style="color: #00DCE3; text-decoration: none;">Browse</a>
+                    </span>
+                    and like products to see them here.
+                </p>
+            </div>
+        @endif
+
+
         <div class="row row-cols-1 row-cols-md-4 g-3 mb-4">
             @foreach ($products as $product)
                 <div class="col" wire:key="{{ $product->id }}">
@@ -81,8 +95,8 @@
                                 class="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-300">
 
                                 <div style="display: inline-flex; align-items: center; justify-content: center; 
-                                                                                                width: 40px; height: 40px; background-color: #00CED1; border-radius: 10px; padding: 10px; 
-                                                                                                transition: background-color 0.3s ease, transform 0.2s ease;"
+                                                                                                                width: 40px; height: 40px; background-color: #00CED1; border-radius: 10px; padding: 10px; 
+                                                                                                                transition: background-color 0.3s ease, transform 0.2s ease;"
                                     onmouseover="this.style.backgroundColor='#00B2B5'; this.style.transform='scale(1.1)';"
                                     onmouseout="this.style.backgroundColor='#00DCE3'; this.style.transform='scale(1)';">
 
