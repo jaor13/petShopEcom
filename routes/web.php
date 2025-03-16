@@ -70,9 +70,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/order/success/{order}', SuccessPage::class)->name('order.success');
 
 
-    // Route::get('/profile/my-purchases', function () {
-    //     return view('userProfile');
-    // })->name('my-purchases');
+    Route::get('/profile/my-purchases', function () {
+        return view('userProfile');
+    })->name('my-purchases');
 
 
 Route::get('/profile', UserProfile::class)->name('profile.show');

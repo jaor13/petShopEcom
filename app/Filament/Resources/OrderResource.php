@@ -66,17 +66,18 @@ class OrderResource extends Resource
                         Select::make('payment_method')
                         ->options([
                             'cod' => 'Cash on Delivery',
-                            'gcash' => 'GCash',
+                            'paymongo' => 'Online Payment (Paymongo)',
                         ])
                         ->required(),
 
                         Select::make('payment_status')
                         ->options([
-                            'pending' => 'Pending',
+                            'processing' => 'Processing',
                             'paid' => 'Paid',
-                            'failed' => 'Failed'
+                            'failed' => 'Failed',
+                            'unpaid' => 'Unpaid',
+                            'pending' => 'Pending'
                         ])
-                        ->default('pending')
                         ->required(),
 
 
@@ -92,7 +93,7 @@ class OrderResource extends Resource
                        ])
                        ->colors([
                         'new' => 'info',
-                        'processing'=> 'warning',
+                        'processing'=> 'primary',
                         'shipped' => 'success',
                         'delivered' => 'success',
                         'cancelled' => 'warning'
@@ -107,9 +108,7 @@ class OrderResource extends Resource
 
                        Select::make('shipping_method')
                         ->options([
-                            'jnt' => 'J&T Express',
-                            'flash' => 'Flash Express',
-                            'ninjavan' => 'Ninja Van',
+                            'standard' => 'Standard Delivery',
                         ])
                         ->required(),
 

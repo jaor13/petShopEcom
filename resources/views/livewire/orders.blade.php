@@ -12,6 +12,9 @@
         <li class="nav-item flex-fill text-center">
             <a class="nav-link {{ $status === 'completed' ? 'active' : '' }}" wire:click.prevent="filterOrders('completed')" href="#">Completed</a>
         </li>
+        <li class="nav-item flex-fill text-center">
+            <a class="nav-link {{ $status === 'cancelled' ? 'active' : '' }}" wire:click.prevent="filterOrders('cancelled')" href="#">Cancelled</a>
+        </li>
     </ul>
 
     <div class="w-100">

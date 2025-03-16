@@ -88,7 +88,7 @@ class CheckoutPage extends Component
             OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $item['product_id'],
-                'variant_id' => null, 
+                'variant_id' => $item['variant_id'] ?? null, 
                 'quantity' => $item['quantity'],
                 'unit_amount' => $item['unit_amount'],
                 'total_amount' => $item['total_amount'],

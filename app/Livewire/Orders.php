@@ -107,7 +107,7 @@ class Orders extends Component
             'processing', 'to_ship' => 'Your order is being prepared for shipping.',
             'to_receive', 'shipped' => 'Your order is on its way to you.',
             'completed', 'delivered' => 'Order completed successfully.',
-            'canceled' => 'Your order was canceled.',
+            'cancelled' => 'Order canceled due to payment failure.',
             default => 'Order status unknown.',
         };
     }

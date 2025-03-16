@@ -134,6 +134,22 @@ class CartManagement
 
     }
 
+    static public function removeCartItemById($cart_id)
+    {
+        $query = Cart::where('id', $cart_id);
+
+        if (auth()->check()) {
+            $query->where('user_id', auth()->id());
+        } else {
+            $query->where('session_id', session()->getId());
+        }
+
+        $query->delete();
+
+        return self::getCartItemsFromDB();
+    }
+
+
 
     // Add cart items to db
     static public function addCartItemsToDB($cart_items)
@@ -195,15 +211,41 @@ class CartManagement
         })->delete();
     }
 
+
     // Get all cart items from db
     static public function getCartItemsFromDB()
     {
         if (Auth::check()) {
-            return Cart::where('user_id', Auth::id())->get()->toArray();
+            return Cart::where('user_id', Auth::id())
+                ->select('id as cart_id', 'product_id', 'name', 'slug', 'variant_name', 'image', 'quantity', 'unit_amount', 'total_amount')
+                ->get()
+                ->toArray();
         } else {
             $session_id = session()->getId();
-            return Cart::where('session_id', $session_id)->get()->toArray();
+            return Cart::where('session_id', $session_id)
+                ->select('id as cart_id', 'product_id', 'name', 'slug', 'variant_name', 'image', 'quantity', 'unit_amount', 'total_amount')
+                ->get()
+                ->toArray();
         }
+    }
+
+    static public function getCartItemIds()
+    {
+        if (Auth::check()) {
+            $cart_ids = Cart::where('user_id', Auth::id())
+                ->whereIn('id', session()->get('selected_cart_items', []))
+                ->pluck('id')
+                ->toArray();
+        } else {
+            $cart_ids = Cart::where('session_id', session()->getId())
+                ->whereIn('id', session()->get('selected_cart_items', []))
+                ->pluck('id')
+                ->toArray();
+        }
+
+        dd($cart_ids);
+
+        return $cart_ids;
     }
 
     // Increment item quantity
@@ -233,7 +275,7 @@ class CartManagement
 
         return self::getCartItemsFromDB();
     }
-
+    
     // Decrement item quantity
     static public function decrementQuantityToCartItem($product_id, $variant_name = null)
     {
@@ -281,9 +323,16 @@ class CartManagement
     
 
     // Calculate grand total
-    static public function calculateGrandTotal($items)
-    {
-        return array_sum(array_column($items, 'total_amount'));
+    static public function calculateGrandTotal($selected_items = [])
+{
+    if (!is_array($selected_items) || empty($selected_items)) {
+        return 0; // Ensure $selected_items is an array and not empty
     }
+
+    $cart_items = array_filter(self::getCartItemsFromDB(), fn($item) => in_array($item['cart_id'], $selected_items));
+
+    return array_sum(array_column($cart_items, 'total_amount'));
+}
+
 
 }
