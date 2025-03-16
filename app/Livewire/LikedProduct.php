@@ -81,6 +81,10 @@ class LikedProduct extends Component
 
             $this->selectedProducts = [];
             $this->isAllSelected = false;
+            
+            if ($this->products->isEmpty()) {
+                $this->editMode = false;  
+            }
         } else {
             $this->alert('warning', 'No products selected for deletion.', [
                 'position' => 'bottom-end',
