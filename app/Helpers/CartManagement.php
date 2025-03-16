@@ -13,7 +13,6 @@ class CartManagement
     static public function addItemToCart($product_id, $variant_name = null)
     {
         // // dd($product_id,  $variant_name);
-        // \Log::info("Adding to cart: Product ID {$product_id}, Variant: {$variant_name}");
         $cart_items = self::getCartItemsFromDB();
         // dd($cart_items);
         $existing_item = null;
@@ -28,10 +27,9 @@ class CartManagement
 
         // dd($existing_item);
         if ($existing_item !== null) {
-            $cart_items[$existing_item]['quantity'] = 1; 
+            $cart_items[$existing_item]['quantity'] = 1;
             $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount']; // Update total price
-        }
-         else {
+        } else {
             $product = Product::where('id', $product_id)->first(['id', 'product_name', 'slug', 'price', 'images']);
 
             if ($product) {
@@ -103,8 +101,6 @@ class CartManagement
         return count($cart_items);
     }
 
-
-
     // Remove item from cart
     static public function removeCartItem($product_id, $variant_name = null)
     {
@@ -131,7 +127,6 @@ class CartManagement
         $query->delete();
 
         return self::getCartItemsFromDB();
-
     }
 
     static public function removeCartItemById($cart_id)
@@ -148,8 +143,6 @@ class CartManagement
 
         return self::getCartItemsFromDB();
     }
-
-
 
     // Add cart items to db
     static public function addCartItemsToDB($cart_items)
@@ -172,13 +165,12 @@ class CartManagement
                 })
                 ->first();
 
-                if ($existingCartItem) {
-                    // If the item already exists in the cart, update its quantity and total price
-                    $existingCartItem->quantity = $item['quantity']; // Set the quantity to the new value (not incrementing)
-                    $existingCartItem->total_amount = $item['quantity'] * $existingCartItem->unit_amount; // Update the total price
-                    $existingCartItem->save(); // Save the updated record to the database
-                }
-                 else {
+            if ($existingCartItem) {
+                // If the item already exists in the cart, update its quantity and total price
+                $existingCartItem->quantity = $item['quantity']; // Set the quantity to the new value (not incrementing)
+                $existingCartItem->total_amount = $item['quantity'] * $existingCartItem->unit_amount; // Update the total price
+                $existingCartItem->save(); // Save the updated record to the database
+            } else {
                 Cart::create([
                     'user_id' => $user_id,
                     'session_id' => $user_id ? null : $session_id,
@@ -210,7 +202,6 @@ class CartManagement
             }
         })->delete();
     }
-
 
     // Get all cart items from db
     static public function getCartItemsFromDB()
@@ -275,7 +266,7 @@ class CartManagement
 
         return self::getCartItemsFromDB();
     }
-    
+
     // Decrement item quantity
     static public function decrementQuantityToCartItem($product_id, $variant_name = null)
     {
@@ -304,35 +295,38 @@ class CartManagement
         return self::getCartItemsFromDB();
     }
 
-
-    public static function calculateShipping($cart_items) {
-        if (empty($cart_items)) {
-            return 0.0;
-        }
-    
-        $base_rate = 50; // Fixed base shipping fee
-        $additional_rate = 10; // Additional charge per extra item
-    
-        // Sum the total quantity of all products in the cart
-        $num_items = collect($cart_items)->sum('quantity');
-    
-        // Ensure at least the base rate applies, then add extra charges for additional units
-        return (float) ($base_rate + (($num_items - 1) * $additional_rate));
-    }
-    
-    
-
-    // Calculate grand total
-    static public function calculateGrandTotal($selected_items = [])
+    static public function calculateShipping()
 {
-    if (!is_array($selected_items) || empty($selected_items)) {
-        return 0; // Ensure $selected_items is an array and not empty
+    $cart_items = self::getCartItemsFromDB(); // Get cart items from DB
+    
+    $total_quantity = array_sum(array_column($cart_items, 'quantity')); // Sum up quantities of all items
+
+    // Define shipping cost logic
+    if ($total_quantity == 0) {
+        return 0; // No items, no shipping cost
+    } elseif ($total_quantity <= 5) {
+        return 50; // Flat rate for 1-5 items
+    } elseif ($total_quantity <= 10) {
+        return 80; // Flat rate for 6-10 items
+    } else {
+        return 100; // Flat rate for 11+ items
     }
-
-    $cart_items = array_filter(self::getCartItemsFromDB(), fn($item) => in_array($item['cart_id'], $selected_items));
-
-    return array_sum(array_column($cart_items, 'total_amount'));
 }
 
+    static public function calculateGrandTotal($selected_items = [])
+    {
+        if (!is_array($selected_items)) {
+            return 0; // Return 0 if $selected_items is not an array
+        }
+        
+        if (empty($selected_items)) {
+            return 0;
+        }
 
+        $cart_items = array_filter(self::getCartItemsFromDB(), function ($item) use ($selected_items) {
+            return in_array($item['cart_id'], $selected_items);
+        });
+
+        return array_sum(array_column($cart_items, 'total_amount'));
+    }
 }

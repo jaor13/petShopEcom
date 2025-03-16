@@ -104,7 +104,7 @@
         </td>
       </tr>
     @endforelse
-    </tbody>
+              </tbody>
             </table>
           </div>
         </div>

@@ -9,6 +9,7 @@ use App\Livewire\CancelPage;
 use App\Livewire\CartPage;
 use App\Livewire\CheckoutPage;
 use App\Livewire\LandingPage;
+use App\Livewire\LikedProduct;
 use App\Livewire\OrderDetailsPage;
 use App\Livewire\OrdersPage;
 use App\Livewire\ProductDetailPage;
@@ -27,7 +28,7 @@ use App\Livewire\UserProfile;
 Route::get('/', LandingPage::class)->name('home');
 Route::get('/', LandingPage::class)->name('home');
 Route::get('/products', ProductsPage::class)->name('products');
-Route::get('/cart', CartPage::class);
+Route::get('/cart', CartPage::class)->name('cart');
 Route::get('/product/{slug}', ProductDetailPage::class);
 
 Route::middleware('guest')->group(function () {
@@ -56,9 +57,10 @@ Route::middleware('auth')->group(function () {
     // Route::patch('/profile/custom-update', [CustomProfileController::class, 'update'])->name('profile.custom-update');
     // Route::delete('/profile/delete', [CustomProfileController::class, 'destroy'])->name('profile.delete');
 
-
     //new
-    Route::get('/checkout', CheckoutPage::class);
+    Route::get('/liked-product', LikedProduct::class)->name('liked-product');
+    //new
+    Route::get('/checkout', CheckoutPage::class)->name('checkout');
     Route::get('/orders', OrdersPage::class);
     Route::get('/orders/{orderID}', OrderDetailsPage::class);
 

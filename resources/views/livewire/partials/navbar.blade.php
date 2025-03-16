@@ -54,7 +54,7 @@
             </div>
 
             <div class="heart-container">
-                <a href="{{ url('wishlist/') }}" wire:navigate class="relative flex items-center space-x-1">
+                <a href="{{ url('profile?section=liked-products') }}" class="relative flex items-center space-x-1">
                     <span><iconify-icon icon="mdi:heart" class="iconify-heart"></iconify-heart></span>
                 </a>
             </div>

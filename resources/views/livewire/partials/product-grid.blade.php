@@ -1,5 +1,5 @@
 <div class="container-fluid m-3 rounded-3">
-    <div class="row row-cols-1 row-cols-md-5 mx-auto">
+    <div class="row row-cols-1 row-cols-md-5 mx-auto g-3">
         @foreach ($products as $product)
             <div class="col" wire:key="{{ $product->id }}">
                 <div class="card h-100 p-2 m-2" style="position: relative;">

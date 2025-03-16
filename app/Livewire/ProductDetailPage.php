@@ -9,12 +9,15 @@ use App\Models\LikedProducts;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 #[Title("Product Detail - Aricuz")]
 
 class ProductDetailPage extends Component
 {
+
+    use LivewireAlert;
 
     public $slug;
 
@@ -30,6 +33,14 @@ class ProductDetailPage extends Component
         $this->slug = $slug;
         $this->variant_price = $product->price;
         $this->stock_quantity = $product->stock_quantity;
+
+        if (request()->has('variant_alert')) {
+            $this->alert('warning', 'Please select a variant before adding to cart.', [
+                'position' => 'bottom-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);
+        }
     }
 
     public function increaseQty()
@@ -58,24 +69,54 @@ class ProductDetailPage extends Component
         }
     }
 
-    public function addToCart($product_id) {
+    public function addToCart($product_id)
+    {
         // dd($product_id);
         // dd($this->variant_name);
+        $product = Product::with('variants')->find($product_id);
+
+        // Check if the product has variants and if no variant is selected
+        if ($product && $product->variants->count() > 0 && !$this->variant_name) {
+            $this->alert('warning', 'Please select a variant before adding to cart.', [
+                'position' => 'bottom-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);
+            return;
+        }
+
         usleep(200000); // 0.2-second delay (200ms)
 
         $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity, $this->variant_name, $this->variant_price);
         // dd($total_count, $this->quantity);
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
-        
+
+        $this->alert('success', 'Product added to cart successfully!', [
+            'position' => 'bottom-end',
+            'timer' => 3000,
+            'toast' => true,
+        ]);
     }
 
     // Add a product to the liked table
-    public function addToLiked($product_id)
-{
-    $response = LikedProductManagement::addToLiked($product_id);
+    public function addToLiked($productId)
+    {
+        $result = LikedProductManagement::addToLikedProductsTable($productId);
 
-    return $response;
-}
+        if (isset($result['error'])) {
+            $this->alert('error', $result['error'], [
+                'position' => 'bottom-end',
+                'timer' => 3000,
+                'toast' => true,
+            ]);
+        } else {
+            $this->alert('success', $result['success'], [
+                'position' => 'bottom-end',
+                'timer' => 3000,
+                'toast' => true,
+            ]);
+        }
+    }
 
     public function render()
     {

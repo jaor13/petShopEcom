@@ -14,11 +14,15 @@ class ProfileNavigation extends Component
         }
     }
 
+    // public function mount()
+    // {
+    //     $this->activeSection = request()->query('section', 'my-account');
+    // }
+
     public function setActiveSection($section)
     {
         $this->activeSection = $section;
     }
-
     public function render()
     {
         return view('livewire.profile-navigation');
