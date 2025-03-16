@@ -1,36 +1,29 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Livewire\Chat\CreateChat;
+use App\Livewire\Chat\Main;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\EnsureUserIsAdmin;
 
 
-Route::get('/', function () {
-    return view('landing');
-})->name('landing');
+Route::view('/', 'welcome');
 
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-
-
-Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    Route::get('/admin', function () {
-        return redirect()->route('filament.admin.pages.admin-dashboard'); 
-    })->name('adminDashboard');
-});
-
-Route::middleware(['auth', 'verified', 'notAdmin'])->group(function () {
-    Route::get('/user/dashboard', function () {
-        return view('userDashboard');
-    })->name('dashboard');
-});
-
-
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
 
 require __DIR__.'/auth.php';
+
+Route::get('/users',CreateChat::class)->name('users');
+Route::get('/chat{key?}',Main::class)->name('chat');
+Route::get('/chat', CreateChat::class)->middleware('auth');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->name('logout');

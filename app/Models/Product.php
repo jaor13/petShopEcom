@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_name', 'slug', 'images', 'description', 'price', 'is_active', 'in_stock', 'has_variant', 'stock_quantity','sold_count'];
+    protected $fillable = ['product_name', 'slug', 'images', 'description', 'price', 'is_active', 'in_stock', 'has_variant', 'stock_quantity', 'sold_count'];
 
     protected $casts = [
         'images' => 'array',
@@ -20,8 +20,10 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'category_product');
     }
+
+
 
     public function orderItems()
     {
@@ -33,15 +35,15 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class, 'product_id');
     }
 
-   
-    
+
+
     public function getPriceAttribute()
     {
         // already in sql trigger
         // function will return the mninimum price of product e.g sa product table if walang variant then price column will be the base price
         // but if may variant naman siya hahanapin niya yung lowest price sa variant table then yun magga update yung base price sa product table sa lowest price
         // based sa variant price
-       
+
         if ($this->has_variant && $this->variants()->exists()) {
             return $this->variants()->min('price');
         }
@@ -58,7 +60,8 @@ class Product extends Model
             return $this->variants()->sum('stock_quantity') ?? 0; 
         }
 
-        return $this->attributes['stock_quantity'] ?? 0; 
+        return $this->attributes['stock_quantity'] ?? 0; // Ensure it returns 0 if null
+ 
     }
 
     public function updateStockAndAvailability()
@@ -75,7 +78,7 @@ class Product extends Model
         $this->stock_quantity = $totalStock;
         $this->in_stock = $totalStock > 0;
         $this->saveQuietly();  // Prevents the 'saved' event from being triggered
-   
+
     }
     public function updatePrice()
     {
@@ -93,7 +96,7 @@ class Product extends Model
         //updates or create stock quantity in product table
         $this->attributes['stock_quantity'] = $value;
     }
-    
+
 
     protected static function boot()
     {
@@ -118,7 +121,6 @@ class Product extends Model
             $variant->product->updateStockAndAvailability();
         });
     
-        // already in sql trigger
         ProductVariant::deleted(function (ProductVariant $variant) {
             $variant->product->updateStockAndAvailability();
         });
@@ -126,13 +128,13 @@ class Product extends Model
 
 
 
-    //     //
-    //     public function updateStockFromVariants()
-    // {
-    //     $this->update([
-    //         'stock_quantity' => $this->variants()->sum('stock_quantity'),
-    //     ]);
-    // }
+//     //
+//     public function updateStockFromVariants()
+// {
+//     $this->update([
+//         'stock_quantity' => $this->variants()->sum('stock_quantity'),
+//     ]);
+// }
 
 
 
