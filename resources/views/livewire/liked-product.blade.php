@@ -1,6 +1,8 @@
-<div>
+<div class="p-3 mb-4 border border-light shadow-sm rounded bg-white">
     <div class="d-flex justify-content-between align-items-center m-3">
+
         <div>
+            <h2 style="font-size: 25px;">Liked Products</h2>
             @if($editMode)
                 <input type="checkbox" wire:click="toggleSelectAll" class="form-check-input"
                     style="width: 20px; height: 20px; cursor: pointer;" {{ count($selectedProducts) === count($products) ? 'checked' : '' }}>
@@ -10,18 +12,35 @@
         <div>
             @if($editMode)
                 <button class="btn btn-danger me-2" wire:click="deleteSelected" {{ empty($selectedProducts) ? 'disabled' : '' }}>
-                    Delete
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" style="width: 20px; height: 20px;"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                        <path d="M4 6h16"></path>
+                        <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                    </svg>
                 </button>
             @endif
 
-            <button class="btn btn-primary" wire:click="toggleEditMode">
-                {{ $editMode ? 'Cancel' : 'Edit' }}
+
+            <button wire:click="toggleEditMode" class="btn"
+                style="background-color: #00DCE3; color: white; border: none;" {{ !$editMode ? 'hidden' : '' }}>
+                Cancel
             </button>
+
+            <button wire:click="toggleEditMode" style="background: none; border: none; color: #00DCE3; cursor: pointer;"
+                {{ $editMode ? 'hidden' : '' }}>
+                Edit
+            </button>
+
         </div>
     </div>
 
-    <div class="container-fluid m-3 rounded-3">
-        <div class="row row-cols-1 row-cols-md-4">
+    <div class="container-fluid ms-0 me-3 rounded-3">
+        <div class="row row-cols-1 row-cols-md-4 g-3 mb-4">
             @foreach ($products as $product)
                 <div class="col" wire:key="{{ $product->id }}">
                     <div class="card h-100 p-2 m-2 position-relative">
@@ -63,8 +82,8 @@
                                 class="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-300">
 
                                 <div style="display: inline-flex; align-items: center; justify-content: center; 
-                                                                width: 40px; height: 40px; background-color: #00CED1; border-radius: 10px; padding: 10px; 
-                                                                transition: background-color 0.3s ease, transform 0.2s ease;"
+                                                                                    width: 40px; height: 40px; background-color: #00CED1; border-radius: 10px; padding: 10px; 
+                                                                                    transition: background-color 0.3s ease, transform 0.2s ease;"
                                     onmouseover="this.style.backgroundColor='#00B2B5'; this.style.transform='scale(1.1)';"
                                     onmouseout="this.style.backgroundColor='#00DCE3'; this.style.transform='scale(1)';">
 
