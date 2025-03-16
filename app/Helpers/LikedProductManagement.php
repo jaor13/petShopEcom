@@ -28,7 +28,7 @@ class LikedProductManagement
             'product_id' => $product_id,
         ]);
 
-        return ['success' => 'Product added to liked items!'];
+        return ['success' => 'Product added to liked products!'];
     }
 
     public static function removeFromLikedProductsTable($likedProductIds)
@@ -41,7 +41,7 @@ class LikedProductManagement
             ->whereIn('product_id', $likedProductIds)
             ->delete();
 
-        return ['success' => 'Selected products removed from liked items!'];
+        return ['success' => 'Product removed from liked products!'];
     }
 
     public static function showLiked()

@@ -28,7 +28,7 @@
 
             <button wire:click="toggleEditMode" class="btn"
                 style="background-color: #00DCE3; color: white; border: none;" {{ !$editMode ? 'hidden' : '' }}>
-                Cancel
+                Done
             </button>
 
             <button wire:click="toggleEditMode" style="background: none; border: none; color: #00DCE3; cursor: pointer;"

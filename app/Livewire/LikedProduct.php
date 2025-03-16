@@ -90,15 +90,20 @@ class LikedProduct extends Component
 
         LikedProductManagement::removeFromLikedProductsTable($likedProductIds);
 
-        $this->selectedProducts = [];
+        $count = count($this->selectedProducts);
+        $message = $count === 1
+            ? 'Product successfully removed from liked products!'
+            : 'Selected products successfully removed from liked products!';
 
-        $this->likedProducts = LikedProductManagement::showLiked();
-
-        $this->alert('success', 'Selected products successfully deleted from liked products!', [
+        $this->alert('success', $message, [
             'position' => 'bottom-end',
             'timer' => 3000,
             'toast' => true,
         ]);
+
+        $this->selectedProducts = [];
+
+        $this->likedProducts = LikedProductManagement::showLiked();
 
         $this->dispatch('updatedLikedProducts');
     }
