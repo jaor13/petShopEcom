@@ -79,7 +79,7 @@ class LikedProduct extends Component
 
         if (empty($this->selectedProducts)) {
             $this->alert('warning', 'No products selected for deletion.', [
-                'position' => 'top-end',
+                'position' => 'bottom-end',
                 'timer' => 3000,
                 'toast' => true,
             ]);

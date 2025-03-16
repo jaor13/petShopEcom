@@ -1,6 +1,5 @@
 <div class="p-3 mb-4 border border-light shadow-sm rounded bg-white">
     <div class="d-flex justify-content-between align-items-center m-3">
-
         <div>
             <h2 style="font-size: 25px;">Liked Products</h2>
             @if($editMode)
@@ -9,9 +8,10 @@
                 <label class="ms-2">Select All</label>
             @endif
         </div>
+            
         <div>
             @if($editMode)
-                <button class="btn btn-danger me-2" wire:click="deleteSelected" {{ empty($selectedProducts) ? 'disabled' : '' }}>
+                <button class="btn btn-danger me-2" wire:click="deleteSelected">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" style="width: 20px; height: 20px;"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -24,7 +24,6 @@
                     </svg>
                 </button>
             @endif
-
 
             <button wire:click="toggleEditMode" class="btn"
                 style="background-color: #00DCE3; color: white; border: none;" {{ !$editMode ? 'hidden' : '' }}>
