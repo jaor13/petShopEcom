@@ -5,7 +5,7 @@
         <form wire:submit.prevent="sendMessage" action="">
             <div class="chatbox_footer">
             <div class="custom_form_group">
-                    <input wire:model.defer="body" wire:ignore placeholder="Write message" type="text" class="control">
+                    <input wire:model.defer="body" placeholder="Write message" type="text" class="control">
                     <button type="submit" class="submit">Send</button>
                 </div>
 

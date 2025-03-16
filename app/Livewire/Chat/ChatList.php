@@ -15,7 +15,7 @@ class ChatList extends Component
 
     public $selectedConversation;
 
-    protected $listeners = ['chatUserSelected'];
+    protected $listeners = ['chatUserSelected','refresh'=>'$refresh'];
 
     public function chatUserSelected(int $conversation_id, int $receiver_id)
     {

@@ -27,6 +27,8 @@ window.addEventListener('chatSelected', event=>{
         $('.chat_box_container').show();
     }
 
+    $('.chatbox_body').scrollTop($('.chatbox_body')[0].scrollHeight);
+
 });
 
 

@@ -42,6 +42,8 @@ class SendMessage extends Component
         $this->body = '';
         // Dispatch message event
         $this->dispatch('pushMessage', messageId: $createdMessage->id)->to('chat.chatbox');
+        $this->dispatch('refresh')->to('chat.chat-list');
+
 
         // Refresh conversation list
         $this->dispatch('refresh')->to('chat.chat-list');
