@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 bg-white py-4">
     <div class="mx-4 px-3">
         <h1 class="text-3xl font-bold">
             @if(request('query') && request('category'))
