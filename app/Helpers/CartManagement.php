@@ -295,24 +295,6 @@ class CartManagement
         return self::getCartItemsFromDB();
     }
 
-    static public function calculateShipping()
-{
-    $cart_items = self::getCartItemsFromDB(); // Get cart items from DB
-    
-    $total_quantity = array_sum(array_column($cart_items, 'quantity')); // Sum up quantities of all items
-
-    // Define shipping cost logic
-    if ($total_quantity == 0) {
-        return 0; // No items, no shipping cost
-    } elseif ($total_quantity <= 5) {
-        return 50; // Flat rate for 1-5 items
-    } elseif ($total_quantity <= 10) {
-        return 80; // Flat rate for 6-10 items
-    } else {
-        return 100; // Flat rate for 11+ items
-    }
-}
-
     static public function calculateGrandTotal($selected_items = [])
     {
         if (!is_array($selected_items)) {

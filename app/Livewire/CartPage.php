@@ -11,14 +11,14 @@ use Livewire\Component;
 #[Title("Cart - Aricuz")]
 class CartPage extends Component
 {
-    Use LivewireAlert;
+
+    use LivewireAlert;
+
     public $cart_items = [];
-    public $grand_total;
-    public $shipping_fee;
-    public $selectAll = false;
     public $selected_items = [];
-
-
+    public $grand_total;
+    public $selectAll = false;
+    public $shipping_fee;
 
     public function mount()
     {
@@ -28,6 +28,7 @@ class CartPage extends Component
             : [];
 
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+        $this->shipping_fee = $this->calculateShipping();
 
         $this->selectAll = count($this->selected_items) === count($this->cart_items);
     }
@@ -36,6 +37,7 @@ class CartPage extends Component
     {
         session()->put('selected_cart_items', $this->selected_items);
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+        $this->shipping_fee = $this->calculateShipping();
 
         $this->selectAll = count((array) $this->selected_items) === count($this->cart_items);
     }
@@ -50,11 +52,13 @@ class CartPage extends Component
 
         session()->put('selected_cart_items', $this->selected_items);
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+        $this->shipping_fee = $this->calculateShipping();
     }
 
     public function updateSummary()
     {
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+        $this->shipping_fee = $this->calculateShipping();
     }
 
     public function goToCheckout()
@@ -68,6 +72,7 @@ class CartPage extends Component
             return;
         }
         session()->put('selected_cart_items', $this->selected_items);
+        session()->put('shipping_fee', $this->shipping_fee); // Store shipping fee in session
         // dd($this->selected_items);       
         return redirect()->route('checkout');
     }
@@ -78,6 +83,7 @@ class CartPage extends Component
 
         $this->cart_items = CartManagement::getCartItemsFromDB();
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+        $this->shipping_fee = $this->calculateShipping();
     }
 
     public function decreaseQty($product_id, $variant_name = null)
@@ -86,6 +92,7 @@ class CartPage extends Component
 
         $this->cart_items = CartManagement::getCartItemsFromDB();
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+        $this->shipping_fee = $this->calculateShipping();
     }
 
     public function removeItem($product_id, $variant_name = null)
@@ -101,6 +108,7 @@ class CartPage extends Component
         session()->put('selected_cart_items', $this->selected_items);
 
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+        $this->shipping_fee = $this->calculateShipping();
 
         $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
 
@@ -132,6 +140,7 @@ class CartPage extends Component
 
         session()->put('selected_cart_items', $this->selected_items);
         $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+        $this->shipping_fee = $this->calculateShipping();
 
         $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
         $this->alert('success', 'Selected items removed.', [
@@ -141,7 +150,28 @@ class CartPage extends Component
         ]);
     }
 
-    public function render() {
+    public function calculateShipping()
+    {
+        $base_rate = 50;
+        $additional_rate = 20;
+        $total_quantity = 0;
+
+        foreach ($this->selected_items as $cart_id) {
+            $item = collect($this->cart_items)->firstWhere('cart_id', $cart_id);
+            if ($item) {
+                $total_quantity += $item['quantity'];
+            }
+        }
+
+        if ($total_quantity <= 1) {
+            return $base_rate;
+        }
+
+        return $base_rate + ($total_quantity - 1) * $additional_rate;
+    }
+
+    public function render()
+    {
         return view('livewire.cart-page');
     }
 }

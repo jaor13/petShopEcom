@@ -25,15 +25,24 @@ class CheckoutPage extends Component
     public $zip_code;
     public $payment_method;
     public $selected_items = [];
+    public $shipping_amount;
 
     public function mount()
     {
         $this->selected_items = session()->get('selected_cart_items', []);
+        $this->shipping_amount = session()->get('shipping_fee', 0); 
     }
-
 
     public function placeOrder()
     {
+
+           // Retrieve cart items
+           $cart_items = CartManagement::getCartItemsFromDB();
+           $grand_total = CartManagement::calculateGrandTotal($this->selected_items) + $this->shipping_amount;
+
+   
+           $shipping_amount = $this->shipping_amount;
+
         $this->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -44,10 +53,11 @@ class CheckoutPage extends Component
             'zip_code' => 'required',
             'payment_method' => 'required',
         ]);
+
     
-        // Retrieve cart items
-        $cart_items = CartManagement::getCartItemsFromDB();
-        $grand_total = CartManagement::calculateGrandTotal($cart_items);
+        // Use the shipping amount from the session
+
+     
     
         // Check if the cart is empty
         if (count($cart_items) === 0) {
@@ -55,16 +65,14 @@ class CheckoutPage extends Component
             return redirect()->route('/');
         }
 
-        $num_items = collect($cart_items)->sum('quantity'); // Sum up all quantities
-        $base_rate = 50; // Fixed base shipping fee
-        $additional_rate = 10; // Extra charge per additional item
-    
-        $shipping_amount = $base_rate + (($num_items - 1) * $additional_rate);
+
+        
+
     
         // Create Order
         $order = Order::create([
             'user_id' => auth()->id(),
-            'grand_total' => $grand_total + $shipping_amount, // Add shipping
+            'grand_total' => $grand_total, 
             'shipping_amount' => $shipping_amount,
             'payment_method' => $this->payment_method,
             'payment_status' => ($this->payment_method === 'cod') ? 'unpaid' : 'processing',
@@ -110,7 +118,7 @@ class CheckoutPage extends Component
     
        // Handle Online Payment (PayMongo)
         $secretKey = config('services.paymongo.secret_key');
-        $amount = ($grand_total + $shipping_amount) * 100; 
+        $amount = $grand_total  * 100; 
 
         $data = [
             "data" => [
@@ -180,10 +188,9 @@ class CheckoutPage extends Component
             return in_array($item['cart_id'], $this->selected_items);
         });
 
-        $grand_total = CartManagement::calculateGrandTotal($this->selected_items);
+        $grand_total = CartManagement::calculateGrandTotal($this->selected_items) + $this->shipping_amount;
+        $shipping_amount = $this->shipping_amount; // Ensure shipping_amount is defined
 
-        return view('livewire.checkout-page', compact('cart_items', 'grand_total'));
+        return view('livewire.checkout-page', compact('cart_items', 'grand_total', 'shipping_amount'));
     }
-
-
 }
