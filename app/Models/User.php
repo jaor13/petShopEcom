@@ -3,39 +3,32 @@
 namespace App\Models;
 
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+ 
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasName{
 
-class User extends Authenticatable implements MustVerifyEmail
-{
+    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
-        'username',
-        'fname',
-        'lname',
-        'cp_num',
-        'email',
-        'password',
-        'address_id',
-        'role',
-        'status',
-        'profile_picture',
-        'created_at',
-        'updated_at'
+        'username', 'fname', 'lname', 'cp_num', 'email',
+        'password', 'address_id', 
+        'role', 'status', 'profile_picture', 'created_at', 'updated_at'
     ];
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var list<string>
      */
     protected $hidden = [
         'password',
@@ -44,29 +37,34 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the attributes that should be cast.
      *
-     * @var array
+     * @return array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+        ];
+    }
 
     public function address()
-    {
-        return $this->belongsTo(Address::class);
-    }
+{
+    return $this->belongsTo(Address::class);
+}
+public function canAccessPanel(\Filament\Panel $panel): bool
+{
+    return $this->role === 'admin'; // Allow only admins
+}
 
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
 
-    public function getFilamentName(): string
+public function getFilamentName(): string
     {
         return "{$this->fname} {$this->lname}";
     }
+
+
 }
