@@ -82,8 +82,7 @@
             <td class="py-4 text-red-500 font-semibold text-center">
             <button wire:click="removeItem({{ $item['product_id'] }}, '{{ $item['variant_name'] }}')"
               class="hover:text-red-500 group opacity-50">
-              <span wire:loading.remove class="block"
-              wire:target="removeItem({{ $item['product_id'] }}, '{{ $item['variant_name'] }}')">
+              <span wire:target="removeItem({{ $item['product_id'] }}, '{{ $item['variant_name'] }}')">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500 group-hover:text-red-500"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
@@ -95,9 +94,7 @@
                 <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
               </svg>
               </span>
-              <span wire:loading class="hidden block"
-              wire:target="removeItem({{ $item['product_id'] }}, '{{ $item['variant_name'] }}')">Removing</span>
-            </button>
+              </button>
             </td>
           </tr>
         @empty
