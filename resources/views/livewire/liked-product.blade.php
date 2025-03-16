@@ -2,13 +2,14 @@
     <div class="d-flex justify-content-between align-items-center m-3">
         <div>
             <h2 style="font-size: 25px;">Liked Products</h2>
-            @if($editMode)
-                <input type="checkbox" wire:click="toggleSelectAll" class="form-check-input"
-                    style="width: 20px; height: 20px; cursor: pointer;" {{ count($selectedProducts) === count($products) ? 'checked' : '' }}>
-                <label class="ms-2">Select All</label>
-            @endif
+            <div class="select-all-container">
+                @if($editMode)
+                    <input type="checkbox" wire:click="toggleSelectAll" class="circle-checkbox select-all-checkbox" {{ count($selectedProducts) === count($products) ? 'checked' : '' }}>
+                    <label class="ms-2" style="color: gray;">Select All</label>
+                @endif
+            </div>
         </div>
-            
+
         <div>
             @if($editMode)
                 <button class="btn btn-danger me-2" wire:click="deleteSelected">
@@ -46,8 +47,7 @@
 
                         @if($editMode)
                             <input type="checkbox" wire:click="toggleProductSelection({{ $product->id }})" {{ in_array($product->id, array_column($selectedProducts, 'product_id')) ? 'checked' : '' }}
-                                class="position-absolute"
-                                style="top: 10px; left: 10px; width: 20px; height: 20px; cursor: pointer;">
+                                class="circle-checkbox">
                         @endif
 
                         <a href="{{ url('product/' . $product->slug) }}">
@@ -81,8 +81,8 @@
                                 class="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-300">
 
                                 <div style="display: inline-flex; align-items: center; justify-content: center; 
-                                                                                    width: 40px; height: 40px; background-color: #00CED1; border-radius: 10px; padding: 10px; 
-                                                                                    transition: background-color 0.3s ease, transform 0.2s ease;"
+                                                                                                width: 40px; height: 40px; background-color: #00CED1; border-radius: 10px; padding: 10px; 
+                                                                                                transition: background-color 0.3s ease, transform 0.2s ease;"
                                     onmouseover="this.style.backgroundColor='#00B2B5'; this.style.transform='scale(1.1)';"
                                     onmouseout="this.style.backgroundColor='#00DCE3'; this.style.transform='scale(1)';">
 

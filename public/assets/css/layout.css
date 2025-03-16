@@ -401,3 +401,41 @@ margin-left: 0px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* liked products' checkbox */
+.select-all-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+}
+
+.circle-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc; 
+  border-radius: 50%; 
+  appearance: none; 
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, border 0.3s;
+}
+
+.circle-checkbox:not(.select-all-checkbox) {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.circle-checkbox:checked {
+  background-color: #00DCE3; 
+  border-color: #00DCE3;
+}
+
+.circle-checkbox:checked::after {
+  content: '✔'; 
+  font-size: 14px;
+  color: white; 
+  font-weight: bold;
+}
