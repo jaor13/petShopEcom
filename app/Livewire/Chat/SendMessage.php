@@ -38,14 +38,15 @@ class SendMessage extends Component
         $this->selectedConversation->last_time_message = $createdMessage->created_at;
         $this->selectedConversation->save();
 
+        // Reset the input field
+        $this->body = '';
         // Dispatch message event
         $this->dispatch('pushMessage', messageId: $createdMessage->id)->to('chat.chatbox');
 
         // Refresh conversation list
         $this->dispatch('refresh')->to('chat.chat-list');
 
-        // Reset the input field
-        $this->reset('body');
+        
 
         
     }
