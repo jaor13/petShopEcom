@@ -214,6 +214,24 @@
       </div>
     </div>
   </div>
+
+  <div class="container-fluid p-2 rounded-3" style="background-color: white;">
+  <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1em;">
+  <h1 style="font-weight: bold; color: gray;"
+      class="text-2xl">
+        Products of Same Category
+      </h1>
+      <a href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
+        style="font-size: 18px; color: gray; text-decoration: none;">
+        View All >
+      </a>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+    @livewire('partials.product-grid', ['category' => $product->categories->first()->name ?? '', 'limit' => 5, 'excludeProductId' => $product->id])
+    </div>
+  </div>
+
+
 </div>
 </div>
 

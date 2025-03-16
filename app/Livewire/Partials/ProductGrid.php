@@ -16,14 +16,17 @@ class ProductGrid extends Component
     public $category;
     public $type;
     public $limit;
+    public $excludeProductId;
 
-    public function mount($query = null, $category = null, $type = null, $limit = null)
+    public function mount($query = null, $category = null, $type = null, $limit = null, $excludeProductId = null)
     {
         $this->query = $query;
         $this->category = $category;
         $this->type = $type;
         $this->limit = $limit;
+        $this->excludeProductId = $excludeProductId;
     }
+
 
     // add to cart
     public function addToCart($product_id)
@@ -57,15 +60,25 @@ class ProductGrid extends Component
                 $q->where('name', 'like', '%' . $this->category . '%');
             });
         }
-
+        
         if ($this->query) {
             $products->where('product_name', 'like', '%' . $this->query . '%');
         }
-
+        
         if ($this->type === 'latest') {
             $products->orderBy('created_at', 'desc'); 
         } elseif ($this->type === 'best_sellers') {
             $products->orderBy('sold_count', 'desc'); 
+        }
+        
+        if ($this->excludeProductId) {
+            $products->where('id', '!=', $this->excludeProductId);
+        }
+
+        if ($this->type === 'latest') {
+            $products->orderBy('created_at', 'desc');
+        } elseif ($this->type === 'best_sellers') {
+            $products->orderBy('sold_count', 'desc');
         }
 
         if ($this->limit) {
