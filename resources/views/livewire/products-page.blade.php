@@ -12,19 +12,26 @@
             @elseif(request('type') === 'best_sellers')
                 Best Seller Products
             @else
-
             @endif
         </h1>
     </div>
 
     <div>
-        @if(request('query') || request('category') || request('type'))
-                @livewire('partials.product-grid', [
-                        'limit' => 20,
-                        'query' => request('query'),
-                        'category' => request('category'),
-                        'type' => request('type')
-                    ])
+        @if(request('query')|| request('category') || request('type'))
+            @if(request('query'))
+                @if(collect($products)->isEmpty())  
+                <div class="text-center text-gray-500 text-lg font-semibold mt-10">
+                    No products found for "{{ request('query') }}"
+                </div>
+                @endif
+            @endif
+
+            @livewire('partials.product-grid', [
+                'limit' => 20,
+                'query' => request('query'),
+                'category' => request('category'),
+                'type' => request('type')
+            ])
         @else
            @foreach ($groupedProducts as $categoryName => $products)
             <div class="mx-4 px-3">
