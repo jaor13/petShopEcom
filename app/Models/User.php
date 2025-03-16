@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+ 
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasName{
 
-class User extends Authenticatable implements MustVerifyEmail
-{
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -50,18 +52,18 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function address()
-    {
-        return $this->belongsTo(Address::class);
-    }
+{
+    return $this->belongsTo(Address::class);
+}
+public function canAccessPanel(\Filament\Panel $panel): bool
+{
+    return $this->role === 'admin'; // Allow only admins
+}
 
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
 
-    public function getFullNameAttribute()
+public function getFilamentName(): string
     {
-        return $this->fname . ' ' . $this->lname;
+        return "{$this->fname} {$this->lname}";
     }
 
 
