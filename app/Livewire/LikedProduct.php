@@ -17,16 +17,21 @@ class LikedProduct extends Component
 
     use LivewireAlert;
 
-    public $likedProducts = [];
+    public $products = [];
+
     public $selectedProducts = [];
 
     public $editMode = false;
-    public $selectAll = false;
+    public $isAllSelected = false;
+
 
     public function mount()
     {
         if (Auth::check()) {
-            $this->likedProducts = LikedProductManagement::showLiked();
+            $likedProductIds = LikedProductManagement::showLiked();
+
+            $this->products = Product::whereIn('id', $likedProductIds)->get();
+            $this->isAllSelected = false;
         }
     }
 
@@ -35,100 +40,57 @@ class LikedProduct extends Component
         $this->editMode = !$this->editMode;
         if (!$this->editMode) {
             $this->selectedProducts = [];
-            $this->selectAll = false;
-        }
-    }
-
-    public function toggleProductSelection($productId)
-    {
-        if (in_array($productId, array_column($this->selectedProducts, 'product_id'))) {
-            $this->selectedProducts = array_filter($this->selectedProducts, function ($item) use ($productId) {
-                return $item['product_id'] !== $productId;
-            });
-        } else {
-            $this->selectedProducts[] = ['product_id' => $productId];
-        }
-
-        $this->dispatch('updatedSelectedProducts');
-    }
-
-    public function toggleSelectAll()
-    {
-        $this->selectAll = !$this->selectAll;
-
-        if ($this->selectAll) {
-            $this->selectedProducts = \App\Models\LikedProduct::where('user_id', Auth::id())
-                ->pluck('product_id')
-                ->map(fn($product_id) => ['product_id' => $product_id])
-                ->toArray();
         } else {
             $this->selectedProducts = [];
         }
     }
 
+
+    public function toggleSelectAll()
+    {
+        if ($this->isAllSelected) {
+            $this->selectedProducts = $this->products->pluck('id')->toArray();
+        } else {
+            $this->selectedProducts = [];
+        }
+    }
+
+
     public function deleteSelected()
     {
-        if (!Auth::check()) {
-            $this->alert('error', 'You need to log in to delete liked products.', [
-                'position' => 'top-end',
+        if (count($this->selectedProducts) > 0) {
+            LikedProductManagement::removeFromLikedProductsTable($this->selectedProducts);
+
+            $this->products = $this->products->filter(function ($product) {
+                return !in_array($product->id, $this->selectedProducts);
+            });
+
+            $count = count($this->selectedProducts);
+            $message = $count === 1
+                ? 'Product successfully removed from liked products!'
+                : 'Selected products successfully removed from liked products!';
+
+            $this->alert('success', $message, [
+                'position' => 'bottom-end',
                 'timer' => 3000,
                 'toast' => true,
             ]);
-            return;
-        }
 
-        if (empty($this->selectedProducts)) {
+            $this->selectedProducts = [];
+            $this->isAllSelected = false;
+        } else {
             $this->alert('warning', 'No products selected for deletion.', [
                 'position' => 'bottom-end',
                 'timer' => 3000,
                 'toast' => true,
             ]);
-            return;
         }
-
-        $likedProductIds = array_map(fn($product) => $product['product_id'], $this->selectedProducts);
-
-        LikedProductManagement::removeFromLikedProductsTable($likedProductIds);
-
-        $count = count($this->selectedProducts);
-        $message = $count === 1
-            ? 'Product successfully removed from liked products!'
-            : 'Selected products successfully removed from liked products!';
-
-        $this->alert('success', $message, [
-            'position' => 'bottom-end',
-            'timer' => 3000,
-            'toast' => true,
-        ]);
-
-        $this->selectedProducts = [];
-
-        $this->likedProducts = LikedProductManagement::showLiked();
-
-        $this->dispatch('updatedLikedProducts');
     }
 
     public function render()
     {
-        if (empty($this->likedProducts)) {
-            return view('livewire.liked-product', [
-                'products' => collect([])
-            ]);
-        }
-
-        $products = Product::where('is_active', 1)
-            ->whereIn('id', $this->likedProducts)
-            ->get()
-            ->map(function ($product) {
-                $likedProduct = \App\Models\LikedProduct::where('user_id', auth()->id())
-                    ->where('product_id', $product->id)
-                    ->first();
-                $product->liked_product_id = $likedProduct ? $likedProduct->id : null;
-                return $product;
-            });
-
         return view('livewire.liked-product', [
-            'products' => $products
+            'products' => $this->products
         ]);
     }
 }
