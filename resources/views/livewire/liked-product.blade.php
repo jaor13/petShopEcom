@@ -4,8 +4,9 @@
             <h2 style="font-size: 25px;">Liked Products</h2>
             <div class="select-all-container">
                 @if($editMode)
-                <input type="checkbox" wire:model="isAllSelected" wire:click="toggleSelectAll" class="circle-checkbox select-all-checkbox" />
-                <label class="ms-2" style="color: gray;">Select All</label>
+                    <input type="checkbox" wire:model="isAllSelected" wire:click="toggleSelectAll"
+                        class="circle-checkbox select-all-checkbox" />
+                    <label class="ms-2" style="color: gray;">Select All</label>
                 @endif
             </div>
         </div>
@@ -61,8 +62,9 @@
 
                         @if($editMode)
                             <input type="checkbox" wire:model="selectedProducts" value="{{ $product->id }}"
-                                class="circle-checkbox">
+                                class="circle-checkbox" wire:click="updateSelectAllStatus">
                         @endif
+
 
                         <a href="{{ url('product/' . $product->slug) }}">
                             <img src="{{ url('storage/' . $product->images[0]) }}" class="card-img-top img-fluid"
@@ -94,9 +96,8 @@
                             wire:click.prevent="addToCart({{ $product->id }})" @endif
                                 class="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-300">
 
-                                <div style="display: inline-flex; align-items: center; justify-content: center; 
-                                                                                                                        width: 40px; height: 40px; background-color: #00CED1; border-radius: 10px; padding: 10px; 
-                                                                                                                        transition: background-color 0.3s ease, transform 0.2s ease;"
+                                <div style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: #00CED1; border-radius: 10px; padding: 10px; 
+                                    transition: background-color 0.3s ease, transform 0.2s ease;"
                                     onmouseover="this.style.backgroundColor='#00B2B5'; this.style.transform='scale(1.1)';"
                                     onmouseout="this.style.backgroundColor='#00DCE3'; this.style.transform='scale(1)';">
 

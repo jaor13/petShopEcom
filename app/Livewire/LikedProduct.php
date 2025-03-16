@@ -45,16 +45,19 @@ class LikedProduct extends Component
         }
     }
 
+    public function updateSelectAllStatus()
+    {
+        $this->isAllSelected = count($this->selectedProducts) === $this->products->count();
+    }
 
     public function toggleSelectAll()
     {
-        if ($this->isAllSelected) {
-            $this->selectedProducts = $this->products->pluck('id')->toArray();
-        } else {
+        if ($this->isAllSelected == false) {
             $this->selectedProducts = [];
+        } else {
+            $this->selectedProducts = $this->products->pluck('id')->toArray();
         }
     }
-
 
     public function deleteSelected()
     {
