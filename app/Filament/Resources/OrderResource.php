@@ -32,6 +32,8 @@ use NumberFormatter;
 use Filament\Support\Facades\FilamentNumber as Number;
 use Filament\Forms\Components\Group;
 use App\Filament\Resources\OrderResource\Pages\Invoice;
+use Illuminate\Support\Facades\Storage;
+
 
 
 
@@ -49,6 +51,15 @@ class OrderResource extends Resource
             ->schema([
                 Group::make()->columnSpanFull()->schema([
                     Section::make('Order Information')->schema([
+
+                        Placeholder::make('order_id')
+                        ->label('Order ID')
+                        ->content(fn ($record) => $record->id),
+
+                        Placeholder::make('order_date')
+                        ->label('Order Date')
+                        ->content(fn ($record) => $record->created_at->format('D d Y h:i A')),
+
                         Select::make('user_id') // Use 'user_id' since it's the actual value being stored
                         ->label('Customer')
                         ->searchable()
@@ -61,7 +72,6 @@ class OrderResource extends Resource
                         ->getOptionLabelUsing(fn ($value) => \App\Models\User::find($value)?->username) // Display username when selected
                         ->required(),
                     
-
 
                         Select::make('payment_method')
                         ->options([
@@ -116,7 +126,29 @@ class OrderResource extends Resource
                         ->columnSpanFull(),
                     ])->columns(2),
 
-          
+                    
+                    Section::make('Delivery Information')->schema([
+                        Group::make()->schema([
+                            Placeholder::make('full_name')
+                            ->label('Full Name')
+                            ->content(fn ($record) => ($record->user->address->first_name ?? 'N/A') . ' ' . ($record->user->address->last_name ?? '')),
+
+
+                            Placeholder::make('phone')
+                                ->label('Phone Number')
+                                ->content(fn ($record) => $record->user->address->phone ?? 'N/A'),
+
+                                Placeholder::make('delivery_address')
+                                ->label('Delivery Address')
+                                ->content(fn ($record) => 
+                                    ($record->user->address->street_address ?? 'N/A') . ', ' . 
+                                    ($record->user->address->city ?? 'N/A') . ', ' . 
+                                    ($record->user->address->zip_code ?? 'N/A') . ', ' . 
+                                    ($record->user->address->province ?? 'N/A')
+                                ),
+                        ])->columns(3),
+
+                    ])->columns(1),
 
 
                     Section::make('Order Items')->schema([
@@ -124,6 +156,7 @@ class OrderResource extends Resource
                             ->relationship()
                             ->schema([
                                 // Product Selection
+
                                 Select::make('product_id')
                                     ->relationship('product', 'product_name')
                                     ->getOptionLabelFromRecordUsing(fn (Product $product) => "{$product->product_name}")
@@ -170,6 +203,7 @@ class OrderResource extends Resource
                                             $set('total_amount', $variant->price * $get('quantity', 1));
                                         }
                                     }),
+
                     
                                 // Quantity Input
                                 TextInput::make('quantity')
@@ -197,35 +231,75 @@ class OrderResource extends Resource
                                     ->required()
                                     ->dehydrated()
                                     ->columnSpan(3),
-                            ])->columns(12),
+
+                                    Placeholder::make('image')
+                                    ->label('Product Image')
+                                    ->content(function (Get $get) {
+                                        $product = Product::find($get('product_id'));
+                                        $variant = \App\Models\ProductVariant::find($get('variant_id'));
                                 
+                                        // Check for variant image first
+                                        if ($variant && !empty($variant->image)) {
+                                            $imagePath = $variant->image;
+                                        }
+                                        // Check if product images exist and ensure it's an array
+                                        elseif ($product && !empty($product->images)) {
+                                            $imagePath = is_array($product->images) ? $product->images[0] : $product->images;
+                                        } else {
+                                            $imagePath = null;
+                                        }
+                                
+                                        // Display image if available
+                                        if ($imagePath) {
+                                            return new \Illuminate\Support\HtmlString('<img src="' . asset('storage/' . ltrim($imagePath, '/')) . '" alt="Product Image" style="max-width: 100px; max-height: 100px; border: 1px solid #ddd; border-radius: 4px;">');
+                                        }
+                                
+                                        return 'No image available';
+                                    })
+                                    ->columnSpan(9),
+                                
+                            ])->columns(12),
+
+                            
+                                
+                            // Placeholder::make('shipping_amount_placeholder')
+                            // ->label('Shipping Fee')
+                            // ->content('₱56.00'),
+                        
+                            // Hidden::make('shipping_amount')
+                            //     ->default(56),
+                        
+
+                        // // Grand Total Calculation
+                        // Placeholder::make('grand_total_placeholder')
+                        //     ->label('Grand Total')
+                        //     ->content(function(Get $get, Set $set){
+                        //         $total = 0;
+                        //         if (!$repeaters = $get('items')) {
+                        //             return '₱56.00'; // Default to shipping fee if no items
+                        //         }
+                    
+                        //         foreach($repeaters as $key => $repeater){
+                        //             $total += $get("items.{$key}.total_amount");
+                        //         }
+
+                        //         $total += 56; // Add the fixed shipping amount
+                        //         $set('grand_total', $total);
+                        //         return '₱' . number_format($total, 2);
+                        //     }),
+                    
+                        // Hidden::make('grand_total')->default(0)
+                            Group::make()->schema([
+                                
+                            Placeholder::make('grand_total_placeholder')
+                            ->label('Grand Total')
+                            ->content(fn ($record) => '₱' . number_format($record->grand_total, 2)),
+
                             Placeholder::make('shipping_amount_placeholder')
                             ->label('Shipping Fee')
-                            ->content('₱56.00'),
+                            ->content(fn ($record) => '₱' . number_format($record->shipping_amount, 2)),
                         
-                            Hidden::make('shipping_amount')
-                                ->default(56),
-                        
-
-                        // Grand Total Calculation
-                        Placeholder::make('grand_total_placeholder')
-                            ->label('Grand Total')
-                            ->content(function(Get $get, Set $set){
-                                $total = 0;
-                                if (!$repeaters = $get('items')) {
-                                    return '₱56.00'; // Default to shipping fee if no items
-                                }
-                    
-                                foreach($repeaters as $key => $repeater){
-                                    $total += $get("items.{$key}.total_amount");
-                                }
-
-                                $total += 56; // Add the fixed shipping amount
-                                $set('grand_total', $total);
-                                return '₱' . number_format($total, 2);
-                            }),
-                    
-                        Hidden::make('grand_total')->default(0)
+                            ])->columns(3)
                     ])
                 ])                    
 
@@ -294,10 +368,10 @@ class OrderResource extends Resource
                 ->searchable(),
 
                 TextColumn::make('created_at')
+                ->label('Order Date')
                 ->sortable()
-                ->dateTime()
+                ->dateTime('M d, Y h:i A') // 12-hour format with AM/PM
                 ->toggledHiddenByDefault(true),
-
               
             ])
             ->filters([
@@ -325,7 +399,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AddressRelationManager::class,
+          
         ];
     }
 

@@ -19,9 +19,9 @@ class Address extends Model
         'zip_code',
     ];
 
-    public function order()
+    public function user()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(User::class);
     }
 
     public function getFullNameAttribute()
