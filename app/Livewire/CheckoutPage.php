@@ -26,7 +26,6 @@ class CheckoutPage extends Component
     public $payment_method;
     public $selected_items = [];
     public $shipping_amount;
-
     public $use_existing_address = false;
     public $showAddressModal = false;
     public $is_editing = false;
@@ -108,7 +107,9 @@ class CheckoutPage extends Component
 
     public function placeOrder()
     {
-        $cart_items = CartManagement::getCartItemsFromDB();
+        $cart_items = array_filter(CartManagement::getCartItemsFromDB(), function ($item) {
+            return in_array($item['cart_id'], $this->selected_items);
+        });
         $grand_total = CartManagement::calculateGrandTotal($this->selected_items) + $this->shipping_amount;
 
         $shipping_amount = $this->shipping_amount;
@@ -136,7 +137,8 @@ class CheckoutPage extends Component
             'shipping_method' => 'standard',
         ]);
 
-        CartManagement::clearCartItems();
+        // Clear only the selected cart items
+        CartManagement::clearCartItems($this->selected_items);
 
         ProcessOrderStatus::dispatch($order)->delay(now()->addMinutes(1));
 
@@ -181,7 +183,6 @@ class CheckoutPage extends Component
 
         // Handle Cash on Delivery (COD)
         if ($this->payment_method === 'cod') {
-            CartManagement::clearCartItems();
             return redirect()->route('my-purchases');
         }
 

@@ -204,20 +204,24 @@ class CartManagement
     }
 
     // Clear cart items from db
-    static public function clearCartItems()
-    {
-        $user_id = Auth::id();
-        $session_id = session()->getId(); // Get session ID for guest users
-
-        // Delete cart items for logged-in users or guest users
-        Cart::where(function ($query) use ($user_id, $session_id) {
-            if ($user_id) {
-                $query->where('user_id', $user_id);
-            } else {
-                $query->where('session_id', $session_id);
-            }
-        })->delete();
+    static public function clearCartItems($selected_items = [])
+{
+    if (empty($selected_items)) {
+        return; // If no items are selected, do nothing
     }
+
+    $user_id = Auth::id();
+    $session_id = session()->getId(); // Get session ID for guest users
+
+    // Delete selected cart items for logged-in users or guest users
+    Cart::where(function ($query) use ($user_id, $session_id) {
+        if ($user_id) {
+            $query->where('user_id', $user_id);
+        } else {
+            $query->where('session_id', $session_id);
+        }
+    })->whereIn('id', $selected_items)->delete();
+}
 
     // Get all cart items from db
     static public function getCartItemsFromDB()
