@@ -8,8 +8,8 @@
         <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-gray-100 rounded-t-lg p-6">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-2xl font-extrabold text-gray-700">Invoice Number: #{{ $order->id }}</h1>
-                    <p class="text-gray-400">Date: {{ $order->created_at->format('F j, Y') }}</p>
+                    <h1 class="text-2xl font-extrabold text-gray-700">Invoice for Order: #{{ $order->id }}</h1>
+                    <p class="text-gray-400">Date Ordered: {{ $order->created_at->format('F j, Y') }}</p>
                 </div>
                 <div class="text-right">
                     <img src="{{ asset('assets/images/brand-logo.svg') }}" alt="Company Logo" class="w-30 h-30" style="width: 120px; height: 120px;">
@@ -25,10 +25,10 @@
             <!-- Delivery Details -->
             <div class="bg-blue-50 p-6 rounded-lg">
                 <h2 class="font-bold text-blue-800 text-lg">Delivery Details</h2>
-                <p class="text-gray-700">{{ $order->address->full_name ?? 'N/A' }}</p>
-                <p class="text-gray-700">{{ $order->address->street_address ?? 'N/A' }}, {{ $order->address->city ?? '' }}, {{ $order->address->province ?? '' }} {{ $order->address->zip_code ?? '' }}</p>
-                <p class="text-gray-700">Email: {{ $order->customer->email ?? 'N/A' }}</p>
-                <p class="text-gray-700">Phone: {{ $order->address->phone ?? 'N/A' }}</p>
+                <p class="text-gray-700">{{ $order->user->address->full_name ?? 'N/A' }}</p>
+                <p class="text-gray-700">{{ $order->user->address->street_address ?? 'N/A' }}, {{ $order->user->address->city ?? '' }},{{ $order->user->address->zip_code ?? '' }} {{ $order->user->address->province ?? '' }} </p>
+                <p class="text-gray-700">Email: {{ $order->user->email ?? 'N/A' }}</p>
+                <p class="text-gray-700">Phone: {{ $order->user->address->phone ?? 'N/A' }}</p>
             </div>
             
             <!-- Payment Details -->
@@ -36,7 +36,7 @@
                 <h2 class="font-bold text-blue-800 text-lg">Payment Details</h2>
                 <p class="text-gray-700">Method: {{ $order->payment_method }}</p>
                 <p class="text-gray-700">Status: {{ ucfirst($order->payment_status) }}</p>
-                <p class="text-gray-700">Transaction ID: {{ $order->transaction_id ?? 'N/A' }}</p>
+                <p class="text-gray-700">Transaction ID: {{ $order->paymongo_reference ?? 'N/A' }}</p>
             </div>
         </div>
 

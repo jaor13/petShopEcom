@@ -18,7 +18,7 @@ class Invoice extends Page
     public function mount($record)
     {
         $this->record = $record;
-        $this->order = Order::with(['items.product', 'items.variant', 'address'])->find($record);
+        $this->order = Order::with(['items.product', 'items.variant', 'user.address'])->find($record);
     }
 
     public function getHeaderActions(): array
