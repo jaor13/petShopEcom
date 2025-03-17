@@ -277,11 +277,49 @@ margin-left: 0px;
 
 
  
-
+/* 
 .card:hover {
   transform: translateY(-3px); 
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.116); 
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
+
+.card{
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+.card {
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-indicators button {
+  background-color: #f3d7d7;
+  border: none;
+}
+
+.carousel-indicators .active {
+  background-color: #ffffff; /* Change this to match your theme */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+    opacity: 1;
+}
+
+
 
 .card-img-top {
             height: 22vh;
@@ -297,6 +335,7 @@ margin-left: 0px;
             --bs-gutter-y: 0;
         }
 
+        
 .text-muted {
   --bs-text-opacity: 1;
   color: var(--bs-secondary-color) !important;

@@ -2,7 +2,8 @@
   <!-- Main Content -->
   <main class="container my-2 flex-grow-1 bg-red">
     <section class="slider position-relative">
-      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+      
+      <!-- <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="10000">
             <img src="{{ asset('assets/images/Slide1.svg') }}" class="d-block w-100" alt="Slide 1">
@@ -30,16 +31,56 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
-      </div>
+      </div> -->
+
+      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img src="{{ asset('assets/images/Slide1.svg') }}" class="d-block w-100" alt="Slide 1">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ asset('assets/images/Slide2.svg') }}" class="d-block w-100" alt="Slide 2">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ asset('assets/images/Slide3.svg') }}" class="d-block w-100" alt="Slide 3">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ asset('assets/images/Slide4.svg') }}" class="d-block w-100" alt="Slide 4">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ asset('assets/images/Slide5.svg') }}" class="d-block w-100" alt="Slide 5">
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
 
       <!-- Intro Section (Overlay on Top of Carousel) -->
       @auth
-      <div class="intro">
+      <!-- <div class="intro">
       <h1 class="pawsome-essentials">Pawsome Essentials<br>Delivered with Love!</h1>
       <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. Integer ut sed praesent eget auctor donec
         egestas orci amet.</p>
 
-      </div>
+      </div> -->
     @endauth
 
       @guest
@@ -53,7 +94,7 @@
     </section>
 
     @auth
-    <div id="chat-button-container" style="position: fixed; bottom: 20px; right: 175px;">
+    <div id="chat-button-container" style="position: fixed; z-index: 100; bottom: 20px; right: 175px;">
       <button id="chat-button"
       style="background-color: #00D1D8; color: white; border: none; padding: 10px 10px; border-radius: 10px; font-weight: bold; font-size: 1.5rem">
       <i class="fas fa-comments" style="font-size: 1.5em; margin-right: 5px; "></i> Chat
@@ -61,7 +102,7 @@
     </div>
 
     <div id="chat-window"
-      style="display: none; position: fixed; bottom: 10px; right: 100px; width: 350px; background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+      style="display: none; position: fixed; bottom: 10px; z-index: 100; right: 100px; width: 350px; background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
       <div
       style="background-color:#00DCE3; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
       <div>
@@ -108,7 +149,7 @@
     <!-- New Products Section -->
     <div class="container-fluid p-2 rounded-3" style="background-color: white;">
       <div style=" display: flex; justify-content: space-between; align-items: center;">
-        <h1 style="font-weight: bold; color: gray; font-size: xx-large; margin:0.4em 0em 0em 1em;">
+        <h1 style="font-weight: bold; color:#4F4F4F; font-size: xx-large; margin:0.4em 0em 0em 1.1em;">
           New Released Products
         </h1>
         <a href="{{ route('products', ['type' => 'latest']) }}"
@@ -116,7 +157,7 @@
           View All
         </a>
       </div>
-      <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em;">
         @livewire('partials.product-grid', ['limit' => 5, 'type' => 'latest'])
       </div>
     </div>
@@ -125,7 +166,7 @@
 
     <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
       <div style=" display: flex; justify-content: space-between; align-items: center;">
-        <h1 style="font-weight: bold; color: gray; font-size: xx-large; margin:0.4em 0em 0em 1em;">
+        <h1 style="font-weight: bold; color:#4F4F4F; font-size: xx-large; margin:0.4em 0em 0em 1.1em;">
           Best Seller Products
         </h1>
         <a href="{{ route('products', ['type' => 'best_sellers']) }}"
@@ -133,11 +174,12 @@
           View All
         </a>
       </div>
-      <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
         @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
       </div>
     </div>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
+    
   </div>

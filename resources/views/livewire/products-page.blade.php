@@ -1,6 +1,6 @@
-<div class="container mt-5 bg-white py-4">
+<div class="container mt-5 bg-white rounded-3" style="padding:2em 4em 2em 2em;">
     <div class="mx-4 px-3">
-        <h1 class="text-3xl font-bold">
+        <h1 style="font-weight: bold; color:#4F4F4F; font-size: xx-large;">
             @if(request('query') && request('category'))
                 Search results for "{{ request('query') }}" in "{{ request('category') }}"
             @elseif(request('query'))
@@ -34,8 +34,8 @@
             ])
         @else
            @foreach ($groupedProducts as $categoryName => $products)
-            <div class="mx-4 px-3">
-                <h1 class="text-3xl font-bold">{{ $categoryName }}</h1>
+            <div class="mx-4 px-3" style="padding:2em 4em 0em 2em;">
+                <h1 style="font-weight: bold; color:#4F4F4F; font-size: xx-large;">{{ $categoryName }}</h1>
             </div>
 
             <div class="mb-12"> 
@@ -48,4 +48,6 @@
         @endforeach
         @endif
     </div>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </div>
