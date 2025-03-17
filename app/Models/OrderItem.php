@@ -34,36 +34,36 @@ class OrderItem extends Model
     }
 
 
-    //   // Update stock quantity when creating an order item
-    //   protected static function boot()
-    //   {
-    //       parent::boot();
+      // Update stock quantity when creating an order item
+      protected static function boot()
+      {
+          parent::boot();
   
-    //       static::creating(function ($orderItem) {
-    //           $orderItem->updateStock(-$orderItem->quantity); // Reduce stock
-    //       });
+          static::creating(function ($orderItem) {
+              $orderItem->updateStock(-$orderItem->quantity); // Reduce stock
+          });
   
-    //       static::deleting(function ($orderItem) {
-    //           $orderItem->updateStock($orderItem->quantity); // Restore stock if order is canceled
-    //       });
-    //   }
+          static::deleting(function ($orderItem) {
+              $orderItem->updateStock($orderItem->quantity); // Restore stock if order is canceled
+          });
+      }
   
-    //   private function updateStock($amount)
-    //   {
-    //       if ($this->variant_id) {
-    //           // Deduct from product variant
-    //           $variant = $this->variant;
-    //           if ($variant) {
-    //               $variant->decrement('stock_quantity', abs($amount));
-    //           }
-    //       } else {
-    //           // Deduct from product directly (only if no variant)
-    //           $product = $this->product;
-    //           if ($product && !$product->variants()->exists()) {
-    //               $product->decrement('stock_quantity', abs($amount));
-    //           }
-    //       }
-    //   }
+      private function updateStock($amount)
+      {
+          if ($this->variant_id) {
+              // Deduct from product variant
+              $variant = $this->variant;
+              if ($variant) {
+                  $variant->decrement('stock_quantity', abs($amount));
+              }
+          } else {
+              // Deduct from product directly (only if no variant)
+              $product = $this->product;
+              if ($product && !$product->variants()->exists()) {
+                  $product->decrement('stock_quantity', abs($amount));
+              }
+          }
+      }
 
 
     
