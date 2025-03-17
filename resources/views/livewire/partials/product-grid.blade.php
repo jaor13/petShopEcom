@@ -2,10 +2,10 @@
     <div class="row row-cols-1 row-cols-md-5 mx-auto">
         @foreach ($products as $product)
             <div class="col" wire:key="{{ $product->id }}">
-                <div class="card h-100 p-2 m-2" style="position: relative;">
+                <div class="card h-100 p-2 m-2 " style="position: relative;">
                     <a href="{{ url('product/' . $product->slug) }}">
                         <img src="{{ url('storage/' . $product->images[0]) }}" 
-                            class="card-img-top img-fluid" 
+                            class="card-img-top img-fluid bg-[#E7FAFF] rounded-lg" 
                             alt="{{ $product->product_name }}" 
                             style="object-fit: cover; height: 230px;">
                     </a>

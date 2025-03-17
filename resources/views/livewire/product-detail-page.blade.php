@@ -1,5 +1,5 @@
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto pt-5 ">
-  <section class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7 font-normal font-['Poppins']">
+  <section class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7 font-normal font-['Afacad']">
     <div class="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
       <div class="flex flex-wrap -mx-6">
         <!-- Product Image and Slideshow -->
@@ -47,22 +47,22 @@
               <!-- <button @click="prevImage"
               class="absolute left-2 top-1/2 text-gray-400 px-2 py-1 rounded-l-md">❮</button> -->
               <img x-bind:src="images[mainImageIndex]" alt=""
-                class="object-cover w-full lg:h-full transition-opacity duration-500">
+              class="object-cover w-full lg:h-full transition-opacity bg-[#E7FAFF] rounded-lg duration-500">
               <!-- <button @click="nextImage"
               class="absolute right-2 top-1/2 text-gray-400 px-2 py-1 rounded-r-md">❯</button> -->
             </div>
 
-            <p class="max-w-md text-gray-700 dark:text-gray-400" x-text="variantName"></p>
+            <p class="max-w-md text-gray-700 font-semibold dark:text-black-400" x-text="variantName"></p>
 
             <!-- Variant Images -->
-            <div class="flex-wrap hidden md:flex">
-              @foreach ($product->variants as $variant)<div class="w-1/2 p-2 sm:w-1/4"
+            <div class="flex-wrap hidden md:flex ">
+              @foreach ($product->variants as $variant)<div class="w-1/2  mr-1 sm:w-1/4 border"
           wire:click="selectVariant('{{ $variant->name }}', {{ $variant->price }}, {{ $variant->stock_quantity }})"
           x-on:click="selectVariant('{{ $variant->name }}', '{{ url('storage', $variant->image) }}', {{ $variant->stock_quantity }}, {{ $variant->price }})">
 
           <img src="{{ url('storage', $variant->image) }}" alt="{{ $variant->name }}"
-            class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-blue-500"
-            :class="selectedVariant === '{{ $variant->name }}' ? 'border-2 border-blue-500' : ''">
+            class="w-35 lg:h-25 cursor-pointer "
+            :class="selectedVariant === '{{ $variant->name }}' ? 'border-2 border-[#00DCE3]' : ''">
           </div>
         @endforeach
             </div>
@@ -73,7 +73,7 @@
         <div class="w-full px-4 md:w-1/2">
           <div class="lg:pl-5">
             <div class="mb-8">
-              <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-gray-400 md:text-4xl">
+              <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-[#3E3939] md:text-4xl">
                 {{ $product->product_name }}
               </h2>
 
@@ -84,12 +84,14 @@
                   <span style="color: #374151;">PET ESSENTIALS</span>
                 </div>
                 <div style="display: flex; align-items: center;">
-                  <span
-                    style="font-family: sans-serif; font-size: 2rem; margin-right: 5px; color: #ff0004; cursor: pointer;"
-                    wire:click="addToLiked({{ $product->id }})">
-                    ♡
-                  </span>
-
+                <div wire:click="addToLiked({{ $product->id }})" class="like-button-container">
+    <span class="like-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#FF8284"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="bevel" class="like-icon hover:fill-red-500  ">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+    </span>
+</div>
                   <span style="font-family: sans-serif; color: #374151;">Add to Favorites</span>
                 </div>
               </div>
