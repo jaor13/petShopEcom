@@ -109,14 +109,18 @@
               <div style="display: flex; align-items: center;">
                 <span style="font-size: 18px; font-weight: bold; color: #555; margin-right: 10px;">Quantity:</span>
                 <div style="display: inline-flex; border: 1px solid #00CED1; border-radius: 5px;">
-                  <button wire:click="decreaseQty"
-                    style="width: 40px; height: 30px; border: none; background-color: transparent; font-size: 18px; cursor: pointer;">-</button>
-                  <input type="text" wire:model="quantity" value="1"
-                    style="width: 40px; height: 30px; text-align: center; border: none; border-left: 1px solid #00CED1; border-right: 1px solid #00CED1; font-size: 18px;"
-                    readonly>
-                  <button wire:click="increaseQty"
-                    style="width: 40px; height: 30px; border: none; background-color: transparent; font-size: 18px; cursor: pointer;">+</button>
-                </div>
+    <button wire:click="decreaseQty"
+            style="width: 40px; height: 30px; border: none; background-color: transparent; font-size: 18px; cursor: pointer;"
+            onmouseover="this.style.backgroundColor='#E0FFFF';" 
+            onmouseout="this.style.backgroundColor='transparent';">-</button>
+    <input type="text" wire:model="quantity" value="1"
+           style="width: 40px; height: 30px; text-align: center; border: none; border-left: 1px solid #00CED1; border-right: 1px solid #00CED1; font-size: 18px;"
+           readonly>
+    <button wire:click="increaseQty"
+            style="width: 40px; height: 30px; border: none; background-color: transparent; font-size: 18px; cursor: pointer;"
+            onmouseover="this.style.backgroundColor='#E0FFFF';" 
+            onmouseout="this.style.backgroundColor='transparent';">+</button>
+</div>
               </div>
               <div class="flex items-center mt-4">
                 <span class="text-yellow-500" style="font-size: 1.2em;">&#9733;</span>

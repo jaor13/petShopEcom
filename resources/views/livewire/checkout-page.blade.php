@@ -108,7 +108,7 @@
                                     <li class="py-3 sm:py-4" wire:key="{{ $ci['product_id'] }}">
                                         <div class="flex items-center">
                                            
-                                                <img alt="{{ $ci['name'] }}" style="width:15%; height:15%;"
+                                                <img alt="{{ $ci['name'] }}" style="width:15%; height:15%; background:#E7FAFF;"
                                                     src="{{ url('storage', $ci['image']) }}">
                                            
                                             <div class="flex-1 min-w-0 ms-4">
