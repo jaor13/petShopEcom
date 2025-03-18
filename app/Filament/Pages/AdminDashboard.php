@@ -22,8 +22,11 @@ class AdminDashboard extends Page
     protected function getHeaderWidgets(): array
     {
         return [
-           App\Filament\Resources\OrderResource\Widgets\OrderStats::class,
-           App\Filament\Widgets\LatestOrders::class,
+            App\Filament\Widgets\OrderUserRevenueStats::class,
+            App\Filament\Widgets\FilaWidget::class,
+            App\Filament\Widgets\OrdersTrendWidget::class,
+            App\Filament\Widgets\InventoryTrackingWidget::class,
+            App\Filament\Widgets\LatestOrders::class,
         ];
     }
 
