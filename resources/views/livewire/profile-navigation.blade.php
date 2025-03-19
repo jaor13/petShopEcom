@@ -41,6 +41,7 @@
         <h2>Ratings and Reviews</h2>
     </div>
     <div class="{{ $activeSection === 'liked-products' ? '' : 'd-none' }}">
+
     </div>
 </main>
 </div>

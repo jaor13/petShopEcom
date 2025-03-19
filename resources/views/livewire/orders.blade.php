@@ -29,7 +29,7 @@
                     </div>
                     <div class="text-end">
                         <a class="btn btn-link">{{ ucfirst(str_replace('_', ' ', $order['status'])) }}</a>
-                        <a href="#" class="btn btn-link">Order Details ></a>
+                        <a href="#" class="btn btn-link" wire:click.prevent="selectOrder({{ $order['id'] }})">Order Details ></a>
                     </div>
                 </div>
 

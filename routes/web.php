@@ -10,7 +10,6 @@ use App\Livewire\CartPage;
 use App\Livewire\CheckoutPage;
 use App\Livewire\LandingPage;
 use App\Livewire\LikedProduct;
-use App\Livewire\OrderDetailsPage;
 use App\Livewire\OrdersPage;
 use App\Livewire\ProductDetailPage;
 use App\Livewire\ProductsPage;
@@ -21,6 +20,7 @@ use App\Http\Controllers\CustomProfileController;
 use App\Models\Order;
 use App\Http\Controllers\PaymentController;
 use App\Livewire\UserProfile;
+use App\Livewire\OrderDetails;
 
 
 
@@ -61,7 +61,10 @@ Route::middleware('auth')->group(function () {
     //new
     Route::get('/checkout', CheckoutPage::class)->name('checkout');
     Route::get('/orders', OrdersPage::class);
-    Route::get('/orders/{orderID}', OrderDetailsPage::class);
+
+
+    Route::get('/orders/order-details/{orderId}', OrderDetails::class)->name('order.details');
+
 
     Route::get('/success', SuccessPage::class);
     Route::get('/cancel', CancelPage::class);

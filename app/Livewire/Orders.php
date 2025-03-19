@@ -11,6 +11,8 @@ class Orders extends Component
 {
     public $status = 'all'; // Default tab
     public $orders = [];
+    public $selectedOrderId = null;
+
 
     public function mount()
     {
@@ -21,19 +23,22 @@ class Orders extends Component
     {
         // Get orders for the authenticated user
         $query = Order::where('user_id', Auth::id())
-            ->with('items.product') // Assuming you have a relationship for order items
+            ->with(['items.product', 'items.variant', 'user.address']) // Eager load user and address relationships
             ->orderBy('created_at', 'desc');
 
-            if ($this->status !== 'all') {
-                $query->whereIn('status', match ($this->status) {
-                    'to_ship' => ['processing', 'to_ship'],
-                    'to_receive' => ['shipped'],
-                    'completed' => ['delivered'],
-                    default => [$this->status],
-                });
-            }
-        
+        if ($this->status !== 'all') {
+            $query->whereIn('status', match ($this->status) {
+                'to_ship' => ['processing', 'to_ship'],
+                'to_receive' => ['shipped'],
+                'completed' => ['delivered'],
+                default => [$this->status],
+            });
+        }
+
         $this->orders = $query->get()->map(function ($order) {
+            $user = $order->user;
+            $address = $user->address;
+
             return [
                 'id' => $order->id,
                 'date' => $order->created_at->format('F j, Y, H:i'),
@@ -46,15 +51,15 @@ class Orders extends Component
                 'items' => $order->items->map(function ($item) {
                     $product = $item->product;
                     $variant = $item->variant;
-        
+
                     // Default to the first product image if available, otherwise use a default image
                     $image = !empty($product->images) ? $product->images[0] : 'default-image.jpg';
-        
+
                     // If a variant exists and has an image, use it instead
                     if ($variant && !empty($variant->image)) {
                         $image = $variant->image;
                     }
-        
+
                     return [
                         'name' => $product->product_name,
                         'variant_name' => $variant ? $variant->name : 'N/A',
@@ -67,10 +72,20 @@ class Orders extends Component
                 'total_price' => $order->grand_total,
                 'payment_method' => $order->payment_method,
                 'payment_status' => $order->payment_status,
+                'shipping_amount' => $order->shipping_amount,
+                'user' => [
+                    'first_name' => $user->address->first_name,
+                    'last_name' => $user->address->last_name,
+                    'phone' => $user->address->phone,
+                    'address' => [
+                        'street_address' => $address->street_address,
+                        'city' => $address->city,
+                        'province' => $address->province,
+                        'zip_code' => $address->zip_code,
+                    ],
+                ],
                 'message' => $this->getStatusMessage($order->status),
             ];
-        
-        
         })->toArray();
     }
 
@@ -79,6 +94,13 @@ class Orders extends Component
         $this->status = $status;
         $this->fetchOrders(); // Refresh orders based on new filter
     }
+
+    public function selectOrder($orderId)
+    {
+        $this->selectedOrderId = $orderId;
+        // dd($this->selectedOrderId);
+    }
+
 
     public function getFilteredOrders()
     {
@@ -104,7 +126,7 @@ class Orders extends Component
     public function getStatusMessage($status)
     {
         return match ($status) {
-            'new', => 'Your order is being processed.',
+            'new' => 'Your order is being processed.',
             'processing', 'to_ship' => 'Your order is being prepared for shipping.',
             'to_receive', 'shipped' => 'Your order is on its way to you.',
             'completed', 'delivered' => 'Order completed successfully.',
@@ -116,8 +138,13 @@ class Orders extends Component
 
     public function render()
     {
+        if ($this->selectedOrderId) {
+            $order = collect($this->orders)->firstWhere('id', $this->selectedOrderId);
+            return view('livewire.order-details', ['order' => $order]);
+        }       
+
         return view('livewire.orders', [
-            'filteredOrders' => $this->orders,
+            'filteredOrders' => $this->getFilteredOrders(),
         ]);
     }
 }
