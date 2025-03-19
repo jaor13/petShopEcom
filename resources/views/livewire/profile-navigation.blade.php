@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a wire:click.prevent="setActiveSection('liked-products')" class="nav-link {{ $activeSection === 'liked-products' ? 'active' : '' }}" href="#">
+                <a wire:click.prevent="setActiveSection('liked-product')" class="nav-link {{ $activeSection === 'liked-product' ? 'active' : '' }}" href="#">
                     <i class="fas fa-heart"></i> Liked Products
                 </a>
             </li>
@@ -40,8 +40,8 @@
     <div class="{{ $activeSection === 'ratings-reviews' ? '' : 'd-none' }}">
         <h2>Ratings and Reviews</h2>
     </div>
-    <div class="{{ $activeSection === 'liked-products' ? '' : 'd-none' }}">
-
+    <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}">
+        @livewire('liked-product')
     </div>
 </main>
 </div>
