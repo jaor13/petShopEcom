@@ -102,7 +102,7 @@
               </hr>
               <p class="inline-block mb-6  text-4xl font-bold  text-[#F93535] ">
                 <span>{{ Number::currency($variant_price, 'PHP') }}</span>
-                <span class="text-base font-normal  line-through text-[#F93535]">$2800.99</span>
+                <!-- <span class="text-base font-normal  line-through text-[#F93535]">$2800.99</span> -->
               </p>
             </div>
 
@@ -128,7 +128,7 @@
               <div class="flex items-center mt-4">
                 <span class="text-yellow-500" style="font-size: 1.2em;">&#9733;</span>
                 <span class="ml-1" style="font-size: 1.1em; font-weight: 500;">4.6</span>
-                <span class="ml-1" style="color: #888;">|1198 Sold</span>
+                <span class="ml-1" style="color: #888;">|{{ $product->sold_count }} Sold</span>
               </div>
             </div>
             <div style="display: flex; flex-wrap: wrap; align-items: center;">
