@@ -62,8 +62,14 @@ class ProductGrid extends Component
         }
         
         if ($this->query) {
-            $products->where('product_name', 'like', '%' . $this->query . '%');
+            $products->where(function ($q) {
+                $q->whereHas('categories', function ($q) {
+                    $q->where('name', 'like', "%{$this->query}%");
+                })
+                ->orWhere('product_name', 'like', "%{$this->query}%");
+            });
         }
+        
         
         if ($this->type === 'latest') {
             $products->orderBy('created_at', 'desc'); 
