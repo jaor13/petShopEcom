@@ -54,7 +54,7 @@
         </div>
 
         <div class="heart-container">
-            <a href="{{ url('profile?section=liked-product') }}" class="relative flex items-center space-x-1">
+            <a href="{{ url('profile?section=liked-product') }}" wire:navigate class="relative flex items-center space-x-1">
                 <span><iconify-icon icon="mdi:heart" class="iconify-heart"></iconify-heart></span>
             </a>
         </div>
@@ -85,7 +85,7 @@
             <div x-show="open" x-transition class="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                 <p class="block px-4 py-2 text-gray-700">{{ auth()->user()->username }}</p>
                 <hr>
-                <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                <a href="{{ route('profile.show') }}" wire:navigate class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
