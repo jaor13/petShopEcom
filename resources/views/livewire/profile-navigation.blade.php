@@ -4,25 +4,25 @@
          @livewire('profile-settings')
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a wire:click.prevent="setActiveSection('my-account')" class="nav-link {{ $activeSection === 'my-account' ? 'active' : '' }}" href="#">
-                    <i class="fas fa-user"></i> My Account
+                <a wire:click.prevent="setActiveSection('my-account')" class="nav-link {{ $activeSection === 'my-account' ? 'active' : '' }}" href="#" style="color: gray;">
+                    <i class="far fa-user"  style="color: gray;"></i> My Account
                 </a>
             </li>
             <li class="nav-item">
-                <a wire:click.prevent="setActiveSection('my-purchases')" class="nav-link {{ $activeSection === 'my-purchases' ? 'active' : '' }}" href="#">
-                    <i class="fas fa-history"></i> My Purchases
+                <a wire:click.prevent="setActiveSection('my-purchases')" class="nav-link {{ $activeSection === 'my-purchases' ? 'active' : '' }}" href="#"style="color: gray;">
+                    <i class="fas fa-box"  style="color: gray;"></i> My Purchases
                 </a>
             </li>
             <li class="nav-item">
-                <a wire:click.prevent="setActiveSection('ratings-reviews')" class="nav-link {{ $activeSection === 'ratings-reviews' ? 'active' : '' }}" href="#">
-                    <i class="fas fa-star"></i> Ratings and Reviews
+                <a wire:click.prevent="setActiveSection('ratings-reviews')" class="nav-link {{ $activeSection === 'ratings-reviews' ? 'active' : '' }}" href="#"style="color: gray;">
+                    <i class="far fa-star"  style="color: gray;"></i> Ratings and Reviews
                 </a>
             </li>
             <li class="nav-item">
-                <a wire:click.prevent="setActiveSection('liked-product')" class="nav-link {{ $activeSection === 'liked-product' ? 'active' : '' }}" href="#">
-                    <i class="fas fa-heart"></i> Liked Products
+                <a wire:click.prevent="setActiveSection('liked-product')" class="nav-link {{ $activeSection === 'liked-product' ? 'active' : '' }}" href="#" style="color: gray;">
+                   <i class="far fa-heart" style="color: gray;"></i> Liked Products
                 </a>
-            </li>
+           </li>
         </ul>
     </div>
 </nav>

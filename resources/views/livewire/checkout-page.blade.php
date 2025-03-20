@@ -28,7 +28,7 @@
 
                                         <!-- Address Details -->
                                         <div class="ml-3 flex-grow-1">
-                                            <h5 class="font-semibold text-dark mb-1">
+                                            <h5 class="font-semibold text-dark mb-1 text-lg">
                                                 {{ $first_name }} {{ $last_name }}
                                             </h5>
                                             <p class="text-muted small mb-0">
