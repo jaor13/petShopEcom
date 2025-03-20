@@ -21,6 +21,7 @@ use App\Models\Order;
 use App\Http\Controllers\PaymentController;
 use App\Livewire\UserProfile;
 use App\Livewire\OrderDetails;
+use App\Livewire\Orders;
 
 
 // admin
@@ -68,6 +69,10 @@ Route::middleware(['notAdmin'])->group(function () {
     
     
        Route::get('/profile', UserProfile::class)->name('profile.show');
+
+
+       Route::get('/orders', Orders::class)->name('orders');
+      Route::get('/order-details/{order}', OrderDetails::class)->name('order-details');
 
     });
     
