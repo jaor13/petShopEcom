@@ -36,6 +36,7 @@
         <h2 class="ml-3">Ratings and Reviews</h2>
     </div>
     <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}">
+        <h2 class="section-title">Liked Products</h2>
         @livewire('liked-product')
     </div>
 </main>
