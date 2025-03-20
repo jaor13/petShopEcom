@@ -19,7 +19,7 @@
                         <td>{{ $item->product->product_name ?? 'Unknown Product' }}</td>
                         <td>{{ $item->variant->name ?? 'No Variant' }}</td>
                         <td>
-                            <button wire:click="selectOrderItem({{ $item->id }})" class="btn btn-primary"
+                            <button wire:click="selectOrderItem({{ $item->id }})" class="btn" style="background-color:#00DCE3; color:white;"
                                 data-bs-toggle="modal" data-bs-target="#reviewModal">
                                 Rate
                             </button>
