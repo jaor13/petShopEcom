@@ -3,11 +3,6 @@
         <div>
             <h2 style="font-size: 25px;">Liked Products</h2>
             <div class="select-all-container">
-                @if($editMode)
-                    <input type="checkbox" wire:model="isAllSelected" wire:click="toggleSelectAll"
-                        class="circle-checkbox select-all-checkbox" />
-                    <label class="ms-2" style="color: gray;">Select All</label>
-                @endif
             </div>
         </div>
 
@@ -62,7 +57,7 @@
 
                         @if($editMode)
                             <input type="checkbox" wire:model="selectedProducts" value="{{ $product->id }}"
-                                class="circle-checkbox" wire:click="updateSelectAllStatus">
+                                class="circle-checkbox">
                         @endif
 
 

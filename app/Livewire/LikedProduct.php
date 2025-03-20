@@ -22,7 +22,6 @@ class LikedProduct extends Component
     public $selectedProducts = [];
 
     public $editMode = false;
-    public $isAllSelected = false;
 
 
     public function mount()
@@ -31,7 +30,6 @@ class LikedProduct extends Component
             $likedProductIds = LikedProductManagement::showLiked();
 
             $this->products = Product::whereIn('id', $likedProductIds)->get();
-            $this->isAllSelected = false;
         }
     }
 
@@ -42,20 +40,6 @@ class LikedProduct extends Component
             $this->selectedProducts = [];
         } else {
             $this->selectedProducts = [];
-        }
-    }
-
-    public function updateSelectAllStatus()
-    {
-        $this->isAllSelected = count($this->selectedProducts) === $this->products->count();
-    }
-
-    public function toggleSelectAll()
-    {
-        if ($this->isAllSelected == false) {
-            $this->selectedProducts = [];
-        } else {
-            $this->selectedProducts = $this->products->pluck('id')->toArray();
         }
     }
 
@@ -80,7 +64,6 @@ class LikedProduct extends Component
             ]);
 
             $this->selectedProducts = [];
-            $this->isAllSelected = false;
             
             if ($this->products->isEmpty()) {
                 $this->editMode = false;  
