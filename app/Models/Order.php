@@ -20,6 +20,9 @@ class Order extends Model
         'shipping_method',
         'notes',
         'paymongo_reference',
+        'delivered_at', 
+        'completed_at', 
+        'cancelled_at'
     ];
 
     public function user()
