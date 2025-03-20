@@ -3,6 +3,7 @@
   <main class="container my-2 flex-grow-1 bg-red">
     <section class="slider position-relative">
 
+
       <!-- <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="10000">
@@ -47,25 +48,59 @@
           <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4"
             aria-label="Slide 5"></button>
         </div>
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3"
+            aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4"
+            aria-label="Slide 5"></button>
+        </div>
 
         <div class="carousel-inner " style="border-radius: 20px;">
           <div class="carousel-item active" data-bs-interval="10000">
+        <div class="carousel-inner " style="border-radius: 20px;">
+          <div class="carousel-item active" data-bs-interval="10000">
             <img src="{{ asset('assets/images/Slide1.svg') }}" class="d-block w-100" alt="Slide 1">
+            </div>
+            <div class="carousel-item">
+            <img src="{{ asset('assets/images/Slide2.svg') }}" class="d-block w-100" alt="Slide 2">
           </div>
           <div class="carousel-item">
-            <img src="{{ asset('assets/images/Slide2.svg') }}" class="d-block w-100" alt="Slide 2">
           </div>
           <div class="carousel-item">
             <img src="{{ asset('assets/images/Slide3.svg') }}" class="d-block w-100" alt="Slide 3">
           </div>
           <div class="carousel-item">
+          </div>
+          <div class="carousel-item">
             <img src="{{ asset('assets/images/Slide4.svg') }}" class="d-block w-100" alt="Slide 4">
+          </div>
+          <div class="carousel-item">
           </div>
           <div class="carousel-item">
             <img src="{{ asset('assets/images/Slide5.svg') }}" class="d-block w-100" alt="Slide 5">
           </div>
         </div>
+          </div>
+        </div>
 
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
           data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -94,8 +129,8 @@
       <div class="intro text-center">
 <<<<<<< Updated upstream
       <h1 class="pawsome-essentials"><strong> PEssentials<br>Delivered with Love! </strong></h1>
-      <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. <br> 
-      Integer ut sed praesent eget auctor donec
+      <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. <br>
+        Integer ut sed praesent eget auctor donec
 =======
       <h1 class="pawsome-essentials"><strong> Pawsome Essentials<br>Delivered with Love! </strong></h1>
       <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. <br>
