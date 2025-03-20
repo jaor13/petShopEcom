@@ -17,14 +17,16 @@ class ProductGrid extends Component
     public $type;
     public $limit;
     public $excludeProductId;
+    public $sortPrice;
 
-    public function mount($query = null, $category = null, $type = null, $limit = null, $excludeProductId = null)
+    public function mount($query = null, $category = null, $type = null, $limit = null, $excludeProductId = null, $sortPrice = null)
     {
         $this->query = $query;
         $this->category = $category;
         $this->type = $type;
         $this->limit = $limit;
         $this->excludeProductId = $excludeProductId;
+        $this->sortPrice = $sortPrice;
     }
 
 
@@ -62,8 +64,14 @@ class ProductGrid extends Component
         }
         
         if ($this->query) {
-            $products->where('product_name', 'like', '%' . $this->query . '%');
+            $products->where(function ($q) {
+                $q->whereHas('categories', function ($q) {
+                    $q->where('name', 'like', "%{$this->query}%");
+                })
+                ->orWhere('product_name', 'like', "%{$this->query}%");
+            });
         }
+        
         
         if ($this->type === 'latest') {
             $products->orderBy('created_at', 'desc'); 
@@ -79,6 +87,12 @@ class ProductGrid extends Component
             $products->orderBy('created_at', 'desc');
         } elseif ($this->type === 'best_sellers') {
             $products->orderBy('sold_count', 'desc');
+        }
+
+        if ($this->sortPrice === 'asc') {
+            $products->orderBy('price', 'asc');
+        } elseif ($this->sortPrice === 'desc') {
+            $products->orderBy('price', 'desc');
         }
 
         if ($this->limit) {

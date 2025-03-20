@@ -254,7 +254,8 @@ class CheckoutPage extends Component
 
         $grand_total = CartManagement::calculateGrandTotal($this->selected_items) + $this->shipping_amount;
         $shipping_amount = $this->shipping_amount; // Ensure shipping_amount is defined
+        $total_items = count($cart_items); // Calculate total items
 
-        return view('livewire.checkout-page', compact('cart_items', 'grand_total', 'shipping_amount'));
+        return view('livewire.checkout-page', compact('cart_items', 'grand_total', 'shipping_amount', 'total_items'));
     }
 }

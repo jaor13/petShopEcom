@@ -13,7 +13,7 @@
                             @if (!$use_existing_address)
                                 <!-- Add Address Button -->
                                 <button type="button" class="btn " wire:click="openAddressModal">
-                                    <i class="fas fa-plus-circle mr-2 "></i> 
+                                    <i class="fas fa-plus-circle mr-2 ml-3"></i> 
                                     Add Address
                                 </button>
                             @else
@@ -23,7 +23,7 @@
                                     <div class="d-flex align-items-center mr-3 ml-3">
                                         <!-- Location Pin Icon -->
                                         <div class="text-primary flex-shrink-0 " style="margin-bottom: 35px;">
-                                            <i class="fa-solid fa-location-dot fa-lg " style="color: #ED2A2A;"></i>
+                                            <i class="fa-solid fa-location-dot fa-lg " style="color:#00DCE3"></i>
                                         </div>
 
                                         <!-- Address Details -->
@@ -35,7 +35,7 @@
                                                 (+63) {{ $phone }}
                                             </p>
                                             <p class="text-muted small mb-0">
-                                                {{ $street_address }}, {{ $province }}
+                                                {{ $street_address }}, {{ $city }}, {{ $zip_code }}, {{ $province }}
                                             </p>
                                         </div>
 
@@ -84,12 +84,10 @@
                             </ul>
                         
                         <div class="flex justify-between items-center pt-3">
-        <p class="text-lg font-bold text-gray-700">Delivery Fee</p>
-        <p class="text-lg text-gray-900">₱ 49.00</p>
     </div>
     <div class="flex justify-between items-center mt-2">
-        <p class="text-lg font-bold text-gray-700">Total 6 Item(s)</p>
-        <p class="text-lg font-semibold text-gray-900">₱ 2,673.00</p>
+        <p class="text-lg font-bold text-gray-700">Total {{ $total_items }} Item(s)</p>
+        <p class="text-lg font-semibold text-gray-900">{{ Number::currency($grand_total-$shipping_amount, 'PHP') }}</p>
     </div>
 </div>
                     </div>
@@ -107,7 +105,7 @@
                                 <label class="d-flex align-items-center p-2 bg-white ">
                                 <div class="ml-2 flex-grow-1">
                                     <div class="d-flex align-items-center mb-1">
-                                        <img src="{{ asset('assets/images/cod.svg') }}" class="h-5 w-5 mr-1">
+                                        <img src="{{ asset('assets/images/cod.svg') }}" class="h-5 w-5 mr-1 mb-1">
                                         <span class="h6 font-weight-medium text-dark">Cash on Delivery</span>
                                         <div class="form-check ml-auto">
                                             <input class="form-check-input" type="radio" name="payment_method" value="cod" wire:model="payment_method">
@@ -120,8 +118,8 @@
                                 <label class="d-flex align-items-start p-2 bg-white">
                                     <div class="ml-2 flex-grow-1">
                                         <div class="d-flex align-items-center mb-1">
-                                            <img src="{{ asset('assets/images/wallet.svg') }}" class="h-5 w-5 mr-1">
-                                            <span class="h6 font-weight-medium text-dark">E-Wallet Payment</span>
+                                            <img src="{{ asset('assets/images/wallet.svg') }}" class="h-5 w-5 mr-1 mb-2">
+                                            <span class="h6 font-weight-medium text-dark">E-Wallet Payment via Paymongo</span>
                                             <div class="form-check ml-auto">
                                                 <input class="form-check-input" type="radio" name="payment_method" value="paymongo" wire:model="payment_method">
                                             </div>
@@ -134,7 +132,7 @@
                                     class="h-5 w-5 mr-2">
                                 <span>GCash</span>
                             </div>
-                            <span class="text-xs text-gray-500" style="margin-left: 25px;">Payment should be completed within 30 minutes.</span>
+                            <span class="text-xs text-gray-500" style="margin-left: 29px;">Payment should be completed within 30 minutes.</span>
                         </div>
                     </li>
                     <li class="flex items-center">
@@ -144,7 +142,7 @@
                             class="h-5 w-5 mr-2">
                                 <span>PayMaya</span>
                             </div>
-                            <span class="text-xs text-gray-500" style="margin-left: 25px;">Payment should be completed within 30 minutes.</span>
+                            <span class="text-xs text-gray-500" style="margin-left: 29px;">Payment should be completed within 30 minutes.</span>
                         </div>
                     </li>
                 </ul>

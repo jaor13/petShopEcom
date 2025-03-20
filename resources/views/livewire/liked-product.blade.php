@@ -60,7 +60,8 @@
                             class="circle-checkbox">
                     @endif
 
-                    <a href="{{ url('product/' . $product->slug) }}" class="no-underline text-black">                        <img src="{{ url('storage/' . $product->images[0]) }}" 
+                    <a href="{{ url('product/' . $product->slug) }}" wire:navigate class="no-underline text-black">                        
+                        <img src="{{ url('storage/' . $product->images[0]) }}" 
                             class="card-img-top img-fluid bg-[#E7FAFF] rounded-lg" 
                             alt="{{ $product->product_name }}" 
                             style="object-fit: cover; height: 230px;">

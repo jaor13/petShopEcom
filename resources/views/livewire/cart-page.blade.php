@@ -52,7 +52,7 @@
             style="overflow: hidden; white-space: nowrap;">
 
             <div class="flex items-center">
-                  <a href="{{ url('/product/' . $item['slug']) }}">
+                  <a href="{{ url('/product/' . $item['slug']) }}" wire:navigate>
               <img class="h-16 w-16 mr-2 cursor-pointer" src="{{ url('storage', $item['image']) }}"   alt="{{ $item['name'] }}">
               </a>
               <div class="max-w-[350px] md:max-w-[400px] lg:max-w-[450px] truncate">

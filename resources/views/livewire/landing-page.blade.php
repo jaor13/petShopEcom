@@ -153,7 +153,7 @@
           New Released Products
         </h1>
         <a href="{{ route('products', ['type' => 'latest']) }}"
-          style="font-size: 1.2em; color: gray; margin-right: 1.7em; text-decoration: none;">
+          style="font-size: 1.2em; color: gray; margin-right: 1.7em; text-decoration: none;" wire:navigate>
           View All
         </a>
       </div>
@@ -170,7 +170,7 @@
           Best Seller Products
         </h1>
         <a href="{{ route('products', ['type' => 'best_sellers']) }}"
-          style="font-size: 1.2em; color: gray; margin-right: 1.7em; text-decoration: none;">
+          style="font-size: 1.2em; color: gray; margin-right: 1.7em; text-decoration: none;" wire:navigate>
           View All
         </a>
       </div>
