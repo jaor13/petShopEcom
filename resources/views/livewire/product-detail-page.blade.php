@@ -56,16 +56,19 @@
 
             <!-- Variant Images -->
             <div class="flex-wrap hidden md:flex">
-              @foreach ($product->variants as $variant)<div class="w-1/2  mr-1 sm:w-1/4 border"
-          wire:click="selectVariant('{{ $variant->name }}', {{ $variant->price }}, {{ $variant->stock_quantity }})"
-          x-on:click="selectVariant('{{ $variant->name }}', '{{ url('storage', $variant->image) }}', {{ $variant->stock_quantity }}, {{ $variant->price }})">
-
-          <img src="{{ url('storage', $variant->image) }}" alt="{{ $variant->name }}"
-            class="  w-35 lg:h-25 cursor-pointer hover:border hover:border-[#00DEC3]"
-            :class="selectedVariant === '{{ $variant->name }}' ? 'border-2 border-[#00DCE3]'' : ''">
-          </div>
-        @endforeach
-            </div>
+    @foreach ($product->variants as $variant)
+        <div class="w-1/2 mr-1 sm:w-1/4 border"
+             wire:click="selectVariant('{{ $variant->name }}', {{ $variant->price }}, {{ $variant->stock_quantity }})"
+             x-on:click="selectVariant('{{ $variant->name }}', '{{ url('storage', $variant->image) }}', {{ $variant->stock_quantity }}, {{ $variant->price }})"
+             :class="{ 'border-2 border-[#00DEC3]': selectedVariant === '{{ $variant->name }}' }"
+        >
+            <img src="{{ url('storage', $variant->image) }}" alt="{{ $variant->name }}"
+                 class="w-35 lg:h-25 cursor-pointer hover:border hover:border-[#00DEC3]"
+                 :class="{ 'border-2 border-[#00DEC3]': selectedVariant === '{{ $variant->name }}' }"
+            >
+        </div>
+    @endforeach
+</div>
           </div>
         </div>
 
