@@ -43,8 +43,8 @@
         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5"></button>
     </div>
 
-    <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="10000">
+    <div class="carousel-inner ">
+        <div class="carousel-item active" data-bs-interval="10000" >
             <img src="{{ asset('assets/images/Slide1.svg') }}" class="d-block w-100" alt="Slide 1">
         </div>
         <div class="carousel-item">
