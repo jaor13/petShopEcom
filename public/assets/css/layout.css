@@ -497,37 +497,3 @@ margin-left: 0px;
   transform: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-
-.main-box{
-  border-radius: 10px;
-}
-
-#sidebar{
-  border-radius: 10px;
-  border-right: 1px solid #e2dddd; /* Light gray and thin border */
-  box-shadow: 1px 0 0 0 #f5f5f5; 
-}
-
-
-
-.nav-link {
-  color: gray;
-  text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
-  font-size: 1.3em;
-}
-
-.nav-link:hover {
-  color: #007bff; /* Optional hover effect */
-}
-
-.nav-link.active {
-  background-color: #ebf4f6; /* Fill color for active item */
-  color: white; /* Text color for active item */
-}
-
-.nav-link.active i {
-  color: white; /* Icon color for active item */
-  padding:0;
-}

@@ -33,7 +33,7 @@
         </button>
       </div> -->
 
-      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+      <div id="carouselExampleInterval" class="carousel slide  " data-bs-ride="carousel">
     <!-- Carousel Indicators -->
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -43,8 +43,8 @@
         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5"></button>
     </div>
 
-    <div class="carousel-inner ">
-        <div class="carousel-item active" data-bs-interval="10000" >
+    <div class="carousel-inner " style="border-radius: 20px;">
+        <div class="carousel-item active"  data-bs-interval="10000" >
             <img src="{{ asset('assets/images/Slide1.svg') }}" class="d-block w-100" alt="Slide 1">
         </div>
         <div class="carousel-item">
@@ -84,9 +84,10 @@
     @endauth
 
       @guest
-      <div class="intro">
-      <h1 class="pawsome-essentials">Pawsome Essentials<br>Delivered with Love!</h1>
-      <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. Integer ut sed praesent eget auctor donec
+      <div class="intro text-center">
+      <h1 class="pawsome-essentials"><strong> Pawsome Essentials<br>Delivered with Love! </strong></h1>
+      <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. <br> 
+      Integer ut sed praesent eget auctor donec
         egestas orci amet.</p>
       <button class="shop-now">Shop Now</button>
       </div>
