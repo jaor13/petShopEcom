@@ -97,9 +97,9 @@
               </div>
               <hr style="margin-top: 10px; margin-bottom: 30px; border: 0.6px solid #ccc;">
               </hr>
-              <p class="inline-block mb-6  text-4xl font-bold text-gray-700 dark:text-[#F93535] ">
+              <p class="inline-block mb-6  text-4xl font-bold  text-[#F93535] ">
                 <span>{{ Number::currency($variant_price, 'PHP') }}</span>
-                <span class="text-base font-normal text-gray-500 line-through dark:text-[#F93535]">$2800.99</span>
+                <span class="text-base font-normal  line-through text-[#F93535]">$2800.99</span>
               </p>
             </div>
 
