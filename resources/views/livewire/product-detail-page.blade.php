@@ -130,7 +130,7 @@
               </div>
               <div class="flex items-center mt-4">
                 <span class="text-yellow-500" style="font-size: 1.2em;">&#9733;</span>
-                <span class="ml-1" style="font-size: 1.1em; font-weight: 500;">4.6</span>
+                <span class="ml-1" style="font-size: 1.1em; font-weight: 500;">{{ number_format($averageRating, 1) }}</span>
                 <span class="ml-1" style="color: #888;">|{{ $product->sold_count }} Sold</span>
               </div>
             </div>
@@ -186,47 +186,37 @@
     </div>
   </div>
 
-  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 font-normal mb-7">
-    <div class="px-20 pb-6 mt-6 ">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-semibold text-gray-900">
-          4.6 <span class="text-yellow-500">★</span> Product Ratings (10)
-        </h2>
-        <a href="#" class="text-black-600 hover:text-indigo-800">
-          View All <span aria-hidden="true">></span>
-        </a>
-      </div>
-      <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000;">
-      <div class="space-y-4">
-        <div class="bg-white rounded-lg p-4 shadow-sm ">
-          <div class="flex items-start mb-2">
-            <div class="rounded-full bg-gray-200 w-8 h-8 mr-2"></div>
-            <div>
-              <div class="font-medium text-black-900">Febby</div>
-              <div class="text-yellow-500">⭐⭐⭐⭐☆</div>
-              <div class="text-sm text-gray-500">2025-02-14 16:36 | Variation</div>
-            </div>
-          </div>
-          <p class="text-sm text-black-700">Performance: makunit, garo karton</p>
-          <p class="text-sm text-black-700">Product Quality: haluyon pa ideilver</p>
+  <div class="overflow-hidden bg-white py-11 dark:bg-gray-800 font-normal mb-7">
+    <div class="px-20 pb-6 mt-6">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-semibold text-gray-900">
+                {{ number_format($averageRating, 1) }} <span class="text-yellow-500">★</span> Product Ratings ({{ count($reviews) }})
+            </h2>
         </div>
-
-        <div class="bg-white rounded-lg p-4 shadow-sm ">
-          <div class="flex items-start mb-2">
-            <div class="rounded-full bg-gray-200 w-8 h-8 mr-2"></div>
-            <div>
-              <div class="font-medium text-black-900">Fabian</div>
-              <div class="text-yellow-500">⭐⭐⭐⭐☆</div>
-              <div class="text-sm text-gray-500">2025-02-14 16:36 | Variation</div>
-            </div>
-          </div>
-          <p class="text-sm text-black-700">Performance: makunit, garo karton</p>
-          <p class="text-sm text-black-700">Product Quality: haluyon pa ideilver</p>
-        </div>
-
+        <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000;">
+        <div class="space-y-4">
+          @forelse ($reviews as $review)
+              <div class="bg-white rounded-lg p-4 shadow-sm">
+                  <div class="flex items-start mb-2">
+                      <div class="rounded-full bg-gray-200 w-8 h-8 mr-2"></div>
+                      <div>
+                          <div class="font-medium text-black-900">{{ $review->user->username ?? 'Anonymous' }}</div>
+                          <div class="text-yellow-500">
+                              {!! str_repeat('⭐', $review->rating) !!}
+                              {!! str_repeat('☆', 5 - $review->rating) !!}
+                          </div>
+                          <p class="text-sm text-black-700">{{ $review->comment }}</p>
+                          <div class="text-sm text-gray-500">{{ $review->created_at->format('Y-m-d H:i') }} | {{ $review->variant->name ?? 'No Variant' }}</div>
+                      </div>
+                  </div>
+              </div>
+          @empty
+              <p class="text-center text-gray-500">No reviews yet.</p>
+          @endforelse
       </div>
     </div>
-  </div>
+</div>
+
 
   <div class="container-fluid p-2 rounded-3" style="background-color: white;">
   <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">

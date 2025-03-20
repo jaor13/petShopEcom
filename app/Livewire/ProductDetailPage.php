@@ -119,9 +119,14 @@ class ProductDetailPage extends Component
     }
 
     public function render()
-    {
-        return view('livewire.product-detail-page', [
-            'product' => Product::where('slug', $this->slug)->first(),
-        ]);
-    }
+{
+    $product = Product::with('reviews')->where('slug', $this->slug)->first();
+
+    return view('livewire.product-detail-page', [
+        'product' => $product,
+        'reviews' => $product ? $product->reviews()->latest()->get() : [],
+        'averageRating' => $product ? $product->reviews()->avg('rating') : 0,
+    ]);
+}
+
 }
