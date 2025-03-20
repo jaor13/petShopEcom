@@ -149,13 +149,11 @@
     <!-- New Products Section -->
     <div class="container-fluid p-2 rounded-3" style="background-color: white;">
       <div style=" display: flex; justify-content: space-between; align-items: center;">
-        <h1 style="font-weight: bold; color:#4F4F4F; font-size: xx-large; margin:0.4em 0em 0em 1.1em;">
-          New Released Products
-        </h1>
-        <a href="{{ route('products', ['type' => 'latest']) }}"
-          style="font-size: 1.2em; color: gray; margin-right: 1.7em; text-decoration: none;" wire:navigate>
-          View All
-        </a>
+        <h1 style="font-weight: bold; color: #262525; margin-top: 1.3em; font-size: xx-large; margin:1em 0em 0em 1.1em;">
+        <span style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+  
+        Categories
+        
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em;">
         @livewire('partials.product-grid', ['limit' => 5, 'type' => 'latest'])
@@ -163,15 +161,50 @@
     </div>
 
 
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color:#262525; font-size: xx-large; margin:1em 0em 0em 1.1em;">
+        <span style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+    
+        Latest Products
+        </h1>
+        <a href="{{ route('products', ['type' => 'best_sellers']) }}"
+          style="font-size: 1.2em; color:rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;" wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
+      </div>
+    </div>
 
     <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
       <div style=" display: flex; justify-content: space-between; align-items: center;">
-        <h1 style="font-weight: bold; color:#4F4F4F; font-size: xx-large; margin:0.4em 0em 0em 1.1em;">
-          Best Seller Products
+        <h1 style="font-weight: bold; color: #262525; font-size: xx-large; margin:1em 0em 0em 1.1em;">
+        <span style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+    
+        Best Seller
         </h1>
         <a href="{{ route('products', ['type' => 'best_sellers']) }}"
-          style="font-size: 1.2em; color: gray; margin-right: 1.7em; text-decoration: none;" wire:navigate>
-          View All
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;" wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
+      </div>
+    </div>
+
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: #262525; font-size: xx-large; margin:1em 0em 0em 1.1em;">
+        <span style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+    
+        Hygiene and Supply
+        </h1>
+        <a href="{{ route('products', ['type' => 'best_sellers']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;" wire:navigate>
+          View All >
         </a>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
