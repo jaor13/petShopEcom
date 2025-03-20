@@ -24,7 +24,7 @@
                             class="card-img-top img-fluid bg-[#E7FAFF] rounded-lg" 
                             alt="{{ $product->product_name }}" 
                             style="object-fit: cover; height: 230px;">
-                    </a>
+                   
 
                     <!-- Product Name Section -->
                     <h3 class="card-title fw-bold text-truncate mt-2" style="margin-left: 4px; color: rgb(64, 61, 61);">
@@ -67,6 +67,7 @@
                             </div>
                         </a>
                     </div>
+                    </a>
                 </div>
             </div>
         @endforeach
