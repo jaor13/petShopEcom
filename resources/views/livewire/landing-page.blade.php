@@ -157,26 +157,33 @@
   </div>
 
   <!-- Category Boxes -->
-  <div style="display: flex; flex-wrap: wrap; gap: 5rem; padding: 0.6em 0 1.2em 0; justify-content: center;">
-    <div style="width: 9em; height: 9em; background-color: #00D4FF; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
-    <i class="fa-solid fa-dog" style="color: white; font-size: 50px;"></i>
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding: 0.6em 0 1.2em 0; justify-content: center;">
+    <div class="category-box">
+      <i class="fa-solid fa-dog"></i>
     </div>
 
-    <div style="width: 9em; height: 9em; background-color: #00D4FF; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
-    <i class="fa-solid fa-cat" style="color: white; font-size: 50px;"></i>
+    <div class="category-box">
+      <i class="fa-solid fa-cat"></i>
     </div>
 
-    <div style="width: 9em; height: 9em; background-color: #00D4FF; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
-    <i class="fa-solid fa-dove" style="color: white; font-size: 50px;"></i>
+    <div class="category-box">
+      <i class="fa-solid fa-dove"></i>
     </div>
 
-    <div style="width: 9em; height: 9em; background-color: #00D4FF; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
-    <i class="fa-solid fa-otter" style="color: white; font-size: 50px;"></i>
-
+    <div class="category-box">
+      <i class="fa-solid fa-otter"></i>
     </div>
 
-    <div style="width: 9em; height: 9em; background-color: #00D4FF; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
-    <i class="fa-solid fa-fish" style="color: white; font-size: 50px;"></i>
+    <div class="category-box">
+      <i class="fa-solid fa-fish"></i>
+    </div>
+
+    <div class="category-box">
+      <i class="fa-solid fa-dog"></i>
+    </div>
+
+    <div class="category-box">
+      <i class="fa-solid fa-dragon"></i>
     </div>
   </div>
 </div>

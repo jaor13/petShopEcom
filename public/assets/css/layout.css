@@ -498,6 +498,32 @@ margin-left: 0px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.category-box {
+  width: 9em;
+  height: 9em;
+  background-color: #00DCE3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.category-box i {
+  color: white;
+  font-size: 50px;
+  transition: color 0.2s ease;
+}
+
+.category-box:hover {
+  background-color: #00d1d8;
+  transform: scale(1.1);
+}
+
+.category-box:hover i {
+  color: #f8f8f8;
+}
+
 
 .main-box{
   border-radius: 10px;
