@@ -1,4 +1,4 @@
-<div class="profile text-center py-4" style="background-color: #f8f9fa;">
+<div class="profile text-center py-4">
     <!-- Profile Picture -->
     <label for="profile-picture-upload">
         <img src="{{ $profile_picture_url }}" 
@@ -9,7 +9,7 @@
     <input type="file" id="profile-picture-upload" wire:model="profile_picture" style="display: none;">
 
     <!-- Display Updated Username -->
-    <h6 class="profile-name">Hi {{ $username }}!</h6>
+    <h5 class="profile-name" style="color:#4F4F4F;">Hi {{ $username }}!</h5>
 
     @error('profile_picture') <span class="text-danger">{{ $message }}</span> @enderror
 </div>

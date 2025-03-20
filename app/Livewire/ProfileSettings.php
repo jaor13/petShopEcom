@@ -56,7 +56,7 @@ class ProfileSettings extends Component
         return view('livewire.profile-settings', [
             'profile_picture_url' => $this->profile_picture
                 ? asset('storage/' . $this->profile_picture)
-                : asset('assets/images/default-profile.png'),
+                : asset('assets/images/default-1.gif'),
         ]);
     }
 }
