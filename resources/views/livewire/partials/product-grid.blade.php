@@ -1,4 +1,20 @@
 <div class="container-fluid m-3 rounded-3">
+    @if($products->isEmpty())
+            <div class="text-center py-5">
+                <h3 class="text-gray-500">
+            No products found 
+            @if($query && $category)
+                for "{{ $query }}" in "{{ $category }}".
+            @elseif($query)
+                for "{{ $query }}".
+            @elseif($category)
+                in "{{ $category }}".
+            @else
+                .
+            @endif
+        </h3>
+            </div>
+        @else
     <div class="row row-cols-1 row-cols-md-5 mx-auto g-3">
         @foreach ($products as $product)
             <div class="col" wire:key="{{ $product->id }}">
@@ -55,4 +71,5 @@
             </div>
         @endforeach
     </div>
+    @endif
 </div>
