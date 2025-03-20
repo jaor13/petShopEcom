@@ -31,9 +31,9 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->font('Afacad')
+            // ->font('Afacad')
             ->brandLogo(asset('assets/images/brand-logo-admin.svg'))
-->brandLogoHeight('60px') // Adjust the height as needed
+            ->brandLogoHeight('60px') // Adjust the height as needed
 
 
             // ->login(false) // Disable Filament’s login

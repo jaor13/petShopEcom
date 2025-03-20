@@ -19,7 +19,7 @@
         @foreach ($products as $product)
             <div class="col" wire:key="{{ $product->id }}">
                 <div class="card h-100 p-2 m-2" style="position: relative;">
-                    <a href="{{ url('product/' . $product->slug) }}">
+                     <a href="{{ url('product/' . $product->slug) }}">
                         <img src="{{ url('storage/' . $product->images[0]) }}" 
                             class="card-img-top img-fluid bg-[#E7FAFF] rounded-lg" 
                             alt="{{ $product->product_name }}" 
@@ -27,7 +27,7 @@
                     </a>
 
                     <!-- Product Name Section -->
-                    <h3 class="card-title fw-bold text-truncate" style="margin-left: 4px; color: rgb(64, 61, 61);">
+                    <h3 class="card-title fw-bold text-truncate mt-2" style="margin-left: 4px; color: rgb(64, 61, 61);">
                         {{ $product->product_name }}
                     </h3>
 
