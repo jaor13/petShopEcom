@@ -6,9 +6,9 @@
         <div class="row">
 
             <div class="col-lg-8 mb-4">
-                <div class="card custom-card border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="border p-4 mb-4 rounded-3 shadow-sm">
+                <div>
+                    <div class="card-body  ">
+                        <div class="border p-4 mb-3 rounded-3 shadow-sm bg-white">
                             <!-- Check if the user has an address -->
                             @if (!$use_existing_address)
                                 <!-- Add Address Button -->
@@ -20,10 +20,10 @@
 
                                 <!-- Non-Editing View -->
                                 @if (!$is_editing)
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center mr-3 ml-3">
                                         <!-- Location Pin Icon -->
                                         <div class="text-primary flex-shrink-0">
-                                            <i class="fa-solid fa-location-dot fa-lg"></i>
+                                            <i class="fa-solid fa-location-dot fa-lg" style="color: #00DCE3;"></i>
                                         </div>
 
                                         <!-- Address Details -->
@@ -42,26 +42,28 @@
                                         <!-- Edit Icon -->
                                         <div class="ml-auto">
                                             <button type="button" class="btn btn-link text-primary p-0" wire:click="openAddressModal(true)">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            Edit
+                                            <i class="fas fa-edit" style="color: #00DCE3;"></i> 
+    </button>
+    <span style="color: #00DCE3;">Edit</span>
                                         </div>
                                     </div>
                                 @endif
                             @endif
                         </div>
-
-                        <div class="mt-4">
-                            <h5 class="font-weight-bold text-dark mb-3">
+                    </div>
+                    <div class="card-body card p-5 custom-card border-0 shadow-sm">
+                        <div class="mt-0">
+                            <h5 class="font-bold text-xl text-black-400 mb-3  border-bottom">
                                 Product Ordered
                             </h5>
+                            
                             <ul class="list-unstyled">
                                 @foreach ($cart_items as $ci)
                                     <li class="py-3 border-bottom" wire:key="{{ $ci['product_id'] }}">
                                         <div class="d-flex align-items-center">
                                             <img alt="{{ $ci['name'] }}" class="img-fluid bg-[#E7FAFF] rounded-lg " style="width: 15%; height: 15%;" src="{{ url('storage', $ci['image']) }}">
                                             <div class="ml-4 flex-grow-1">
-                                                <p class="h6 font-weight-medium text-dark mb-1">
+                                                <p class="text-xl font-medium text-gray-900 truncate">
                                                     {{ $ci['name'] }}
                                                 </p>
                                                 @if (!empty($ci['variant_name']))
@@ -69,62 +71,83 @@
                                                         Variant: {{ $ci['variant_name'] }}
                                                     </p>
                                                 @endif
-                                                <div class="font-weight-semibold text-danger">
+                                                <div class="inline-flex items-center pt-2 text-base font-semibold text-[#F93535]">
                                                     {{ Number::currency($ci['total_amount'], 'PHP') }}
                                                 </div>
                                             </div>
-                                            <p class="h6 text-muted mb-0">
+                                            <p class="text-meduim text-gray-500 truncate dark:text-[#585858]">
                                                 x{{ $ci['quantity'] }}
                                             </p>
                                         </div>
                                     </li>
                                 @endforeach
                             </ul>
-                        </div>
+                        
+                        <div class="flex justify-between items-center pt-3">
+        <p class="text-lg font-bold text-gray-700">Delivery Fee</p>
+        <p class="text-lg text-gray-900">₱ 49.00</p>
+    </div>
+    <div class="flex justify-between items-center mt-2">
+        <p class="text-lg font-bold text-gray-700">Total 6 Item(s)</p>
+        <p class="text-lg font-semibold text-gray-900">₱ 2,673.00</p>
+    </div>
+</div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body">
-                        <h5 class="font-weight-bold text-dark mb-3">
+                    <div class="card-body p-4 mr-3 ml-3">
+                        <h5 class="text-lg font-bold text-gray-700 dark:text-gray mb-2">
                             Payment Methods
                         </h5>
                         <ul class="list-unstyled">
-                            <li class="mb-3">
-                                <label class="d-flex align-items-center p-2 bg-white border rounded cursor-pointer">
-                                    <div class="ml-2 d-flex align-items-center">
-                                        <img src="{{ asset('assets/images/cod.svg') }}" class="mr-2" style="height: 1.25rem;">
+                            <li class="mb-0">
+                                <label class="d-flex align-items-center p-2 bg-white ">
+                                <div class="ml-2 flex-grow-1">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <img src="{{ asset('assets/images/cod.svg') }}" class="h-5 w-5 mr-1">
                                         <span class="h6 font-weight-medium text-dark">Cash on Delivery</span>
                                         <div class="form-check ml-auto">
                                             <input class="form-check-input" type="radio" name="payment_method" value="cod" wire:model="payment_method">
                                         </div>
                                     </div>
+                                </div>
                                 </label>
                             </li>
                             <li>
-                                <label class="d-flex align-items-start p-2 bg-white border rounded cursor-pointer">
+                                <label class="d-flex align-items-start p-2 bg-white">
                                     <div class="ml-2 flex-grow-1">
                                         <div class="d-flex align-items-center mb-1">
-                                            <img src="{{ asset('assets/images/wallet.svg') }}" class="mr-2" style="height: 1.25rem;">
+                                            <img src="{{ asset('assets/images/wallet.svg') }}" class="h-5 w-5 mr-1">
                                             <span class="h6 font-weight-medium text-dark">E-Wallet Payment</span>
                                             <div class="form-check ml-auto">
                                                 <input class="form-check-input" type="radio" name="payment_method" value="paymongo" wire:model="payment_method">
                                             </div>
                                         </div>
-                                        <ul class="list-unstyled ml-4 mt-3">
-                                            <li class="d-flex align-items-center mb-2">
-                                                <img src="{{ asset('assets/images/Gcash.svg') }}" class="mr-2" style="height: 1.25rem;">
-                                                <span class="small text-dark">GCash</span>
-                                                <span class="small text-muted ml-3">Payment should be completed within 30 minutes.</span>
-                                            </li>
-                                            <li class="d-flex align-items-center">
-                                                <img src="{{ asset('assets/images/maya.svg') }}" class="mr-2" style="height: 1.25rem;">
-                                                <span class="small text-dark">PayMaya</span>
-                                                <span class="small text-muted ml-3">Payment should be completed within 30 minutes.</span>
-                                            </li>
-                                        </ul>
+                                        <ul class="ml-6 space-y-1 mt-3"> 
+                    <li class="flex items-center">
+                        <div class="ml-2 text-sm text-gray-900">
+                            <div class="flex items-center">
+                              <img src="{{ asset('assets/images/Gcash.svg') }}"
+                                    class="h-5 w-5 mr-2">
+                                <span>GCash</span>
+                            </div>
+                            <span class="text-xs text-gray-500" style="margin-left: 25px;">Payment should be completed within 30 minutes.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-center">
+                        <div class="ml-2 text-sm text-gray-900">
+                            <div class="flex items-center">
+                            <img src="{{ asset('assets/images/maya.svg') }}"
+                            class="h-5 w-5 mr-2">
+                                <span>PayMaya</span>
+                            </div>
+                            <span class="text-xs text-gray-500" style="margin-left: 25px;">Payment should be completed within 30 minutes.</span>
+                        </div>
+                    </li>
+                </ul>
                                     </div>
                                 </label>
                             </li>
@@ -136,26 +159,27 @@
                 </div>
 
                 <div class="card border-0 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="font-weight-bold text-center text-dark mb-3">
+                    <div class="card-body p-4 mr-3 ml-3">
+                        <h5 class="text-xl text-center font-bold  text-gray-700 dark:text-black mb-2">
                             ORDER SUMMARY
                         </h5>
-                        <div class="d-flex justify-content-between font-weight-bold mb-3">
+                        <div class="flex justify-between mt-3">
                             <span>Subtotal</span>
                             <span>{{ Number::currency($grand_total - $shipping_amount, 'PHP') }}</span>
                         </div>
-                        <div class="d-flex justify-content-between font-weight-bold mb-3">
+                        <div class="d-flex justify-content-between mb-2">
                             <span>Shipping Cost</span>
                             <span>{{ Number::currency($shipping_amount, 'PHP') }}</span>
                         </div>
                         <hr>
-                        <div class="d-flex justify-content-between font-weight-bold mb-3">
+                        <div class="d-flex justify-content-between  mb-2 font-bold pt-3">
                             <span>Grand Total</span>
                             <span>{{ Number::currency($grand_total, 'PHP') }}</span>
                         </div>
-                        <button type="submit" class="btn btn-danger btn-block">
-                            Place Order
-                        </button>
+                        <button type="submit"
+                        class="bg-[#00DCE3] mt-4 w-full p-2 rounded-lg text-xl font-bold text-white hover:bg-[#00CFD6]">
+                        Place Order
+                    </button>
                     </div>
                 </div>
             </div>
