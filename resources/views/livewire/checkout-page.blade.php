@@ -13,7 +13,7 @@
                             @if (!$use_existing_address)
                                 <!-- Add Address Button -->
                                 <button type="button" class="btn " wire:click="openAddressModal">
-                                    <i class="fas fa-plus-circle mr-2"></i> 
+                                    <i class="fas fa-plus-circle mr-2 "></i> 
                                     Add Address
                                 </button>
                             @else
@@ -22,8 +22,8 @@
                                 @if (!$is_editing)
                                     <div class="d-flex align-items-center mr-3 ml-3">
                                         <!-- Location Pin Icon -->
-                                        <div class="text-primary flex-shrink-0">
-                                            <i class="fa-solid fa-location-dot fa-lg" style="color: #00DCE3;"></i>
+                                        <div class="text-primary flex-shrink-0 " style="margin-bottom: 35px;">
+                                            <i class="fa-solid fa-location-dot fa-lg " style="color: #ED2A2A;"></i>
                                         </div>
 
                                         <!-- Address Details -->
