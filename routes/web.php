@@ -23,22 +23,7 @@ use App\Livewire\UserProfile;
 use App\Livewire\OrderDetails;
 
 
-
-
-Route::get('/', LandingPage::class)->name('home');
-Route::get('/', LandingPage::class)->name('home');
-Route::get('/products', ProductsPage::class)->name('products');
-Route::get('/cart', CartPage::class)->name('cart');
-Route::get('/product/{slug}', ProductDetailPage::class);
-
-Route::middleware('guest')->group(function () {
-    Route::get('/login', LoginPage::class);
-    Route::get('/register', RegisterPage::class);
-    Route::get('/forgot-password', ForgotPasswordPage::class);
-    Route::get('/reset-password', ResetPasswordPage::class);
-});
-
-//
+// admin
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin', function () {
         return redirect()->route('filament.admin.pages.admin-dashboard');
@@ -46,40 +31,55 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 });
 
 
+// not admin
+Route::middleware(['notAdmin'])->group(function () {
+    // logged in user
+    Route::middleware(['auth',])->group(function () {
+        Route::get('/', LandingPage::class)->name('home');
+        Route::get('/products', ProductsPage::class)->name('products');
+        Route::get('/product/{slug}', ProductDetailPage::class)->name('product.detail');
+    
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+        //Custom Profile Controller
+        // Route::patch('/profile/custom-update', [CustomProfileController::class, 'update'])->name('profile.custom-update');
+        // Route::delete('/profile/delete', [CustomProfileController::class, 'destroy'])->name('profile.delete');
+    
+        Route::get('/liked-product', LikedProduct::class)->name('liked-product');
+        Route::get('/cart', CartPage::class)->name('cart');
+        Route::get('/checkout', CheckoutPage::class)->name('checkout');
+        Route::get('/orders', OrdersPage::class);
+    
+    
+        Route::get('/orders/order-details/{orderId}', OrderDetails::class)->name('order.details');
+    
+    
+        Route::get('/success', SuccessPage::class);
+        Route::get('/cancel', CancelPage::class);
+    
+    
+        // Route::get('/order/success/{order}', SuccessPage::class)->name('order.success');
+        Route::get('/order/success/{order}', SuccessPage::class)->name('order.success');
+    
+    
+        Route::get('/profile/my-purchases', UserProfile::class)->name('my-purchases'); 
+    
+    
+       Route::get('/profile', UserProfile::class)->name('profile.show');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+    
+    //guest
+    Route::get('/login', LoginPage::class);
+    Route::get('/register', RegisterPage::class);
+    Route::get('/forgot-password', ForgotPasswordPage::class);
+    Route::get('/reset-password', ResetPasswordPage::class);
 
-    //Custom Profile Controller
-    // Route::patch('/profile/custom-update', [CustomProfileController::class, 'update'])->name('profile.custom-update');
-    // Route::delete('/profile/delete', [CustomProfileController::class, 'destroy'])->name('profile.delete');
-
-    //new
-    Route::get('/liked-product', LikedProduct::class)->name('liked-product');
-    //new
-    Route::get('/checkout', CheckoutPage::class)->name('checkout');
-    Route::get('/orders', OrdersPage::class);
-
-
-    Route::get('/orders/order-details/{orderId}', OrderDetails::class)->name('order.details');
-
-
-    Route::get('/success', SuccessPage::class);
-    Route::get('/cancel', CancelPage::class);
-
-
-    // Route::get('/order/success/{order}', SuccessPage::class)->name('order.success');
-    Route::get('/order/success/{order}', SuccessPage::class)->name('order.success');
-
-
-    Route::get('/profile/my-purchases', UserProfile::class)->name('my-purchases'); 
-
-
-   Route::get('/profile', UserProfile::class)->name('profile.show');
-
-
+    Route::get('/', LandingPage::class)->name('home');
+    Route::get('/products', ProductsPage::class)->name('products');
+    Route::get('/product/{slug}', ProductDetailPage::class)->name('product.detail');
 });
 
 
