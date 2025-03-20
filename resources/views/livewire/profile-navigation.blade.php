@@ -34,11 +34,11 @@
         @livewire('my-account')
     </div>
     <div class="{{ $activeSection === 'my-purchases' ? '' : 'd-none' }}">
-        <h2>My Purchases</h2>
+        <h2 class="ml-3">My Purchases</h2>
         @livewire('orders')
     </div>
     <div class="{{ $activeSection === 'ratings-reviews' ? '' : 'd-none' }}">
-        <h2>Ratings and Reviews</h2>
+        <h2 class="ml-3">Ratings and Reviews</h2>
     </div>
     <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}">
         @livewire('liked-product')
