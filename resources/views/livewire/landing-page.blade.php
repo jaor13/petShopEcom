@@ -85,7 +85,7 @@
 
       @guest
       <div class="intro text-center">
-      <h1 class="pawsome-essentials"><strong> Pawsome Essentials<br>Delivered with Love! </strong></h1>
+      <h1 class="pawsome-essentials"><strong> PEssentials<br>Delivered with Love! </strong></h1>
       <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. <br> 
       Integer ut sed praesent eget auctor donec
         egestas orci amet.</p>
