@@ -59,7 +59,7 @@
                                 @foreach ($cart_items as $ci)
                                     <li class="py-3 border-bottom" wire:key="{{ $ci['product_id'] }}">
                                         <div class="d-flex align-items-center">
-                                            <img alt="{{ $ci['name'] }}" class="img-fluid" style="width: 15%; height: 15%;" src="{{ url('storage', $ci['image']) }}">
+                                            <img alt="{{ $ci['name'] }}" class="img-fluid bg-[#E7FAFF] rounded-lg " style="width: 15%; height: 15%;" src="{{ url('storage', $ci['image']) }}">
                                             <div class="ml-4 flex-grow-1">
                                                 <p class="h6 font-weight-medium text-dark mb-1">
                                                     {{ $ci['name'] }}
