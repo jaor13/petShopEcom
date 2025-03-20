@@ -1,5 +1,5 @@
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto pt-5 ">
-  <section class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7 font-normal font-['Poppins']">
+  <section class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7 font-normal font-['Afacad']">
     <div class="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
       <div class="flex flex-wrap -mx-6">
         <!-- Product Image and Slideshow -->
@@ -47,22 +47,22 @@
               <!-- <button @click="prevImage"
               class="absolute left-2 top-1/2 text-gray-400 px-2 py-1 rounded-l-md">❮</button> -->
               <img x-bind:src="images[mainImageIndex]" alt=""
-                class="object-cover w-full lg:h-full transition-opacity duration-500">
+                class="object-cover w-full lg:h-full transition-opacity duration-500 bg-[#E7FAFF] rounded-lg duration-500">
               <!-- <button @click="nextImage"
               class="absolute right-2 top-1/2 text-gray-400 px-2 py-1 rounded-r-md">❯</button> -->
             </div>
 
-            <p class="max-w-md text-gray-700 dark:text-gray-400" x-text="variantName"></p>
+            <p class="max-w-md text-gray-700 font-semibold dark:text-black-400" x-text="variantName"></p>
 
             <!-- Variant Images -->
             <div class="flex-wrap hidden md:flex">
-              @foreach ($product->variants as $variant)<div class="w-1/2 p-2 sm:w-1/4"
+              @foreach ($product->variants as $variant)<div class="w-1/2  mr-1 sm:w-1/4 border"
           wire:click="selectVariant('{{ $variant->name }}', {{ $variant->price }}, {{ $variant->stock_quantity }})"
           x-on:click="selectVariant('{{ $variant->name }}', '{{ url('storage', $variant->image) }}', {{ $variant->stock_quantity }}, {{ $variant->price }})">
 
           <img src="{{ url('storage', $variant->image) }}" alt="{{ $variant->name }}"
-            class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-blue-500"
-            :class="selectedVariant === '{{ $variant->name }}' ? 'border-2 border-blue-500' : ''">
+            class="  w-35 lg:h-25 cursor-pointer hover:border hover:border-[#00DEC3]"
+            :class="selectedVariant === '{{ $variant->name }}' ? 'border-2 border-[#00DCE3]'' : ''">
           </div>
         @endforeach
             </div>
@@ -73,7 +73,7 @@
         <div class="w-full px-4 md:w-1/2">
           <div class="lg:pl-5">
             <div class="mb-8">
-              <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-gray-400 md:text-4xl">
+              <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-[#3E3939] md:text-4xl">
                 {{ $product->product_name }}
               </h2>
 
@@ -84,20 +84,22 @@
                   <span style="color: #374151;">PET ESSENTIALS</span>
                 </div>
                 <div style="display: flex; align-items: center;">
-                  <span
-                    style="font-family: sans-serif; font-size: 2rem; margin-right: 5px; color: #ff0004; cursor: pointer;"
-                    wire:click="addToLiked({{ $product->id }})">
-                    ♡
-                  </span>
-
-                  <span style="font-family: sans-serif; color: #374151;">Add to Favorites</span>
+                <div wire:click="addToLiked({{ $product->id }})" class="like-button-container">
+    <span class="like-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF8284"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="bevel" class="like-icon hover:fill-red-500 mr-2 ">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+    </span>
+</div>
+                  <span style="color: #374151;">Add to Favorites</span>
                 </div>
               </div>
               <hr style="margin-top: 10px; margin-bottom: 30px; border: 0.6px solid #ccc;">
               </hr>
-              <p class="inline-block mb-6  text-4xl font-bold text-gray-700 dark:text-red-400 ">
+              <p class="inline-block mb-6  text-4xl font-bold text-gray-700 dark:text-[#F93535] ">
                 <span>{{ Number::currency($variant_price, 'PHP') }}</span>
-                <span class="text-base font-normal text-gray-500 line-through dark:text-red-400">$2800.99</span>
+                <span class="text-base font-normal text-gray-500 line-through dark:text-[#F93535]">$2800.99</span>
               </p>
             </div>
 
@@ -107,14 +109,18 @@
               <div style="display: flex; align-items: center;">
                 <span style="font-size: 18px; font-weight: bold; color: #555; margin-right: 10px;">Quantity:</span>
                 <div style="display: inline-flex; border: 1px solid #00CED1; border-radius: 5px;">
-                  <button wire:click="decreaseQty"
-                    style="width: 40px; height: 30px; border: none; background-color: transparent; font-size: 18px; cursor: pointer;">-</button>
-                  <input type="text" wire:model="quantity" value="1"
-                    style="width: 40px; height: 30px; text-align: center; border: none; border-left: 1px solid #00CED1; border-right: 1px solid #00CED1; font-size: 18px;"
-                    readonly>
-                  <button wire:click="increaseQty"
-                    style="width: 40px; height: 30px; border: none; background-color: transparent; font-size: 18px; cursor: pointer;">+</button>
-                </div>
+    <button wire:click="decreaseQty"
+            style="width: 40px; height: 30px; border: none; background-color: transparent; font-size: 18px; cursor: pointer;"
+            onmouseover="this.style.backgroundColor='#E0FFFF';" 
+            onmouseout="this.style.backgroundColor='transparent';">-</button>
+    <input type="text" wire:model="quantity" value="1"
+           style="width: 40px; height: 30px; text-align: center; border: none; border-left: 1px solid #00CED1; border-right: 1px solid #00CED1; font-size: 18px;"
+           readonly>
+    <button wire:click="increaseQty"
+            style="width: 40px; height: 30px; border: none; background-color: transparent; font-size: 18px; cursor: pointer;"
+            onmouseover="this.style.backgroundColor='#E0FFFF';" 
+            onmouseout="this.style.backgroundColor='transparent';">+</button>
+</div>
               </div>
               <div class="flex items-center mt-4">
                 <span class="text-yellow-500" style="font-size: 1.2em;">&#9733;</span>
@@ -149,7 +155,7 @@
     </div>
   </section>
 
-  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 font-normal font-['Poppins'] mb-7">
+  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7">
     <div class="px-20 pb-6 mt-6 ">
       <div class="flex flex-col mt-6">
         <div style="background-color: #E0F2F7; padding: 10px; border-radius: 5px;">
@@ -173,7 +179,7 @@
     </div>
   </div>
 
-  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 font-normal font-['Poppins'] mb-7">
+  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 font-normal mb-7">
     <div class="px-20 pb-6 mt-6 ">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-semibold text-gray-900">
