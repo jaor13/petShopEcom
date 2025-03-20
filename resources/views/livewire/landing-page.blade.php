@@ -33,7 +33,7 @@
         </button>
       </div> -->
 
-      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+      <div id="carouselExampleInterval" class="carousel slide  " data-bs-ride="carousel">
     <!-- Carousel Indicators -->
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -43,8 +43,8 @@
         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5"></button>
     </div>
 
-    <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="10000">
+    <div class="carousel-inner " style="border-radius: 20px;">
+        <div class="carousel-item active"  data-bs-interval="10000" >
             <img src="{{ asset('assets/images/Slide1.svg') }}" class="d-block w-100" alt="Slide 1">
         </div>
         <div class="carousel-item">
@@ -84,9 +84,10 @@
     @endauth
 
       @guest
-      <div class="intro">
-      <h1 class="pawsome-essentials">Pawsome Essentials<br>Delivered with Love!</h1>
-      <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. Integer ut sed praesent eget auctor donec
+      <div class="intro text-center">
+      <h1 class="pawsome-essentials"><strong> Pawsome Essentials<br>Delivered with Love! </strong></h1>
+      <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. <br> 
+      Integer ut sed praesent eget auctor donec
         egestas orci amet.</p>
       <button class="shop-now">Shop Now</button>
       </div>
@@ -147,31 +148,85 @@
 
   <div class="container p-3">
     <!-- New Products Section -->
-    <div class="container-fluid p-2 rounded-3" style="background-color: white;">
-      <div style=" display: flex; justify-content: space-between; align-items: center;">
-        <h1 style="font-weight: bold; color:#4F4F4F; font-size: xx-large; margin:0.4em 0em 0em 1.1em;">
-          New Released Products
-        </h1>
-        <a href="{{ route('products', ['type' => 'latest']) }}"
-          style="font-size: 1.2em; color: gray; margin-right: 1.7em; text-decoration: none;" wire:navigate>
-          View All
-        </a>
-      </div>
-      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em;">
-        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'latest'])
-      </div>
+    <div class="container-fluid p-2 rounded-3" style="background-color: white; padding: 20px;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1 style="font-weight: bold; color: #262525; margin-top: 1.3em; font-size: xx-large; margin:0.8em 1em 0.5em 1.1em; display: flex; align-items: center;">
+      <span style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+      Categories
+    </h1>
+  </div>
+
+  <!-- Category Boxes -->
+  <div style="display: flex; flex-wrap: wrap; gap: 5rem; padding: 0.6em 0 1.2em 0; justify-content: center;">
+    <div style="width: 9em; height: 9em; background-color: #00D4FF; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
+    <i class="fa-solid fa-dog" style="color: white; font-size: 50px;"></i>
     </div>
+
+    <div style="width: 9em; height: 9em; background-color: #00D4FF; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
+    <i class="fa-solid fa-cat" style="color: white; font-size: 50px;"></i>
+    </div>
+
+    <div style="width: 9em; height: 9em; background-color: #00D4FF; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
+    <i class="fa-solid fa-dove" style="color: white; font-size: 50px;"></i>
+    </div>
+
+    <div style="width: 9em; height: 9em; background-color: #00D4FF; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
+    <i class="fa-solid fa-otter" style="color: white; font-size: 50px;"></i>
+
+    </div>
+
+    <div style="width: 9em; height: 9em; background-color: #00D4FF; display: flex; align-items: center; justify-content: center; border-radius: 6px;">
+    <i class="fa-solid fa-fish" style="color: white; font-size: 50px;"></i>
+    </div>
+  </div>
+</div>
 
 
 
     <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
       <div style=" display: flex; justify-content: space-between; align-items: center;">
-        <h1 style="font-weight: bold; color:#4F4F4F; font-size: xx-large; margin:0.4em 0em 0em 1.1em;">
-          Best Seller Products
+        <h1 style="font-weight: bold; color:#262525; font-size: xx-large; margin:1em 0em 0em 1.1em;">
+        <span style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+    
+        Latest Products
         </h1>
         <a href="{{ route('products', ['type' => 'best_sellers']) }}"
-          style="font-size: 1.2em; color: gray; margin-right: 1.7em; text-decoration: none;" wire:navigate>
-          View All
+          style="font-size: 1.2em; color:rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;" wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
+      </div>
+    </div>
+
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: #262525; font-size: xx-large; margin:1em 0em 0em 1.1em;">
+        <span style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+    
+        Best Seller
+        </h1>
+        <a href="{{ route('products', ['type' => 'best_sellers']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;" wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
+      </div>
+    </div>
+
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: #262525; font-size: xx-large; margin:1em 0em 0em 1.1em;">
+        <span style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+    
+        Hygiene and Supply
+        </h1>
+        <a href="{{ route('products', ['type' => 'best_sellers']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;" wire:navigate>
+          View All >
         </a>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">

@@ -22,7 +22,7 @@
     </div>
 </nav>
 
-<main class="col-md-8 ms-sm-auto col-lg-9 px-md-4 custom-main p-4">
+<main class="col-md-8 ms-sm-auto col-lg-9 px-md-4 custom-main p-4 ">
     <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}">
         <h2 class="section-title">Manage your Account Details</h2>
         <p class="section-description">Update your account's profile information and email address.</p>
