@@ -11,6 +11,11 @@ body {
   background: #ececec;
 }
 
+.product-name{
+  /* font-family: 'Raleway', sans-serif; */
+  font-size:3em;
+}
+
 
 header {
   position: fixed;
