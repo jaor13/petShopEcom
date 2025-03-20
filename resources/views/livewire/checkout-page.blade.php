@@ -7,7 +7,7 @@
 
             <div class="col-lg-8 mb-4">
                 <div>
-                    <div class="card-body  ">
+                    <div class="card-body">
                         <div class="border p-4 mb-3 rounded-3 shadow-sm bg-white">
                             <!-- Check if the user has an address -->
                             @if (!$use_existing_address)
@@ -51,7 +51,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="card-body card p-5 custom-card border-0 shadow-sm">
+                    <div class="card-body p-5 bg-white border rounded-lg shadow-sm">
                         <div class="mt-0">
                             <h5 class="font-bold text-xl text-black-400 mb-3  border-bottom">
                                 Product Ordered
@@ -97,7 +97,7 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="card border-0 shadow-sm mb-4">
+                <div class=" bg-white border rounded-lg shadow-sm border-0 shadow-sm mb-4">
                     <div class="card-body p-4 mr-3 ml-3">
                         <h5 class="text-lg font-bold text-gray-700 dark:text-gray mb-2">
                             Payment Methods
@@ -158,7 +158,7 @@
                     </div>
                 </div>
 
-                <div class="card border-0 shadow-sm">
+                <div class=" bg-white border rounded-lg shadow-sm border-0 shadow-sm">
                     <div class="card-body p-4 mr-3 ml-3">
                         <h5 class="text-xl text-center font-bold  text-gray-700 dark:text-black mb-2">
                             ORDER SUMMARY
