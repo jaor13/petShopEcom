@@ -62,7 +62,7 @@
 
 
                         <a href="{{ url('product/' . $product->slug) }}">
-                            <img src="{{ url('storage/' . $product->images[0]) }}" class="card-img-top img-fluid"
+                            <img src="{{ url('storage/' . $product->images[0]) }}" class="card-img-top img-fluid bg-[#E7FAFF]"
                                 alt="{{ $product->product_name }}" style="object-fit: cover; height: 230px;">
                         </a>
 
@@ -91,10 +91,9 @@
                             wire:click.prevent="addToCart({{ $product->id }})" @endif
                                 class="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-300">
 
-                                <div style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: #00CED1; border-radius: 10px; padding: 10px; 
-                                    transition: background-color 0.3s ease, transform 0.2s ease;"
-                                    onmouseover="this.style.backgroundColor='#00B2B5'; this.style.transform='scale(1.1)';"
-                                    onmouseout="this.style.backgroundColor='#00DCE3'; this.style.transform='scale(1)';">
+                                <div style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: #00CED1; border-radius: 10px; padding: 10px; transition: background-color 0.3s ease, transform 0.2s ease;"
+                                onmouseover="this.style.backgroundColor='#00B2B5'; this.style.transform='scale(1.1)';"
+                                onmouseout="this.style.backgroundColor='#00DCE3'; this.style.transform='scale(1)';">
 
                                     <span wire:target="addToCart({{ $product->id }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
