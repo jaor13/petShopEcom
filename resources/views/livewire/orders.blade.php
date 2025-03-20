@@ -1,18 +1,39 @@
-<div class="container mt-5">
-<ul class="d-flex mb-4 bg-light p-0">
-    <li class="nav-item flex-fill text-center mx-4" style="width: 150.61px;"> <a class="nav-link fw-bold py-2 {{ $status === 'all' ? 'active text-info border-bottom border-3 border-info' : 'text-secondary' }}"
-            wire:click.prevent="filterOrders('all')" href="#">All Orders</a>
+<div class="container mt-4 p-0">
+<ul class="d-flex mb-4 p-0">
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('all')" href="#">
+            <i class="fas fa-list-alt me-2"></i> All Orders
+        </a>
     </li>
-    <li class="nav-item flex-fill text-center mx-4" style="width: 150.61px;"> <a class="nav-link fw-bold py-2 {{ $status === 'to_ship' ? 'active text-info border-bottom border-3 border-info' : 'text-secondary' }}"
-            wire:click.prevent="filterOrders('to_ship')" href="#">To Ship</a>
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'to_ship' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('to_ship')" href="#">
+            <i class="fas fa-shipping-fast me-2"></i> To Ship
+        </a>
     </li>
-    <li class="nav-item flex-fill text-center mx-4" style="width: 150.61px;"> <a class="nav-link fw-bold py-2 {{ $status === 'to_receive' ? 'active text-info border-bottom border-3 border-info ' : 'text-secondary' }}"
-            wire:click.prevent="filterOrders('to_receive')" href="#">To Receive</a>
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'to_receive' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('to_receive')" href="#">
+            <i class="fas fa-box-open me-2"></i> To Receive
+        </a>
     </li>
-    <li class="nav-item flex-fill text-center mx-4" style="width: 150.61px;"> <a class="nav-link fw-bold py-2 {{ $status === 'completed' ? 'active text-info border-bottom border-3 border-info' : 'text-secondary' }}"
-            wire:click.prevent="filterOrders('completed')" href="#">Completed</a>
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'completed' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('completed')" href="#">
+            <i class="fas fa-check-circle me-2"></i> Completed
+        </a>
+    </li>
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'cancelled' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('cancelled')" href="#">
+           <i class="fas fa-times-circle me-2"></i> Cancelled
+        </a>
     </li>
 </ul>
+
+
+
 
 <div class="w-100 p-0">
         @forelse ($filteredOrders as $order)

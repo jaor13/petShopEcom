@@ -148,18 +148,46 @@
 
   <div class="container p-3">
     <!-- New Products Section -->
-    <div class="container-fluid p-2 rounded-3" style="background-color: white;">
-      <div style=" display: flex; justify-content: space-between; align-items: center;">
-        <h1 style="font-weight: bold; color: #262525; margin-top: 1.3em; font-size: xx-large; margin:1em 0em 0em 1.1em;">
-        <span style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
-  
-        Categories
-        
-      </div>
-      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em;">
-        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'latest'])
-      </div>
+    <div class="container-fluid p-2 rounded-3" style="background-color: white; padding: 20px;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1 style="font-weight: bold; color: #262525; margin-top: 1.3em; font-size: xx-large; margin:0.8em 1em 0.5em 1.1em; display: flex; align-items: center;">
+      <span style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+      Categories
+    </h1>
+  </div>
+
+  <!-- Category Boxes -->
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding: 0.6em 0 1.2em 0; justify-content: center;">
+    <div class="category-box">
+      <i class="fa-solid fa-dog"></i>
     </div>
+
+    <div class="category-box">
+      <i class="fa-solid fa-cat"></i>
+    </div>
+
+    <div class="category-box">
+      <i class="fa-solid fa-dove"></i>
+    </div>
+
+    <div class="category-box">
+      <i class="fa-solid fa-otter"></i>
+    </div>
+
+    <div class="category-box">
+      <i class="fa-solid fa-fish"></i>
+    </div>
+
+    <div class="category-box">
+      <i class="fa-solid fa-dog"></i>
+    </div>
+
+    <div class="category-box">
+      <i class="fa-solid fa-dragon"></i>
+    </div>
+  </div>
+</div>
+
 
 
     <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">

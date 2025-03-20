@@ -1,4 +1,4 @@
-<div class="profile text-center py-4">
+<div class="profile text-center py-2 mt-3">
     <!-- Profile Picture -->
     <label for="profile-picture-upload">
         <img src="{{ $profile_picture_url }}" 
