@@ -17,12 +17,13 @@ class Order extends Model
         'status',
         'currency',
         'shipping_amount',
-        'shipping_method',
+        'shipping_method',  
         'notes',
         'paymongo_reference',
         'delivered_at', 
         'completed_at', 
-        'cancelled_at'
+        'cancelled_at',
+        'shipped_at'
     ];
 
     public function user()
