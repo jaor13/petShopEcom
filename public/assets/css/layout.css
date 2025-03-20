@@ -1,10 +1,7 @@
 :root {
   --default-font-family: "Afacad", sans-serif;
 }
-html, body {
-  height: auto;
-  overflow-x: hidden; /* Prevents horizontal scrolling */
-}
+
 
 body {
   font-family: 'Afacad', sans-serif;
@@ -500,7 +497,7 @@ margin-left: 0px;
 
 .category-box {
   width: 9em;
-  height: 9em;
+  height:9em;
   background-color: #00DCE3;
   display: flex;
   align-items: center;

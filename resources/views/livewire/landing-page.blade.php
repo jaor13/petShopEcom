@@ -155,10 +155,12 @@
 
   <div class="container p-3">
     <!-- Categories -->
+
+    
     <div class="container-fluid p-2 rounded-3" style="background-color: white; padding: 20px;">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <h1
-          style="font-font-weight: bold; color: #262525; margin-top: 1.3em; font-size: xx-large; margin:0.8em 1em 0.5em 1.1em; display: flex; align-items: center;">
+          style="font-weight: bold; color: #262525; margin-top: 1.3em; font-size: xx-large; margin:0.8em 1em 0.5em 1.1em; display: flex; align-items: center;">
           <span
             style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
           Categories
@@ -193,8 +195,17 @@
         </a>
 
 
+        <a href="{{ route('products', ['type' => 'dog']) }}" wire:navigate class="category-box">
+          <i class="fa-solid fa-dog"></i>
+        </a>
+        
         <a href="{{ route('products', ['type' => 'dragon']) }}" wire:navigate class="category-box">
           <i class="fa-solid fa-dragon"></i>
+
+        <a href="{{ route('products', ['type' => 'cat']) }}" wire:navigate class="category-box">
+          <i class="fa-solid fa-cat"></i>
+        </a>
+
         </a>
       </div>
     </div>
