@@ -46,8 +46,11 @@
             <div class="relative mb-6 lg:mb-10 lg:h-2/4">
               <!-- <button @click="prevImage"
               class="absolute left-2 top-1/2 text-gray-400 px-2 py-1 rounded-l-md">❮</button> -->
+              <div style="position: absolute; right: 0; margin-right:-77px; top:18%; transform: translateY(-50%) rotate(270deg); letter-spacing:3px; background-color: #00DCE3; color: white; padding: 10px 50px; font-weight: bolder; font-size: 2.4em; border-radius: 2px; z-index: 1;">
+                ARICUZ
+            </div>
               <img x-bind:src="images[mainImageIndex]" alt=""
-                class="object-cover w-full lg:h-full transition-opacity duration-500 bg-[#E7FAFF] rounded-lg duration-500">
+                class="object-cover w-full lg:h-full transition-opacity duration-500 bg-[#E7FAFF] rounded-lg duration-500"   style="width: 580px; height: 560px;">
               <!-- <button @click="nextImage"
               class="absolute right-2 top-1/2 text-gray-400 px-2 py-1 rounded-r-md">❯</button> -->
             </div>
@@ -102,7 +105,7 @@
               </hr>
               <p class="inline-block mb-6  text-4xl font-bold  text-[#F93535] ">
                 <span>{{ Number::currency($variant_price, 'PHP') }}</span>
-                <span class="text-base font-normal  line-through text-[#F93535]">$2800.99</span>
+                <!-- <span class="text-base font-normal  line-through text-[#F93535]">$2800.99</span> -->
               </p>
             </div>
 
@@ -128,7 +131,7 @@
               <div class="flex items-center mt-4">
                 <span class="text-yellow-500" style="font-size: 1.2em;">&#9733;</span>
                 <span class="ml-1" style="font-size: 1.1em; font-weight: 500;">4.6</span>
-                <span class="ml-1" style="color: #888;">|1198 Sold</span>
+                <span class="ml-1" style="color: #888;">|{{ $product->sold_count }} Sold</span>
               </div>
             </div>
             <div style="display: flex; flex-wrap: wrap; align-items: center;">
@@ -164,10 +167,10 @@
         <div style="background-color: #E0F2F7; padding: 10px; border-radius: 5px;">
           <h2 class="text-xl font-light text-black-300 dark:text-black-400">Product Specification</h2>
         </div>
-        <p class="max-w-md text-black-300 dark:text-black-400 ml-4">
+        <p class="max-w-md text-black-300 dark:text-black-400 ml-4 mt-2">
           Category: {{ $product->categories->pluck('name')->join(', ') }}
         </p>
-        <p class="max-w-md text-gray-300 dark:text-gray-400 ml-4">
+        <p class="max-w-md text-gray-300 dark:text-gray-400 ml-4 mt-2">
           Stocks: {{ $product->stock_quantity }}
         </p>
       </div>
@@ -175,9 +178,10 @@
         <div style="background-color: #E0F2F7;margin-bottom: 10px; padding: 10px; border-radius: 5px;">
           <h2 class="text-xl font-light text-black-300 dark:text-black-400">Product Description</h2>
         </div>
-        <p class="max-w-md text-gray-300 dark:text-gray-400 ">
-          {!! Str::markdown($product->description) !!}
-        </p>
+      <p class="max-w-md text-gray-300 dark:text-gray-400">
+    {!! Str::markdown(preg_replace('/^\s*-\s*/m', '- ', $product->description)) !!}
+</p>
+
       </div>
     </div>
   </div>
