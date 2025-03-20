@@ -117,6 +117,22 @@ class MyAccount extends Component
         }
     }
     
+    public function sendVerificationEmail()
+{
+    $user = Auth::user();
+
+    if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail()) {
+        $user->sendEmailVerificationNotification();
+
+        $this->alert('success', 'A new verification link has been sent to your email.', [
+            'position' => 'center',
+            'toast' => true,
+            'timer' => 3000,
+            'showConfirmButton' => false
+        ]);
+    }
+}
+
     
     public function confirmDelete()
     {
