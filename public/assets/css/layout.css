@@ -589,3 +589,7 @@ margin-left: 0px;
   font-weight: bold; /* Bold text for active links */
   border-bottom: 3px solid #00DCE3; /* Underline for active links */
 }
+
+.container-fluid {
+  margin-bottom: -2.3rem; /* Adjust as needed */
+}
