@@ -18,7 +18,7 @@
                 <li class="nav-item">
                     <a wire:click.prevent="setActiveSection('ratings-reviews')"
                         class="nav-link {{ $activeSection === 'ratings-reviews' ? 'active' : '' }}" href="#">
-                        <i class="fas fa-star ml-5 p-2"></i> Ratings & Reviews
+                        <i class="fas fa-star ml-5 p-2 fix-cust-1"></i> Ratings & Reviews
                     </a>
                 </li>
 
