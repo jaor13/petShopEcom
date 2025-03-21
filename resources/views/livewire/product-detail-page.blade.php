@@ -195,24 +195,36 @@
         </div>
         <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000;">
         <div class="space-y-4">
-          @forelse ($reviews as $review)
-              <div class="bg-white rounded-lg p-4 shadow-sm">
-                  <div class="flex items-start mb-2">
-                      <div class="rounded-full bg-gray-200 w-8 h-8 mr-2"></div>
-                      <div>
-                          <div class="font-medium text-black-900">{{ $review->user->username ?? 'Anonymous' }}</div>
-                          <div class="text-yellow-500">
-                              {!! str_repeat('⭐', $review->rating) !!}
-                              {!! str_repeat('☆', 5 - $review->rating) !!}
-                          </div>
-                          <p class="text-sm text-black-700">{{ $review->comment }}</p>
-                          <div class="text-sm text-gray-500">{{ $review->created_at->format('Y-m-d H:i') }} | {{ $review->variant->name ?? 'No Variant' }}</div>
-                      </div>
+        @forelse ($reviews as $review)
+    <div class="bg-white rounded-lg p-4 shadow-sm">
+        <div class="flex items-start mb-2">
+            <div class="rounded-full bg-gray-200 w-8 h-8 mr-2"></div>
+            <div>
+                <div class="font-medium text-black-900">{{ $review->user->username ?? 'Anonymous' }}</div>
+                <div class="text-yellow-500">
+                    {!! str_repeat('⭐', $review->rating) !!}
+                    {!! str_repeat('☆', 5 - $review->rating) !!}
+                </div>
+                <p class="text-sm text-black-700">{{ $review->comment }}</p>
+
+              @if(is_array($review->images) && count($review->images) > 0)
+                  <div class="flex flex-wrap gap-2 mt-2">
+                      @foreach($review->images as $image)
+                          <img src="{{ url('storage/' . $image) }}" 
+                              alt="Review Image" 
+                              class="rounded-lg w-32 h-32 object-cover">
+                      @endforeach
                   </div>
-              </div>
-          @empty
-              <p class="text-center text-gray-500">No reviews yet.</p>
-          @endforelse
+              @endif
+
+                <div class="text-sm text-gray-500">{{ $review->created_at->format('Y-m-d H:i') }} | {{ $review->variant->name ?? 'No Variant' }}</div>
+            </div>
+        </div>
+    </div>
+@empty
+    <p class="text-center text-gray-500">No reviews yet.</p>
+@endforelse
+
       </div>
     </div>
 </div>
