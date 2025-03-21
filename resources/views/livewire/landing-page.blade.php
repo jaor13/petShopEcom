@@ -73,25 +73,7 @@
 
 
 
-      <!-- Intro Section (Overlay on Top of Carousel) -->
-      @auth
-      <!-- <div class="intro">
-      <h1 class="pawsome-essentials">Pawsome Essentials<br>Delivered with Love!</h1>
-      <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. Integer ut sed praesent eget auctor donec
-        egestas orci amet.</p>
-
-      </div> -->
-    @endauth
-
-      @guest
-      <div class="intro text-center">
-      <h1 class="pawsome-essentials"><strong> PEssentials<br>Delivered with Love! </strong></h1>
-      <p class="lorem-ipsum">Lorem ipsum dolor sit amet consectetur. <br> 
-      Integer ut sed praesent eget auctor donec
-        egestas orci amet.</p>
-      <button class="shop-now">Shop Now</button>
-      </div>
-    @endguest
+     
     </section>
 
     @auth
