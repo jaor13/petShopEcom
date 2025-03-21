@@ -9,7 +9,7 @@
     <input type="file" id="profile-picture-upload" wire:model="profile_picture" style="display: none;">
 
     <!-- Display Updated Username -->
-    <h5 class="profile-name" style="color:#4F4F4F;">Hi {{ $username }}!</h5>
+    <h5 class="profile-name" style="color:#3D3D3D;">Hi, {{ $username }}!</h5>
 
     @error('profile_picture') <span class="text-danger">{{ $message }}</span> @enderror
 </div>

@@ -1,6 +1,6 @@
 <div>
-    <div class="container mt-5 rounded-3 ">
-        <div>
+    <div class="container mt-5 rounded-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="text-white text-center pt-2 w-100 h-12 m-0" style="background-color: #00DCE3; 
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
@@ -51,13 +51,13 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <p><strong>x {{ $item['qty'] }}</strong></p>
+                                <p>x {{ $item['qty'] }}</p>
                             </td>
                             <td class="text-center">
-                                <p> <strong>₱{{ number_format($item['price'], 2) }}</strong></p>
+                                <p>₱{{ number_format($item['price'], 2) }}</p>
                             </td>
                             <td class="text-right">
-                                <p><strong>₱{{ number_format($item['price'] * $item['qty'], 2) }}</strong></p>
+                                <p>₱{{ number_format($item['price'] * $item['qty'], 2) }}</p>
                             </td>
                         </tr>
                     @endforeach
@@ -74,7 +74,7 @@
                     <p class="mb-0">₱{{ number_format($order['shipping_amount'], 2) }}</p>
                 </div>
                 <div class="text-end mt-3 mb-5">
-                    <p class="mb-0"><strong>Order Total:</strong> ₱ {{ number_format($order['total_price'], 2) }}</p>
+                    <p class="mb-0"><strong>Order Total: ₱ {{ number_format($order['total_price'], 2) }}</strong></p>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
             </div>
 
             <div class="d-flex justify-content-between mb-2">
-                <p class="mb-1">Paid Method:</p>
+                <p class="mb-1">Payment Method:</p>
                 <p class="mb-1">{{ $order['payment_method'] }}</p>
             </div>
 

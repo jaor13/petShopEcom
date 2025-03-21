@@ -229,13 +229,13 @@
   </div>
 
   <div class="container-fluid p-2 rounded-3" style="background-color: white;">
-  <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1em;">
-  <h1 style="font-weight: bold; color: gray;"
+  <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
+  <h1 style="font-weight: bold; color: #262525;"
       class="text-2xl">
         Products of Same Category
       </h1>
       <a href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
-        style="font-size: 18px; color: gray; text-decoration: none;">
+        style="font-size: 18px; color: rgb(145, 143, 143); text-decoration: none;">
         View All >
       </a>
     </div>

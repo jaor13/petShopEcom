@@ -24,7 +24,7 @@
 
 <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4 custom-main p-4 ">
     <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}">
-        <h2 class="section-title">Manage your Account Details</h2>
+        <h2 class="section-title">Manage Account Details</h2>
         <p class="section-description">Update your account's profile information and email address.</p>
         @livewire('my-account')
     </div>
@@ -36,6 +36,7 @@
         <h2 class="ml-3">Ratings and Reviews</h2>
     </div>
     <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}">
+        <h2 class="section-title">Liked Products</h2>
         @livewire('liked-product')
     </div>
 </main>

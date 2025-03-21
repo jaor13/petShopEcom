@@ -1,9 +1,7 @@
-<div class="p-3 mb-4 border border-light shadow-sm rounded bg-white">
-    <div class="d-flex justify-content-between align-items-center m-3">
+<div class="">
+    <div class="d-flex justify-content-between align-items-center mr-3 mb-2">
         <div>
-            <h2 style="font-size: 25px;">Liked Products</h2>
-            <div class="select-all-container">
-            </div>
+            <p class="section-description">See the products you liked.</p>
         </div>
 
         <div>
@@ -28,7 +26,7 @@
             </button>
 
             @if(!$products->isEmpty())
-                <button wire:click="toggleEditMode" style="background: none; border: none; color: #00DCE3; cursor: pointer;"
+                <button wire:click="toggleEditMode" style="background: none; border: none; color: #00DCE3; cursor: pointer; margin-bottom:12px;"
                     {{ $editMode ? 'hidden' : '' }}>
                     Edit
                 </button>
@@ -36,7 +34,7 @@
         </div>
     </div>
 
-    <div class="container-fluid ms-0 me-3 rounded-3">
+    <div class="container-fluid ms-0 me-3 p-3 mb-2 border border-light shadow-sm rounded-3 bg-white">
         @if($products->isEmpty())
             <div class="text-center p-5">
                 <p class="mt-3">No liked products yet</p>
@@ -50,10 +48,10 @@
         @endif
 
 
-        <div class="row row-cols-1 row-cols-md-4 g-3 mb-4">
+        <div class="row row-cols-1 row-cols-md-4 g-3 mb-6">
             @foreach ($products as $product)
             <div class="col" wire:key="{{ $product->id }}">
-                <div class="card h-100 p-2 m-2" style="position: relative;">
+                <div class="card h-90 p-2 m-2" style="position: relative;">
 
                     @if($editMode)
                         <input type="checkbox" wire:model="selectedProducts" value="{{ $product->id }}"
