@@ -73,7 +73,7 @@
                     <p class="mb-0">Total Items: {{ count($order['items']) }}</p>
                     <p><strong>Total Price: ₱{{ number_format($order['total_price'], 2) }}</strong></p>
                     <div class="d-inline-block">
-                        <p class="mb-0 rounded-3 px-3 py-2" style="background-color: #00DCE3; font-weight: bold; color: #fff;">
+                        <p class="mb-0 rounded-3 px-3 py-2" style="border: 2px solid #00DCE3; color: #00DCE3; background-color: #f8f9fa; font-weight: bold;">
                             {{ $order['message'] }}
                         </p>
                     </div>
