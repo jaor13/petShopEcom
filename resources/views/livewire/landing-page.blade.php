@@ -156,7 +156,6 @@
   <div class="container p-3">
     <!-- Categories -->
 
-    
     <div class="container-fluid p-2 rounded-3" style="background-color: white; padding: 20px;">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <h1
@@ -169,11 +168,11 @@
 
       <!-- Category Boxes -->
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding: 0.6em 0 1.2em 0; justify-content: center;">
-        <a href="{{ route('products', ['type' => 'dog']) }}" wire:navigate class="category-box">
+        <a href="{{ url('products?category=' . "Dog") }}" wire:navigate class="category-box">
           <i class="fa-solid fa-dog"></i>
         </a>
 
-        <a href="{{ route('products', ['type' => 'cat']) }}" wire:navigate class="category-box">
+        <a href="{{ url('products?category=' . "Cat") }}" wire:navigate class="category-box">
           <i class="fa-solid fa-cat"></i>
         </a>
 

@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
 use Livewire\WithFileUploads;
 use App\Models\OrderItem;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Reviews extends Component
 {
     use WithFileUploads;
+    use LiveWireAlert;
 
     public $product;
     public $orderedItemId;
@@ -95,7 +97,12 @@ class Reviews extends Component
             ]
         );
 
-        session()->flash('success', 'Review submitted successfully!');
+        $this->alert('success', 'Review submitted.', [
+            'position' => 'bottom-end',
+            'timer' => 3000,
+            'toast' => true,
+        ]);
+
         $this->reset(); // Reset form fields
         $this->dispatch('hide-review-modal'); // Hide modal
     }
