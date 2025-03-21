@@ -2,31 +2,31 @@
     <ul class="d-flex mb-4 p-0">
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('all')" href="#">
+               wire:click.prevent="filterOrders('all')" href="?status=all">
                 <i class="fas fa-list-alt me-2"></i> All Orders
             </a>
         </li>
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'to_ship' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('to_ship')" href="#">
+               wire:click.prevent="filterOrders('to_ship')" href="?status=to_ship">
                 <i class="fas fa-shipping-fast me-2"></i> To Ship
             </a>
         </li>
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'to_receive' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('to_receive')" href="#">
+               wire:click.prevent="filterOrders('to_receive')" href="?status=to_receive">
                 <i class="fas fa-box-open me-2"></i> To Receive
             </a>
         </li>
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'completed' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('completed')" href="#">
+               wire:click.prevent="filterOrders('completed')" href="?status=completed">
                 <i class="fas fa-check-circle me-2"></i> Completed
             </a>
         </li>
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'cancelled' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('cancelled')" href="#">
+               wire:click.prevent="filterOrders('cancelled')" href="?status=cancelled">
                <i class="fas fa-times-circle me-2"></i> Cancelled
             </a>
         </li>

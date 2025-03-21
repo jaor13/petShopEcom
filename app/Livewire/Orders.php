@@ -13,11 +13,16 @@ class Orders extends Component
     public $orders = [];
     public $selectedOrderId = null;
 
+    protected $queryString = ['status'];
+
+
 
     public function mount()
     {
         $this->fetchOrders();
+        $this->filterOrders($this->status);
     }
+
 
     public function fetchOrders()
     {
