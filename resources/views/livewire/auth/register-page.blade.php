@@ -19,7 +19,7 @@
               <!-- Form Group -->
 
               <div>
-                <label for="name" class="block text-sm mb-2">Name</label>
+                <label for="username" class="block text-sm mb-2">Username</label>
                 <div class="relative">
                   <input type="text" id="name" name="name" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required aria-describedby="email-error">
                   <div class="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
