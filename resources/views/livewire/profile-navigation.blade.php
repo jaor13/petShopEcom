@@ -6,7 +6,7 @@
                 <li class="nav-item">
                     <a wire:click.prevent="setActiveSection('my-account')"
                         class="nav-link {{ $activeSection === 'my-account' ? 'active' : '' }}" href="#">
-                        <i class="far fa-user mr-2 ml-5 p-2"></i> My Account
+                        <i class="fas fa-user mr-2 ml-5 p-2"></i> My Account
                     </a>
                 </li>
                 <li class="nav-item">
@@ -25,7 +25,7 @@
                 <li class="nav-item">
                     <a wire:click.prevent="setActiveSection('liked-product')"
                         class="nav-link {{ $activeSection === 'liked-product' ? 'active' : '' }}" href="#">
-                        <i class="far fa-heart ml-5 p-2 fix-cust"></i> Liked Products
+                        <i class="fas fa-heart ml-5 p-2 fix-cust"></i> Liked Products
                     </a>
                 </li>
             </ul>
