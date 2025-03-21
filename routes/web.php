@@ -69,6 +69,7 @@ Route::middleware(['notAdmin'])->group(function () {
     
     
        Route::get('/profile', UserProfile::class)->name('profile.show');
+       
 
 
        Route::get('/orders', Orders::class)->name('orders');

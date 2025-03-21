@@ -8,19 +8,14 @@ class ProfileNavigation extends Component
 {
     public $activeSection = 'my-account';
 
-    public function mount()
-    {
-        if (request()->routeIs('my-purchases')) {
-            $this->activeSection = 'my-purchases';
-        } else {
-            $this->activeSection = request()->query('section', 'my-account');
-        }
-    }
+    // Enable query string binding
+    protected $queryString = ['activeSection'];
 
     public function setActiveSection($section)
     {
         $this->activeSection = $section;
     }
+
     public function render()
     {
         return view('livewire.profile-navigation');
