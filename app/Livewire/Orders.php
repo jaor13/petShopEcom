@@ -107,6 +107,11 @@ class Orders extends Component
         // dd($this->selectedOrderId);
     }
 
+    public function goBack()
+    {
+        $this->selectedOrderId = null;
+    }
+
 
     public function getFilteredOrders()
     {
