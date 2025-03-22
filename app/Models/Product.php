@@ -69,7 +69,8 @@ class Product extends Model
             return $this->variants()->sum('stock_quantity') ?? 0; 
         }
 
-        return $this->attributes['stock_quantity'] ?? 0; 
+        return $this->attributes['stock_quantity'] ?? 0; // Ensure it returns 0 if null
+ 
     }
 
     public function updateStockAndAvailability()
@@ -134,18 +135,6 @@ class Product extends Model
             $variant->product->updateStockAndAvailability();
         });
     }
-
-
-
-    //     //
-    //     public function updateStockFromVariants()
-    // {
-    //     $this->update([
-    //         'stock_quantity' => $this->variants()->sum('stock_quantity'),
-    //     ]);
-    // }
-
-
 
 
 

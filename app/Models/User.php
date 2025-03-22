@@ -66,13 +66,11 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
         return $this->role === 'admin'; // Allow only admins
     }
 
-    public function getFullNameAttribute()
-    {
-        return $this->fname . ' ' . $this->lname;
-    }
 
-    public function getFilamentName(): string
+public function getFilamentName(): string
     {
         return "{$this->fname} {$this->lname}";
     }
+
+
 }

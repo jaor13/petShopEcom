@@ -1,19 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Livewire\Auth\ForgotPasswordPage;
-use App\Livewire\Auth\LoginPage;
-use App\Livewire\Auth\RegisterPage;
-use App\Livewire\Auth\ResetPasswordPage;
-use App\Livewire\CancelPage;
-use App\Livewire\CartPage;
-use App\Livewire\CheckoutPage;
-use App\Livewire\LandingPage;
-use App\Livewire\LikedProduct;
-use App\Livewire\OrdersPage;
-use App\Livewire\ProductDetailPage;
-use App\Livewire\ProductsPage;
-use App\Livewire\SuccessPage;
+use App\Livewire\Chat\CreateChat;
+use App\Livewire\Chat\Main;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Controllers\CustomProfileController;
@@ -92,3 +80,27 @@ Route::middleware(['notAdmin'])->group(function () {
 
 
 require __DIR__ . '/auth.php';
+
+
+Route::view('/', 'welcome');
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__.'/auth.php';
+
+Route::get('/users',CreateChat::class)->name('users');
+Route::get('/chat{key?}',Main::class)->name('chat');
+Route::get('/chat', CreateChat::class)->middleware('auth');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->name('logout');
