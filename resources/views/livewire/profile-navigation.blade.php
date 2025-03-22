@@ -1,6 +1,6 @@
-<div class="row main-box bg-light">
-    <nav id="sidebar" class="col-md-4 col-lg-3 d-md-block sidebar rounded-3">
-        <div class="position-sticky">
+<div class="row main-box ">
+    <nav id="" class="col-md-4 col-lg-3 d-md-block ">
+        <div class="position-sticky bg-light">
             @livewire('profile-settings')
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -22,7 +22,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item mb-4">
                     <a wire:click.prevent="setActiveSection('liked-product')"
                         class="nav-link {{ $activeSection === 'liked-product' ? 'active' : '' }}" href="#">
                         <i class="fas fa-heart ml-5 p-2 fix-cust"></i> Liked Products
@@ -32,7 +32,7 @@
         </div>
     </nav>
 
-    <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4 custom-main p-4 ">
+    <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4  p-4 ">
         <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}">
             <h2 class="section-title">Manage Account Details</h2>
             <p class="section-description">Update your account's profile information and email address.</p>
