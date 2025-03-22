@@ -16,7 +16,7 @@ class OrderDetails extends Component
 
     public function goBack()
     {
-        return view('livewire.orders');
+        $this->emit('sectionChanged', ['section' => 'orders']);
     }
 
     public function render()
