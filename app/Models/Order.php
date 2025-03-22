@@ -54,23 +54,19 @@ class Order extends Model
                 if ($item->variant_id) {
                     $variant = $item->variant;
                     $variant->decrement('sold_count', $item->quantity);
-                    
-                    $product = $variant->product;
-                    $product->decrement('sold_count', $item->quantity);
+                    // No need to update the product sold_count, let the trigger handle it
                 } else {
                     $product = $item->product;
                     $product->decrement('sold_count', $item->quantity);
                 }
             }
-            } elseif ($previousStatus !== 'completed' && $this->status === 'completed') {
+        } elseif ($previousStatus !== 'completed' && $this->status === 'completed') {
             // If order was NOT completed before but is now completed, increment the sold count
             foreach ($this->items as $item) {
                 if ($item->variant_id) {
                     $variant = $item->variant;
                     $variant->increment('sold_count', $item->quantity);
-                    
-                    $product = $variant->product;
-                    $product->increment('sold_count', $item->quantity);
+                    // No need to update the product sold_count, let the trigger handle it
                 } else {
                     $product = $item->product;
                     $product->increment('sold_count', $item->quantity);
