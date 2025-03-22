@@ -33,6 +33,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
@@ -55,6 +57,7 @@
     </div>
 
     @include('partials.chat')
+    @livewireScripts
 </body>
 
 <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
