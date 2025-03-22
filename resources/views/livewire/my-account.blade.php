@@ -1,6 +1,55 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-12 p-3 mt-2 rounded shadow-sm custom-card-design">
+    <div class="row ">
+          <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
+    <h4 class="mb-4">Personal Information</h4>
+        <div class="d-flex align-items-center mb-3">
+            <img src="profile-image-url" alt="Profile Picture" class="rounded-circle" width="80" height="80">
+            <button class="btn btn-link ms-3 ">Edit Profile Information</button>
+        </div>
+
+
+        <dive>
+        <form wire:submit.prevent="updateProfile ">
+            <div class="mb-3 ">
+                <label for="username" class="form-label">Name</label>
+                <input type="text" class="form-control" id="username" wire:model="username" required>
+                @error('username') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+            </div>
+            
+            <div class="mb-3">
+                <label for="dob" class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" id="dob" wire:model="dob" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <div>
+                    <input type="radio" id="male" wire:model="gender" value="male"> <label for="male">Male</label>
+                    <input type="radio" id="female" wire:model="gender" value="female" class="ms-3"> <label for="female">Female</label>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone" wire:model="phone" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" wire:model="email" required>
+                @error('email') <div class="text-danger mt-1">{{ $message }}</div> @enderror
+            </div>
+            
+            @if (Auth::user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !Auth::user()->hasVerifiedEmail())
+                <div class="alert alert-warning mt-3">
+                    <p>Your email address is unverified.</p>
+                    <button wire:click="sendVerificationEmail" class="btn btn-link">Click here to re-send the verification email.</button>
+                </div>
+            @endif
+            
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+</div><
             <h4>Change Username & Email</h4>
             @if (session()->has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,7 +94,7 @@
             </form>
         </div>
 
-        <div class="col-md-12 p-3 mt-3 mt-md-5 rounded shadow-sm custom-card-design">
+        <div class="col-md-12 px-5 py-3 mt-3 mt-md-5 rounded shadow-sm custom-card-design">
             <h4>Change Password</h4>
             <form wire:submit.prevent="updatePassword" class="mt-3">
                 <!-- Current Password Field -->
@@ -74,8 +123,8 @@
                 </div>
             </form>
         </div>
-
-        <div class="col md-12  p-3 mt-5 rounded shadow-sm custom-card-design">
+ 
+        <div class="col md-12  p-3 mt-5 rounded shadow-sm custom-card-design px-5 py-3">
         <h4>Delete Account</h4>
         <form wire:submit.prevent="confirmDelete" class="mt-3">
             <div class="mb-3">
