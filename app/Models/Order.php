@@ -48,29 +48,25 @@ class Order extends Model
     {
         $previousStatus = $this->getOriginal('status'); // Get the previous status
     
-        if ($previousStatus === 'delivered' && $this->status !== 'delivered') {
-            // If order was delivered but is now pending/canceled, revert the sold count
+        if ($previousStatus === 'completed' && $this->status !== 'completed') {
+            // If order was completed but is now pending/canceled, revert the sold count
             foreach ($this->items as $item) {
                 if ($item->variant_id) {
                     $variant = $item->variant;
                     $variant->decrement('sold_count', $item->quantity);
-                    
-                    $product = $variant->product;
-                    $product->decrement('sold_count', $item->quantity);
+                    // No need to update the product sold_count, let the trigger handle it
                 } else {
                     $product = $item->product;
                     $product->decrement('sold_count', $item->quantity);
                 }
             }
-        } elseif ($previousStatus !== 'delivered' && $this->status === 'delivered') {
-            // If order was NOT delivered before but is now delivered, increment the sold count
+        } elseif ($previousStatus !== 'completed' && $this->status === 'completed') {
+            // If order was NOT completed before but is now completed, increment the sold count
             foreach ($this->items as $item) {
                 if ($item->variant_id) {
                     $variant = $item->variant;
                     $variant->increment('sold_count', $item->quantity);
-                    
-                    $product = $variant->product;
-                    $product->increment('sold_count', $item->quantity);
+                    // No need to update the product sold_count, let the trigger handle it
                 } else {
                     $product = $item->product;
                     $product->increment('sold_count', $item->quantity);

@@ -14,7 +14,7 @@ class OrderUserRevenueStats extends BaseWidget
     {
         return [
             // Total Orders
-            Card::make('Total Orders', Order::where('status', 'delivered')->count())
+            Card::make('Total Orders', Order::where('status', 'completed')->count())
                 ->description('Completed Orders')
                 ->icon('heroicon-o-shopping-cart'),
 
@@ -24,7 +24,7 @@ class OrderUserRevenueStats extends BaseWidget
                 ->icon('heroicon-o-user'),
 
             // Total Revenue
-            Card::make('Total Revenue', '₱' . number_format(Order::where('status', 'delivered')
+            Card::make('Total Revenue', '₱' . number_format(Order::where('status', 'completed')
                 ->where('payment_status', 'paid')
                 ->sum('grand_total'), 2))
                 ->description('Total Sales')

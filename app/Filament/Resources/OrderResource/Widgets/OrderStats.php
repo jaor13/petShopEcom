@@ -14,7 +14,7 @@ class OrderStats extends BaseWidget
     {
         $totalRevenue = Order::query()
             ->where('payment_status', 'paid')
-            ->where('status', 'delivered')
+            ->where('status', 'completed')
             ->sum('grand_total'); // Summing grand_total for valid orders
     
         return [
@@ -25,6 +25,9 @@ class OrderStats extends BaseWidget
                 ->icon('heroicon-o-clock'),
     
             Stat::make('Order Shipped', Order::query()->where('status', 'shipped')->count())
+                ->icon('heroicon-o-check-circle'),
+
+            Stat::make('Order Delivered', Order::query()->where('status', 'delivered')->count())
                 ->icon('heroicon-o-check-circle'),
     
             Stat::make('Average Price', '₱ ' . number_format(Order::query()->avg('grand_total'), 2))

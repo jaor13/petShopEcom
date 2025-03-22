@@ -43,13 +43,15 @@ class LatestOrders extends BaseWidget
                         'processing' => 'warning',
                         'shipped' => 'success',
                         'delivered' => 'success',
+                        'completed' => 'success',
                         'cancelled' => 'red',
                     })
                     ->icon(fn(string $state) => match ($state) {
                         'new' => 'heroicon-m-sparkles',
                         'processing' => 'heroicon-m-arrow-path',
                         'shipped' => 'heroicon-m-truck',
-                        'delivered' => 'heroicon-m-check-badge',
+                        'delivered' => 'heroicon-m-check-circle',
+                        'completed' => 'heroicon-m-check-badge',
                         'cancelled' => 'heroicon-m-x-circle',
                     })
                     ->label('Status')

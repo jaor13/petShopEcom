@@ -99,6 +99,7 @@ class OrderResource extends Resource
                         'processing'=> 'Processing',
                         'shipped' => 'Shipped',
                         'delivered' => 'Delivered',
+                        'completed' => 'Completed',
                         'cancelled' => 'Cancelled'
                        ])
                        ->colors([
@@ -106,13 +107,15 @@ class OrderResource extends Resource
                         'processing'=> 'primary',
                         'shipped' => 'success',
                         'delivered' => 'success',
+                        'completed' => 'success',
                         'cancelled' => 'warning'
                        ])
                        ->icons([
                         'new' => 'heroicon-m-sparkles',
                         'processing'=> 'heroicon-m-arrow-path',
                         'shipped' => 'heroicon-m-truck',
-                        'delivered' => 'heroicon-m-check-badge',
+                        'delivered' => 'heroicon-m-check-circle',
+                        'completed' => 'heroicon-m-check-badge',
                         'cancelled' => 'heroicon-m-x-circle'
                        ]),
 
@@ -358,6 +361,7 @@ class OrderResource extends Resource
                     'processing'=> 'Processing',
                     'shipped' => 'Shipped',
                     'delivered' => 'Delivered',
+                    'completed' => 'Completed',
                     'cancelled' => 'Cancelled'
                 ])
                 ->sortable()

@@ -2,31 +2,37 @@
     <ul class="d-flex mb-4 p-0">
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('all')" href="#">
+               wire:click.prevent="filterOrders('all')" href="?status=all">
                 <i class="fas fa-list-alt me-2"></i> All Orders
             </a>
         </li>
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'to_ship' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('to_ship')" href="#">
+               wire:click.prevent="filterOrders('to_ship')" href="?status=to_ship">
                 <i class="fas fa-shipping-fast me-2"></i> To Ship
             </a>
         </li>
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'to_receive' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('to_receive')" href="#">
+               wire:click.prevent="filterOrders('to_receive')" href="?status=to_receive">
                 <i class="fas fa-box-open me-2"></i> To Receive
             </a>
         </li>
         <li class="nav-item flex-fill text-center">
+            <a class="custom-link py-2 {{ $status === 'delivered' ? 'active' : '' }}" 
+                wire:click.prevent="filterOrders('delivered')" href="?status=delivered">
+                <i class="fas fa-check-square me-2"></i> Delivered
+            </a>
+        </li>
+        <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'completed' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('completed')" href="#">
+               wire:click.prevent="filterOrders('completed')" href="?status=completed">
                 <i class="fas fa-check-circle me-2"></i> Completed
             </a>
         </li>
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'cancelled' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('cancelled')" href="#">
+               wire:click.prevent="filterOrders('cancelled')" href="?status=cancelled">
                <i class="fas fa-times-circle me-2"></i> Cancelled
             </a>
         </li>
@@ -73,9 +79,15 @@
                     <p class="mb-0">Total Items: {{ count($order['items']) }}</p>
                     <p><strong>Total Price: ₱{{ number_format($order['total_price'], 2) }}</strong></p>
                     <div class="d-inline-block">
-                        <p class="mb-0 rounded-3 px-3 py-2" style="background-color: #00DCE3; font-weight: bold; color: #fff;">
-                            {{ $order['message'] }}
-                        </p>
+                        @if ($order['status'] === 'delivered')
+                        <button class="btn btn-success" onclick="openModal('testModal', {{ $order['id'] }})">
+                            Order Received
+                        </button>
+                        @else
+                            <p class="mb-0 rounded-3 px-3 py-2" style="border: 2px solid #00DCE3; color: #00DCE3; background-color: #f8f9fa; font-weight: bold;">
+                                {{ $order['message'] }}
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -83,4 +95,37 @@
             <p class="text-center mt-4">No orders found.</p>
         @endforelse
     </div>
+
+
+    <div id="testModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-1/3">
+        <div class="flex justify-between items-center p-4 border-b">
+            <h5 class="text-xl font-medium" id="testModalLabel">Order Received Confirmation</h5>
+            <button type="button" class="text-gray-400 hover:text-gray-600" onclick="toggleModal('testModal')">
+                <span class="sr-only">Close</span>
+                &times;
+            </button>
+        </div>
+        <div class="p-4">
+            Are you sure you want to mark this order as received?
+            <input type="hidden" id="orderId" value="">
+        </div>
+        <div class="flex justify-end p-4 border-t">
+            <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded mr-2" onclick="toggleModal('testModal')">Cancel</button>
+            <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded" wire:click="updateOrderStatus(document.getElementById('orderId').value)">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal(modalID, orderId) {
+        document.getElementById('orderId').value = orderId;
+        toggleModal(modalID);
+    }
+
+    function toggleModal(modalID) {
+        document.getElementById(modalID).classList.toggle('hidden');
+    }
+</script>
+
 </div>

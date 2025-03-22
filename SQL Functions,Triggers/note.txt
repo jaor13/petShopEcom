@@ -6,6 +6,9 @@ triggers in product_variants model :
 	4)update_product_stock	
 	5)update_product_stock_on_delete	
 	6)update_product_stock_on_update	
+    7)update_product_sold_count
+    8)update_product_sold_count_after_update
+    9)update_product_sold_count_after_delete
 
 trigger for order model:
    1)update_order_status_timestamps
@@ -128,3 +131,57 @@ BEGIN
     END IF;
     
 END $$
+
+
+DELIMITER //
+
+CREATE TRIGGER update_product_sold_count
+AFTER INSERT ON product_variants
+FOR EACH ROW
+BEGIN
+    UPDATE products p
+    SET p.sold_count = (
+        SELECT COALESCE(SUM(sold_count), 0) 
+        FROM product_variants pv 
+        WHERE pv.product_id = NEW.product_id
+    )
+    WHERE p.id = NEW.product_id;
+END;
+//
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE TRIGGER update_product_sold_count_after_update
+AFTER UPDATE ON product_variants
+FOR EACH ROW
+BEGIN
+    UPDATE products p
+    SET p.sold_count = (
+        SELECT COALESCE(SUM(sold_count), 0) 
+        FROM product_variants pv 
+        WHERE pv.product_id = NEW.product_id
+    )
+    WHERE p.id = NEW.product_id;
+END;
+//
+
+
+
+CREATE TRIGGER update_product_sold_count_after_delete
+AFTER DELETE ON product_variants
+FOR EACH ROW
+BEGIN
+    UPDATE products p
+    SET p.sold_count = (
+        SELECT COALESCE(SUM(sold_count), 0) 
+        FROM product_variants pv 
+        WHERE pv.product_id = OLD.product_id
+    )
+    WHERE p.id = OLD.product_id;
+END;
+//
+
+DELIMITER ;
