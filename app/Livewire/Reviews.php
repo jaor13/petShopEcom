@@ -24,7 +24,7 @@ class Reviews extends Component
     public $images = [];
     public $reviews = [];
     public $selectedOrderItemId = null;
-
+    public $activeTab = 'to_rate';
 
     public function mount($orderedItemId = null)
     {
@@ -36,10 +36,15 @@ class Reviews extends Component
         if ($this->product) {
             $this->fetchReviews();
         } else {
-            $this->reviews = collect(); 
+            $this->reviews = collect();
         }
     }
-    
+
+    public function switchTab($tab)
+    {
+        $this->activeTab = $tab;
+    }
+
     public function fetchReviews()
     {
         $this->reviews = Review::where('product_id', $this->product->id)
@@ -59,7 +64,7 @@ class Reviews extends Component
         $this->rating = null;
         $this->comment = '';
         $this->images = [];
-        $this->dispatch('show-review-modal'); 
+        $this->dispatch('show-review-modal');
     }
 
     public function setRating($value)
@@ -119,7 +124,7 @@ class Reviews extends Component
             } elseif (!empty($item->product->images) && is_array($item->product->images)) {
                 $item->display_image = url('storage/' . $item->product->images[0]);
             } else {
-                $item->display_image = asset('default.jpg'); 
+                $item->display_image = asset('default.jpg');
             }
         }
 
