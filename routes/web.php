@@ -1,7 +1,19 @@
 <?php
 
-use App\Livewire\Chat\CreateChat;
-use App\Livewire\Chat\Main;
+use App\Http\Controllers\ProfileController;
+use App\Livewire\Auth\ForgotPasswordPage;
+use App\Livewire\Auth\LoginPage;
+use App\Livewire\Auth\RegisterPage;
+use App\Livewire\Auth\ResetPasswordPage;
+use App\Livewire\CancelPage;
+use App\Livewire\CartPage;
+use App\Livewire\CheckoutPage;
+use App\Livewire\LandingPage;
+use App\Livewire\LikedProduct;
+use App\Livewire\OrdersPage;
+use App\Livewire\ProductDetailPage;
+use App\Livewire\ProductsPage;
+use App\Livewire\SuccessPage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Controllers\CustomProfileController;
@@ -10,6 +22,8 @@ use App\Http\Controllers\PaymentController;
 use App\Livewire\UserProfile;
 use App\Livewire\OrderDetails;
 use App\Livewire\Orders;
+use App\Livewire\Chat\CreateChat;
+use App\Livewire\Chat\Main;
 
 
 // admin
