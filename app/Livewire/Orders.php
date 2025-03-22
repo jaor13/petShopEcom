@@ -15,8 +15,6 @@ class Orders extends Component
 
     protected $queryString = ['status'];
 
-
-
     public function mount()
     {
         $this->fetchOrders();
@@ -35,7 +33,9 @@ class Orders extends Component
             $query->whereIn('status', match ($this->status) {
                 'to_ship' => ['processing', 'to_ship'],
                 'to_receive' => ['shipped'],
-                'completed' => ['delivered'],
+                'delivered' => ['delivered'],
+                'completed' => ['completed'],
+                'cancelled' => ['cancelled'],
                 default => [$this->status],
             });
         }
@@ -50,7 +50,8 @@ class Orders extends Component
                 'status' => match ($order->status) {
                     'processing' => 'to_ship',
                     'shipped' => 'to_receive',
-                    'delivered' => 'completed',
+                    'delivered' => 'delivered',
+                    'completeed' => 'completed',
                     default => $order->status,
                 },
                 'items' => $order->items->map(function ($item) {
@@ -120,8 +121,11 @@ class Orders extends Component
             if ($this->status === 'to_receive') {
                 return in_array($order['status'], ['to_receive', 'shipped']);
             }
+            if ($this->status === 'delivered') {
+                return in_array($order['status'], ['delivered']);
+            }
             if ($this->status === 'completed') {
-                return in_array($order['status'], ['completed', 'delivered']);
+                return in_array($order['status'], ['completed']);
             }
             return $order['status'] === $this->status;
         });
@@ -134,12 +138,30 @@ class Orders extends Component
             'new' => 'Your order is being processed.',
             'processing', 'to_ship' => 'Your order is being prepared for shipping.',
             'to_receive', 'shipped' => 'Your order is on its way to you.',
-            'completed', 'delivered' => 'Order completed successfully.',
+            'delivered' => 'Order Received.',
+            'completed' => 'Order completed successfully.',
             'cancelled' => 'Order canceled due to payment failure.',
             default => 'Order status unknown.',
         };
     }
+
+    public function updateOrderStatus($orderId)
+    {
+        $order = Order::find($orderId);
+        if ($order) {
+            $order->status = 'completed';
+            
+            // Check if the payment method is COD and update the payment status
+            if ($order->payment_method === 'cod') {
+                $order->payment_status = 'paid';
+            }
+            
+            $order->save();
+        }
     
+        // Optionally, you can refresh the orders list
+        $this->filterOrders($this->status);
+    }
 
     public function render()
     {
