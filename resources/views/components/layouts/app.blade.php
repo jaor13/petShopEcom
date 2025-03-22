@@ -45,6 +45,8 @@
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    @include('partials.chat')
 </body>
 
 </html>
