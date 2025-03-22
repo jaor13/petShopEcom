@@ -21,6 +21,7 @@
 
     <!-- Custom CSS -->
     <link href="{{ asset('assets/css/layout.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/chat.css') }}" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column min-vh-100 mt-5">
