@@ -77,7 +77,6 @@ public function editReview($reviewId)
         return;
     }
 
-    // Set review data for editing
     $this->editingReviewId = $review->id;
     $this->selectedOrderItemId = $review->order_item_id;
     $this->rating = $review->rating;
@@ -92,7 +91,7 @@ public function deleteReview($reviewId)
     $review = Review::where('id', $reviewId)->where('user_id', auth()->id())->first();
     if ($review) {
         $review->delete();
-        $this->fetchReviews(); // Refresh reviews after deleting
+        $this->fetchReviews(); 
         $this->alert('success', 'Review deleted successfully.');
     } else {
         $this->alert('error', 'Unable to delete review.');
@@ -114,9 +113,12 @@ public function submitReview()
         $uploadedImages[] = $image->store('reviews', 'public');
     }
 
+    $productId = $orderItem->product_id;
+    $variantId = $orderItem->variant_id;
+
     Review::updateOrCreate(
         [
-            'id' => $this->editingReviewId, // If editing, use existing review ID
+            'id' => $this->editingReviewId, 
             'user_id' => Auth::id(),
             'order_item_id' => $orderItem->id,
         ],
@@ -124,16 +126,19 @@ public function submitReview()
             'rating' => $this->rating,
             'comment' => $this->comment,
             'images' => $uploadedImages,
+            'product_id' => $productId,  
+            'variant_id' => $variantId,  
         ]
     );
 
-    $this->fetchReviews(); // Refresh reviews
+    $this->fetchReviews(); 
 
     $this->alert('success', $this->editingReviewId ? 'Review updated.' : 'Review submitted.');
 
     $this->reset(['editingReviewId', 'rating', 'comment', 'images', 'selectedOrderItemId']);
     $this->dispatch('hide-review-modal');
 }
+
 
 
     public function refreshToRateList()
@@ -143,7 +148,6 @@ public function submitReview()
 
     public function render()
     {
-        // Fetch items that are eligible for review
         $orderedItems = OrderItem::whereHas('order', function ($query) {
             $query->where('user_id', auth()->id())->where('status', 'Completed');
         })
@@ -161,12 +165,10 @@ public function submitReview()
             }
         }
 
-        // Fetch user's reviews
         $reviews = Review::where('user_id', auth()->id())
             ->with(['orderItem.product', 'orderItem.variant'])
             ->get();
 
-        // Process images for each review
         foreach ($this->reviews as $review) {
             $orderItem = $review->orderItem;
         
