@@ -192,7 +192,7 @@
       <div style=" display: flex; justify-content: space-between; align-items: center;">
         <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
           <span
-            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 2px;"></span>
 
           Latest Products
         </h1>
@@ -211,7 +211,7 @@
       <div style=" display: flex; justify-content: space-between; align-items: center;">
         <h1 style="font-weight: bold; color:rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
           <span
-            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 2px;"></span>
 
           Best Seller
         </h1>
