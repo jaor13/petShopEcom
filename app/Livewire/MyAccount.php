@@ -2,27 +2,31 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class MyAccount extends Component
 {
     use LivewireAlert;
-
+    use WithFileUploads;
+    
     public $username, $email, $dob, $gender, $cp_num;
     public $currentPassword, $newPassword, $newPasswordConfirmation;
+    public $profile_picture;
 
     public $password; // Add this for delete confirmation
-
-    protected $listeners = ['deleteConfirmed' => 'deleteUser'];
+    protected $listeners = ['deleteConfirmed' => 'deleteUser', 'profileUpdated' => 'refreshUser'];
 
     public $isEditing = false;
 
     public function mount()
     {
+        $this->refreshUser();
         $user = Auth::user();
 
         // Load user details
@@ -31,6 +35,9 @@ class MyAccount extends Component
         $this->dob = $user->dob;
         $this->gender = $user->gender;
         $this->cp_num = $user->cp_num;
+        $this->profile_picture = $user->profile_picture;
+
+        $this->refreshUser();
 
         if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail()) {
             $this->alert('warning', 'Your email address is unverified. Please verify it from your email.', [
@@ -43,6 +50,34 @@ class MyAccount extends Component
         }
     }
 
+    public function refreshUser()
+    {
+        $user = Auth::user();
+        $this->username = $user->username;
+        $this->profile_picture = $user->profile_picture;
+    }
+
+    public function updatedProfilePicture()
+    {
+        $this->validate([
+            'profile_picture' => 'image|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        // Delete old profile picture if exists
+        if ($user->profile_picture) {
+            Storage::disk('public')->delete($user->profile_picture);
+        }
+
+        // Store new profile picture
+        $path = $this->profile_picture->store('profile_pictures', 'public');
+        $user->profile_picture = $path;
+        $user->save();
+
+        // Emit event so other components update
+        $this->dispatch('profileUpdated');
+    }
 
     public function enableEditing()
     {
@@ -204,6 +239,11 @@ class MyAccount extends Component
 
     public function render()
     {
-        return view('livewire.my-account');
+        return view('livewire.my-account', [
+            'profile_picture_url' => $this->profile_picture
+                ? asset('storage/' . $this->profile_picture)
+                : asset('assets/images/default-profile.png'),
+        ]);
     }
+
 }

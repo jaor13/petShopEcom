@@ -4,6 +4,9 @@
         @if (!$isEditing)
             <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
                 <h4 class="mb-4">Personal Information</h4>
+                <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('assets/images/default-profile.png') }}"
+                    alt="Profile Photo" class="profile-img rounded-circle mb-2"
+                    style="width: 100px; height: 100px; cursor: pointer;">
                 <div class="mb-3">
                 <button class="btn ms-3" wire:click="enableEditing" style="color: #00DCE3;">
     <i class="fa-solid fa-pen-to-square me-1" style="color: #00DCE3; font-size: 20px;"></i>
@@ -25,9 +28,9 @@
                 <div class="mb-3">
                     <label class="form-label">Gender</label>
                     <div>
-                        <input type="radio" value="male" {{ $gender === 'male' ? 'checked' : '' }} disabled> Male
-                        <input type="radio" value="female" class="ms-3" {{ $gender === 'female' ? 'checked' : '' }} disabled>
-                        Female
+                        <input type="radio" id="maleReadonly" value="male" {{ ($gender ?? '') === 'male' ? 'checked' : '' }}
+                            disabled> <label for="maleReadonly">Male</label>
+                        <input type="radio" id="femaleReadonly" value="female" class="ms-3" {{ ($gender ?? '') === 'female' ? 'checked' : '' }} disabled> <label for="femaleReadonly">Female</label>
                     </div>
                 </div>
 
@@ -61,6 +64,11 @@
             <div class="col-md-12 px-5 py-3 mt-3 rounded shadow-sm custom-card-design">
                 <h4>Edit Profile Information</h4>
                 <form wire:submit.prevent="updateProfile" class="mt-3">
+                    <label for="profile-picture-upload">
+                    <img src="{{ $profile_picture_url }}" alt="Profile Photo" class="profile-img rounded-circle mb-2" style="width: 100px; height: 100px; cursor: pointer;">
+
+                    </label>
+                    <input type="file" id="profile-picture-upload" wire:model="profile_picture" style="display: none;">
                     <div class="mb-3">
                         <label class="form-label">Username</label>
                         <input type="text" class="form-control" wire:model="username" required autofocus>
