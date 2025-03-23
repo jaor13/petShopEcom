@@ -55,11 +55,11 @@
                         </div>
                         <div>
                             <p class="mb-1 mt-3">
-                                <span class="font-bold text-gray-600">{{ ucfirst(str_replace('_', ' ', $order['status'])) }}</span>
+                                <span class="font-bold text-[#00DCE3]">{{ ucfirst(str_replace('_', ' ', $order['status'])) }}</span>
                             </p>
                         </div>
                         <div class="">
-                            <a href="#" class="btn btn-link text-secondary text-decoration-none mb-5" wire:click.prevent="selectOrder({{ $order['id'] }})">Order Details ></a>
+                            <a href="#" class="btn btn-link text-secondary text-decoration-none mt-3" wire:click.prevent="selectOrder({{ $order['id'] }})">Order Details ></a>
                         </div>
                     </div>
 

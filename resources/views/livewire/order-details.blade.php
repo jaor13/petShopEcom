@@ -1,7 +1,7 @@
 <div>
     <div class="container mt-5 rounded-3">
     <button class="btn btn-secondary mb-3" wire:click="goBack">Back to Orders</button>
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-white text-center pt-2 w-100 h-12 m-0" style="background-color: #00DCE3; 
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
