@@ -30,7 +30,7 @@
             <button style="background: none; border: none; font-size: 1.2em;">
                 <i class="fas fa-image"></i> </button>
             <input type="text" placeholder="Type a message"
-                style="flex: 1; padding: 4px; border: 1px solid #ddd; border-radius: 5px; margin: 0 10px; font-size: 1em;">
+                style="flex: 1; padding: 4px; border: 0.5px solid #ddd; border-radius: 5px; margin: 0 10px; font-size: 1em; color: rgb(51, 51, 51);">
             <button
                 style="margin: 0 5% 0 2%; background: none; border: none; font-size: 0.8em; font-weight: bold; color: rgb(0, 181, 236); font-family: 'Poppins';">
                 Send </button>
