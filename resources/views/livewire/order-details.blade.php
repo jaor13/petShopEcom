@@ -1,13 +1,23 @@
 <div>
     <div class="container mt-5 rounded-3">
-    <button class="btn btn-secondary mb-3" wire:click="goBack">Back to Orders</button>
+        <button class="btn btn-secondary mb-3" wire:click="goBack">Back to Orders</button>
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-white text-center pt-2 w-100 h-12 m-0" style="background-color: #00DCE3; 
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
                 border-bottom-left-radius: 0px;
                 border-bottom-right-radius: 0px;">
-                Your order is complete
+                @if($order['status'] == 'to_ship')
+                    Your order is currently being prepared for shipment
+                @elseif($order['status'] == 'to_receive')
+                    Order has been shipped
+                @elseif($order['status'] == 'delivered')
+                    Order successfully delivered
+                @elseif($order['status'] == 'completed')
+                    Your order is complete
+                @elseif($order['status'] == 'cancelled')
+                    Order has been cancelled
+                @endif
             </h4>
         </div>
         <div class="px-4 py-3 mb-2 border bg-white" style="
@@ -99,6 +109,42 @@
                 <p class="mb-1">Order Time:</p>
                 <p class="mb-1">{{ \Carbon\Carbon::parse($order['date'])->format('d-m-Y h:i A') }}</p>
             </div>
+
+            @if($order['status'] == 'to_receive' || $order['status'] == 'delivered' || $order['status'] == 'completed')
+                <div class="d-flex justify-content-between">
+                    <p class="mb-1">Shipped Time:</p>
+                    <p class="mb-1">{{ \Carbon\Carbon::parse($order['shipped_at'])->format('d-m-Y h:i A') }}</p>
+                </div>
+            @endif
+
+            @if($order['status'] == 'delivered' || $order['status'] == 'completed')
+                <div class="d-flex justify-content-between">
+                    <p class="mb-1">Delivered Time:</p>
+                    <p class="mb-1">{{ \Carbon\Carbon::parse($order['delivered_at'])->format('d-m-Y h:i A') }}</p>
+                </div>
+            @endif
+
+            @if($order['status'] == 'completed')
+                <div class="d-flex justify-content-between">
+                    <p class="mb-1">Completed Time:</p>
+                    <p class="mb-1">{{ \Carbon\Carbon::parse($order['completed_at'])->format('d-m-Y h:i A') }}</p>
+                </div>
+            @endif
+
+            @if($order['status'] == 'cancelled')
+                <div class="d-flex justify-content-between">
+                    <p class="mb-1">Cancelled Time:</p>
+                    <p class="mb-1">{{ \Carbon\Carbon::parse($order['cancelled_at'])->format('d-m-Y h:i A') }}</p>
+                </div>
+            @endif
         </div>
+
+        @if($order['status'] == 'to_ship')
+            <button class="btn btn-danger mt-3" wire:click="cancelOrder">Cancel Order</button>
+        @endif
+
+        @if($order['status'] == 'delivered')
+            <button class="btn btn-success mt-3" wire:click="markAsReceived">Order Received</button>
+        @endif
     </div>
 </div>

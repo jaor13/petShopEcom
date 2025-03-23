@@ -21,7 +21,6 @@ class Orders extends Component
         $this->filterOrders($this->status);
     }
 
-
     public function fetchOrders()
     {
         // Get orders for the authenticated user
@@ -51,7 +50,7 @@ class Orders extends Component
                     'processing' => 'to_ship',
                     'shipped' => 'to_receive',
                     'delivered' => 'delivered',
-                    'completeed' => 'completed',
+                    'completed' => 'completed',
                     default => $order->status,
                 },
                 'items' => $order->items->map(function ($item) {
@@ -90,6 +89,10 @@ class Orders extends Component
                         'zip_code' => $address->zip_code,
                     ],
                 ],
+                'shipped_at' => $order->shipped_at ? $order->shipped_at : null,
+                'delivered_at' => $order->delivered_at ? $order->delivered_at : null,
+                'completed_at' => $order->completed_at ? $order->completed_at : null,
+                'cancelled_at' => $order->cancelled_at ? $order->cancelled_at : null,
                 'message' => $this->getStatusMessage($order->status),
             ];
         })->toArray();
@@ -111,7 +114,6 @@ class Orders extends Component
     {
         $this->selectedOrderId = null;
     }
-
 
     public function getFilteredOrders()
     {
@@ -135,8 +137,7 @@ class Orders extends Component
             return $order['status'] === $this->status;
         });
     }
-    
-    
+
     public function getStatusMessage($status)
     {
         return match ($status) {
