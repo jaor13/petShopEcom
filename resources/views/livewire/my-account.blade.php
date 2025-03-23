@@ -37,13 +37,18 @@
                     <label class="form-label">Email</label>
                     <input type="email" class="form-control" value="{{ $email }}" readonly>
                 </div>
-
                 @if (Auth::user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !Auth::user()->hasVerifiedEmail())
                     <div class="alert alert-warning mt-3">
                         <p>Your email address is unverified.</p>
                         <button wire:click="sendVerificationEmail" class="btn btn-link">Click here to re-send the verification
                             email.</button>
                     </div>
+
+                    @if (session()->has('verification-link-sent'))
+                        <div class="alert alert-success mt-3">
+                            A new verification link has been sent to your email address.
+                        </div>
+                    @endif
                 @endif
             </div>
         @endif
