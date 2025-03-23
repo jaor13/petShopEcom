@@ -1,18 +1,18 @@
 <div class="container">
     <div class="row ">
-          <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
+          <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design ">
     <h4 class="mb-4">Personal Information</h4>
-        <div class="d-flex align-items-center mb-3">
+        <div class=" mb-3">
             <img src="profile-image-url" alt="Profile Picture" class="rounded-circle" width="80" height="80">
             <button class="btn btn-link ms-3 ">Edit Profile Information</button>
         </div>
 
 
-        <dive>
-        <form wire:submit.prevent="updateProfile ">
+       
+        <form wire:submit.prevent="updateProfile " style="margin-right: 400px;">
             <div class="mb-3 ">
                 <label for="username" class="form-label">Name</label>
-                <input type="text" class="form-control" id="username" wire:model="username" required>
+                <input type="text" class="form-control bg-[#F1F1F1]" id="username" wire:model="username" required>
                 @error('username') <div class="text-danger mt-1">{{ $message }}</div> @enderror
             </div>
             
@@ -47,9 +47,9 @@
                 </div>
             @endif
             
-            <button type="submit" class="btn btn-success">Save</button>
+  
         </form>
-</div><
+
             <h4>Change Username & Email</h4>
             @if (session()->has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">

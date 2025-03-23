@@ -13,18 +13,17 @@ body {
   font-size:3em;
 }
 
-/* 
+
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px; /
-  background-color: rgb(235, 235, 235); 
-  z-index: 1000; 
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
-} */
-
+  height: 60px; /* Adjust as needed */
+  background-color: rgb(235, 235, 235); /* Ensure visibility */
+  z-index: 1000; /* Keeps it above other elements */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow */
+}
 main {
   margin-top: 70px; /* Adjust this to match the header height */
 
@@ -32,18 +31,14 @@ main {
 
 /* Header Styling */
 .header-container {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 110px;
   background: #00DCE3;
   display: flex;
   align-items: center;
-  z-index: 1000; 
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
   padding: 0 20px;
 }
+
 
 .brand-logo {
   max-height: 100px; /* Adjust size */
@@ -61,13 +56,14 @@ main {
 
 /* Fix search container issues */
 .search-container {
+ 
   background: #ffffff;
   border-radius: 8px;
-  width: 80%;
+  width: 80%; /* Adjust width */
   max-width: 100%;
   border: 1px solid #ddd;
-  position: relative;
-  overflow: hidden; /* Change to hidden */
+  position: relative; /* Needed for dropdown positioning */
+  overflow: visible; /* Prevents dropdown from getting cut */
 }
 /* Fix category dropdown */
 .dropdown-menu {
