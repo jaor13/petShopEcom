@@ -80,9 +80,9 @@
     </section>
 
     @auth
-    <div id="chat-button-container" style="position: fixed; z-index: 100; bottom: 20px; right: 175px;">
+    <div id="chat-button-container" style="position: fixed; z-index: 100; bottom: 20px; right: 75px;">
       <button id="chat-button"
-      style="background-color: #00D1D8; color: white; border: none; padding: 10px 10px; border-radius: 10px; font-weight: bold; font-size: 1.5rem">
+      style="background-color: #282C34; color: white; border: none; padding: 10px 10px; border-radius: 10px; font-weight: bold; font-size: 1.5rem">
       <i class="fas fa-comments" style="font-size: 1.5em; margin-right: 5px; "></i> Chat
       </button>
     </div>
