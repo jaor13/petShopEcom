@@ -8,11 +8,11 @@
                     alt="Profile Photo" class="profile-img rounded-circle mb-2"
                     style="width: 100px; height: 100px; cursor: pointer;">
                 <div class="mb-3">
-                <button class="btn ms-3" wire:click="enableEditing" style="color: #00DCE3;">
-    <i class="fa-solid fa-pen-to-square me-1" style="color: #00DCE3; font-size: 20px;"></i>
-    Edit Profile Information
-</button>
-             
+                    <button class="btn ms-3" wire:click="enableEditing" style="color: #00DCE3;">
+                        <i class="fa-solid fa-pen-to-square me-1" style="color: #00DCE3; font-size: 20px;"></i>
+                        Edit Profile Information
+                    </button>
+
                 </div>
 
                 <div class="mb-3">
@@ -65,7 +65,8 @@
                 <h4>Edit Profile Information</h4>
                 <form wire:submit.prevent="updateProfile" class="mt-3">
                     <label for="profile-picture-upload">
-                    <img src="{{ $profile_picture_url }}" alt="Profile Photo" class="profile-img rounded-circle mb-2" style="width: 100px; height: 100px; cursor: pointer;">
+                        <img src="{{ $profile_picture_url }}" alt="Profile Photo" class="profile-img rounded-circle mb-2"
+                            style="width: 100px; height: 100px; cursor: pointer;">
 
                     </label>
                     <input type="file" id="profile-picture-upload" wire:model="profile_picture" style="display: none;">

@@ -6,8 +6,8 @@
              class="profile-img rounded-circle mb-2" 
              style="width: 100px; height: 100px; cursor: pointer;">
     </label>
-    <input type="file" id="profile-picture-upload" wire:model="profile_picture" style="display: none;">
-
+    <!-- <input type="file" id="profile-picture-upload" wire:model="profile_picture" style="display: none;"> -->
+   
     <!-- Display Updated Username -->
     <h5 class="profile-name" style="color:#3D3D3D;">Hi, {{ $username }}!</h5>
 

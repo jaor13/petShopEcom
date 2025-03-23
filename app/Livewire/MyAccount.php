@@ -20,7 +20,7 @@ class MyAccount extends Component
     public $profile_picture;
 
     public $password; // Add this for delete confirmation
-    protected $listeners = ['deleteConfirmed' => 'deleteUser', 'profileUpdated' => 'refreshUser'];
+    protected $listeners = ['deleteConfirmed' => 'deleteUser', 'profileUpdated', 'newProfile' => 'refreshUser'];
 
     public $isEditing = false;
 
@@ -36,8 +36,6 @@ class MyAccount extends Component
         $this->gender = $user->gender;
         $this->cp_num = $user->cp_num;
         $this->profile_picture = $user->profile_picture;
-
-        $this->refreshUser();
 
         if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail()) {
             $this->alert('warning', 'Your email address is unverified. Please verify it from your email.', [
@@ -75,8 +73,7 @@ class MyAccount extends Component
         $user->profile_picture = $path;
         $user->save();
 
-        // Emit event so other components update
-        $this->dispatch('profileUpdated');
+        $this->dispatch('newProfile');
     }
 
     public function enableEditing()
