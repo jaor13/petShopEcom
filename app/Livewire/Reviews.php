@@ -12,13 +12,11 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Reviews extends Component
 {
-    use WithFileUploads;
-    use LiveWireAlert;
+    use WithFileUploads, LivewireAlert;
 
     public $product;
     public $orderedItemId;
     public $orderItem;
-    public $variantId;
     public $rating;
     public $comment;
     public $images = [];
@@ -29,15 +27,11 @@ class Reviews extends Component
     public function mount($orderedItemId = null)
     {
         if ($orderedItemId) {
-            $orderItem = OrderItem::find($orderedItemId);
-            $this->product = $orderItem ? Product::find($orderItem->product_id) : null;
+            $this->orderItem = OrderItem::find($orderedItemId);
+            $this->product = $this->orderItem ? $this->orderItem->product : null;
         }
 
-        if ($this->product) {
-            $this->fetchReviews();
-        } else {
-            $this->reviews = collect();
-        }
+        $this->fetchReviews();
     }
 
     public function switchTab($tab)
@@ -47,7 +41,8 @@ class Reviews extends Component
 
     public function fetchReviews()
     {
-        $this->reviews = Review::where('product_id', $this->product->id)
+        $this->reviews = Review::where('user_id', auth()->id())
+            ->with('orderItem.product', 'orderItem.variant')
             ->orderBy('created_at', 'desc')
             ->get();
     }
@@ -82,18 +77,15 @@ class Reviews extends Component
             return;
         }
 
-        // Handle Image Uploads
         $uploadedImages = [];
         foreach ($this->images as $image) {
             $uploadedImages[] = $image->store('reviews', 'public');
         }
 
-        // Save or Update Review
         Review::updateOrCreate(
             [
                 'user_id' => Auth::id(),
-                'product_id' => $orderItem->product_id,
-                'variant_id' => $orderItem->variant_id,
+                'order_item_id' => $orderItem->id,
             ],
             [
                 'rating' => $this->rating,
@@ -102,21 +94,40 @@ class Reviews extends Component
             ]
         );
 
+        // Refresh Data
+        $this->refreshToRateList(); // Remove the reviewed item from "To Rate" list
+        $this->fetchReviews(); // Fetch My Reviews again
+
+        // Switch to "My Reviews" tab
+        $this->activeTab = 'my_reviews';
+
         $this->alert('success', 'Review submitted.', [
             'position' => 'bottom-end',
             'timer' => 3000,
             'toast' => true,
         ]);
 
-        $this->reset(); // Reset form fields
-        $this->dispatch('hide-review-modal'); // Hide modal
+        // Reset only the form inputs, NOT the entire component
+        $this->reset(['rating', 'comment', 'images', 'selectedOrderItemId']);
+
+        // Close modal
+        $this->dispatch('hide-review-modal');
+    }
+
+    public function refreshToRateList()
+    {
+        $this->render();
     }
 
     public function render()
     {
+        // Fetch items that are eligible for review
         $orderedItems = OrderItem::whereHas('order', function ($query) {
-            $query->where('user_id', auth()->id());
-        })->with('product', 'variant')->get();
+            $query->where('user_id', auth()->id())->where('status', 'Completed');
+        })
+            ->whereDoesntHave('review')
+            ->with('product', 'variant')
+            ->get();
 
         foreach ($orderedItems as $item) {
             if ($item->variant && $item->variant->image) {
@@ -127,6 +138,25 @@ class Reviews extends Component
                 $item->display_image = asset('default.jpg');
             }
         }
+
+        // Fetch user's reviews
+        $reviews = Review::where('user_id', auth()->id())
+            ->with(['orderItem.product', 'orderItem.variant'])
+            ->get();
+
+        // Process images for each review
+        foreach ($this->reviews as $review) {
+            $orderItem = $review->orderItem;
+        
+            if ($orderItem && $orderItem->variant && $orderItem->variant->image) {
+                $review->display_image = url('storage/' . $orderItem->variant->image);
+            } elseif ($orderItem && $orderItem->product && !empty($orderItem->product->images) && is_array($orderItem->product->images)) {
+                $review->display_image = url('storage/' . $orderItem->product->images[0]);
+            } else {
+                $review->display_image = asset('default.jpg');
+            }
+        }
+        
 
         return view('livewire.reviews', [
             'orderedItems' => $orderedItems,
