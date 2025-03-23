@@ -6,23 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
-    protected $fillable = ['user_id', 'product_id', 'variant_id', 'rating', 'comment', 'images'];
+    protected $fillable = ['user_id', 'order_item_id', 'rating', 'comment', 'images'];
 
     protected $casts = [
-        'images' => 'array', // Automatically converts JSON to array
+        'images' => 'array',
     ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function product()
+   public function orderItem()
     {
-        return $this->belongsTo(Product::class);
-    }
-
-    public function variant()
-    {
-        return $this->belongsTo(ProductVariant::class);
+        return $this->belongsTo(OrderItem::class, 'order_item_id');
     }
 }
