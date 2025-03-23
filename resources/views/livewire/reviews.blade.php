@@ -118,16 +118,24 @@
                             @error('images.*') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
-                        <!-- Image Preview -->
+                        <!-- Image Preview-->
                         @if ($images)
                             <div class="d-flex flex-wrap mt-2">
-                                @foreach ($images as $image)
-                                    <div class="me-2 mb-2">
-                                        <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail" width="100">
+                                @foreach ($images as $index => $image)
+                                    <div class="position-relative me-2 mb-2" style="width: 100px; height: 100px;">
+                                        <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail w-100 h-100"
+                                            style="object-fit: cover;">
+
+                                        <!-- Delete Button Inside the Image -->
+                                        <button type="button" class="btn-close position-absolute top-0 end-0 p-1"
+                                            wire:click="removeImage({{ $index }})"
+                                            style="font-size: 12px; background-color: rgba(255, 255, 255, 0.7); border-radius: 50%; margin: 5px;">
+                                        </button>
                                     </div>
                                 @endforeach
                             </div>
                         @endif
+
 
                         <button type="submit" class="btn btn-success">
                             {{ $editingReviewId ? 'Update Review' : 'Submit Review' }}
@@ -150,6 +158,7 @@
         Livewire.on('hide-review-modal', () => {
             var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
             if (modal) modal.hide();
+            Livewire.dispatch('resetReviewForm');
         });
     });
 </script>

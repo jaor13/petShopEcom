@@ -35,6 +35,14 @@ class Reviews extends Component
         $this->fetchReviews();
     }
 
+    protected function getListeners()
+    {
+        return [
+            'resetReviewForm' => 'resetReviewForm',
+        ];
+    }
+
+
     public function switchTab($tab)
     {
         $this->activeTab = $tab;
@@ -51,11 +59,13 @@ class Reviews extends Component
     protected $rules = [
         'rating' => 'required|integer|min:1|max:5',
         'comment' => 'nullable|string',
+        'images' => 'array|max:4',
         'images.*' => 'image|max:2048', // Each image max 2MB
     ];
 
     public function selectOrderItem($orderItemId)
     {
+        $this->reset(['rating', 'comment', 'images', 'editingReviewId']);
         $this->selectedOrderItemId = $orderItemId;
         $this->rating = null;
         $this->comment = '';
@@ -69,76 +79,119 @@ class Reviews extends Component
     }
 
 
-public function editReview($reviewId)
-{
-    $review = Review::find($reviewId);
-    if (!$review || $review->user_id !== auth()->id()) {
-        session()->flash('error', 'Invalid review.');
-        return;
+    public function editReview($reviewId)
+    {
+        $review = Review::find($reviewId);
+        if (!$review || $review->user_id !== auth()->id()) {
+            session()->flash('error', 'Invalid review.');
+            return;
+        }
+
+        $this->reset(['rating', 'comment', 'images', 'editingReviewId']);
+        $this->editingReviewId = $review->id;
+        $this->selectedOrderItemId = $review->order_item_id;
+        $this->rating = $review->rating;
+        $this->comment = $review->comment;
+        $this->images = $review->images;
+
+        $this->dispatch('show-review-modal'); // Show the modal
     }
 
-    $this->editingReviewId = $review->id;
-    $this->selectedOrderItemId = $review->order_item_id;
-    $this->rating = $review->rating;
-    $this->comment = $review->comment;
-    $this->images = $review->images;
-
-    $this->dispatch('show-review-modal'); // Show the modal
-}
-
-public function deleteReview($reviewId)
-{
-    $review = Review::where('id', $reviewId)->where('user_id', auth()->id())->first();
-    if ($review) {
-        $review->delete();
-        $this->fetchReviews(); 
-        $this->alert('success', 'Review deleted successfully.');
-    } else {
-        $this->alert('error', 'Unable to delete review.');
-    }
-}
-
-public function submitReview()
-{
-    $this->validate();
-
-    $orderItem = OrderItem::find($this->selectedOrderItemId);
-    if (!$orderItem) {
-        session()->flash('error', 'Invalid Order Item.');
-        return;
+    public function resetReviewForm()
+    {
+        $this->reset(['rating', 'images', 'selectedOrderItemId', 'editingReviewId']);
+        $this->comment = ''; // Ensure comment resets to an empty string
     }
 
-    $uploadedImages = [];
-    foreach ($this->images as $image) {
-        $uploadedImages[] = $image->store('reviews', 'public');
+
+
+    public function deleteReview($reviewId)
+    {
+        $review = Review::where('id', $reviewId)->where('user_id', auth()->id())->first();
+        if ($review) {
+            $review->delete();
+            $this->fetchReviews();
+            $this->alert('success', 'Review deleted successfully.', [
+                'position' => 'bottom-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);
+        } else {
+            $this->alert('error', 'Unable to delete review.', [
+                'position' => 'bottom-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);
+        }
     }
 
-    $productId = $orderItem->product_id;
-    $variantId = $orderItem->variant_id;
+    public function submitReview()
+    {
+        $this->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|string',
+            'images' => 'array',
+            'images.*' => 'image|max:2048', // Ensure each image is valid
+        ]);
 
-    Review::updateOrCreate(
-        [
-            'id' => $this->editingReviewId, 
-            'user_id' => Auth::id(),
-            'order_item_id' => $orderItem->id,
-        ],
-        [
-            'rating' => $this->rating,
-            'comment' => $this->comment,
-            'images' => $uploadedImages,
-            'product_id' => $productId,  
-            'variant_id' => $variantId,  
-        ]
-    );
+        if (is_array($this->images) && count($this->images) > 4) {
+            $this->alert('error', 'You can only upload a maximum of 4 images.', [
+                'position' => 'bottom-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);
+            return;
+        }
 
-    $this->fetchReviews(); 
 
-    $this->alert('success', $this->editingReviewId ? 'Review updated.' : 'Review submitted.');
+        $orderItem = OrderItem::find($this->selectedOrderItemId);
+        if (!$orderItem) {
+            session()->flash('error', 'Invalid Order Item.');
+            return;
+        }
 
-    $this->reset(['editingReviewId', 'rating', 'comment', 'images', 'selectedOrderItemId']);
-    $this->dispatch('hide-review-modal');
-}
+        $uploadedImages = [];
+        foreach ($this->images as $image) {
+            $uploadedImages[] = $image->store('reviews', 'public');
+        }
 
+        $productId = $orderItem->product_id;
+        $variantId = $orderItem->variant_id;
+
+        Review::updateOrCreate(
+            [
+                'id' => $this->editingReviewId,
+                'user_id' => Auth::id(),
+                'order_item_id' => $orderItem->id,
+            ],
+            [
+                'rating' => $this->rating,
+                'comment' => $this->comment,
+                'images' => $uploadedImages,
+                'product_id' => $productId,
+                'variant_id' => $variantId,
+            ]
+        );
+
+        $this->fetchReviews();
+
+        $this->alert('success', $this->editingReviewId ? 'Review updated.' : 'Review submitted.', [
+            'position' => 'bottom-end',
+            'timer' => 5000,
+            'toast' => true,
+        ]);
+
+        $this->reset(['rating', 'comment', 'images', 'selectedOrderItemId', 'editingReviewId']);
+        $this->dispatch('hide-review-modal');
+    }
+
+    public function removeImage($index)
+    {
+        if (isset($this->images[$index])) {
+            unset($this->images[$index]);
+            $this->images = array_values($this->images); // Re-index array
+        }
+    }
 
 
     public function refreshToRateList()
@@ -171,7 +224,7 @@ public function submitReview()
 
         foreach ($this->reviews as $review) {
             $orderItem = $review->orderItem;
-        
+
             if ($orderItem && $orderItem->variant && $orderItem->variant->image) {
                 $review->display_image = url('storage/' . $orderItem->variant->image);
             } elseif ($orderItem && $orderItem->product && !empty($orderItem->product->images) && is_array($orderItem->product->images)) {
@@ -180,7 +233,7 @@ public function submitReview()
                 $review->display_image = asset('default.jpg');
             }
         }
-        
+
 
         return view('livewire.reviews', [
             'orderedItems' => $orderedItems,
