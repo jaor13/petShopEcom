@@ -1,32 +1,39 @@
 @auth
-    <div id="chat-button-container" style="position: fixed; z-index: 100; bottom: 20px; right: 175px;">
+    <div id="chat-button-container" style="position: fixed; z-index: 100; bottom: 1.5%; right: 5%;">
         <button id="chat-button"
-            style="background-color: #00D1D8; color: white; border: none; padding: 10px 10px; border-radius: 10px; font-weight: bold; font-size: 1.5rem">
-            <i class="fas fa-comments" style="font-size: 1.5em; margin-right: 5px;"></i> Chat
+            style="background-color:rgb(0, 181, 236); color: white; border: none; padding: 10px 10px; border-radius: 5px; font-weight: bold; font-size: 1.2rem">
+            <i class="fas fa-comments" style="font-size: 1.2em; margin-right: 8px;"></i> Message Us
         </button>
     </div>
 
     <div id="chat-window"
-        style="display: none; position: fixed; bottom: 10px; z-index: 100; right: 100px; width: 350px; background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        style="display: none; position: fixed; bottom: 1%; z-index: 100; right: 3.5%; width: 330px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-family: 'Poppins';">
         <div
-            style="background-color:#00DCE3; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
+            style="background-color: rgb(4, 200, 235); padding: 1.5%; border-top-left-radius: 10px; border-top-right-radius: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 1% rgba(0, 0, 0, 0.4);">
+            <div style="display: flex; align-items: center;">
                 <img src="{{ asset('assets/images/brand-logo.svg') }}" alt="Petshop Logo"
-                    style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px; align-items:center;">
-                Aricuz Petshop
+                    style="width: 45px; height: 45px; margin-left: 10%; margin-right: 10px;">
+                <p
+                    style="color: white; font-weight: bolder; font-size: 1em; margin: 0; white-space: nowrap; margin-left: 4%; margin-top: 3%; font-family: 'Poppins';">
+                    Aricuz Petshop
+                </p>
             </div>
-            <button id="close-chat" style="background: none; border: none; font-size: 1.2em;">×</button>
+
+            <button id="close-chat"
+                style="background: none; color: white; border: none; font-size: 1.6em; margin-right: 5%;">×</button>
         </div>
-        <div style="padding: 15px; height: 300px; overflow-y: auto;">
-            <p>Welcome to Pet Haven! Ready to find the best pet care essentials? Let us know how we can help.</p>
+        <div
+            style=" padding: 25px; height: 300px; overflow-y: auto; font-size: 0.8em; text-align: center; font-weight: bold; color:rgb(75, 74, 74);">
+            <p style="font-family: 'Poppins';">Welcome to Pet Haven! Ready to find the best pet care essentials? Let us know how we can help.</p>
         </div>
-        <div style="padding: 10px; border-top: 1px solid #ddd; display: flex; align-items: center;">
-            <button style="background: none; border: none; font-size: 1.5em;">
+        <div style="padding: 10px; border-top: 1px solid #ddd; display: flex; align-items: center; color: rgb(0, 181, 236)">
+            <button style="background: none; border: none; font-size: 1.2em;">
                 <i class="fas fa-image"></i> </button>
             <input type="text" placeholder="Type a message"
-                style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px; margin: 0 10px;">
-            <button style="background: none; border: none; font-size: 1.5em; color: #00DCE3;">
-                <i class="fas fa-paper-plane"></i> </button>
+                style="flex: 1; padding: 4px; border: 1px solid #ddd; border-radius: 5px; margin: 0 10px; font-size: 1em;">
+            <button
+                style="margin: 0 5% 0 2%; background: none; border: none; font-size: 0.8em; font-weight: bold; color: rgb(0, 181, 236); font-family: 'Poppins';">
+                Send </button>
         </div>
     </div>
 
