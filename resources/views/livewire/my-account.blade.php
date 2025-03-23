@@ -5,8 +5,9 @@
             <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
                 <h4 class="mb-4">Personal Information</h4>
                 <div class="mb-3">
-                    <img src="profile-image-url" alt="Profile Picture" class="rounded-circle" width="80" height="80">
-                    <button class="btn btn-link ms-3" wire:click="enableEditing">Edit Profile Information</button>
+                <button class="btn btn-link ms-3" wire:click="enableEditing">
+    <i class="material-icons me-1">edit</i> Edit Profile Information
+</button>
                 </div>
 
                 <div class="mb-3">
