@@ -5,9 +5,11 @@
             <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
                 <h4 class="mb-4">Personal Information</h4>
                 <div class="mb-3">
-                <button class="btn btn-link ms-3" wire:click="enableEditing">
-    <i class="material-icons me-1">edit</i> Edit Profile Information
+                <button class="btn ms-3" wire:click="enableEditing" style="color: #00DCE3;">
+    <i class="fa-solid fa-pen-to-square me-1" style="color: #00DCE3; font-size: 20px;"></i>
+    Edit Profile Information
 </button>
+             
                 </div>
 
                 <div class="mb-3">
