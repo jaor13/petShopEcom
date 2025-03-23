@@ -13,6 +13,8 @@ class SendMessage extends Component
     public $selectedConversation;
     public $body;
 
+    public $isNewConversation = false;
+
     protected $listeners = ['loadConversation', 'updateSendMessage', 'pushMessage'];
 
     public function updateSendMessage(Conversation $conversation, User $receiver)
@@ -26,53 +28,50 @@ class SendMessage extends Component
         if (empty($this->body)) {
             return;
         }
-    
-        // Create the message
-        $createdMessage = Message::create([
-            'conversation_id' => $this->selectedConversation->id,
-            'sender_id' => auth()->id(),
-            'receiver_id' => $this->receiverInstance->id, // Admin's ID
-            'body' => $this->body,
-        ]);
-    
-        // Update the last message timestamp
-        $this->selectedConversation->last_time_message = now();
-        $this->selectedConversation->save();
-    
-        // Reset the input field after sending
-        $this->body = '';
-    
-        // Emit event to update the chatbox component
-        $this->dispatch('messageSent')->to('chat.chatbox');
-    }
-    
 
-public function mount()
-{
-    $user = auth()->user();
-    
-    if ($user->role === 'admin') {
-        // Admin side: conversation will be set through updateSendMessage method
-        return;
-    } else {
-        // User side: automatically set up conversation with admin
         $admin = User::where('role', 'admin')->first();
-        
+
         if ($admin) {
-            $this->receiverInstance = $admin;
-            $this->selectedConversation = Conversation::firstOrCreate([
+            Message::create([
                 'sender_id' => auth()->id(),
                 'receiver_id' => $admin->id,
-            ], [
-                'last_time_message' => now(),
+                'body' => $this->body,
             ]);
-        } else {
-            session()->flash('error', 'Admin user not found.');
+        }
+
+        // Reset input field
+        $this->body = '';
+        $this->isNewConversation = false; // ✅ Once a message is sent, it's no longer a new conversation
+    }
+
+    public function mount()
+    {
+        $admin = User::where('role', 'admin')->first();
+
+        if ($admin) {
+            $messages = Message::where(function ($query) use ($admin) {
+                $query->where('sender_id', auth()->id())
+                    ->where('receiver_id', $admin->id);
+            })->orWhere(function ($query) use ($admin) {
+                $query->where('sender_id', $admin->id)
+                    ->where('receiver_id', auth()->id());
+            })->exists();
+
+            $this->isNewConversation = !$messages;
         }
     }
+
+    public function getIsNewConversationProperty()
+{
+    return $this->isNewConversation;
 }
+
+
+
     public function render()
     {
-        return view('livewire.chat.send-message');
+        return view('livewire.chat.send-message', [
+            'isNewConversation' => $this->isNewConversation, // ✅ Pass to Blade
+        ]);
     }
 }

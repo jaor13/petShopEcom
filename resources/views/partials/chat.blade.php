@@ -23,10 +23,15 @@
                 style="background: none; color: white; border: none; font-size: 1.6em; margin-right: 5%;">×</button>
         </div>
         <div
-            style=" padding: 25px; height: 300px; overflow-y: auto; font-size: 0.8em; text-align: center; font-weight: bold; color:rgb(75, 74, 74);">
-            <p style="font-family: 'Poppins';">Welcome to Aricuz PetShop! Ready to find the best pet care essentials? Let us
-                know how we can help.</p>
+            style="padding: 25px; height: 300px; overflow-y: auto; font-size: 0.8em; text-align: center; font-weight: bold; color:rgb(75, 74, 74);">
+            @if ($isNewConversation)
+                <p style="font-family: 'Poppins';">
+                    Welcome to Aricuz PetShop! Ready to find the best pet care essentials? Let us know how we can help.
+                </p>
+            @endif
         </div>
+
+
         <div>
             {{-- Because she competes with no one, no one can compete with her. --}}
 
@@ -41,8 +46,6 @@
                     </div>
                 </div>
             </form>
-            
-
 
 
         </div>
@@ -58,5 +61,9 @@
         });
     </script>
 
-    @livewire('chat.send-message')
+ 
+
+
+@livewire('chat.send-message')
+
 @endauth
