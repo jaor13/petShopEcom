@@ -52,13 +52,3 @@
         </div>
     </main>
 </div>
-
-<script>
-    document.addEventListener('sectionChanged', event => {
-        const section = event.detail.section;
-        const url = new URL(window.location);
-        url.searchParams.set('section', section);
-        window.history.pushState({}, '', url);
-    });
-</script>
-
