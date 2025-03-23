@@ -137,7 +137,7 @@
     <div class="container-fluid p-2 rounded-3" style="background-color: white; padding: 20px;">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <h1
-          style="font-weight: bold; color: #262525; margin-top: 1.3em; font-size: xx-large; margin:0.8em 1em 0.5em 1.1em; display: flex; align-items: center;">
+          style="font-weight: bold; color: rgb(83, 82, 82); margin-top: 1.3em; font-size: xx-large; margin:0.8em 1em 0.5em 1.1em; display: flex; align-items: center;">
           <span
             style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
           Categories
@@ -190,9 +190,9 @@
 
     <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
       <div style=" display: flex; justify-content: space-between; align-items: center;">
-        <h1 style="font-weight: bold; color:#262525; font-size: xx-large; margin:1em 0em 0em 1.1em;">
+        <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
           <span
-            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 2px;"></span>
 
           Latest Products
         </h1>
@@ -209,9 +209,9 @@
 
     <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
       <div style=" display: flex; justify-content: space-between; align-items: center;">
-        <h1 style="font-weight: bold; color: #262525; font-size: xx-large; margin:1em 0em 0em 1.1em;">
+        <h1 style="font-weight: bold; color:rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
           <span
-            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 2px;"></span>
 
           Best Seller
         </h1>
@@ -228,7 +228,7 @@
 
     <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
       <div style=" display: flex; justify-content: space-between; align-items: center;">
-        <h1 style="font-weight: bold; color: #262525; font-size: xx-large; margin:1em 0em 0em 1.1em;">
+        <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
           <span
             style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
 
