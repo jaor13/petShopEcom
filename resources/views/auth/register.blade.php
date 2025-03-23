@@ -68,7 +68,7 @@
         <div class="overlay-container">
             <img src="{{ asset('assets/images/overlay-logo.svg') }}" alt="Description of the image" style="width: 400px; height: 300px;">
             <h1>Pawsome Essentials Delivered with Love!</h1>
-            <p>This is some example text inside the container. You can add more text and other elements as needed.</p>
+            <p>Give your pet the best! Create an account for new foods, accessories, and loving delivery</p>
         </div>
     </div>
 

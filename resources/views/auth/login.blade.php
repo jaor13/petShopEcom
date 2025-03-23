@@ -19,7 +19,7 @@
         <div class="overlay-container">
             <img src="{{ asset('assets/images/overlay-logo.svg') }}" alt="Description of the image" style="width: 400px; height: 300px;">
             <h1>Pawsome Essentials Delivered with Love!</h1>
-            <p>This is some example text inside the container. You can add more text and other elements as needed.</p>
+            <p>Login to quickly reorder your favorite essentials, and track your local delivery right to your doorstep.  Experience the convenience of loving care for your furry friends."</p>
         </div>
         <div class="form-container sign-in" id="signin-container">
             <h2>Welcome Back!</h2>

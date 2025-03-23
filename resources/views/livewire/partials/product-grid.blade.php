@@ -21,15 +21,19 @@
 
         
     <div class="row row-cols-1 row-cols-md-5 mx-auto g-3">
+        
         @foreach ($products as $product)
             <div class="col" wire:key="{{ $product->id }}">
                 <div class="card h-100 p-2 m-2" style="position: relative;">
                      <a href="{{ url('product/' . $product->slug) }}" wire:navigate>
+                   
                         <img src="{{ url('storage/' . $product->images[0]) }}" 
                             class="card-img-top img-fluid bg-[#E7FAFF] rounded-lg" 
                             alt="{{ $product->product_name }}" 
                             style="object-fit: cover; height: 230px;">
-                   
+                            <p style="position: absolute; right: 0; margin-right:-23px; top:15%; transform: translateY(-50%) rotate(270deg); letter-spacing:2px; background-color:#282C34; color: white; padding:5px 15px; font-weight: bolder; font-size: 20px; border-radius: 2px; z-index: 1;">
+                ARICUZ
+</p>
 
                     <!-- Product Name Section -->
                     <h3 class="card-title fw-bold text-truncate mt-2 product-name"  style="margin-left: 4px; font-size: 1.5em; color: rgb(64, 61, 61);">
