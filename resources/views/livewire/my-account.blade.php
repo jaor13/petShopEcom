@@ -35,13 +35,19 @@
                     <label for="emailReadonly" class="form-label">Email</label>
                     <input type="email" class="form-control" id="emailReadonly" value="{{ $email ?? '' }}" readonly>
                 </div>
-
                 @if (Auth::user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !Auth::user()->hasVerifiedEmail())
                     <div class="alert alert-warning mt-3">
                         <p>Your email address is unverified.</p>
                         <button wire:click="sendVerificationEmail" class="btn btn-link">Click here to re-send the verification email.</button>
                     </div>
+
+                    @if (session()->has('verification-link-sent'))
+                        <div class="alert alert-success mt-3">
+                            A new verification link has been sent to your email address.
+                        </div>
+                    @endif
                 @endif
+                
             </form>
         </div>
 
@@ -91,18 +97,6 @@
                     @error('email') <div class="text-danger mt-1">{{ $message }}</div> @enderror
                 </div>
 
-                @if (Auth::user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !Auth::user()->hasVerifiedEmail())
-                    <div class="alert alert-warning mt-3">
-                        <p>Your email address is unverified.</p>
-                        <button wire:click="sendVerificationEmail" class="btn btn-link">Click here to re-send the verification email.</button>
-                    </div>
-
-                    @if (session()->has('verification-link-sent'))
-                        <div class="alert alert-success mt-3">
-                            A new verification link has been sent to your email address.
-                        </div>
-                    @endif
-                @endif
 
                 <div class="mb-3">
                     <label for="dob" class="form-label">Date of Birth</label>
