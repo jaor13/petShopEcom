@@ -24,7 +24,7 @@
         </div>
         <div
             style=" padding: 25px; height: 300px; overflow-y: auto; font-size: 0.8em; text-align: center; font-weight: bold; color:rgb(75, 74, 74);">
-            <p style="font-family: 'Poppins';">Welcome to Pet Haven! Ready to find the best pet care essentials? Let us know how we can help.</p>
+            <p style="font-family: 'Poppins';">Welcome to Aricuz PetShop! Ready to find the best pet care essentials? Let us know how we can help.</p>
         </div>
         <div style="padding: 10px; border-top: 1px solid #ddd; display: flex; align-items: center; color: rgb(0, 181, 236)">
             <button style="background: none; border: none; font-size: 1.2em;">
