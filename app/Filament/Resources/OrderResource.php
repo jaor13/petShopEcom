@@ -335,11 +335,18 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
+                // TextColumn::make('user_id')
+                // ->label('Customer')
+                // ->sortable()
+                // ->formatStateUsing(fn ($state) => \App\Models\User::find($state)?->username ?? 'Unknown')
+                // ->searchable(),
+                TextColumn::make('user.username')
                 ->label('Customer')
                 ->sortable()
                 ->searchable()
-                ->formatStateUsing(fn ($state) => \App\Models\User::find($state)?->username ?? 'Unknown'),
+                ->formatStateUsing(fn ($state) => $state ?? 'Unknown'),
+
+
             
 
                 TextColumn::make('grand_total')

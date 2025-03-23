@@ -47,7 +47,7 @@ class OrdersTrendWidget extends ChartWidget
         $values = [];
 
         foreach ($ordersData as $data) {
-            $labels[] = $data->order_period;
+            $labels[] = Carbon::parse($data->order_period)->format('n/j/y'); // Format date as m/d/y
             $values[] = $data->orders_count;
         }
 

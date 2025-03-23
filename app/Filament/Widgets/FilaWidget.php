@@ -14,7 +14,7 @@ class FilaWidget extends ChartWidget
     {
         $revenueData = DB::table('orders')
             ->selectRaw('SUM(grand_total) as revenue, DATE(created_at) as order_date')
-            ->where('status', 'delivered')
+            ->where('status', 'completed')
             ->where('payment_status', 'paid')
             ->where('created_at', '>=', Carbon::now()->subDays(30)) // Last 30 days
             ->groupBy('order_date')

@@ -216,19 +216,21 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('sold_count')
                     ->label('Number of Sold')
                     ->sortable()
-                    ->getStateUsing(fn (Product $record) => $record->has_variant 
-                        ? $record->variants->sum('sold_count') 
-                        : $record->sold_count
-                    ),
+                    // ->getStateUsing(fn (Product $record) => $record->has_variant 
+                    //     ? $record->variants->sum('sold_count') 
+                    //     : $record->sold_count
+                    // ),
+                    ->getStateUsing(fn (Product $record) => $record->sold_count),
 
 
-               Tables\Columns\TextColumn::make('stock')
+               Tables\Columns\TextColumn::make('stock_quantity')
                 ->numeric()
                 ->sortable()
-                ->getStateUsing(fn (Product $record) => $record->has_variant 
-                    ? $record->variants->sum('stock_quantity') 
-                    : $record->stock_quantity
-            ),
+                // ->getStateUsing(fn (Product $record) => $record->has_variant 
+                //     ? $record->variants->sum('stock_quantity') 
+                //     : $record->stock_quantity
+                ->getStateUsing(fn (Product $record) => $record->stock_quantity),
+            
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
