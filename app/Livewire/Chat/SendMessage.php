@@ -23,36 +23,54 @@ class SendMessage extends Component
 
     public function sendMessage()
     {
-
         if (empty($this->body)) {
             return;
         }
-
+    
+        // Create the message
         $createdMessage = Message::create([
             'conversation_id' => $this->selectedConversation->id,
             'sender_id' => auth()->id(),
-            'receiver_id' => $this->receiverInstance->id,
+            'receiver_id' => $this->receiverInstance->id, // Admin's ID
             'body' => $this->body,
         ]);
-
-        $this->selectedConversation->last_time_message = $createdMessage->created_at;
+    
+        // Update the last message timestamp
+        $this->selectedConversation->last_time_message = now();
         $this->selectedConversation->save();
-
-        // Reset the input field
+    
+        // Reset the input field after sending
         $this->body = '';
-        // Dispatch message event
-        $this->dispatch('pushMessage', messageId: $createdMessage->id)->to('chat.chatbox');
-        $this->dispatch('refresh')->to('chat.chat-list');
-
-
-        // Refresh conversation list
-        $this->dispatch('refresh')->to('chat.chat-list');
-
-        
-
-        
+    
+        // Emit event to update the chatbox component
+        $this->dispatch('messageSent')->to('chat.chatbox');
     }
+    
 
+public function mount()
+{
+    $user = auth()->user();
+    
+    if ($user->role === 'admin') {
+        // Admin side: conversation will be set through updateSendMessage method
+        return;
+    } else {
+        // User side: automatically set up conversation with admin
+        $admin = User::where('role', 'admin')->first();
+        
+        if ($admin) {
+            $this->receiverInstance = $admin;
+            $this->selectedConversation = Conversation::firstOrCreate([
+                'sender_id' => auth()->id(),
+                'receiver_id' => $admin->id,
+            ], [
+                'last_time_message' => now(),
+            ]);
+        } else {
+            session()->flash('error', 'Admin user not found.');
+        }
+    }
+}
     public function render()
     {
         return view('livewire.chat.send-message');

@@ -602,3 +602,48 @@ margin-left: 0px;
 .star {
   transition: color 0.3s;
 }
+
+
+.chat-form {
+  width: 100%;
+}
+
+.chatbox_footer {
+  width: 100%;
+  padding: 5px;
+  border-top: 1px solid #ddd;
+  background-color: white;
+}
+
+.custom_form_group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust spacing */
+  width: 100%;
+}
+
+.image-button {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: #00DCE3;
+  padding: 8px;
+}
+
+.control {
+  flex: 1;
+  padding: 3px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.submit {
+  background: none;
+  border: none;
+  font-size: 1em;
+  font-weight: bold;
+  color: #00DCE3;
+  padding: 8px;
+}

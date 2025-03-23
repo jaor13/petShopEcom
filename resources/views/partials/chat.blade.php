@@ -24,16 +24,27 @@
         </div>
         <div
             style=" padding: 25px; height: 300px; overflow-y: auto; font-size: 0.8em; text-align: center; font-weight: bold; color:rgb(75, 74, 74);">
-            <p style="font-family: 'Poppins';">Welcome to Aricuz PetShop! Ready to find the best pet care essentials? Let us know how we can help.</p>
+            <p style="font-family: 'Poppins';">Welcome to Aricuz PetShop! Ready to find the best pet care essentials? Let us
+                know how we can help.</p>
         </div>
-        <div style="padding: 10px; border-top: 1px solid #ddd; display: flex; align-items: center; color: rgb(0, 181, 236)">
-            <button style="background: none; border: none; font-size: 1.2em;">
-                <i class="fas fa-image"></i> </button>
-            <input type="text" placeholder="Type a message"
-                style="flex: 1; padding: 4px; border: 0.5px solid #ddd; border-radius: 5px; margin: 0 10px; font-size: 1em; color: rgb(51, 51, 51);">
-            <button
-                style="margin: 0 5% 0 2%; background: none; border: none; font-size: 0.8em; font-weight: bold; color: rgb(0, 181, 236); font-family: 'Poppins';">
-                Send </button>
+        <div>
+            {{-- Because she competes with no one, no one can compete with her. --}}
+
+            <form wire:submit.prevent="sendMessage" class="chat-form">
+                <div class="chatbox_footer">
+                    <div class="custom_form_group">
+                        <button type="button" class="image-button">
+                            <i class="fas fa-image"></i>
+                        </button>
+                        <input wire:model.defer="body" placeholder="Write message" type="text" class="control">
+                        <button type="submit" class="submit">Send</button>
+                    </div>
+                </div>
+            </form>
+            
+
+
+
         </div>
     </div>
 
