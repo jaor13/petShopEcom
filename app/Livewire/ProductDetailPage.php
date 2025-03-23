@@ -120,20 +120,13 @@ class ProductDetailPage extends Component
 
     public function render()
 {
-    $product = Product::with('orderItems.review')->where('slug', $this->slug)->first();
-
-    // Fetch reviews through order items
-    $reviews = $product 
-        ? $product->orderItems->flatMap->review->sortByDesc('created_at') 
-        : collect();
+    $product = Product::with('reviews')->where('slug', $this->slug)->first();
 
     return view('livewire.product-detail-page', [
         'product' => $product,
-        'reviews' => $reviews,
-        'averageRating' => $reviews->isNotEmpty() ? $reviews->avg('rating') : 0,
+        'reviews' => $product ? $product->reviews()->latest()->get() : [],
+        'averageRating' => $product ? $product->reviews()->avg('rating') : 0,
     ]);
 }
-
-
 
 }
