@@ -23,6 +23,7 @@ class Reviews extends Component
     public $reviews = [];
     public $selectedOrderItemId = null;
     public $activeTab = 'to_rate';
+    public $editingReviewId = null;
 
     public function mount($orderedItemId = null)
     {
@@ -67,52 +68,73 @@ class Reviews extends Component
         $this->rating = $value;
     }
 
-    public function submitReview()
-    {
-        $this->validate();
 
-        $orderItem = OrderItem::find($this->selectedOrderItemId);
-        if (!$orderItem) {
-            session()->flash('error', 'Invalid Order Item.');
-            return;
-        }
-
-        $uploadedImages = [];
-        foreach ($this->images as $image) {
-            $uploadedImages[] = $image->store('reviews', 'public');
-        }
-
-        Review::updateOrCreate(
-            [
-                'user_id' => Auth::id(),
-                'order_item_id' => $orderItem->id,
-            ],
-            [
-                'rating' => $this->rating,
-                'comment' => $this->comment,
-                'images' => $uploadedImages,
-            ]
-        );
-
-        // Refresh Data
-        $this->refreshToRateList(); // Remove the reviewed item from "To Rate" list
-        $this->fetchReviews(); // Fetch My Reviews again
-
-        // Switch to "My Reviews" tab
-        $this->activeTab = 'my_reviews';
-
-        $this->alert('success', 'Review submitted.', [
-            'position' => 'bottom-end',
-            'timer' => 3000,
-            'toast' => true,
-        ]);
-
-        // Reset only the form inputs, NOT the entire component
-        $this->reset(['rating', 'comment', 'images', 'selectedOrderItemId']);
-
-        // Close modal
-        $this->dispatch('hide-review-modal');
+public function editReview($reviewId)
+{
+    $review = Review::find($reviewId);
+    if (!$review || $review->user_id !== auth()->id()) {
+        session()->flash('error', 'Invalid review.');
+        return;
     }
+
+    // Set review data for editing
+    $this->editingReviewId = $review->id;
+    $this->selectedOrderItemId = $review->order_item_id;
+    $this->rating = $review->rating;
+    $this->comment = $review->comment;
+    $this->images = $review->images;
+
+    $this->dispatch('show-review-modal'); // Show the modal
+}
+
+public function deleteReview($reviewId)
+{
+    $review = Review::where('id', $reviewId)->where('user_id', auth()->id())->first();
+    if ($review) {
+        $review->delete();
+        $this->fetchReviews(); // Refresh reviews after deleting
+        $this->alert('success', 'Review deleted successfully.');
+    } else {
+        $this->alert('error', 'Unable to delete review.');
+    }
+}
+
+public function submitReview()
+{
+    $this->validate();
+
+    $orderItem = OrderItem::find($this->selectedOrderItemId);
+    if (!$orderItem) {
+        session()->flash('error', 'Invalid Order Item.');
+        return;
+    }
+
+    $uploadedImages = [];
+    foreach ($this->images as $image) {
+        $uploadedImages[] = $image->store('reviews', 'public');
+    }
+
+    Review::updateOrCreate(
+        [
+            'id' => $this->editingReviewId, // If editing, use existing review ID
+            'user_id' => Auth::id(),
+            'order_item_id' => $orderItem->id,
+        ],
+        [
+            'rating' => $this->rating,
+            'comment' => $this->comment,
+            'images' => $uploadedImages,
+        ]
+    );
+
+    $this->fetchReviews(); // Refresh reviews
+
+    $this->alert('success', $this->editingReviewId ? 'Review updated.' : 'Review submitted.');
+
+    $this->reset(['editingReviewId', 'rating', 'comment', 'images', 'selectedOrderItemId']);
+    $this->dispatch('hide-review-modal');
+}
+
 
     public function refreshToRateList()
     {

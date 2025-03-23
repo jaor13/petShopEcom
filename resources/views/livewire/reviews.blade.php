@@ -51,7 +51,10 @@
                             <div class="flex-grow-1">
                                 <h5>{{ $review->orderItem->product->product_name ?? 'Unknown Product' }}</h5>
 
-                                <p class="text-warning">Rating: ⭐ {{ $review->rating }}</p>
+                                <div class="text-yellow-500">
+                                    {!! str_repeat('⭐', $review->rating) !!}
+                                    {!! str_repeat('☆', 5 - $review->rating) !!}
+                                </div>
                                 <p class="mb-0">{{ $review->comment }}</p>
 
                                 <!-- Display Review Images -->
@@ -64,6 +67,11 @@
                                     </div>
                                 @endif
                             </div>
+
+                            <button wire:click="editReview({{ $review->id }})" class="btn btn-warning btn-sm me-2">Edit</button>
+                            <button wire:click="deleteReview({{ $review->id }})" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Are you sure?')">Delete</button>
+
                         </div>
                     </div>
                 @empty
@@ -121,29 +129,27 @@
                             </div>
                         @endif
 
-                        <button type="submit" class="btn btn-success">Submit Review</button>
+                        <button type="submit" class="btn btn-success">
+                            {{ $editingReviewId ? 'Update Review' : 'Submit Review' }}
+                        </button>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <script>
     document.addEventListener('livewire:load', function () {
-        Livewire.on('reviewSubmitted', () => {
+        Livewire.on('show-review-modal', () => {
             var modal = new bootstrap.Modal(document.getElementById('reviewModal'));
-            modal.hide();
+            modal.show();
         });
-    });
-</script>
 
-<script>
-    document.addEventListener('livewire:load', function () {
-        Livewire.on('reviewSubmitted', () => {
-            var reviewTab = new bootstrap.Tab(document.getElementById('my-reviews-tab'));
-            reviewTab.show();
+        Livewire.on('hide-review-modal', () => {
+            var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+            if (modal) modal.hide();
         });
     });
 </script>
