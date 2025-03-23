@@ -33,6 +33,10 @@ class OrderItem extends Model
         return $this->belongsTo(ProductVariant::class, 'variant_id');
     }
 
+    public function review()
+    {
+        return $this->hasOne(Review::class, 'order_item_id');
+    }
 
       // Update stock quantity when creating an order item
       protected static function boot()
