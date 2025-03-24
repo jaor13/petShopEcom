@@ -25,6 +25,7 @@
     <!-- Custom CSS -->
     <link href="{{ asset('assets/css/layout.css') }}" rel="stylesheet">
     <link href="{{ asset('css/chat.css') }}" rel="stylesheet">
+    @livewireStyles
 </head>
 
 <body class="d-flex flex-column min-vh-100 mt-5">
@@ -50,6 +51,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     @include('partials.chat')
+    @livewireScripts
 </body>
 
 </html>

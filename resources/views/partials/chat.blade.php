@@ -24,7 +24,7 @@
         </div>
         <div
             style="padding: 25px; height: 300px; overflow-y: auto; font-size: 0.8em; text-align: center; font-weight: bold; color:rgb(75, 74, 74);">
-            @if ($isNewConversation)
+           @if (isset($isNewConversation) && $isNewConversation)
                 <p style="font-family: 'Poppins';">
                     Welcome to Aricuz PetShop! Ready to find the best pet care essentials? Let us know how we can help.
                 </p>
