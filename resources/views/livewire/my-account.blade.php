@@ -2,18 +2,18 @@
     <div class="row">
         <!-- Read-Only Personal Information -->
         @if (!$isEditing)
+        
             <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
                 <h4 class="mb-4">Personal Information</h4>
-                <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('assets/images/default-profile.png') }}"
-                    alt="Profile Photo" class="profile-img rounded-circle mb-2"
-                    style="width: 100px; height: 100px; cursor: pointer;">
-                <div class="mb-3">
-                    <button class="btn ms-3" wire:click="enableEditing" style="color: #00DCE3;">
-                        <i class="fa-solid fa-pen-to-square me-1" style="color: #00DCE3; font-size: 20px;"></i>
-                        Edit Profile Information
-                    </button>
-
-                </div>
+                <div class="mb-3 d-flex align-items-center">
+    <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('assets/images/default-1.gif') }}"
+        alt="Profile Photo" class="profile-img rounded-circle mb-2"
+        style="width: 100px; height: 100px; cursor: pointer;">
+    <button class="btn ms-3" wire:click="enableEditing" style="color: #00DCE3;">
+        <i class="fa-solid fa-pen-to-square me-1" style="color: #00DCE3; font-size: 20px;"></i>
+        Edit Profile Information
+    </button>
+</div>
 
                 <div class="mb-3">
                     <label class="form-label">Name</label>
@@ -56,6 +56,7 @@
                         </div>
                     @endif
                 @endif
+   
             </div>
         @endif
 
@@ -65,8 +66,7 @@
                 <h4>Edit Profile Information</h4>
                 <form wire:submit.prevent="updateProfile" class="mt-3">
                     <label for="profile-picture-upload">
-                        <img src="{{ $profile_picture_url }}" alt="Profile Photo" class="profile-img rounded-circle mb-2"
-                            style="width: 100px; height: 100px; cursor: pointer;">
+                       <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('assets/images/default-1.gif') }}">
 
                     </label>
                     <input type="file" id="profile-picture-upload" wire:model="profile_picture" style="display: none;">
@@ -109,9 +109,9 @@
             </div>
         @endif
 
-        <div class="col-md-12 px-5 py-3 mt-3 mt-md-5 rounded shadow-sm custom-card-design">
+        <div class="col-md-12 px-5 py-3 mt-3  rounded shadow-sm custom-card-design">
             <h4>Change Password</h4>
-            <form wire:submit.prevent="updatePassword" class="mt-3">
+            <form wire:submit.prevent="updatePassword" class="mt-3 mb-4">
                 <div class="mb-3">
                     <label for="currentPassword" class="form-label">Current Password</label>
                     <input type="password" class="form-control" id="currentPassword" wire:model="currentPassword"
@@ -136,9 +136,9 @@
             </form>
         </div>
 
-        <div class="col-md-12 p-3 mt-5 rounded shadow-sm custom-card-design px-5 py-3">
+        <div class="col-md-12 p-3 mt-3 rounded shadow-sm custom-card-design px-5 py-3">
             <h4>Delete Account</h4>
-            <form wire:submit.prevent="confirmDelete" class="mt-3">
+            <form wire:submit.prevent="confirmDelete" class="mt-3 mb-4">
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" wire:model="password" required>

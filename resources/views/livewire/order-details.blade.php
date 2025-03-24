@@ -140,7 +140,7 @@
         </div>
 
         @if($order['status'] == 'to_ship')
-            <button class="btn btn-danger mt-3" wire:click="cancelOrder">Cancel Order</button>
+        <button class="btn btn-white mt-3" style="background-color: #00DCE3; color: white;" wire:click="cancelOrder">Cancel Order</button>
         @endif
 
         @if($order['status'] == 'delivered')
