@@ -57,10 +57,10 @@
 
                             <!-- Dropdown Menu -->
                             <div class="dropdown">
-                            <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton{{ $review->id }}"
-    data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background: none;">
-    <i class="fas fa-ellipsis-v"></i>
-</button>
+                                <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton{{ $review->id }}"
+                                    data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background: none;">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
 
                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm"
                                     style="border: 1px solid #ddd; background-color: #fff; border-radius: 8px; width: 80px; min-width: unset; padding:0px">
@@ -71,8 +71,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-dark" href="#" wire:click="deleteReview({{ $review->id }})"
-                                            onclick="return confirm('Are you sure?')">
+                                        <a class="dropdown-item text-dark" href="#" wire:click="deleteReview({{ $review->id }})">
                                             Delete
                                         </a>
                                     </li>
