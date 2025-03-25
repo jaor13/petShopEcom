@@ -66,7 +66,7 @@ class Reviews extends Component
 
     public function selectOrderItem($orderItemId)
     {
-        $this->state='new';
+        $this->state = 'new';
         $this->reset(['rating', 'comment', 'images', 'editingReviewId']);
         $this->selectedOrderItemId = $orderItemId;
         $this->rating = null;
@@ -78,36 +78,6 @@ class Reviews extends Component
     public function setRating($value)
     {
         $this->rating = $value;
-    }
-
-    public function editReview($reviewId)
-    {
-        $this->state='edit';
-        $review = Review::find($reviewId);
-
-        if (!$review) {
-            $this->alert('error', 'Review not found!', [
-                'position' => 'bottom-end',
-                'timer' => 5000,
-                'toast' => true,
-            ]);
-            return;
-        }
-
-        $this->reviewId = $review->id;
-        $this->rating = $review->rating;
-        $this->comment = $review->comment;
-        // dd($review->comment);
-
-        $this->images = $review->images ?? []; 
-
-        $this->dispatch('show-review-modal');
-
-        $this->alert('success', 'Edit OK', [
-            'position' => 'bottom-end',
-            'timer' => 5000,
-            'toast' => true,
-        ]);
     }
 
 
@@ -139,17 +109,13 @@ class Reviews extends Component
         }
     }
 
-    public function submitReview()
+    public function editReview($reviewId)
     {
-        $this->validate([
-            'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'nullable|string',
-            'images' => 'array',
-            'images.*' => 'image|max:2048', // Ensure each image is valid
-        ]);
+        $this->state = 'edit';
+        $review = Review::find($reviewId);
 
-        if (is_array($this->images) && count($this->images) > 4) {
-            $this->alert('error', 'You can only upload a maximum of 4 images.', [
+        if (!$review) {
+            $this->alert('error', 'Review not found!', [
                 'position' => 'bottom-end',
                 'timer' => 5000,
                 'toast' => true,
@@ -157,20 +123,83 @@ class Reviews extends Component
             return;
         }
 
+        
+        $this->editingReviewId = $review->id; // FIX: Set editingReviewId correctly
+        $this->rating = $review->rating;
+        $this->comment = $review->comment ?? '';
 
+        // Only set images if it's an array, otherwise, set an empty array
+        $this->images = is_array($review->images) ? $review->images : [];
+
+        $this->selectedOrderItemId = $review->order_item_id;
+        
+        $this->dispatch('show-review-modal');
+
+        $this->alert('success', 'Edit OK', [
+            'position' => 'bottom-end',
+            'timer' => 5000,
+            'toast' => true,
+        ]);
+
+        // dd($this->editingReviewId, $this->rating, $this->comment, $this->images); 
+
+    }
+
+
+    public function submitReview()
+{
+    try {
+        $validationRules = [
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|string',
+        ];
+
+        if ($this->images && is_array($this->images) && count($this->images) > 0 && $this->images[0] instanceof \Illuminate\Http\UploadedFile) {
+            $validationRules['images'] = 'array|max:4';
+            $validationRules['images.*'] = 'image|mimes:jpeg,png,jpg,gif|max:2048';
+        }
+
+        $this->validate($validationRules);
+        // dd('Validation passed!');
+
+        // Check if selected order item exists
         $orderItem = OrderItem::find($this->selectedOrderItemId);
         if (!$orderItem) {
-            session()->flash('error', 'Invalid Order Item.');
-            return;
+            dd('Order Item not found!', $this->selectedOrderItemId);
         }
 
+        // Retrieve existing review
+        $existingReview = $this->editingReviewId ? Review::find($this->editingReviewId) : null;
+        if ($this->editingReviewId && !$existingReview) {
+            dd('Editing Review not found!', $this->editingReviewId);
+        }
+
+        // Retrieve existing images
+        $existingImages = $existingReview ? $existingReview->images : [];
+        
+        // Debug Images Before Processing
+        // dd('Existing Images:', $existingImages, 'New Images:', $this->images);
+
+        // Upload new images if any
         $uploadedImages = [];
-        foreach ($this->images as $image) {
-            $uploadedImages[] = $image->store('reviews', 'public');
+        if ($this->images && is_array($this->images)) {
+            foreach ($this->images as $image) {
+                if ($image instanceof \Illuminate\Http\UploadedFile) {
+                    try {
+                        $uploadedImages[] = $image->store('reviews', 'public');
+                    } catch (\Exception $ex) {
+                        dd('Image Upload Error:', $ex->getMessage());
+                    }
+                } else {
+                    $uploadedImages[] = $image; // Preserve old images
+                }
+            }
         }
 
-        $productId = $orderItem->product_id;
-        $variantId = $orderItem->variant_id;
+        // Merge old and new images
+        $finalImages = array_slice(array_merge($existingImages, $uploadedImages), 0, 4);
+        
+        // dd('Final Images:', $finalImages);
 
         Review::updateOrCreate(
             [
@@ -181,11 +210,13 @@ class Reviews extends Component
             [
                 'rating' => $this->rating,
                 'comment' => $this->comment,
-                'images' => $uploadedImages,
-                'product_id' => $productId,
-                'variant_id' => $variantId,
+                'images' => $finalImages,
+                'product_id' => $orderItem->product_id,
+                'variant_id' => $orderItem->variant_id,
             ]
         );
+
+        // dd('Review saved successfully!');
 
         $this->fetchReviews();
 
@@ -197,7 +228,16 @@ class Reviews extends Component
 
         $this->reset(['rating', 'comment', 'images', 'selectedOrderItemId', 'editingReviewId']);
         $this->dispatch('hide-review-modal');
+
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        dd('Validation failed:', $e->errors());
+    } catch (\Exception $e) {
+        dd('Unexpected Error:', $e->getMessage());
     }
+}
+
+    
+
 
     public function removeImage($index)
     {
