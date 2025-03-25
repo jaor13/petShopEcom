@@ -71,7 +71,8 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-dark" href="#" wire:click="deleteReview({{ $review->id }})">
+                                        <a class="dropdown-item text-dark" href="#"
+                                            wire:click="deleteReview({{ $review->id }})">
                                             Delete
                                         </a>
                                     </li>
@@ -103,12 +104,22 @@
                                     @endforeach
                                 </div>
                             @endif
+
+                            <!-- Date Info -->
+                            <p class="text-muted mt-2" style="font-size: 12px;">
+                                @if ($review->created_at != $review->updated_at)
+                                    Edited {{ $review->updated_at->format('M d, Y h:i A') }}
+                                @else
+                                    Posted {{ $review->created_at->format('M d, Y h:i A') }}
+                                @endif
+                            </p>
                         </div>
                     </div>
                 @empty
                     <p class="text-center mt-4">You haven't left any reviews yet.</p>
                 @endforelse
             @endif
+
 
 
 
