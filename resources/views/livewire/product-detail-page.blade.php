@@ -219,7 +219,13 @@
                         @endforeach
                     </div>
                   @endif
-                  <div class="text-sm text-gray-500">{{ $review->created_at->format('Y-m-d H:i') }} | {{ $review->variant->name ?? 'No Variant' }}</div>
+                  <div class="text-sm text-gray-500">
+                    @if ($review->created_at->eq($review->updated_at))
+                        {{ $review->created_at->format('Y-m-d H:i') }} | {{ $review->variant->name ?? 'No Variant' }}
+                    @else
+                        {{ $review->updated_at->format('Y-m-d H:i') }} (Edited) | {{ $review->variant->name ?? 'No Variant' }}
+                    @endif
+                  </div>
                 </div>
               </div>
           </div>
