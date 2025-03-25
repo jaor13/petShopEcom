@@ -24,6 +24,7 @@ class Reviews extends Component
     public $selectedOrderItemId = null;
     public $activeTab = 'to_rate';
     public $editingReviewId = null;
+    public $state;
 
     public function mount($orderedItemId = null)
     {
@@ -65,10 +66,11 @@ class Reviews extends Component
 
     public function selectOrderItem($orderItemId)
     {
+        $this->state='new';
         $this->reset(['rating', 'comment', 'images', 'editingReviewId']);
         $this->selectedOrderItemId = $orderItemId;
         $this->rating = null;
-        $this->comment = '';
+        $this->comment = null;
         $this->images = [];
         $this->dispatch('show-review-modal');
     }
@@ -78,24 +80,36 @@ class Reviews extends Component
         $this->rating = $value;
     }
 
-
     public function editReview($reviewId)
     {
+        $this->state='edit';
         $review = Review::find($reviewId);
-        if (!$review || $review->user_id !== auth()->id()) {
-            session()->flash('error', 'Invalid review.');
+
+        if (!$review) {
+            $this->alert('error', 'Review not found!', [
+                'position' => 'bottom-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);
             return;
         }
 
-        $this->reset(['rating', 'comment', 'images', 'editingReviewId']);
-        $this->editingReviewId = $review->id;
-        $this->selectedOrderItemId = $review->order_item_id;
+        $this->reviewId = $review->id;
         $this->rating = $review->rating;
         $this->comment = $review->comment;
-        $this->images = $review->images;
+        // dd($review->comment);
 
-        $this->dispatch('show-review-modal'); // Show the modal
+        $this->images = $review->images ?? []; 
+
+        $this->dispatch('show-review-modal');
+
+        $this->alert('success', 'Edit OK', [
+            'position' => 'bottom-end',
+            'timer' => 5000,
+            'toast' => true,
+        ]);
     }
+
 
     public function resetReviewForm()
     {

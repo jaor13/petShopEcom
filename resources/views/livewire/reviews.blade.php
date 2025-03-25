@@ -44,40 +44,75 @@
             @if ($activeTab === 'my_reviews')
                 @forelse ($reviews as $review)
                     <div class="px-5 py-3 shadow-sm rounded mb-2 custom-card-design">
+                        <!-- Product Info & Actions -->
                         <div class="d-flex align-items-center">
                             <img src="{{ $review->display_image }}" class="img-thumbnail rounded-lg me-3"
                                 style="width: 80px; height: 80px; background-color: #E7FAFF; border: none;">
-
                             <div class="flex-grow-1">
-                                <h5>{{ $review->orderItem->product->product_name ?? 'Unknown Product' }}</h5>
-
-                                <div class="text-yellow-500">
-                                    {!! str_repeat('⭐', $review->rating) !!}
-                                    {!! str_repeat('☆', 5 - $review->rating) !!}
-                                </div>
-                                <p class="mb-0">{{ $review->comment }}</p>
-
-                                <!-- Display Review Images -->
-                                @if ($review->images && count($review->images) > 0)
-                                    <div class="d-flex flex-wrap mt-2">
-                                        @foreach ($review->images as $image)
-                                            <img src="{{ url('storage/' . $image) }}" class="img-thumbnail me-2"
-                                                style="width: 100px; height: 100px; object-fit: cover;">
-                                        @endforeach
-                                    </div>
-                                @endif
+                                <p class="mb-1">
+                                    <strong>{{ $review->orderItem->product->product_name ?? 'Unknown Product' }}</strong>
+                                </p>
+                                <p class="text-muted mb-0">Variation: {{ $review->variant->name ?? 'N/A' }}</p>
                             </div>
 
-                            <button wire:click="editReview({{ $review->id }})" class="btn btn-warning btn-sm me-2">Edit</button>
-                            <button wire:click="deleteReview({{ $review->id }})" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Are you sure?')">Delete</button>
+                            <!-- Dropdown Menu -->
+                            <div class="dropdown">
+                            <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton{{ $review->id }}"
+    data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background: none;">
+    <i class="fas fa-ellipsis-v"></i>
+</button>
 
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm"
+                                    style="border: 1px solid #ddd; background-color: #fff; border-radius: 8px; width: 80px; min-width: unset; padding:0px">
+                                    <li>
+                                        <a class="dropdown-item text-dark" href="#" wire:click="editReview({{ $review->id }})"
+                                            data-bs-toggle="modal" data-bs-target="#reviewModal">
+                                            Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-dark" href="#" wire:click="deleteReview({{ $review->id }})"
+                                            onclick="return confirm('Are you sure?')">
+                                            Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <!-- Divider -->
+                        <hr class="my-3">
+
+                        <!-- Review Content Below -->
+                        <div class="ps-4">
+                            <!-- Star Rating -->
+                            <div class="text-yellow-500 mb-1">
+                                {!! str_repeat('⭐', $review->rating) !!}
+                                {!! str_repeat('☆', 5 - $review->rating) !!}
+                            </div>
+
+                            <!-- Review Comment -->
+                            <p class="mb-2 text-muted">{{ $review->comment }}</p>
+
+                            <!-- Display Review Images -->
+                            @if ($review->images && count($review->images) > 0)
+                                <div class="d-flex flex-wrap mt-2">
+                                    @foreach ($review->images as $image)
+                                        <img src="{{ url('storage/' . $image) }}" class="img-thumbnail me-2"
+                                            style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                     </div>
                 @empty
                     <p class="text-center mt-4">You haven't left any reviews yet.</p>
                 @endforelse
             @endif
+
+
+
 
         </div>
     </div>
@@ -123,8 +158,15 @@
                             <div class="d-flex flex-wrap mt-2">
                                 @foreach ($images as $index => $image)
                                     <div class="position-relative me-2 mb-2" style="width: 100px; height: 100px;">
-                                        <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail w-100 h-100"
-                                            style="object-fit: cover;">
+                                        @if ($state === 'new')
+                                            <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail w-100 h-100"
+                                                style="object-fit: cover;">
+                                        @else
+                                            <img src="{{ asset('storage/' . $image) }}" class="img-thumbnail w-100 h-100"
+                                                style="object-fit: cover;">
+                                        @endif
+
+
 
                                         <!-- Delete Button Inside the Image -->
                                         <button type="button" class="btn-close position-absolute top-0 end-0 p-1"
@@ -150,10 +192,7 @@
 
 <script>
     document.addEventListener('livewire:load', function () {
-        Livewire.on('show-review-modal', () => {
-            var modal = new bootstrap.Modal(document.getElementById('reviewModal'));
-            modal.show();
-        });
+
 
         Livewire.on('hide-review-modal', () => {
             var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
@@ -162,3 +201,4 @@
         });
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
