@@ -27,6 +27,9 @@ class ProductDetailPage extends Component
     public $variant_price;
     public $stock_quantity;
 
+    public $isOpen = false;
+    public $imageUrl;
+
     public function mount($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
@@ -118,6 +121,19 @@ class ProductDetailPage extends Component
         }
     }
 
+    public function openImageModal($imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
+        $this->isOpen = true;
+    }
+
+    // Close modal
+    public function closeImageModal()
+    {
+        $this->isOpen = false;
+        $this->imageUrl = null;
+    }
+    
     public function render()
 {
     $product = Product::with('reviews')->where('slug', $this->slug)->first();

@@ -212,13 +212,30 @@
                   </div>
                   <p class="text-sm text-black-700">{{ $review->comment }}</p>
 
-                  @if(is_array($review->images) && count($review->images) > 0)
+                  <div>
+                    <!-- Display Review Images -->
                     <div class="flex flex-wrap gap-2 mt-2">
-                        @foreach($review->images as $image)
-                            <img src="{{ url('storage/' . $image) }}"  alt="Review Image" class="rounded-lg w-32 h-32 object-cover">
+                        @foreach($reviews as $review)
+                            @foreach($review->images as $image)
+                                <img src="{{ url('storage/' . $image) }}"  
+                                    alt="Review Image" 
+                                    class="rounded-lg w-32 h-32 object-cover cursor-pointer transition-transform hover:scale-105"
+                                    wire:click="openImageModal('{{ url('storage/' . $image) }}')">
+                            @endforeach
                         @endforeach
                     </div>
-                  @endif
+
+                    <!-- Review Image Modal -->
+                    @if($isOpen)
+                    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <div class="relative bg-white rounded-lg p-4 shadow-lg max-w-[90%] max-h-[90%]">
+                            <button wire:click="closeImageModal" class="absolute top-2 right-2 text-gray-600 text-2xl">&times;</button>
+                            <img src="{{ $imageUrl }}" class="max-w-full max-h-screen rounded-lg">
+                        </div>
+                    </div>
+                    @endif
+                </div>
+
                   <div class="text-sm text-gray-500">
                     @if ($review->created_at->eq($review->updated_at))
                         {{ $review->created_at->format('Y-m-d H:i') }} | {{ $review->variant->name ?? 'No Variant' }}
