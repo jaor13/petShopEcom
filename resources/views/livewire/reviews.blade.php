@@ -99,11 +99,25 @@
                             @if ($review->images && count($review->images) > 0)
                                 <div class="d-flex flex-wrap mt-2">
                                     @foreach ($review->images as $image)
-                                        <img src="{{ url('storage/' . $image) }}" class="img-thumbnail me-2"
-                                            style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+                                        <img src="{{ url('storage/' . $image) }}"
+                                            class="img-thumbnail me-2 cursor-pointer transition-transform hover:scale-105"
+                                            style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;"
+                                            wire:click="openImageModal('{{ url('storage/' . $image) }}')">
                                     @endforeach
                                 </div>
                             @endif
+
+                            <!-- Image Modal -->
+                            @if($isOpen)
+                                <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                                    <div class="relative bg-white rounded-lg p-4 shadow-lg max-w-[90%] max-h-[90%]">
+                                        <button wire:click="closeImageModal"
+                                            class="absolute top-2 right-2 text-gray-600 text-2xl">&times;</button>
+                                        <img src="{{ $imageUrl }}" class="max-w-full max-h-screen rounded-lg">
+                                    </div>
+                                </div>
+                            @endif
+
 
                             <!-- Date Info -->
                             <p class="text-muted mt-2" style="font-size: 12px;">

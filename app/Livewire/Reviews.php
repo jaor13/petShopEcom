@@ -25,6 +25,8 @@ class Reviews extends Component
     public $activeTab = 'to_rate';
     public $editingReviewId = null;
     public $state;
+    public $isOpen = false;
+    public $imageUrl = null;
 
     public function mount($orderedItemId = null)
     {
@@ -36,11 +38,17 @@ class Reviews extends Component
         $this->fetchReviews();
     }
 
-    protected function getListeners()
+
+    public function openImageModal($imageUrl)
     {
-        return [
-            'resetReviewForm' => 'resetReviewForm',
-        ];
+        $this->imageUrl = $imageUrl;
+        $this->isOpen = true;
+    }
+
+    public function closeImageModal()
+    {
+        $this->isOpen = false;
+        $this->imageUrl = null;
     }
 
 
@@ -84,7 +92,7 @@ class Reviews extends Component
     public function resetReviewForm()
     {
         $this->reset(['rating', 'images', 'selectedOrderItemId', 'editingReviewId']);
-        $this->comment = ''; 
+        $this->comment = '';
     }
 
 
@@ -122,7 +130,7 @@ class Reviews extends Component
             return;
         }
 
-        $this->editingReviewId = $review->id; 
+        $this->editingReviewId = $review->id;
         $this->rating = $review->rating;
         $this->comment = $review->comment ?? '';
 
@@ -155,7 +163,7 @@ class Reviews extends Component
                 'images.*.mimes' => 'Images must be in JPEG, PNG, or JPG format',
                 'images.*.max' => 'Each image must be less than 2MB.',
             ];
-    
+
             $this->validate($validationRules, $customMessages);
 
             // $this->validate($validationRules);
@@ -222,8 +230,7 @@ class Reviews extends Component
                     ]);
                 }
             }
-        } 
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->alert('error', 'Unexpected error: ' . $e->getMessage(), [
                 'position' => 'bottom-end',
                 'timer' => 5000,
