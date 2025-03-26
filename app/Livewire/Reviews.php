@@ -84,9 +84,8 @@ class Reviews extends Component
     public function resetReviewForm()
     {
         $this->reset(['rating', 'images', 'selectedOrderItemId', 'editingReviewId']);
-        $this->comment = ''; // Ensure comment resets to an empty string
+        $this->comment = ''; 
     }
-
 
 
     public function deleteReview($reviewId)
@@ -123,26 +122,15 @@ class Reviews extends Component
             return;
         }
 
-
-        $this->editingReviewId = $review->id; // FIX: Set editingReviewId correctly
+        $this->editingReviewId = $review->id; 
         $this->rating = $review->rating;
         $this->comment = $review->comment ?? '';
 
-        // Only set images if it's an array, otherwise, set an empty array
         $this->images = is_array($review->images) ? $review->images : [];
 
         $this->selectedOrderItemId = $review->order_item_id;
 
         $this->dispatch('show-review-modal');
-
-        $this->alert('success', 'Edit OK', [
-            'position' => 'bottom-end',
-            'timer' => 5000,
-            'toast' => true,
-        ]);
-
-        // dd($this->editingReviewId, $this->rating, $this->comment, $this->images); 
-
     }
 
 
@@ -156,51 +144,43 @@ class Reviews extends Component
 
             if ($this->images && is_array($this->images) && count($this->images) > 0 && $this->images[0] instanceof \Illuminate\Http\UploadedFile) {
                 $validationRules['images'] = 'array|max:4';
-                $validationRules['images.*'] = 'image|mimes:jpeg,png,jpg,gif|max:2048';
+                $validationRules['images.*'] = 'image|mimes:jpeg,png,jpg|max:2048';
             }
 
-            $this->validate($validationRules);
+            $customMessages = [
+                'rating.required' => 'Please select a rating before submitting.',
+                'images.array' => 'Something went wrong with the uploaded images.',
+                'images.max' => 'You can only upload up to 4 images.',
+                'images.*.image' => 'One or more files are not valid images.',
+                'images.*.mimes' => 'Images must be in JPEG, PNG, or JPG format',
+                'images.*.max' => 'Each image must be less than 2MB.',
+            ];
+    
+            $this->validate($validationRules, $customMessages);
 
-            // Check if selected order item exists
+            // $this->validate($validationRules);
+
             $orderItem = OrderItem::find($this->selectedOrderItemId);
             if (!$orderItem) {
                 dd('Order Item not found!', $this->selectedOrderItemId);
             }
 
-            // Retrieve existing review
             $existingReview = $this->editingReviewId ? Review::find($this->editingReviewId) : null;
 
-            if ($this->editingReviewId && !$existingReview) {
-                dd('Editing Review not found!', $this->editingReviewId);
-            }
+            $existingImages = $existingReview ? (is_array($existingReview->images) ? $existingReview->images : []) : [];
 
-            // Determine state (edit or new)
-            $this->state = $existingReview ? 'edit' : 'new';
-
-            // Retrieve existing images
-            $existingImages = $existingReview ? $existingReview->images : [];
-
-            // Upload new images if any
             $uploadedImages = [];
             if ($this->images && is_array($this->images)) {
                 foreach ($this->images as $image) {
                     if ($image instanceof \Illuminate\Http\UploadedFile) {
-                        try {
-                            $uploadedImages[] = $image->store('reviews', 'public');
-                        } catch (\Exception $ex) {
-                            dd('Image Upload Error:', $ex->getMessage());
-                        }
-                    } else {
-                        $uploadedImages[] = $image; // Preserve old images
+                        $uploadedImages[] = $image->store('reviews', 'public');
                     }
                 }
             }
 
-            // Merge old and new images
-            $finalImages = array_slice(array_merge($existingImages, $uploadedImages), 0, 4);
+            $finalImages = array_values(array_unique(array_merge($existingImages, $uploadedImages)));
 
             if ($existingReview) {
-                // Editing existing review
                 $existingReview->update([
                     'rating' => $this->rating,
                     'comment' => $this->comment,
@@ -209,7 +189,6 @@ class Reviews extends Component
                     'variant_id' => $orderItem->variant_id,
                 ]);
             } else {
-                // Creating new review
                 Review::create([
                     'user_id' => Auth::id(),
                     'order_item_id' => $orderItem->id,
@@ -221,9 +200,6 @@ class Reviews extends Component
                 ]);
             }
 
-            $existingReview->refresh(); // Ensure fresh data
-            // dd($existingReview->updated_at);
-
             $this->fetchReviews();
 
             $this->alert('success', $this->state === 'edit' ? 'Review updated.' : 'Review submitted.', [
@@ -232,23 +208,48 @@ class Reviews extends Component
                 'toast' => true,
             ]);
 
-            // Reset after submission
+            // Reset state
             $this->reset(['rating', 'comment', 'images', 'selectedOrderItemId', 'editingReviewId', 'state']);
             $this->dispatch('hide-review-modal');
 
         } catch (\Illuminate\Validation\ValidationException $e) {
-            dd('Validation failed:', $e->errors());
-        } catch (\Exception $e) {
-            dd('Unexpected Error:', $e->getMessage());
+            foreach ($e->errors() as $field => $messages) {
+                foreach ($messages as $message) {
+                    $this->alert('error', $message, [
+                        'position' => 'bottom-end',
+                        'timer' => 5000,
+                        'toast' => true,
+                    ]);
+                }
+            }
+        } 
+        catch (\Exception $e) {
+            $this->alert('error', 'Unexpected error: ' . $e->getMessage(), [
+                'position' => 'bottom-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);
         }
     }
-
 
     public function removeImage($index)
     {
         if (isset($this->images[$index])) {
+            $removedImage = $this->images[$index];
             unset($this->images[$index]);
-            $this->images = array_values($this->images); // Re-index array
+
+            $this->images = array_values($this->images);
+
+            if ($this->editingReviewId) {
+                $review = Review::find($this->editingReviewId);
+                if ($review) {
+                    $reviewImages = is_array($review->images) ? $review->images : [];
+                    $reviewImages = array_filter($reviewImages, fn($img) => $img !== $removedImage);
+
+                    $review->images = array_values($reviewImages);
+                    $review->save();
+                }
+            }
         }
     }
 
