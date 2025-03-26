@@ -228,12 +228,13 @@
                     <!-- Review Image Modal -->
                     @if($isOpen)
                     <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                        <div class="relative bg-white rounded-lg p-4 shadow-lg max-w-[90%] max-h-[90%]">
-                            <button wire:click="closeImageModal" class="absolute top-2 right-2 text-gray-600 text-2xl">&times;</button>
+                        <div class="relative bg-white rounded-lg p-3 shadow-lg border border-gray-300 max-w-[90%] max-h-[90%]"> 
+                            <button wire:click="closeImageModal" class="absolute top-0 right-1 text-gray-600 text-2xl">&times;</button>
                             <img src="{{ $imageUrl }}" class="max-w-full max-h-screen rounded-lg">
                         </div>
                     </div>
                     @endif
+
                 </div>
 
                   <div class="text-sm text-gray-500">
