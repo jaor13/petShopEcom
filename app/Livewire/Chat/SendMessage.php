@@ -13,8 +13,6 @@ class SendMessage extends Component
     public $selectedConversation;
     public $body;
 
-    public $isNewConversation = false;
-
     protected $listeners = ['loadConversation', 'updateSendMessage', 'pushMessage'];
 
     public function updateSendMessage(Conversation $conversation, User $receiver)
@@ -25,53 +23,38 @@ class SendMessage extends Component
 
     public function sendMessage()
     {
+
         if (empty($this->body)) {
             return;
         }
 
-        $admin = User::where('role', 'admin')->first();
+        $createdMessage = Message::create([
+            'conversation_id' => $this->selectedConversation->id,
+            'sender_id' => auth()->id(),
+            'receiver_id' => $this->receiverInstance->id,
+            'body' => $this->body,
+        ]);
 
-        if ($admin) {
-            Message::create([
-                'sender_id' => auth()->id(),
-                'receiver_id' => $admin->id,
-                'body' => $this->body,
-            ]);
-        }
+        $this->selectedConversation->last_time_message = $createdMessage->created_at;
+        $this->selectedConversation->save();
 
-        // Reset input field
+        // Reset the input field
         $this->body = '';
-        $this->isNewConversation = false; // ✅ Once a message is sent, it's no longer a new conversation
+        // Dispatch message event
+        $this->dispatch('pushMessage', messageId: $createdMessage->id)->to('chat.chatbox');
+        $this->dispatch('refresh')->to('chat.chat-list');
+
+
+        // Refresh conversation list
+        $this->dispatch('refresh')->to('chat.chat-list');
+
+        
+
+        
     }
-
-    public function mount()
-    {
-        $admin = User::where('role', 'admin')->first();
-
-        if ($admin) {
-            $messages = Message::where(function ($query) use ($admin) {
-                $query->where('sender_id', auth()->id())
-                    ->where('receiver_id', $admin->id);
-            })->orWhere(function ($query) use ($admin) {
-                $query->where('sender_id', $admin->id)
-                    ->where('receiver_id', auth()->id());
-            })->exists();
-
-            $this->isNewConversation = !$messages;
-        }
-    }
-
-    public function getIsNewConversationProperty()
-{
-    return $this->isNewConversation;
-}
-
-
 
     public function render()
     {
-        return view('livewire.chat.send-message', [
-            'isNewConversation' => $this->isNewConversation, // ✅ Pass to Blade
-        ]);
+        return view('livewire.chat.send-message');
     }
 }

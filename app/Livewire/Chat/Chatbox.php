@@ -13,52 +13,47 @@ class Chatbox extends Component
     public $selectedConversation;
     public $receiver;
     public $receiverInstance;
-    public $isNewConversation = false;
+
 
     public $messages;
     public $paginateVar = 10;
-    protected $listeners = [
-        'loadConversation',
-        'updateSendMessage',
-        'pushMessage',
-        'messageSent' => 'loadMessages', // Listen for new messages
-        'refreshMessages' => 'render'
-    ];
+    protected $listeners = ['loadConversation', 'updateSendMessage', 'pushMessage'];
 
 
-    public function pushMessage($id)
-    {
-        $newMessage = Message::find($id);
+    public function pushMessage($messageId)
+{
+    $newMessage = Message::find($messageId);
 
-        if ($newMessage instanceof Message) {  // Ensure it's a single message instance
-            if (!$this->messages instanceof \Illuminate\Support\Collection) {
-                $this->messages = collect($this->messages);
-            }
-
-            $this->messages->push($newMessage);
+    if ($newMessage instanceof Message) {  // Ensure it's a single message instance
+        if (!$this->messages instanceof \Illuminate\Support\Collection) {
+            $this->messages = collect($this->messages);
         }
+
+        $this->messages->push($newMessage);
     }
+}
 
 
+    
 
-
-    public function loadMessages()
+    public function loadConversation(Conversation $conversation, User $receiver)
     {
-        $admin_id = User::where('role', 'admin')->value('id');
+        // Assign the received model instances directly
+        $this->selectedConversation = $conversation;
+        $this->receiverInstance = $receiver;
+    
+        $this->messages_count = Message::where('conversation_id', $this->selectedConversation->id)->count();
+    
+        $this->messages = Message::where('conversation_id', $this->selectedConversation->id)
+            ->skip($this->messages_count - $this->paginateVar)
+            ->take($this->paginateVar)->get();
 
-        $this->messages = Message::where(function ($query) use ($admin_id) {
-            $query->where('sender_id', auth()->id())
-                ->where('receiver_id', $admin_id);
-        })->orWhere(function ($query) use ($admin_id) {
-            $query->where('sender_id', $admin_id)
-                ->where('receiver_id', auth()->id());
-        })->orderBy('created_at', 'asc')->get();
+            $this->dispatch('chatSelected')->self();
 
-        // Check if there are no messages, meaning it's a new conversation
-        $this->isNewConversation = $this->messages->isEmpty();
     }
+    
     public function render()
     {
-        return view('livewire.chat.Chatbox');
+        return view('livewire.chat.chatbox');
     }
 }
