@@ -44,14 +44,14 @@ class ReviewResource extends Resource
                             ->relationship('user', 'username') // Ensure it fetches usernames from the User model
                             ->searchable()
                             ->preload(),
-                
+
                         Forms\Components\TextInput::make('email')
                             ->label('Email')
                             ->disabled() // Prevents editing
-                            ->formatStateUsing(fn ($state, $record) => $record->user->email ?? 'N/A'), // Fetch email from related user
+                            ->formatStateUsing(fn($state, $record) => $record->user->email ?? 'N/A'), // Fetch email from related user
                     ])->columns(1),
                 ])->columnspan(2),
-                
+
                 Group::make()->schema([
                     Section::make('Product Information')->schema([
                         Forms\Components\Hidden::make('user_id')
@@ -117,7 +117,7 @@ class ReviewResource extends Resource
 
 
                 Group::make()->schema([
-                    Section::make('Ratings and Reviews')->schema([
+                    Section::make('Review Information')->schema([
                         Forms\Components\TextInput::make('rating')
                             ->label('Rating')
                             ->disabled() // Prevent user from changing
@@ -125,13 +125,13 @@ class ReviewResource extends Resource
                             ->columnspan(1),
 
                         Forms\Components\Textarea::make('comment')
-                            ->label('Review Comment')
+                            ->label('Comment')
                             ->nullable()
                             ->rows(4)
                             ->columnSpanFull(),
 
                         Forms\Components\Placeholder::make('images_display')
-                            ->label('Review Images')
+                            ->label('Images')
                             ->content(function (Get $get) {
                                 $imagePaths = $get('images');
                                 if (!$imagePaths) {
@@ -181,11 +181,27 @@ class ReviewResource extends Resource
         return $table
             ->columns([
 
-                TextColumn::make('user.username')->label('Username')->sortable()->searchable(),
-            TextColumn::make('rating')->sortable(),
-            TextColumn::make('comment')->limit(50)->tooltip(fn ($record) => $record->comment), 
-            TextColumn::make('created_at')->dateTime()->sortable(),
-            ImageColumn::make('images')->label('Review Images')->limit(2),
+                TextColumn::make('user.username')
+                    ->label('Username')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('rating')
+                    ->sortable(),
+                TextColumn::make('comment')
+                    ->limit(50)
+                    ->tooltip(fn($record) => $record->comment),
+                ImageColumn::make('images')
+                    ->label('Review Images')
+                    ->limit(4),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('rating')
@@ -209,12 +225,13 @@ class ReviewResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
+                    // Tables\Actions\ViewAction::make(),
                     ViewAction::make()
-                    ->modalWidth('5xl'), // Adjust the modal width (try 'xl', '3xl', 'full', or a custom width)
-                    // Tables\Actions\EditAction::make(),
+                        ->modalWidth('5xl'), // Adjust the modal width (try 'xl', '3xl', 'full', or a custom width)
+                    // // Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ]),
-                
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -237,6 +254,7 @@ class ReviewResource extends Resource
             'index' => Pages\ListReviews::route('/'),
             // 'create' => Pages\CreateReview::route('/create'),
             // 'edit' => Pages\EditReview::route('/{record}/edit'),
+            // 'view' => Pages\ViewReview::route('/{record}/view'),
         ];
     }
 }
