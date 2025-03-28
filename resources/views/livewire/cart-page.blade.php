@@ -5,9 +5,9 @@
       <div class="md:w-3/4 mb-4">
         <div>
           <div class="flex justify-between items-center mb-2 bg-white overflow-x-auto rounded-md py-2 px-4">
-            <div class="flex items-center space-x-2">
+          <div class="flex items-center space-x-2">
             <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll"
-            class="w-3 h-3 cursor-pointer  checked:bg-[#00DCE3] checked:border-[#00DCE3] checked:opacity-100">
+            class="w-3 h-3 cursor-pointer   checked:opacity-100">
             <span class="text-m font-thin ">
                 Select All</span>
             </div>

@@ -14,7 +14,7 @@
         Edit Profile Information
     </button>
 </div>
-
+<div style="margin-right: 300px;">
                 <div class="mb-3">
                     <label class="form-label">Name</label>
                     <input type="text" class="form-control" value="{{ $username }}" readonly>
@@ -56,7 +56,7 @@
                         </div>
                     @endif
                 @endif
-   
+</div>
             </div>
         @endif
 
