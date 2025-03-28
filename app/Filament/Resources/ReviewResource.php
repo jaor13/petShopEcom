@@ -48,37 +48,30 @@ class ReviewResource extends Resource
                             ->label('Email')
                             ->disabled() // Prevents editing
                             ->formatStateUsing(fn($state, $record) => $record->user->email ?? 'N/A'), // Fetch email from related user
-                    ])->columns(1),
-                ])->columnspan(2),
+                    ])->columns(2),
+                ])->columnSpanFull(),
+
 
                 Group::make()->schema([
-                    Section::make('Product Information')->schema([
-                        Forms\Components\Hidden::make('user_id')
-                            ->default(fn() => auth()->id()), // Automatically set user_id
-
+                    Section::make('Review Details')->schema([
                         Forms\Components\TextInput::make('product_name')
-                            ->label('Product Name')
-                            ->formatStateUsing(fn($state, $record) => $record?->product?->product_name ?? 'N/A')
-                            ->disabled(),
+                        ->label('Product Name')
+                        ->formatStateUsing(fn($state, $record) => $record?->product?->product_name ?? 'N/A')
+                        ->disabled()
+                        ->columnspan(4),
 
 
-                        Forms\Components\TextInput::make('variant_name')
-                            ->label('Variant')
-                            ->formatStateUsing(fn($state, $record) => $record?->variant?->name ?? 'No Variant')
-                            ->disabled(),
+                    Forms\Components\TextInput::make('variant_name')
+                        ->label('Variant')
+                        ->formatStateUsing(fn($state, $record) => $record?->variant?->name ?? 'No Variant')
+                        ->disabled()
+                        ->columnspan(1),
 
-                    ])->columns(1),
-
-                ])->columnspan(3),
-
-
-                Group::make()->schema([
-                    Section::make('Review Information')->schema([
                         Forms\Components\TextInput::make('rating')
                             ->label('Rating')
                             ->disabled() // Prevent user from changing
                             ->formatStateUsing(fn($state) => str_repeat('⭐', $state)) // Convert number to stars
-                            ->columnspan(1),
+                            ->columnSpanFull(),
 
                         Forms\Components\Textarea::make('comment')
                             ->label('Comment')
@@ -126,8 +119,8 @@ class ReviewResource extends Resource
                                     HTML;
 
                                 return new \Illuminate\Support\HtmlString($html);
-                            })
-                    ])
+                            }) ->columnSpanFull(),
+                    ])->columns(5),
                 ])->columnSpanFull(),
             ])->columns(5);
     }
