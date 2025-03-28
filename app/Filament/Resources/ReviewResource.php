@@ -46,15 +46,15 @@ class ReviewResource extends Resource
                             ->options(function () {
                                 return auth()->user()
                                     ->orders()
-                                    ->whereHas('orderItems', function ($query) {
+                                    ->whereHas('items', function ($query) {
                                         $query->whereHas('order', function ($orderQuery) {
                                             $orderQuery->where('status', 'delivered'); // Only delivered orders
                                         });
                                     })
-                                    ->with('orderItems.product') // Load product relationship
+                                    ->with('items.product') // Load product relationship
                                     ->get()
                                     ->flatMap(function ($order) {
-                                        return $order->orderItems->map(function ($item) {
+                                        return $order->items->map(function ($item) {
                                             return [
                                                 'id' => $item->product->id,
                                                 'name' => $item->product->product_name
