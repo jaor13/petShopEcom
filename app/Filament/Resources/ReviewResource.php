@@ -39,90 +39,39 @@ class ReviewResource extends Resource
             ->schema([
                 Group::make()->schema([
                     Section::make('User Information')->schema([
-                        Forms\Components\Select::make('user_id')
+                        Forms\Components\TextInput::make('username')
                             ->label('Username')
-                            ->relationship('user', 'username') // Ensure it fetches usernames from the User model
-                            ->searchable()
-                            ->preload(),
+                            ->disabled() // Prevents editing
+                            ->formatStateUsing(fn($state, $record) => $record->user->username ?? 'N/A'), // Fetch email from related user
 
                         Forms\Components\TextInput::make('email')
                             ->label('Email')
                             ->disabled() // Prevents editing
                             ->formatStateUsing(fn($state, $record) => $record->user->email ?? 'N/A'), // Fetch email from related user
-                    ])->columns(1),
-                ])->columnspan(2),
-
-                Group::make()->schema([
-                    Section::make('Product Information')->schema([
-                        Forms\Components\Hidden::make('user_id')
-                            ->default(fn() => auth()->id()), // Automatically set user_id
-
-
-                        Forms\Components\Select::make('product_id')
-                            ->label('Product Name')
-                            ->relationship('product', 'product_name')
-                            ->options(function () {
-                                return auth()->user()
-                                    ->orders()
-                                    ->whereHas('items', function ($query) {
-                                        $query->whereHas('order', function ($orderQuery) {
-                                            $orderQuery->where('status', 'delivered'); // Only delivered orders
-                                        });
-                                    })
-                                    ->with('items.product') // Load product relationship
-                                    ->get()
-                                    ->flatMap(function ($order) {
-                                        return $order->items->map(function ($item) {
-                                            return [
-                                                'id' => $item->product->id,
-                                                'name' => $item->product->product_name
-                                            ];
-                                        });
-                                    })
-                                    ->pluck('name', 'id'); // Correct pluck usage
-                            })
-
-                            ->searchable(),
-
-                        Forms\Components\Select::make('variant_id')
-                            ->label('Variant')
-                            ->options(function (callable $get) {
-                                $productId = $get('product_id'); // Get selected product ID
-                                if (!$productId)
-                                    return [];
-
-                                $user = auth()->user();
-
-                                return \App\Models\OrderItem::whereHas('order', function ($query) use ($user) {
-                                    $query->where('user_id', $user->id)
-                                        ->where('status', 'completed'); // Only delivered orders
-                                })
-                                    ->where('product_id', $productId)
-                                    ->whereNotNull('variant_id') // Ensure the product has a variant
-                                    ->with('variant') // Load the variant relationship
-                                    ->get()
-                                    ->mapWithKeys(fn($item) => [$item->variant_id => $item->variant->name]) // Correct display mapping
-                                    ->toArray();
-                            })
-                            ->reactive() // Updates when product_id changes
-                            ->afterStateUpdated(fn(callable $set) => $set('variant_id', null)) // Reset on change
-                            ->nullable() // Allow empty if no variant exists
-                            ->searchable()
-                            ->preload() // Load options immediately
-                            ->native(false), // Use Filament’s custom dropdown
-
-                    ])->columns(1),
-
-                ])->columnspan(3),
+                    ])->columns(2),
+                ])->columnSpanFull(),
 
 
                 Group::make()->schema([
-                    Section::make('Review Information')->schema([
+                    Section::make('Review Details')->schema([
+                        Forms\Components\TextInput::make('product_name')
+                        ->label('Product Name')
+                        ->formatStateUsing(fn($state, $record) => $record?->product?->product_name ?? 'N/A')
+                        ->disabled()
+                        ->columnspan(4),
+
+
+                    Forms\Components\TextInput::make('variant_name')
+                        ->label('Variant')
+                        ->formatStateUsing(fn($state, $record) => $record?->variant?->name ?? 'No Variant')
+                        ->disabled()
+                        ->columnspan(1),
+
                         Forms\Components\TextInput::make('rating')
                             ->label('Rating')
                             ->disabled() // Prevent user from changing
                             ->formatStateUsing(fn($state) => str_repeat('⭐', $state)) // Convert number to stars
-                            ->columnspan(1),
+                            ->columnSpanFull(),
 
                         Forms\Components\Textarea::make('comment')
                             ->label('Comment')
@@ -170,8 +119,8 @@ class ReviewResource extends Resource
                                     HTML;
 
                                 return new \Illuminate\Support\HtmlString($html);
-                            })
-                    ])
+                            }) ->columnSpanFull(),
+                    ])->columns(5),
                 ])->columnSpanFull(),
             ])->columns(5);
     }
