@@ -1,3 +1,4 @@
+
 @auth
     <div id="chat-button-container" style="position: fixed; z-index: 100; bottom: 1.5%; right: 5%;">
         <button id="chat-button"
