@@ -78,7 +78,6 @@
                                     </li>
                                 </ul>
                             </div>
-
                         </div>
 
                         <!-- Divider -->
@@ -113,11 +112,10 @@
                                     <div class="relative bg-white rounded-lg p-4 shadow-lg max-w-[90%] max-h-[90%]">
                                         <button wire:click="closeImageModal"
                                             class="absolute top-2 right-2 text-gray-600 text-2xl">&times;</button>
-                                        <img src="{{ $imageUrl }}" class="max-w-full max-h-screen rounded-lg">
+                                        <img src="{{ $imageUrl }}" class="max-w-full max-h-[60vh] rounded-lg object-contain">
                                     </div>
                                 </div>
                             @endif
-
 
                             <!-- Date Info -->
                             <p class="text-muted mt-2" style="font-size: 12px;">
@@ -133,11 +131,6 @@
                     <p class="text-center mt-4">You haven't left any reviews yet.</p>
                 @endforelse
             @endif
-
-
-
-
-
         </div>
     </div>
 
@@ -167,14 +160,15 @@
 
                         <div class="mb-3">
                             <label for="comment" class="form-label">Comment</label>
-                            <textarea wire:model="comment" class="form-control" rows="3"></textarea>
+                            <textarea wire:model="comment" wire:key="comment-field-{{ $editingReviewId }}"
+                                class="form-control" rows="3"></textarea>
                         </div>
 
                         <!-- Image Upload Field -->
                         <div class="mb-3">
                             <label class="form-label">Upload Images</label>
-                            <input type="file" class="form-control" wire:model="images" multiple>
-                            @error('images.*') <span class="text-danger">{{ $message }}</span> @enderror
+                            <input type="file" class="form-control" wire:model="newImages" multiple>
+                            @error('newImages.*') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
                         <!-- Image Preview-->
@@ -182,15 +176,13 @@
                             <div class="d-flex flex-wrap mt-2">
                                 @foreach ($images as $index => $image)
                                     <div class="position-relative me-2 mb-2" style="width: 100px; height: 100px;">
-                                        @if ($state === 'new')
+                                        @if (is_object($image) && method_exists($image, 'temporaryUrl'))
                                             <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail w-100 h-100"
                                                 style="object-fit: cover;">
                                         @else
                                             <img src="{{ asset('storage/' . $image) }}" class="img-thumbnail w-100 h-100"
                                                 style="object-fit: cover;">
                                         @endif
-
-
 
                                         <!-- Delete Button Inside the Image -->
                                         <button type="button" class="btn-close position-absolute top-0 end-0 p-1"
@@ -201,7 +193,6 @@
                                 @endforeach
                             </div>
                         @endif
-
 
                         <button type="submit" class="btn btn-success">
                             {{ $editingReviewId ? 'Update Review' : 'Submit Review' }}
@@ -216,8 +207,6 @@
 
 <script>
     document.addEventListener('livewire:load', function () {
-
-
         Livewire.on('hide-review-modal', () => {
             var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
             if (modal) modal.hide();

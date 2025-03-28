@@ -19,7 +19,9 @@ class Reviews extends Component
     public $orderItem;
     public $rating;
     public $comment;
-    public $images = [];
+    public $images = []; // Store images
+    public $newImages = []; // Temporarily hold new uploads
+
     public $reviews = [];
     public $selectedOrderItemId = null;
     public $activeTab = 'to_rate';
@@ -238,7 +240,13 @@ class Reviews extends Component
             ]);
         }
     }
-
+    public function updatedNewImages()
+    {
+        // Ensure new images are merged with existing ones
+        $this->images = array_merge($this->images, $this->newImages);
+        $this->newImages = []; // Reset temporary newImages to avoid duplication
+    }
+    
     public function removeImage($index)
     {
         if (isset($this->images[$index])) {

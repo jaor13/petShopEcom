@@ -230,7 +230,7 @@
                     <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <div class="relative bg-white rounded-lg p-3 shadow-lg border border-gray-300 max-w-[90%] max-h-[90%]"> 
                             <button wire:click="closeImageModal" class="absolute top-0 right-1 text-gray-600 text-2xl">&times;</button>
-                            <img src="{{ $imageUrl }}" class="max-w-full max-h-screen rounded-lg">
+                            <img src="{{ $imageUrl }}" class="max-w-full max-h-[60vh] rounded-lg object-contain">                        
                         </div>
                     </div>
                     @endif
