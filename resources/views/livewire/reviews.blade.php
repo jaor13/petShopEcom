@@ -167,8 +167,8 @@
                         <!-- Image Upload Field -->
                         <div class="mb-3">
                             <label class="form-label">Upload Images</label>
-                            <input type="file" class="form-control" wire:model="images" multiple>
-                            @error('images.*') <span class="text-danger">{{ $message }}</span> @enderror
+                            <input type="file" class="form-control" wire:model="newImages" multiple>
+                            @error('newImages.*') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
                         <!-- Image Preview-->
@@ -176,7 +176,7 @@
                             <div class="d-flex flex-wrap mt-2">
                                 @foreach ($images as $index => $image)
                                     <div class="position-relative me-2 mb-2" style="width: 100px; height: 100px;">
-                                        @if ($state === 'new')
+                                        @if (is_object($image) && method_exists($image, 'temporaryUrl'))
                                             <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail w-100 h-100"
                                                 style="object-fit: cover;">
                                         @else
@@ -193,7 +193,6 @@
                                 @endforeach
                             </div>
                         @endif
-
 
                         <button type="submit" class="btn btn-success">
                             {{ $editingReviewId ? 'Update Review' : 'Submit Review' }}
