@@ -210,7 +210,7 @@ class ReviewResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     ViewAction::make()
-                    ->modalWidth('6xl'), // Adjust the modal width (try 'xl', '3xl', 'full', or a custom width)
+                    ->modalWidth('5xl'), // Adjust the modal width (try 'xl', '3xl', 'full', or a custom width)
                     // Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ]),
