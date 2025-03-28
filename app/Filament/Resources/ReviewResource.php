@@ -126,8 +126,6 @@ class ReviewResource extends Resource
                             ->image() // Restrict to image files
                             ->nullable()
                             ->columnSpanFull(),
-
-
                     ])
                 ])
             ])->columns(1);
@@ -223,7 +221,7 @@ class ReviewResource extends Resource
     {
         return [
             'index' => Pages\ListReviews::route('/'),
-            'create' => Pages\CreateReview::route('/create'),
+            // 'create' => Pages\CreateReview::route('/create'),
             // 'edit' => Pages\EditReview::route('/{record}/edit'),
             'view' => Pages\ViewReview::route('/{record}/view'),
         ];
