@@ -17,6 +17,7 @@ class SendMessage extends Component
 
     public function updateSendMessage(Conversation $conversation, User $receiver)
     {
+       // dd($conversation,$receiver);
         $this->selectedConversation = $conversation;
         $this->receiverInstance = $receiver;
     }
@@ -24,8 +25,8 @@ class SendMessage extends Component
     public function sendMessage()
     {
 
-        if (empty($this->body)) {
-            return;
+        if ($this->body == null) {
+            return null;
         }
 
         $createdMessage = Message::create([
@@ -35,7 +36,7 @@ class SendMessage extends Component
             'body' => $this->body,
         ]);
 
-        $this->selectedConversation->last_time_message = $createdMessage->created_at;
+        $this->selectedConversation->last_time_message =$createdMessage->created_at;
         $this->selectedConversation->save();
 
         // Reset the input field
@@ -49,6 +50,7 @@ class SendMessage extends Component
         $this->dispatch('refresh')->to('chat.chat-list');
 
         
+       //dd($this->body);
 
         
     }

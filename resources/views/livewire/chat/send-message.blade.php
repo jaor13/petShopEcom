@@ -8,7 +8,7 @@
                     <button type="button" class="image-button">
                         <i class="fas fa-image"></i>
                     </button>
-                    <input wire:model.defer="body" placeholder="Write message" type="text" class="control">
+                    <input wire:model="body" type="text" class="control"  placeholder="Write message">
                     <button type="submit" class="submit">Send</button>
                 </div>
             </div>

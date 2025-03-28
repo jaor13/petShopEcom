@@ -34,10 +34,6 @@ class ChatList extends Component
 
         $this->dispatch('updateSendMessage', $this->selectedConversation, $receiverInstance)
             ->to('chat.send-message');
-
-
-            $this->dispatch('updateSendMessage', $this->selectedConversation, $this->receiverInstance)
-            ->to('chat.send-message');
        
         
         // dd($selectedConversation, $receiverInstance);
