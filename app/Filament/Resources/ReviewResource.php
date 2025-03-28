@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
@@ -100,17 +101,12 @@ class ReviewResource extends Resource
 
                 Group::make()->schema([
                     Section::make('Ratings and Reviews')->schema([
-                        Forms\Components\Radio::make('rating')
+                        Forms\Components\TextInput::make('rating')
                             ->label('Rating')
-                            ->options([
-                                5 => '⭐⭐⭐⭐⭐',
-                                4 => '⭐⭐⭐⭐',
-                                3 => '⭐⭐⭐',
-                                2 => '⭐⭐',
-                                1 => '⭐',
-                            ])
-                            ->required()
-                            ->inline(),
+                            ->disabled() // Prevent user from changing
+                            ->formatStateUsing(fn($state) => str_repeat('⭐', $state)) // Convert number to stars
+                            ->columnSpanFull(),
+
 
 
                         Forms\Components\Textarea::make('comment')
@@ -119,17 +115,50 @@ class ReviewResource extends Resource
                             ->rows(4)
                             ->columnSpanFull(),
 
-                        Forms\Components\FileUpload::make('images')
+                        Forms\Components\Placeholder::make('images_display')
                             ->label('Review Images')
-                            ->multiple() // Allows multiple file uploads
-                            ->directory('reviews') // Store in 'storage/app/public/reviews'
-                            ->image() // Restrict to image files
-                            ->nullable()
-                            ->columnSpanFull(),
+                            ->content(function (Get $get) {
+                                $imagePaths = $get('images');
+                                if (!$imagePaths) {
+                                    return 'No images available';
+                                }
+
+                                $imagePaths = is_array($imagePaths) ? $imagePaths : json_decode($imagePaths, true);
+
+                                $html = <<<HTML
+                                    <div x-data="{ open: false, imageUrl: '' }">
+                                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                    HTML;
+
+                                foreach ($imagePaths as $image) {
+                                    $imageUrl = asset('storage/' . ltrim($image, '/'));
+                                    $html .= <<<HTML
+                                            <img src="$imageUrl" 
+                                                alt="Review Image" 
+                                                @click="imageUrl='$imageUrl'; open=true" 
+                                                style="width: 250px; height: 250px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd; margin-bottom: 8px; cursor: pointer;">
+                                    HTML;
+                                }
+
+                                $html .= <<<HTML
+                                        </div>
+                                        <!-- Modal -->
+                                        <div x-show="open" class="fixed inset-0 flex items-center justify-center z-50">
+                                        <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur" @click="open=false"></div>
+                            
+                                        <div class="relative bg-white rounded-lg p-4 shadow-lg max-w-[90%] max-h-[90%] z-10">
+                                        <button @click="open=false"  class="absolute top-0 right-0 text-gray-600 text-2xl z-20">&times;</button>
+                                                <img :src="imageUrl" class="max-w-full max-h-screen rounded-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    HTML;
+
+                                return new \Illuminate\Support\HtmlString($html);
+                            })
                     ])
                 ])
             ])->columns(1);
-
     }
 
     public static function table(Table $table): Table
@@ -187,7 +216,7 @@ class ReviewResource extends Resource
                     }),
                 Filter::make('flagged_reviews')
                     ->label('Flagged Reviews')
-                    ->query(fn (Builder $query) => $query->where(function ($query) {
+                    ->query(fn(Builder $query) => $query->where(function ($query) {
                         $words = Config::get('review_filter.inappropriate_words', []); // Fetch words from config
                         foreach ($words as $word) {
                             $query->orWhere('comment', 'LIKE', "%$word%");
