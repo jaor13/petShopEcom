@@ -38,6 +38,8 @@ class SendMessage extends Component
 
         $this->selectedConversation->last_time_message =$createdMessage->created_at;
         $this->selectedConversation->save();
+        $this->selectedConversation->update(['updated_at' => now()]);
+
 
         // Reset the input field
         $this->body = '';

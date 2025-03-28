@@ -75,6 +75,22 @@ class ChatList extends Component
             ->get();
     }
 
+    public function getConversations()
+{
+    return Conversation::with([
+        'latestMessage' => function ($query) {
+            $query->latest();
+        },
+        'messages'
+    ])
+        ->where(function ($query) {
+            $query->where('sender_id', $this->auth_id)
+                ->orWhere('receiver_id', $this->auth_id);
+        })
+        ->orderByDesc('updated_at') // Sort by updated_at
+        ->get();
+}
+
 
 
     public function render()
