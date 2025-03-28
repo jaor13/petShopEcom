@@ -112,7 +112,7 @@
                                     <div class="relative bg-white rounded-lg p-4 shadow-lg max-w-[90%] max-h-[90%]">
                                         <button wire:click="closeImageModal"
                                             class="absolute top-2 right-2 text-gray-600 text-2xl">&times;</button>
-                                        <img src="{{ $imageUrl }}" class="max-w-full max-h-screen rounded-lg">
+                                        <img src="{{ $imageUrl }}" class="max-w-full max-h-[60vh] rounded-lg object-contain">
                                     </div>
                                 </div>
                             @endif
