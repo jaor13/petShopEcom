@@ -12,11 +12,14 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Config;
+use Filament\Tables\Actions\ViewAction;
 
 class ReviewResource extends Resource
 {
@@ -34,7 +37,21 @@ class ReviewResource extends Resource
     {
         return $form
             ->schema([
-
+                Group::make()->schema([
+                    Section::make('User Information')->schema([
+                        Forms\Components\Select::make('user_id')
+                            ->label('Username')
+                            ->relationship('user', 'username') // Ensure it fetches usernames from the User model
+                            ->searchable()
+                            ->preload(),
+                
+                        Forms\Components\TextInput::make('email')
+                            ->label('Email')
+                            ->disabled() // Prevents editing
+                            ->formatStateUsing(fn ($state, $record) => $record->user->email ?? 'N/A'), // Fetch email from related user
+                    ])->columns(1),
+                ])->columnspan(2),
+                
                 Group::make()->schema([
                     Section::make('Product Information')->schema([
                         Forms\Components\Hidden::make('user_id')
@@ -94,9 +111,9 @@ class ReviewResource extends Resource
                             ->preload() // Load options immediately
                             ->native(false), // Use Filament’s custom dropdown
 
-                    ])->columns(2),
+                    ])->columns(1),
 
-                ]),
+                ])->columnspan(3),
 
 
                 Group::make()->schema([
@@ -105,9 +122,7 @@ class ReviewResource extends Resource
                             ->label('Rating')
                             ->disabled() // Prevent user from changing
                             ->formatStateUsing(fn($state) => str_repeat('⭐', $state)) // Convert number to stars
-                            ->columnSpanFull(),
-
-
+                            ->columnspan(1),
 
                         Forms\Components\Textarea::make('comment')
                             ->label('Review Comment')
@@ -136,7 +151,7 @@ class ReviewResource extends Resource
                                             <img src="$imageUrl" 
                                                 alt="Review Image" 
                                                 @click="imageUrl='$imageUrl'; open=true" 
-                                                style="width: 250px; height: 250px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd; margin-bottom: 8px; cursor: pointer;">
+                                                style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd; margin-bottom: 8px; cursor: pointer;">
                                     HTML;
                                 }
 
@@ -157,8 +172,8 @@ class ReviewResource extends Resource
                                 return new \Illuminate\Support\HtmlString($html);
                             })
                     ])
-                ])
-            ])->columns(1);
+                ])->columnSpanFull(),
+            ])->columns(5);
     }
 
     public static function table(Table $table): Table
@@ -166,43 +181,11 @@ class ReviewResource extends Resource
         return $table
             ->columns([
 
-                Tables\Columns\TextColumn::make('user.username') // Assuming a relationship with User
-                    ->label('User')
-                    ->sortable()
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('product.product_name') // Assuming a relationship with Product
-                    ->label('Product')
-                    ->sortable()
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('variant.name') // Assuming a relationship with Variant
-                    ->label('Variant')
-                    ->sortable()
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('rating')
-                    ->label('Rating')
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('comment')
-                    ->label('Comment')
-                    ->limit(50) // Show only first 50 characters
-                    ->sortable()
-                    ->searchable(),
-
-                Tables\Columns\ImageColumn::make('images')
-                    ->label('Review Images')
-                    ->limit(2),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('user.username')->label('Username')->sortable()->searchable(),
+            TextColumn::make('rating')->sortable(),
+            TextColumn::make('comment')->limit(50)->tooltip(fn ($record) => $record->comment), 
+            TextColumn::make('created_at')->dateTime()->sortable(),
+            ImageColumn::make('images')->label('Review Images')->limit(2),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('rating')
@@ -226,10 +209,12 @@ class ReviewResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make(),
+                    ViewAction::make()
+                    ->modalWidth('5xl'), // Adjust the modal width (try 'xl', '3xl', 'full', or a custom width)
                     // Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ]),
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -252,7 +237,6 @@ class ReviewResource extends Resource
             'index' => Pages\ListReviews::route('/'),
             // 'create' => Pages\CreateReview::route('/create'),
             // 'edit' => Pages\EditReview::route('/{record}/edit'),
-            'view' => Pages\ViewReview::route('/{record}/view'),
         ];
     }
 }
