@@ -181,18 +181,35 @@ class ReviewResource extends Resource
         return $table
             ->columns([
 
-                TextColumn::make('user.username')
-                    ->label('Username')
+                Tables\Columns\TextColumn::make('user.username') // Assuming a relationship with User
+                    ->label('User')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('rating')
+
+                Tables\Columns\TextColumn::make('product.product_name') // Assuming a relationship with Product
+                    ->label('Product')
+                    ->limit(30)
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('variant.name') // Assuming a relationship with Variant
+                    ->label('Variant')
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('rating')
+                    ->label('Rating')
                     ->sortable(),
-                TextColumn::make('comment')
-                    ->limit(50)
-                    ->tooltip(fn($record) => $record->comment),
-                ImageColumn::make('images')
+
+                Tables\Columns\TextColumn::make('comment')
+                    ->label('Comment')
+                    ->limit(30) // Show only first 30 characters
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\ImageColumn::make('images')
                     ->label('Review Images')
-                    ->limit(4),
+                    ->limit(2),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
