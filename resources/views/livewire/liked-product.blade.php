@@ -48,10 +48,10 @@
         @endif
 
 
-        <div class="row row-cols-1 row-cols-md-4 g-3 mb-6">
+        <div class="row row-cols-1 row-cols-md-3 mx-auto g-3">
             @foreach ($products as $product)
             <div class="col" wire:key="{{ $product->id }}">
-                <div class="card h-90 p-2 m-2" style="position: relative;">
+                <div class="card h-80 p-2 m-2 d-flex flex-column justify-content-between" style="position: relative;">
 
                     @if($editMode)
                         <input type="checkbox" wire:model="selectedProducts" value="{{ $product->id }}"
