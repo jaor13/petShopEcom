@@ -78,7 +78,6 @@
                                     </li>
                                 </ul>
                             </div>
-
                         </div>
 
                         <!-- Divider -->
@@ -118,7 +117,6 @@
                                 </div>
                             @endif
 
-
                             <!-- Date Info -->
                             <p class="text-muted mt-2" style="font-size: 12px;">
                                 @if ($review->created_at != $review->updated_at)
@@ -133,11 +131,6 @@
                     <p class="text-center mt-4">You haven't left any reviews yet.</p>
                 @endforelse
             @endif
-
-
-
-
-
         </div>
     </div>
 
@@ -167,7 +160,8 @@
 
                         <div class="mb-3">
                             <label for="comment" class="form-label">Comment</label>
-                            <textarea wire:model="comment" class="form-control" rows="3"></textarea>
+                            <textarea wire:model="comment" wire:key="comment-field-{{ $editingReviewId }}"
+                                class="form-control" rows="3"></textarea>
                         </div>
 
                         <!-- Image Upload Field -->
@@ -189,8 +183,6 @@
                                             <img src="{{ asset('storage/' . $image) }}" class="img-thumbnail w-100 h-100"
                                                 style="object-fit: cover;">
                                         @endif
-
-
 
                                         <!-- Delete Button Inside the Image -->
                                         <button type="button" class="btn-close position-absolute top-0 end-0 p-1"
@@ -216,8 +208,6 @@
 
 <script>
     document.addEventListener('livewire:load', function () {
-
-
         Livewire.on('hide-review-modal', () => {
             var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
             if (modal) modal.hide();
