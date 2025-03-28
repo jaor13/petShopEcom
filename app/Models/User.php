@@ -8,11 +8,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Namu\WireChat\Traits\Chatable;
+use Illuminate\Support\Collection;
  
 class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasName{
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    use Chatable;
 
     /**
      * The attributes that are mass assignable.
@@ -75,5 +78,32 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
     public function getFilamentName(): string
     {
         return "{$this->fname} {$this->lname}";
+    }
+
+    public function getCoverUrlAttribute(): ?string
+    {
+      return $this->profile_picture ?? null;
+    }
+
+    public function getDisplayNameAttribute(): ?string
+    {
+      return $this->username ?? 'user';
+    }
+
+    public function searchChatables(string $query): ?Collection
+    {
+     $searchableFields = ['username'];
+     return User::where(function ($queryBuilder) use ($searchableFields, $query) {
+        foreach ($searchableFields as $field) {
+                $queryBuilder->orWhere($field, 'LIKE', '%'.$query.'%');
+        }
+      })
+        ->limit(20)
+        ->get();
+    }
+
+    public function canCreateChats(): bool
+    {
+     return $this->hasVerifiedEmail();
     }
 }
