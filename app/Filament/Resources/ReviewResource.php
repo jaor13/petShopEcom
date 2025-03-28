@@ -207,13 +207,13 @@ class ReviewResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('rating')
                     ->label('Rating')
-                    ->options(function () {
-                        return \App\Models\Review::query()
-                            ->distinct()
-                            ->pluck('rating') // Get unique rating values from DB
-                            ->mapWithKeys(fn($rating) => [$rating => "$rating Stars"]) // Map to options
-                            ->toArray();
-                    }),
+                    ->options([
+                        1 => '⭐ 1 Star',
+                        2 => '⭐⭐ 2 Stars',
+                        3 => '⭐⭐⭐ 3 Stars',
+                        4 => '⭐⭐⭐⭐ 4 Stars',
+                        5 => '⭐⭐⭐⭐⭐ 5 Stars',
+                    ]),
                 Filter::make('flagged_reviews')
                     ->label('Flagged Reviews')
                     ->query(fn(Builder $query) => $query->where(function ($query) {
