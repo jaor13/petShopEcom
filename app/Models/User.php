@@ -8,11 +8,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use JaOcero\FilaChat\Traits\HasFilaChat;
  
 class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasName{
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    use HasFilaChat;
 
     /**
      * The attributes that are mass assignable.

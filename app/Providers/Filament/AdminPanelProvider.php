@@ -20,6 +20,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Pages\AdminDashboard; // Import your custom page
+use JaOcero\FilaChat\FilaChatPlugin;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -56,6 +57,11 @@ class AdminPanelProvider extends PanelProvider
                 OrderStats::class,
                 // Widgets\FilamentInfoWidget::class,
             ])
+            ->plugins([
+                FilaChatPlugin::make()
+            ])
+            ->theme(asset('css/filament/admin/theme.css'))
+            
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
