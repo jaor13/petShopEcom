@@ -47,6 +47,7 @@ class ReviewResource extends Resource
 
                         Forms\Components\TextInput::make('email')
                             ->label('Email')
+                            ->searchable()
                             ->disabled() // Prevents editing
                             ->formatStateUsing(fn($state, $record) => $record->user->email ?? 'N/A'), // Fetch email from related user
                     ])->columns(1),
@@ -60,6 +61,7 @@ class ReviewResource extends Resource
 
                         Forms\Components\Select::make('product_id')
                             ->label('Product Name')
+                            ->searchable()
                             ->relationship('product', 'product_name')
                             ->options(function () {
                                 return auth()->user()
@@ -80,9 +82,7 @@ class ReviewResource extends Resource
                                         });
                                     })
                                     ->pluck('name', 'id'); // Correct pluck usage
-                            })
-
-                            ->searchable(),
+                            }),
 
                         Forms\Components\Select::make('variant_id')
                             ->label('Variant')
@@ -128,6 +128,7 @@ class ReviewResource extends Resource
                             ->label('Comment')
                             ->nullable()
                             ->rows(4)
+                            ->searchable()
                             ->columnSpanFull(),
 
                         Forms\Components\Placeholder::make('images_display')
