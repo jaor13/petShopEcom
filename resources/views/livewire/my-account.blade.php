@@ -4,7 +4,7 @@
         @if (!$isEditing)
         
             <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
-                <h4 class="mb-3">Personal Information</h4>
+                <h4 class="mb-3 text-[#4F4F4F]">Personal Information</h4>
                 <div class="mb-3  inline-flex lign-items-center">
     <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('assets/images/default-1.gif') }}"
         alt="Profile Photo" class="profile-img rounded-circle mb-2"

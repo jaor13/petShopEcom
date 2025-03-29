@@ -36,16 +36,12 @@
       <div id="carouselExampleInterval" class="carousel slide  " data-bs-ride="carousel">
         <!-- Carousel Indicators -->
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3"
-            aria-label="Slide 4"></button>
-          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4"
-            aria-label="Slide 5"></button>
+        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0"  aria-current="true" class="active" aria-label="Slide 1" style="width: 10px; height: 10px; border-radius: 50%; background-color: white; margin: 5px;"></button>
+    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2" style="width: 10px; height: 10px; border-radius: 50%; background-color: white; margin: 5px;"></button>
+    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3" style="width: 10px; height: 10px; border-radius: 50%; background-color: white; margin: 5px;"></button>
+    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4" style="width: 10px; height: 10px; border-radius: 50%; background-color: white; margin: 5px;"></button>
+    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5" style="width: 10px; height: 10px; border-radius: 50%; background-color: white; margin: 5px;"></button>
+ 
         </div>
 
         <div class="carousel-inner " style="border-radius: 20px;">
