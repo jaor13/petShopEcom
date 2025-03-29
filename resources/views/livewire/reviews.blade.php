@@ -25,7 +25,7 @@
                             <img src="{{ $item->display_image }}" class="img-thumbnail rounded-lg me-3"
                                 style="width: 80px; height: 80px; background-color: #E7FAFF; border: none;">
                             <div class="flex-grow-1">
-                                <p><strong>{{ $item->product->product_name ?? 'Unknown Product' }}</strong></p>
+                                <p><strong style=" color: #4F4F4F;">{{ $item->product->product_name ?? 'Unknown Product' }}</strong></p>
                                 <p>Variation: {{ $item->variant->name ?? 'N/A' }}</p>
                             </div>
                             <button wire:click="selectOrderItem({{ $item->id }})" class="btn"

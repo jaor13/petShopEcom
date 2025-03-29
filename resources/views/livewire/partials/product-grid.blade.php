@@ -34,7 +34,7 @@
                            
 
                     <!-- Product Name Section -->
-                    <h3 class="card-title fw-bold text-truncate mt-2 product-name"  style="margin-left: 4px; font-size: 1.5em; color: rgb(64, 61, 61);">
+                    <h3 class="card-title fw-bold text-truncate mt-2 product-name"  style="margin-left: 4px; font-size: 1.5em; color: #4F4F4F;">
                         {{ $product->product_name }}
                     </h3>
 

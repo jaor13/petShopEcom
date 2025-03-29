@@ -79,7 +79,7 @@
         <div class="w-full px-4 md:w-1/2">
           <div class="lg:pl-5">
             <div class="mb-8">
-              <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-[#3E3939] md:text-4xl">
+              <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-[#4F4F4F] md:text-4xl">
                 {{ $product->product_name }}
               </h2>
 
