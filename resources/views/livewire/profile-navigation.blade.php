@@ -10,7 +10,7 @@
     <h4 class="section-title" style="color: #4F4F4F;">Ratings and Reviews</h4>
     </div>
     <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}">
-    <h4 class="section-title" style="color: #4F4F4F;">Liked Products</h4>
+    <h4 class="section-title" style="color: #4F4F4F;">My Likes</h4>
     </div>
         <div class="position-sticky bg-white">
             @livewire('profile-settings')
@@ -44,18 +44,17 @@
         </div>
     </nav>
 
-    <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4  p-4 ">
-        <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}"> 
-            <p class="section-description">Update your account's profile information and email address.</p>
+    <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4 p-4 ">
+        <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}" style="padding-top: 10px;"> 
             @livewire('my-account')
         </div>
-        <div class="{{ $activeSection === 'my-purchases' ? '' : 'd-none' }}">
+        <div class="{{ $activeSection === 'my-purchases' ? '' : 'd-none' }}  " >
             @livewire('orders')
         </div>
-        <div class="{{ $activeSection === 'ratings-reviews' ? '' : 'd-none' }}">
+        <div class="{{ $activeSection === 'ratings-reviews' ? '' : 'd-none' }}  ">
             @livewire('reviews')
         </div>
-        <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}">
+        <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}" style="padding-top: 17px;"> 
             @livewire('liked-product')
         </div>
     </main>
