@@ -5,7 +5,7 @@
 
             <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
                 <h4 class="mb-3 text-[#4F4F4F]"
-                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 111.8c%; margin-left: -49px;">
+                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 118%; margin-left: -49px;">
                     <p class="personal">Personal Information</p>
                 </h4>
                 <div class="mb-3 inline-flex align-items-center">
