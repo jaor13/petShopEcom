@@ -1,43 +1,43 @@
 <div class="container mt-3 p-0">
     
-    <ul class="d-flex mb-2 bg-white  h-10 p-0 pt-2 p-0">
-        <li class="nav-item flex-fill text-center">
-            <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('all')" href="?status=all">
-                <i class="fas fa-list-alt me-2"></i> All Orders
-            </a>
-        </li>
-        <li class="nav-item flex-fill text-center">
-            <a class="custom-link py-2 {{ $status === 'to_ship' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('to_ship')" href="?status=to_ship">
-                <i class="fas fa-shipping-fast me-2"></i> To Ship
-            </a>
-        </li>
-        <li class="nav-item flex-fill text-center">
-            <a class="custom-link py-2 {{ $status === 'to_receive' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('to_receive')" href="?status=to_receive">
-                <i class="fas fa-box-open me-2"></i> To Receive
-            </a>
-        </li>
-        <li class="nav-item flex-fill text-center">
-            <a class="custom-link py-2 {{ $status === 'delivered' ? 'active' : '' }}" 
-                wire:click.prevent="filterOrders('delivered')" href="?status=delivered">
-                <i class="fas fa-check-square me-2"></i> Delivered
-            </a>
-        </li>
-        <li class="nav-item flex-fill text-center">
-            <a class="custom-link py-2 {{ $status === 'completed' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('completed')" href="?status=completed">
-                <i class="fas fa-check-circle me-2"></i> Completed
-            </a>
-        </li>
-        <li class="nav-item flex-fill text-center">
-            <a class="custom-link py-2 {{ $status === 'cancelled' ? 'active' : '' }}" 
-               wire:click.prevent="filterOrders('cancelled')" href="?status=cancelled">
-               <i class="fas fa-times-circle me-2"></i> Cancelled
-            </a>
-        </li>
-    </ul>
+<ul class="d-flex mb-2 bg-white h-10 p-0 pt-2 p-0">
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('all')" href="?status=all" style="font-weight: normal;">
+            <i class="fas fa-list-alt me-2"></i> All Orders
+        </a>
+    </li>
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'to_ship' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('to_ship')" href="?status=to_ship" style="font-weight: normal;">
+            <i class="fas fa-shipping-fast me-2"></i> To Ship
+        </a>
+    </li>
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'to_receive' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('to_receive')" href="?status=to_receive" style="font-weight: normal;">
+            <i class="fas fa-box-open me-2"></i> To Receive
+        </a>
+    </li>
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'delivered' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('delivered')" href="?status=delivered" style="font-weight: normal;">
+            <i class="fas fa-check-square me-2"></i> Delivered
+        </a>
+    </li>
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'completed' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('completed')" href="?status=completed" style="font-weight: normal;">
+            <i class="fas fa-check-circle me-2"></i> Completed
+        </a>
+    </li>
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $status === 'cancelled' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('cancelled')" href="?status=cancelled" style="font-weight: normal;">
+            <i class="fas fa-times-circle me-2"></i> Cancelled
+        </a>
+    </li>
+</ul>
 
     <div class="w-100 p-0">
         @if ($selectedOrderId)
@@ -66,7 +66,7 @@
 
                     @foreach ($order['items'] as $item)
                         <div class="d-flex align-items-center mb-2">
-                            <div class="border rounded p-1">
+                            <div class="border  rounded p-1">
                                 <img src="{{ $item['image'] ? url('storage', $item['image']) : '' }}" alt="Product Image" class="img-thumbnail rounded-lg" style="width: 100px; background-color: #E7FAFF; border: none;">
                             </div>
                             <div class="ms-3 flex-grow-1">

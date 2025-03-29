@@ -45,7 +45,7 @@
     </nav>
 
     <main class="col-md-8 ms-sm-auto col-lg-9 p-0" >
-        <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}" style="margin-top: 40px;" > 
+        <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}" style="margin-top: 41px;" > 
             @livewire('my-account')
         </div>
         <div class="{{ $activeSection === 'my-purchases' ? '' : 'd-none' }}  "  style="margin-top: 49px;">

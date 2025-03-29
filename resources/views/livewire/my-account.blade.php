@@ -8,17 +8,18 @@
                     style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 111%; margin-left: -48px;">
                     <p class="personal">Personal Information</p>
                 </h4>
-                <div class="mb-3 inline-flex align-items-center">
+                <div class ="row mb-3">
+                <div class=" inline-flex align-items-center">
                     <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('assets/images/default-1.gif') }}"
                         alt="Profile Photo" class="profile-img rounded-circle mb-2"
                         style="width: 100px; height: 100px; cursor: pointer;">
 
-                    <button class="btn ms-3" wire:click="enableEditing" style="color: #00DCE3;">
+                    <button class="btn ms-3 " wire:click="enableEditing" style="color: #00DCE3; ">
                         <i class="fa-solid fa-pen-to-square me-1" style="color: #00DCE3; font-size: 20px;"></i>
                         Edit Profile Information
                     </button>
                 </div>
-
+                </div>
 
                 <div style="margin-bottom: 50px;">
                     <div class="row mb-3">

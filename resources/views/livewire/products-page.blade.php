@@ -20,9 +20,9 @@
                 </h1>
                 <div class="d-flex align-items-center">
                     <label for="sortPrice" class="me-2 mt-1">Sort by Price:</label>
-                    <select id="sortPrice" class="form-select-sm w-auto" onchange="updateSorting(this.value)">
+                    <select id="sortPrice" class="form-select-sm w-auto" onchange="updateSorting(this.value)" >
                         <option value="">Default</option>
-                        <option value="asc" {{ request('sortPrice') == 'asc' ? 'selected' : '' }}>Low to High</option>
+                        <option value="asc" {{ request('sortPrice') == 'asc' ? 'selected' : '' }} >Low to High</option>
                         <option value="desc" {{ request('sortPrice') == 'desc' ? 'selected' : '' }}>High to Low</option>
                     </select>
                 </div>
