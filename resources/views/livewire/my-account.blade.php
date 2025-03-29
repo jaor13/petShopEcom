@@ -114,9 +114,9 @@
 
         <!-- Editable Form -->
         @if ($isEditing)
-            <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
+            <div class="col-md-12 px-5 py-3 mt-2  shadow-sm bg-white">
             <h4 class="mb-3 text-[#4F4F4F]"
-                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 118%; margin-left: -49px;">
+                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 111%; margin-left: -48px;">
                     <p class="personal">Personal Information</p>
                 </h4>
                 <form wire:submit.prevent="updateProfile" class="mt-3">
@@ -189,7 +189,7 @@
 
 
 
-        <div class="col-md-12 p-3 mt-3 rounded shadow-sm custom-card-design px-5 py-3">
+        <div class="col-md-12 p-3 mt-2  shadow-sm  px-5 py-3 bg-white">
             <h4>Delete Account</h4>
             <form wire:submit.prevent="confirmDelete" class="mt-3 mb-4">
                 <div class="mb-3">
