@@ -1,6 +1,6 @@
 <div class="container mt-3 p-0">
     
-    <ul class="d-flex mb-2 bg-white rounded h-10 p-0 pt-2 p-0">
+    <ul class="d-flex mb-2 bg-white  h-10 p-0 pt-2 p-0">
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
                wire:click.prevent="filterOrders('all')" href="?status=all">
@@ -44,7 +44,7 @@
             @livewire('order-details', ['order' => collect($orders)->firstWhere('id', $selectedOrderId)])
         @else
             @forelse ($filteredOrders as $order)
-                <div class="px-5 py-3 shadow-sm rounded mb-2 custom-card-design">
+                <div class="px-5 py-3 shadow-sm  mb-2 bg-white">
                     <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
                         <div>
                             <p class="text-secondary mb-1">Order Number:</p>

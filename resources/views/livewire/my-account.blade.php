@@ -3,9 +3,9 @@
         <!-- Read-Only Personal Information -->
         @if (!$isEditing)
 
-            <div class="col-md-12 px-5 py-3 mt-2 p-0 rounded shadow-sm custom-card-design">
+            <div class="col-md-12 px-5 py-3 mt-2 p-0 shadow-sm bg-white">
                 <h4 class="mb-3 text-[#4F4F4F]"
-                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 118%; margin-left: -49px;">
+                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 111%; margin-left: -48px;">
                     <p class="personal">Personal Information</p>
                 </h4>
                 <div class="mb-3 inline-flex align-items-center">
@@ -115,11 +115,14 @@
         <!-- Editable Form -->
         @if ($isEditing)
             <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
-                <h4>Edit Profile Information</h4>
+            <h4 class="mb-3 text-[#4F4F4F]"
+                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 118%; margin-left: -49px;">
+                    <p class="personal">Personal Information</p>
+                </h4>
                 <form wire:submit.prevent="updateProfile" class="mt-3">
                     <label for="profile-picture-upload">
                         <img src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('assets/images/default-1.gif') }}"
-                            class="profile-img rounded-circle mb-2" style="width: 100px; height: 100px; cursor: pointer;">
+                            class="profile-img rounded-circle mb-3" style="width: 100px; height: 100px; cursor: pointer;">
                     </label>
                     <input type="file" id="profile-picture-upload" wire:model="profile_picture" style="display: none;">
 

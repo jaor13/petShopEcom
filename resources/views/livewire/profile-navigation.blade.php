@@ -34,7 +34,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item mb-4">
+                <li class="nav-item ">
                     <a wire:click.prevent="setActiveSection('liked-product')"
                         class="nav-link {{ $activeSection === 'liked-product' ? 'active' : '' }}" href="#">
                         <i class="fas fa-heart ml-5 p-2 fix-cust"></i> Liked Products

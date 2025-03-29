@@ -1,7 +1,7 @@
 <div>
     <div class="container mt-3 p-0">
         <!-- Tab Navigation -->
-        <ul class="d-flex mb-2 rounded  p-0 bg-white h-10 p-0 pt-2 p-0">
+        <ul class="d-flex mb-2   p-0 bg-white h-10 p-0 pt-2 p-0">
             <li class="nav-item flex-fill text-center">
                 <a class="custom-link py-2 {{ $activeTab === 'to_rate' ? 'active' : '' }}"
                     wire:click.prevent="switchTab('to_rate')" href="?tab=to_rate">
@@ -20,7 +20,7 @@
             <!-- "To Rate" Tab -->
             @if ($activeTab === 'to_rate')
                 @forelse ($orderedItems as $item)
-                    <div class="px-5 py-3 shadow-sm rounded mb-2 custom-card-design">
+                    <div class="px-5 py-3 shadow-sm mb-2 bg-white">
                         <div class="d-flex align-items-center">
                             <img src="{{ $item->display_image }}" class="img-thumbnail rounded-lg me-3"
                                 style="width: 80px; height: 80px; background-color: #E7FAFF; border: none;">
