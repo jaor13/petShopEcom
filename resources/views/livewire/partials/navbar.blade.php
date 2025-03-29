@@ -59,6 +59,13 @@
                     <span><iconify-icon icon="mdi:heart" class="iconify-heart"></iconify-heart></span>
                 </a>
             </div>
+
+            <div class="message-container">
+                <a href="{{ route('chats') }}" wire:navigate
+                    class="relative flex items-center space-x-1">
+                    <span><iconify-icon icon="mdi:chat" class="iconify-message"></iconify-icon></span>
+            </div>
+
             <!-- User Profile Icon with Dropdown (Alpine.js) -->
             <div class="relative" x-data="{ open: false }">
                 <!-- User Icon Button -->

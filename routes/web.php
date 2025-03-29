@@ -22,6 +22,8 @@ use App\Http\Controllers\PaymentController;
 use App\Livewire\UserProfile;
 use App\Livewire\OrderDetails;
 use App\Livewire\Orders;
+use Namu\WireChat\Livewire\Pages\Chats;
+use Namu\WireChat\Livewire\Pages\Chat;
 
 
 // admin
@@ -74,6 +76,9 @@ Route::middleware(['notAdmin'])->group(function () {
 
        Route::get('/orders', Orders::class)->name('orders');
       Route::get('/order-details/{order}', OrderDetails::class)->name('order-details');
+
+      Route::get('/chats', Chats::class)->name('chats');
+      Route::get('/chats/{conversation}', Chat::class)->middleware('belongsToConversation')->name('chat');
 
     });
     
