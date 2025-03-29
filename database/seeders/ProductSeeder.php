@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('products')->insert([
+        DB::table('products')->insert(
             [
                 'id' => 1,
                 'product_name' => 'Doggo Quad 2-in-1 Bowl',
@@ -2352,7 +2352,963 @@ class ProductSeeder extends Seeder
                 'is_active' => 1,
                 'has_variant' => 1,
                 'created_at' => now(),
-            ],                                                                                                                                                                                                                                                                            
+            ], 
+            
+            ///
+
+            [
+                [
+                    'product_name' => 'Ronidazole',
+                    'slug' => 'ronidazole',
+                    'description' => <<<EOT
+                **Key Benefits:**
+                
+                Ronidazole is for the prevention and treatment of Trichomoniasis (Canker), Hexamitosis, Giardia, and Cochlosomosis in all aviary birds and pigeons.
+                
+                **Recommended For:**  
+                Birds of all species  
+                
+                **Directions:**  
+                
+                - **Cure (Large Birds):**  
+                  Mix 1 teaspoon into 1 gallon of water for Budgerigars, larger birds, and fancy pigeons. Treat for 7 days.  
+                  Racing pigeons: Treat for 7 days every other week for a total of two doses.  
+                
+                - **Cure (Small Birds - Finches & Canaries):**  
+                  Mix 1 teaspoon into 1 quart of water and give for 7 days.  
+                
+                - **Preventive Treatment:**  
+                  May be given 4 times throughout the year and should always be given to babies after fledging.  
+                
+                Mix fresh daily and remove all other water sources.
+                
+                **Can Be Used With:**  
+                Amtyl, vitamins, calcium  
+                
+                **Side Effects:**  
+                None reported.  
+                
+                **Notes:**  
+                Ronidazole is safe to use at any stage of the breeding cycle. It is best to treat birds before setting them up for breeding. If babies start dying in the nest, give Ronidazole to the parents—they will pass it to the babies. If birds appear sick, we recommend mixing Amtyl with Ronidazole for 7 days.  
+                
+                Always provide a probiotic such as Probiotic Plus for 3 to 4 days after treatment to restore healthy gut bacteria.  
+                
+                **Active Ingredients:**  
+                - 60mg/g Ronidazole  
+                
+                **Manufacturer:**  
+                Pet Health  
+                
+                **Storage:**  
+                Store in the original sealed container in a cool, dry place.  
+                
+                **More Information:**  
+                Giardia is a parasite found in the small intestines of birds. It frequently occurs in budgies, cockatiels, lovebirds, African grays, and gray-cheeked parakeets, although other species can also be infected. Infected birds may appear normal but could exhibit symptoms like loose droppings, weakness, depression, anorexia, or yeast infections. Some birds may start itching and pulling out feathers.
+                
+                **Canker Symptoms to Watch For:**  
+                - Cheesy growth in the mouth or throat  
+                - Visible lump in the neck or navel area  
+                - Slow blinking  
+                - Ruffled feathers  
+                - Excessive thirst  
+                - Loss of appetite and weight  
+                
+                For protozoal infections like Canker, Giardia, Trichomoniasis, Hexamitosis, and Cochlosomosis, birds must be treated with Ronidazole in drinking water for 7 days. If left untreated, they may soon die.  
+                
+                Trichomoniasis, also known as Canker, affects the upper digestive tract of many bird species, causing necrotic material to accumulate in the mouth and esophagus. It primarily affects young birds and is often fatal.  
+                
+                **Trichomoniasis Symptoms:**  
+                - Depression  
+                - Excessive salivation  
+                - Emaciation  
+                - Difficulty closing the mouth  
+                - Repeated swallowing movements  
+                - Watery eyes  
+                - Puffy neck  
+                
+                Birds may die from a tracheal blockage. Immediate treatment with Ronidazole is essential.
+                EOT,
+                    'price' => 601.93,
+                    'in_stock' => 1,
+                    'stock_quantity' => 30,
+                    'is_active' => 1,
+                    'has_variant' => 0,
+                    'category_id' => 15,
+                    'created_at' => now(),
+                ],
+                
+        
+        
+            [
+                'product_name' => 'Calciboost Liquid',
+                'slug' => 'calciboost-liquid',
+                'description' => 'Liquid calcium supplement for molting and growing birds.
+        Calcium deficiencies can lead to egg binding, feather plucking, increased nervousness and death. Calciboost provides the needed calcium, Magnesium and D3 in an easily absorbed form.',
+                'price' => 286.33,
+                'in_stock' => 1,
+                'stock_quantity' => 100,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+        
+        
+            [
+                'product_name' => 'Potent Brew Liquid Probiotic',
+                'slug' => 'potent-brew-liquid-probiotic',
+                'description' => 'Potent Brew Restores beneficial bacteria to the gut of sick or stressed birds. Increases of breeding birds and improves chick survival rates. A LIVE, liquid probiotic that goes to work as soon as it hits the crop to improve digestion and discourage slow crop and feather plucking.
+        Short shelf life product. (4-6 months). Add to foods or drinking water.
+        
+        Application: Add to fruit, soft food or soaked seed : Finches/canaries - 1 drop per bird, 1ml per 30 birds; Budgies - 2 drops per bird, 1 ml per 15 birds; Cockatiels - 4 drops per bird, 2.5 mls per 10 birds; African Greys - 15 drops per bird, 1 ml per pair. Do not use in the same drinking water as Aviclens (Saniclens).
+        Add to water 5 ml per litre.
+        Pack sizes: 50ml, 100ml, 250ml, 500ml.
+        Shelf life: Normally 4-6 months',
+                'price' => 429.79,
+                'in_stock' => 1,
+                'stock_quantity' => 100,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+        
+        
+            [
+                'product_name' => 'Calciboost  Powder',
+                'slug' => 'calciboost-liquid',
+                'description' => 'Use in drinking water or sprinkle on soft foods, fruits and vegetables. Calciboost powder can also be added to hand rearing foods. Calciboost Powder is great for sprinkling on foods. Also keeps hens from getting egg bound, helps in feather plucking, the nervous system, along with helping the muscles, and bones.',
+                'price' => 457.90,
+                'in_stock' => 1,
+                'stock_quantity' => 99,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+        
+            [
+                'product_name' => 'EasyBird Super Breeder',
+                'slug' => 'easybird-super-breeder',
+                'description' => 'EasyBird Super Breeder has the most effective supplement system for breeding birds in the world with all five key products that use to be used at different times of the year and now we have something that is very simple to give. During the breeding season EasyBird Super Breeder supplies all the key nutrients from daily Essentials 3, Calcivet-Calciboost, Flourish, ProBoost superMax, and BioPlus. It is simply added to a commerical soft food or finely chopped fresh fruit and veggies, sprouted seeds or soaked/cooked pulses. The only concession is that because the calcium is best not given everyday, we strongly recommend that one or two days a week are supplement free.
+        
+        Application:
+        
+        Feed EasyBird Super Breeder 5 or 6 days a week. 
+        Before the breeding season add between 50 and 75 grams of easyBird Super Breeder to each kilogram of softfood. Ideally increase the level over a period of about 6 weeks. 
+        
+        During the breeding season add 100 grams per kg of softfood. 
+        Or add 3 grams (1.2 level teaspoon) 
+        
+        1 kg of birds=1 large macaw, 1 pair of african grey/amazons, 5 pair cockatiels, 10 pairs canaries, 30 pairs small finches.
+        
+        Ingredients:
+        
+        Hi value protien (65%), Essentials oils, Vit A (260,000ius), D (26,000 ius), E (600 mgs), C,B1, B2, B6, B12, K, Biotin, Choline, Folic Acid, Niacin and Pantothenic acid, Minerals, include Calcium, Cobalt, Copper, Iodine, Iron, Magnesium, Manganese, Selenium, Sodium, Sulphur and zinc, Selected health supporting herbs, amino acids.',
+                'price' => 894.00,
+                'in_stock' => 1,
+                'stock_quantity' => 159,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+        
+        
+            [
+                'product_name' => 'Liquid Kelp',
+                'slug' => 'liquid-kelp',
+                'description' => 'Iodine deficiency is a common problem in many caged birds but is especially common in the Australian birds. The Australian birds seem to need more iodine than other pet birds. Iodine is required for the proper functioning of the thyroid gland. Deficiencies can result in poor feather condition, difficulty molting, breathing problems, reduced singing, reduced activity and poor breeding. Liqui-Kelp provides the additional iodine needed by the Australian finches.
+        
+        For Feather problems: mix 6 drops to 2 cups of water for 2 weeks, after 2 weeks continue giving 1 drop in 2 cups of water 2 times a week for maintenance.',
+                'price' =>622.02,
+                'in_stock' => 1,
+                'stock_quantity' => 120,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+        
+        
+            [
+                'product_name' => 'Nekton Biotin',
+                'slug' => 'nekton-biotin',
+                'description' => 'Protein-enriched food supplement to ensure good feather growth and help prevent plumage defects
+        After years of research and experiments we developed NEKTON-BIO to meet certain problems in a bird’s plumage and to ensure healthy feather growth in all types of birds.
+        
+        Feathers are largely protein in nature, which is why 18 free amino acids have been included in NEKTON-BIO to help a bird build the proteins needed. Of the amino acids, arginine, methionine and lysine are particularly vital in a supplement because most cage or aviary birds are fed on bird seed, which is poor in these amino acids. Vitamins A, E, and Biotin also have a positive effect on feather growth. Altogether 13 vitamins, 6 trace elements and calcium have been combined with the amino acids to create a special formula to support the organism during the moult and encourage the growth of smooth and glossy feathers.',
+                'price' => 1089.67,
+                'in_stock' => 1,
+                'stock_quantity' =>58,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+        
+        
+            [
+                'product_name' => 'Easy Bird Rest, Moult & Show',
+                'slug' => 'easy-bird-rest-moult-show',
+                'description' => <<<EOT
+        Out of the breeding season, your birds' needs are quite different. The BirdCare Company has designed EasyBird Rest, Moult & Show to help replace essential proteins and nutrients, preparing them for moulting.
+        
+        EasyBird Rest, Moult & Show keeps birds fit and healthy, ensuring they moult easily and look their best for showing while getting ready for the next breeding season. Birds on EasyBird Rest, Moult & Show appear healthier and more vibrant at shows.
+        
+        ### Application:
+        - Feed **5 or 6 days a week**.
+        - Add **50 grams** per **kilogram of soft food**.
+        - Or add **1.5 grams (2/3 level teaspoon)** per **kg of bird weight**.
+        
+        #### Example for Bird Weight:
+        - 1 kg of birds = 1 large Macaw, 1 pair of African Greys/Amazons, 5 pairs of Cockatiels, 10 pairs of Budgies, 16 pairs of Canaries, 30 pairs of small Finches.
+        
+        ### Ingredients (per kg):
+        - High-value protein (15%)
+        - Essential oils
+        - Vitamins: A (170,000 IUs), E (500mg), C, B1, B2, B6, B12, K, Biotin, Choline, Folic Acid, Niacin, Pantothenic Acid
+        - Minerals: Calcium, Cobalt, Copper, Iodine, Iron, Magnesium, Manganese, Selenium, Sodium, Sulphur, Zinc
+        - Selected health-supporting herbs and amino acids.
+        EOT,
+                'price' => 688.00,
+                'in_stock' => 1,
+                'stock_quantity' => 130,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'HP Healing Cream',
+                'slug' => 'hp-healing-cream',
+                'description' => <<<EOT
+        HP Healing Cream promotes and supports the healing of wounds, cuts, bites, burns, and other surface tissue damage in pets. It may reduce healing time for persistent wounds.
+        
+        ### Symptoms:
+        - Infection
+        - Swelling, pain, and shock from injury
+        - Wounds that won’t heal, non-responsive wounds
+        - Promotes rapid healing in wounds, cuts, bites, and burns
+        
+        ### Benefits:
+        - Supports growth of new skin
+        - Keeps wounds/cuts moist
+        - No harsh chemicals
+        - No known side effects
+        - Safe for puppies, kittens, pregnant, and nursing animals
+        - Patent pending
+        EOT,
+                'price' => 1606.11,
+                'in_stock' => 1,
+                'stock_quantity' => 45,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Skin and Itch',
+                'slug' => 'skin-and-itch',
+                'description' => <<<EOT
+        Promotes temporary relief from seasonal allergies and supports a healthy skin and coat in cats, dogs, and other pets. May help with scratching, itching, chewing, and hair loss, which may restore a thick and shiny coat.
+        
+        ### Symptoms:
+        - Scratching
+        - Itching
+        - Chewing
+        - Hair loss
+        
+        ### Benefits:
+        - No harsh chemicals
+        - No known side effects
+        - Safe for puppies, kittens, pregnant, and nursing animals
+        - Detoxifies the skin from the inside
+        - Natural antihistamine
+        - Great value – up to **90 doses per bottle** (depending on weight)
+        - Easy liquid dosing medicine
+        EOT,
+                'price' => 860.15,
+                'in_stock' => 1,
+                'stock_quantity' => 100,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Coat Rescue',
+                'slug' => 'coat-rescue',
+                'description' => <<<EOT
+        Promotes temporary relief from seasonal allergies and supports a healthy skin and coat in cats, dogs, and other pets. May help with scratching, itching, chewing, and hair loss, which may restore a thick and shiny coat.
+        
+        ### Symptoms:
+        - Scratching
+        - Itching
+        - Chewing
+        - Hair loss
+        
+        ### Benefits:
+        - No harsh chemicals
+        - No known side effects
+        - Safe for puppies, kittens, pregnant, and nursing animals
+        - Detoxifies the skin from the inside
+        - Natural antihistamine
+        - Great value – up to **90 doses per bottle** (depending on weight)
+        - Easy liquid dosing medicine
+        EOT,
+                'price' => 860.15,
+                'in_stock' => 1,
+                'stock_quantity' => 100,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+        
+            [
+                'product_name' => 'Rainforest Mist Cockatoo & Macaw Bath Spray',
+                'slug' => 'rainforest-mist-cockatoo-macaw-bath-spray',
+                'description' => "Rainforest Mist will cleanse your bird and relieve dry, itchy skin while helping to prevent feather plucking and unnecessary molting. These products help rid lice and mites.\n\nDIRECTIONS: Shake well and spray on bird from 12 inches away until feathers are visibly wet. Do not spray near open food or water, or directly into bird’s face. Keep bird out of drafty areas during use to prevent chills. Do not spray sick birds with this product unless otherwise directed by a veterinarian.\n\nDOES NOT CONTAIN ALCOHOL, WILL NOT DISCOLOR PLUMAGE. FOR EXTERNAL USE ONLY. KEEP PRODUCT AWAY FROM CHILDREN AND PETS TO AVOID CONSUMPTION.\n\nFresh Vanilla Scent\nFor Cockatoos & Macaws\nMade In The USA\n8oz",
+                'price' => 630.62,
+                'in_stock' => 1,
+                'stock_quantity' => 110,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Rainforest Mist Bath Spray for Small Birds',
+                'slug' => 'rainforest-mist-bath-spray-for-small-birds',
+                'description' => "Key Benefits:\nRainforest Mist bath spray can be used daily on the birds. Rainforest Mist will cleanse your bird and relieve dry, itchy skin while helping to prevent feather plucking and unnecessary molting. This product helps rid lice and mites. Has a nice Hawaiian Hibiscus Scent.\n\nRecommended For:\nAll small birds, Finches, Canaries, Parakeets, Lovebirds, Cockatiels.\n\nDirections:\nShake well and spray on bird 12 inches away until feathers are visibly wet. Do not spray near open food, or water, or directly into bird’s face. Keep bird out of drafty areas during use to prevent chills.\n\nSide Effects:\nNone\n\nNotes:\nDo not spray sick birds with this product unless otherwise directed by a veterinarian. Does not contain alcohol, will not discolor plumage.\n\nStorage:\nFor external use only. Keep product away from children and pets to avoid consumption. Keep out of sunlight and store at room temperature.",
+                'price' => 630.62,
+                'in_stock' => 1,
+                'stock_quantity' => 120,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Rainforest Mist Bath Spray for African Grey',
+                'slug' => 'rainforest-mist-bath-spray-for-african-grey',
+                'description' => "Key Benefits:\nRainforest Mist bath spray can be used daily on birds. It will cleanse the bird and relieve dry, itchy skin while helping to prevent feather plucking and unnecessary molting. This product helps rid the bird of lice and mites. Has a nice Baby Powder Scent.\n\nRecommended For:\nAfrican Greys and Parrots.\n\nDirections:\nShake well and spray on bird 12 inches away until feathers are visibly wet. Do not spray near open food, water, or directly into the bird’s face. Keep birds out of drafty areas during use to prevent chills.\n\nSide Effects:\nNone\n\nNotes:\nDo not spray sick birds with this product unless otherwise directed by a veterinarian. Does not contain alcohol, will not discolor plumage.\n\nManufacturer:\nKings\n\nStorage:\nFor external use only. Keep product away from children and pets to avoid consumption. Keep out of sunlight and store at room temperature.",
+                'price' => 630.62,
+                'in_stock' => 1,
+                'stock_quantity' => 130,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Insecta Pro Insect Mix',
+                'slug' => 'insecta-pro-insect-mix',
+                'description' => "Insecta Pro is ideal for insect-eating birds. Using food extrusion technology, Insecta Pro incorporates the best protein from various sources to create high-specification food for birds.\n\nThe process of extrusion boosts digestibility and ensures purity by eliminating bacteria and toxins. Insecta-Pro replaces live food while ensuring optimal nutrition for health and breeding. Many insect-eating birds will not raise a clutch without insects to feed their babies.\n\nFed moist or dry, Insecta-Pro is ideal for a range of insect-eating birds.\n\nIngredients: Select Australian whole grains including corn, wheat, meat and fish meals, wheat gluten.\n\nFeeding: Insecta-Pro provides a supplemental feed for all insectivorous birds, including those requiring 'live food.' It may be fed dry or moistened to create a soft food. It can also be mixed with fruits, pupae, eggs, etc.\n\nApproximate Analysis:\nCrude Protein 30%, Lysine 1.4%, Crude Fat 14%, Vitamin A 3,000 iu/kg, Crude Fibre 4%, Calcium 2.5%.",
+                'price' => 1376.58,
+                'in_stock' => 1,
+                'stock_quantity' => 23,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Lory Nectar Blessing’s',
+                'slug' => 'lory-nectar-blessings',
+                'description' => "Complete lory diet made from all-natural ingredients to simulate diets in the wild.\n\nIncludes protein, fruits, and vegetables milled with low iron and vitamins A & C. Served in liquid form.\n\nIngredients: Brown Rice Flour, Corn Flour, Red Whole-Wheat Flour, Dextrose, Fructose, Soy Protein Isolate, Bee Pollen, Spirulina, Calcium, Apple, Xanthan Gum, Carrot, Papaya Enzyme, Spearmint, Bell Pepper, Alfalfa, Coconut, Blueberry, Flower Petals, Eucalyptus, Nutritional Yeast, Milk Thistle, Wheat Grass, Clay, Rosemary, and a proprietary blend of vitamins, trace minerals, and amino acids.\n\nAnalysis per one-cup serving:\nCalories 214, Crude Protein 10.99%, Crude Fat 2.19%, Carbs 32.47%, Ash 1.08%, Vitamin A 1694 iu/100g, Iron 41 ppm, Moisture 6.24%.",
+                'price' => 1833.34,
+                'in_stock' => 1,
+                'stock_quantity' => 21,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+        
+            [
+                'product_name' => 'Neocare',
+                'slug' => 'neocare',
+                'description' => "Hand Rearing Food For Baby Birds NEOCARE follows nature by providing a form of ‘crop milk’, essential for the well-being of incubated babies...\n\nIngredients:\nIsolated soy protein, oats, corn, vegetable oil, calcium carbonate, vitamins and minerals, Probotic and Predigestives.\n\nGuaranteed Analysis:\nMin Crude Protein 21% Min Crude Fat 17% Max Crude Fibre 3% Salt .2%\n\nStorage & Availability:\nStore below 30°C (room temperature) in a dry area.",
+                'price' => 1950.97,
+                'in_stock' => 1,
+                'stock_quantity' => 33,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Nektar Plus',
+                'slug' => 'nektar-plus',
+                'description' => "Nektar concentrate for hummers and other nectar-feeding birds. Carefully composed and balanced formula...\n\nNutritional additives per kg:\n11,900 I.U. vitamin A, 770 I.U. vitamin D3, 12 mg vitamin E...\n\nTechnological additive:\nPreservative.",
+                'price' => 4113.68,
+                'in_stock' => 1,
+                'stock_quantity' => 12,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Nekton-Lori',
+                'slug' => 'nekton-loricalciboost-liquid',
+                'description' => "Complete diet for lories and hanging parakeets. Based on years of experience in breeding and rearing these demanding varieties of parrots...\n\nJust add tepid water to the powder, stir slowly and you have a complete diet.",
+                'price' => 3769.39,
+                'in_stock' => 1,
+                'stock_quantity' => 28,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 15,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Aquamaster Color Enhancer Cichlid Food 500g',
+                'slug' => 'aquamaster-color-enhancer-cichlid-food-500g',
+                'description' => "Perfect palatable size for cichlid and medium-sized fishes. Beautiful size and color of fish. Maintain clear water...\n\nIngredients:\nFish Meal, Wheat Flour, Soybean Meal, Fish Oil, Lecithin, Astaxanthin, Vitamins, Minerals.\n\nGuaranteed Analysis:\nCrude Protein: ≥40%, Crude Fat: ≥3.0%, Crude Ash: ≤16%...\n\nFeeding Guidelines:\n2-3 times per day.",
+                'price' => 394.00,
+                'in_stock' => 1,
+                'stock_quantity' => 34,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 17,
+                'created_at' => now(),
+            ],
+        
+        
+            [
+                'product_name'  => 'Aquamaster Goldfish 105g Food',
+                'slug'          => 'aquamaster-goldfish-105g-food',
+                'description'   => "Aquamaster Goldfish 105g Food is a top quality fish food for your aquatic pets. No cloudy water and bad smell. Maintains healthy and lively fishes.\n\n"
+                                 . "Essential Benefits:\n\n"
+                                 . "- Perfect palatable size for goldfish and medium sized fishes\n"
+                                 . "- Beautiful size and color of fish\n"
+                                 . "- Maintain clear water\n"
+                                 . "- Floating pellets\n\n"
+                                 . "Ingredients:\n\n"
+                                 . "Fish Meal, Wheat Flour, Soybean Meal, Fish Oil, Lecithin, Astaxanthin, Vitamins, Minerals.\n\n"
+                                 . "Guaranteed Analysis:\n\n"
+                                 . "- Crude Protein: ≥40%\n"
+                                 . "- Lysine: ≥2.2%\n"
+                                 . "- Crude Fat: ≥3.0%\n"
+                                 . "- Crude Ash: ≤13%\n"
+                                 . "- Crude Fiber: ≤5%\n"
+                                 . "- Moisture: ≤10%\n"
+                                 . "- Total Phosphorus: ≥0.8%\n\n"
+                                 . "Feeding Guidelines:\n\n"
+                                 . "2-3 times per day",
+                'price'         => 95.00,
+                'in_stock'      => 1,
+                'stock_quantity'=> 150,
+                'is_active'     => 1,
+                'has_variant'   => 0,
+                'category_id'   => 17,
+                'created_at'    => now(),
+            ],
+            [
+                'product_name'  => 'Aquamaster Mini 15g Fish Food',
+                'slug'          => 'aquamaster-mini-15g-fish-food',
+                'description'   => "Aquamaster Mini 15g Fish Food is a top quality fish food for your aquatic pets. No cloudy water and bad smell. Maintains healthy and lively fishes.\n\n"
+                                 . "Essential Benefits:\n\n"
+                                 . "- Perfect palatable size for mini and small fishes\n"
+                                 . "- Beautiful size and color of fish\n"
+                                 . "- Maintain clear water\n"
+                                 . "- Semi-sinking granules\n\n"
+                                 . "Ingredients:\n\n"
+                                 . "Fish Meal, Wheat Flour, Soybean Meal, Fish Oil, Lecithin, Astaxanthin, Vitamins, Minerals.\n\n"
+                                 . "Guaranteed Analysis:\n\n"
+                                 . "- Crude Protein: ≥40%\n"
+                                 . "- Lysine: ≥1.7%\n"
+                                 . "- Crude Fat: ≥3.0%\n"
+                                 . "- Crude Ash: ≤14%\n"
+                                 . "- Crude Fiber: ≤3.5%\n"
+                                 . "- Moisture: ≤10%\n"
+                                 . "- Total Phosphorus: ≥0.8%\n\n"
+                                 . "Feeding Guidelines:\n\n"
+                                 . "2-3 times per day",
+                'price'         => 45.00,
+                'in_stock'      => 1,
+                'stock_quantity'=> 140,
+                'is_active'     => 1,
+                'has_variant'   => 0,
+                'category_id'   => 17,
+                'created_at'    => now(),
+            ],
+            [
+                'product_name'  => 'Aquamaster Large Pellet Hi Growth Koi Food',
+                'slug'          => 'aquamaster-large-pellet-hi-growth-koi-food',
+                'description'   => "Aquamaster Large Pellet Hi Growth Koi Food is used by the best Koi breeders and enthusiasts worldwide. Reach your koi's optimum beauty and size by using Aquamaster Koi Food. Made with quality ingredients with probiotics for better digestion and clear water.\n\n"
+                                 . "Essential Benefits:\n\n"
+                                 . "- Rapid growth and beautiful shape of Koi fish\n"
+                                 . "- Crystal clear water\n"
+                                 . "- Palatable pellets\n"
+                                 . "- Probiotic-enriched diet\n"
+                                 . "- Healthy Koi and Fishes\n"
+                                 . "- Floating Pellets\n\n"
+                                 . "Ingredients:\n\n"
+                                 . "Fish Meal, Soybean Meal, Wheat Flour, Soybean Lecithin, Wheat Germ, Spirulina, Astaxanthin, Vitamins, Minerals.\n\n"
+                                 . "Guaranteed Analysis:\n\n"
+                                 . "- Crude Protein: ≥42%\n"
+                                 . "- Lysine: ≥2.6%\n"
+                                 . "- Crude Fat: ≥4%\n"
+                                 . "- Crude Ash: ≤16%\n"
+                                 . "- Crude Fiber: ≤5%\n"
+                                 . "- Moisture: ≤10%\n"
+                                 . "- Total Phosphorus: ≥0.8%\n\n"
+                                 . "Feeding Guidelines:\n\n"
+                                 . "2-3 times per day",
+                'price'         => 520.00,
+                'in_stock'      => 1,
+                'stock_quantity'=> 72,
+                'is_active'     => 1,
+                'has_variant'   => 0,
+                'category_id'   => 17,
+                'created_at'    => now(),
+            ],
+        
+        
+            [
+                'product_name' => 'Aquamaster Small Pellet Staple Koi Food',
+                'slug' => 'aquamaster-small-pellet-staple-koi-food',
+                'description' => 'Maintain size and beautiful body shape of Koi fish
+        Crystal clear water
+        Palatable pellets
+        Probiotic-enriched diet
+        Healthy Koi and Fishes
+        Floating PelletsAquamaster Small Pellet Staple Koi Food is used by the best Koi breeders and enthusiasts worldwide. 
+
+        Essential Benefits:
+        
+        Maintain size and beautiful body shape of Koi fish
+        Crystal clear water
+        Palatable pellets
+        Probiotic-enriched diet
+        Healthy Koi and Fishes
+        Floating Pellets
+        Ingredients: 
+        
+        Fish Meal, Soybean Meal, Wheat Flour, Soybean Lecithin, Wheat Germ, Spirulina, Astaxanthin, Vitamins, Minerals.
+        
+        Guaranteed Analysis:
+        
+        Crude Protein: ≥36%
+        Lysine: ≥1.7%
+        Crude Fat: ≥3%
+        Crude Ash: ≤14%
+        Crude Fiber: ≤5%
+        Moisture: ≤10%
+        Total Phosporus: ≥0.8%
+        
+        Feeding Guidelines:
+        
+        2-3 times per day',
+                'price' => 350.00,
+                'in_stock' => 1,
+                'stock_quantity' => 88,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 17,
+                'created_at' => now(),
+            ],
+        
+             [
+        'product_name' => 'Aquamaster Large Pellet Growth Koi Food',
+        'slug' => 'aquamaster-large-pellet-growth-koi-food',
+        'description' => 'Aquamaster Large Pellet Growth Koi Food for optimal koi growth and health.',
+        'price' => 420.00,
+        'in_stock' => 1,
+        'stock_quantity' => 111,
+        'is_active' => 1,
+        'has_variant' => 0,
+        'category_id' => 17,
+        'created_at' => now(),
+    ],
+    [
+        'product_name' => 'Aquamaster Small Pellet Growth Koi Food',
+        'slug' => 'aquamaster-small-pellet-growth-koi-food',
+        'description' => 'Aquamaster Small Pellet Growth Koi Food is used by top koi breeders. 
+            Essential Benefits:
+            - Rapid growth and beautiful shape
+            - Crystal clear water
+            - Probiotic-enriched diet
+            - Floating pellets
+
+            Ingredients:
+            Fish Meal, Soybean Meal, Wheat Flour, Wheat Germ, Spirulina, Astaxanthin, Vitamins, Minerals.
+
+            Guaranteed Analysis:
+            - Crude Protein: ≥40%
+            - Lysine: ≥2.2%
+            - Crude Fat: ≥3%
+            - Crude Ash: ≤13%
+            - Crude Fiber: ≤5%
+            - Moisture: ≤10%
+            - Total Phosphorus: ≥0.8%
+
+            Feeding Guidelines:
+            Feed 2-3 times per day.',
+        'price' => 420.00,
+        'in_stock' => 1,
+        'stock_quantity' => 99,
+        'is_active' => 1,
+        'has_variant' => 0,
+        'category_id' => 17,
+        'created_at' => now(),
+    ],
+    [
+        'product_name' => 'Nutrilogic Micro Granules 100ml Fish Food',
+        'slug' => 'nutrilogic-micro-granules-100ml-fish-food',
+        'description' => 'Ideal for small fish such as bettas, tetras, guppies, and shrimp. 
+            - High protein and color enhancers
+            - Sinking granules
+            - Good for fish fry
+
+            Ingredients:
+            Fish Meal, Spirulina, Shrimp Meat, Chlorella, Seaweed, Squid Oil, Wheat Germ, Vitamins, Minerals.
+
+            Guaranteed Analysis:
+            - Protein (min): 36%
+            - Fat (min): 6%
+            - Fiber (max): 4%
+            - Moisture (max): 10%
+            - Crude Ash (max): 12%
+
+            Feeding Guidelines:
+            Feed twice daily, ensuring food is consumed within 2 minutes. Avoid overfeeding.',
+        'price' => 245.00,
+        'in_stock' => 1,
+        'stock_quantity' => 69,
+        'is_active' => 1,
+        'has_variant' => 0,
+        'category_id' => 17,
+        'created_at' => now(),
+    ],
+    [
+        'product_name' => 'Nutrilogic Sinking Disc Wafers 250g Fish Food',
+        'slug' => 'nutrilogic-sinking-disc-wafers-250g-fish-food',
+        'description' => 'Nutrilogic Sinking Disc Wafers contain premium protein and digestible carbs for fish health.
+            - Made with fresh ingredients
+            - Infused with vitamins and minerals
+
+            Ingredients:
+            Fish Meal, Spirulina, Shrimp Meat, Chlorella, Seaweed, Squid Oil, Wheat Germ, Vitamins, Minerals.
+
+            Guaranteed Analysis:
+            - Protein (min): 36%
+            - Fat (min): 6%
+            - Fiber (max): 4%
+            - Moisture (max): 10%
+            - Crude Ash (max): 12%
+
+            Feeding Guidelines:
+            Feed twice daily, ensuring food is consumed within 2 minutes. Avoid overfeeding.',
+        'price' => 645.00,
+        'in_stock' => 1,
+        'stock_quantity' => 32,
+        'is_active' => 1,
+        'has_variant' => 0,
+        'category_id' => 17,
+        'created_at' => now(),
+    ],
+    [
+        'product_name' => 'Nutrilogic Pond 101 4kg Fish Food',
+        'slug' => 'nutrilogic-pond-101-4kg-fish-food',
+        'description' => 'Nutrilogic Pond 101 contains premium protein and digestible carbohydrates for pond fish health.',
+        'price' => 1670.00,
+        'in_stock' => 1,
+        'stock_quantity' => 12,
+        'is_active' => 1,
+        'has_variant' => 0,
+        'category_id' => 17,
+        'created_at' => now(),
+    ],
+    [
+        'product_name' => 'Nutrilogic Grand Champion 4kg Fish Food',
+        'slug' => 'nutrilogic-grand-champion-4kg-fish-food',
+        'description' => 'Nutrilogic Grand Champion is designed for koi growth and immune support.
+            - Premium protein and digestible carbohydrates
+            - Infused with vitamins and minerals
+
+            Ingredients:
+            Fish Meal, Wheat Germ, Spirulina, Astaxanthin, Squid Oil, Vitamins, Minerals.
+
+            Guaranteed Analysis:
+            - Crude Protein (min): 45%
+            - Crude Fat (min): 5%
+            - Crude Fiber (max): 3%
+            - Moisture (max): 10%
+            - Crude Ash (max): 10%
+
+            Feeding Guidelines:
+            Feed twice daily, ensuring food is consumed within 2 minutes. Avoid overfeeding.',
+        'price' => 2355.00,
+        'in_stock' => 1,
+        'stock_quantity' => 10,
+        'is_active' => 1,
+        'has_variant' => 0,
+        'category_id' => 17,
+        'created_at' => now(),
+    ],
+    [
+        'product_name' => 'Nutrilogic Marine Sinking Pellets 250g Fish Food',
+        'slug' => 'nutrilogic-marine-sinking-pellets-250g-fish-food',
+        'description' => 'Ideal for saltwater fish: Clownfish, Angels, Tangs, Wrasses, Damsels, Triggerfish.',
+        'price' => 580.00,
+        'in_stock' => 1,
+        'stock_quantity' => 49,
+        'is_active' => 1,
+        'has_variant' => 0,
+        'category_id' => 17,
+        'created_at' => now(),
+    ],
+        
+        
+            [
+                'product_name' => 'Nutrilogic Koi Ultra 4kg Fish Food',
+                'slug' => 'nutrilogic-koi-ultra-4kg-fish-food',
+                'description' => 'For Koi fish
+        Highest Spirulina content
+        Balanced formulation suitable for feeding all year round
+        Color enhancing ingredients, growth accelerators and immune boosting vitaminsNUTRILOGIC developed a blend of carefully selected premium grade ingredients of protein and highly digestive carbohydrates to bring out the full potential of your koi.
+        
+        Only the freshest ingredients are put in each container of NUTRILOGIC. Vitamins and minerals are added to boost immune system.
+        
+        Made in Taiwan.
+        
+        Ingredients:
+        
+        Fish meal, wheatgerm, Spirulina, Astaxanthin, Cantaxanthin, Squid oil, Vitamin A, Vitamin B1, Vitamin B6, Vitamin B12, Stabilized Vitamin C, Vitamin D3, Vitamin E, Vitamin K
+        
+        Guaranteed Analysis:
+        
+        Crude Protein (min): 45%
+        Crude Fat (min): 5%
+        Crude Fiber (min): 3%
+        Moisture (max): 10%
+        Crude Ash (max): 10%
+        
+        Feeding Guidelines:
+        
+        Feed twice a day, taking note that all food given is consumed within 2 minutes. Do not overfeed.
+        
+        Minimize feeding when treating sick fish or after cleaning of filtration and water changes.',
+                'price' => 2940.00,
+                'in_stock' => 1,
+                'stock_quantity' => 9,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 17,
+                'created_at' => now(),
+            ],
+        
+        
+            [
+                'product_name' => 'Nutrilogic Carnivore Feast Floating Sticks 950ml Fish Food',
+                'slug' => 'nutrilogic-carnivore-feast-floating-sticks-950ml-fish-food',
+                'description' => 'For large carnivore fish such as Arowana, Flowerhorn, Oscar, Catfish, etc.
+        Floating sticks
+        Balanced formulation suitable for feeding all year round
+        Color enhancing ingredients, growth accelerators and immune boosting vitaminsNUTRILOGIC developed a blend of carefully selected premium grade ingredients of protein and highly digestive carbohydrates to bring out the full potential of your fish.
+        
+        Only the freshest ingredients are put in each container of NUTRILOGIC. Vitamins and minerals are added to boost immune system.
+        
+        Made in Taiwan.
+        
+        Ingredients:
+        
+        Fish meal, Spirulina, Shrimp meat, Chlorella, Oriental cherry shrimp, Squid oil, Seaweed, Wheat germ flour, Vitamin A, Vitamin B1, Vitamin B6, Vitamin B12, Stabilized Vitamin C, Vitamin D3, Vitamin E, Vitamin K
+        
+        Guaranteed Analysis:
+        
+        Protein (min): 48%
+        Fat (min): 7%
+        Fiber (min): 3%
+        Moisture (max): 10%
+        Crude ash (max): 12%
+        
+        Feeding Guidelines:
+        
+        Feed twice a day, taking note that all food given is consumed within 2 minutes. Do not overfeed.
+        
+        Minimize feeding when treating sick fish or after cleaning of filtration and water changes.',
+                'price' => 570.00,
+                'in_stock' => 1,
+                'stock_quantity' => 20,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 17,
+                'created_at' => now(),
+            ],
+        
+            [
+                'product_name' => 'Nutrilogic Vitamin Sea Dried Seaweed Strips 10g Fish Food',
+                'slug' => 'nutrilogic-vitamin-sea-dried-seaweed-strips-10g-fish-food',
+                'description' => 'MADE IN KOREA
+        Ideal for saltwater fish, shrimp, other herbivorous, algae-eating fishes
+        Great for plecostomus, snails, crustaceans, and other aquatic animals
+        Boosts immunity and vitality
+        Easily digestible floating stripsNutrilogic ®️ Vitamin Sea Dried Seaweed Strips is the natural food for marine and freshwater fishes.
+        
+        It is packaged in a resealable bag with desiccant for moisture absorption.Consume within a month after opening.',
+                'price' => 120.00,
+                'in_stock' => 1,
+                'stock_quantity' => 55,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 17,
+                'created_at' => now(),
+            ],
+        
+        
+        
+        
+        
+        
+            [
+                'product_name' => 'Gargeer Complete Gel Diet Bearded Dragon Food, 3-oz bag',
+                'slug' => 'gargeer-complete-gel-diet-bearded-dragon-food-3-oz-bag',
+                'description' => 'Details
+        
+        This bearded dragon food is specially formulated for both juveniles and adults.
+        Feel good knowing this food is made in the USA with premium ingredients for optimal nutrition.
+        For your convenience, it’s easy to prepare. For your dragon’s well-being, it supports health, growth, and vitality.
+        This food provides a complete diet with no need for live worms, insects, or salad cutting.
+        
+        This gel comes as a concentrated powder that gels when added to boiling water for a moist meal that can trigger natural hunting instincts.
+        Treat your bearded dragon to the ultimate gourmet nutrition with Gargeer Complete Gel Diet Bearded Dragon Food. This specially formulated gel diet is perfect for both juvenile and adult dragons, providing them with all the essential nutrients they need for a long and healthy life. Made in the USA with premium ingredients, this balanced and fortified formula is easy to prepare and supports health, growth, and vitality.',
+                'price' => 1084.46,
+                'in_stock' => 1,
+                'stock_quantity' => 30,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 18,
+                'created_at' => now(),
+            ],
+        
+            [
+                'product_name' => 'Fluker\'s Freeze-Dried River Shrimp Reptile Treats, 1-oz jar',
+                'slug' => 'flukers-freeze-dried-river-shrimp-reptile-treats-1-oz-jar',
+                'description' => '**Packed with essential nutrients and vitamins**. Live freshwater shrimp are difficult to maintain in captivity and can be expensive, making these treats a convenient alternative. **Rich in protein & essential amino acids**. Freeze-dried to preserve flavor and nutrition. Suitable for turtles, amphibians, reptiles, & tropical fish.',
+                'price' => 249.00,
+                'in_stock' => 1,
+                'stock_quantity' => 54,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 18,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Fluker\'s Salad Singles Reptile Mix Reptile Food, 3-pack',
+                'slug' => 'flukers-salad-singles-reptile-mix-reptile-food-3-pack',
+                'description' => '**All-natural food mix** including turnips, cabbage, dandelion greens, carrots, and squash. **Easy to prepare**—just add water! Great for bearded dragons, tortoises, iguanas, and other herbivores. Pair with Fluker’s freeze-dried insects for variety.',
+                'price' => 490.59,
+                'in_stock' => 1,
+                'stock_quantity' => 99,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 18,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Zoo Med Reptisand Reptile Terrarium Sand, Desert White, 10-lb bag',
+                'slug' => 'zoo-med-reptisand-reptile-terrarium-sand-desert-white-10-lb-bag',
+                'description' => '**Natural sand substrate** with no dyes or chemicals. **Stimulates natural digging and burrowing instincts**. Provides an attractive environment for bearded dragons, sand boas, & soft-shell turtles.',
+                'price' => 653.55,
+                'in_stock' => 1,
+                'stock_quantity' => 21,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 18,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Zoo Med ReptiSoil Reptile Soil, 10-qt bag',
+                'slug' => 'zoo-med-reptisoil-reptile-soil-10-qt-bag',
+                'description' => '**Premium soil substrate** for reptiles. Contains **carbon for aeration** and a blend of peat moss, soil, and sand. Perfect for tropical setups and terrariums.',
+                'price' => 515.84,
+                'in_stock' => 1,
+                'stock_quantity' => 32,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 18,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Zoo Med Excavator Clay Burrowing Reptile Substrate, 10-lb bag',
+                'slug' => 'zoo-med-excavator-clay-burrowing-reptile-substrate-10-lb-bag',
+                'description' => '**All-natural clay substrate** with no chemicals or dyes. Encourages burrowing and digging instincts. **Mimics a reptile’s natural habitat** and allows tunnel formation.',
+                'price' => 974.87,
+                'in_stock' => 1,
+                'stock_quantity' => 29,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 18,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Zoo Med Eco Earth Loose Coconut Fiber Reptile Substrate, 24-qt bag',
+                'slug' => 'zoo-med-eco-earth-loose-coconut-fiber-reptile-substrate-24-qt-bag',
+                'description' => '**Eco-friendly substrate** made from coconut husks. Absorbs and breaks down odor and waste. **Ideal for naturalistic terrariums** and can be composted or recycled.',
+                'price' => 1342.09,
+                'in_stock' => 1,
+                'stock_quantity' => 9,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 18,
+                'created_at' => now(),
+            ],
+            [
+                'product_name' => 'Komodo Repti-Pads Tank Liner Large',
+                'slug' => 'komodo-repti-pads-tank-liner-large',
+                'description' => '**Absorbent tank liner** for catching messes like spilled food and water. **Maintains sanitary conditions** and makes cleaning easy. Fits long 20-gallon tanks.',
+                'price' => 609.36,
+                'in_stock' => 1,
+                'stock_quantity' => 45,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 18,
+                'created_at' => now(),
+            ],
+        
+            [
+                'product_name' => 'Rep-Cal Calcium with Vitamin D3 Ultrafine Powder Reptile Supplement, 3.3-oz jar',
+                'slug' => 'rep-cal-calcium-with-vitamin-d3-ultrafine-powder-reptile-supplement-33-oz-jar',
+                'description' => 'Details
+        
+        Adds calcium to your companion’s diet to help him avoid issues associated with calcium deficiency.
+        Crafted with 100% natural oyster shell calcium carbonate and vitamin D for calcium absorption.
+        Specially formulated for reptiles and amphibians.
+        Easy to use—add the powder to your sidekick’s favorite paste, fruits or vegetables.
+        Made with zero preservatives or phosphorous.
+        Vitamin deficiencies are not uncommon in reptiles and amphibians bred in captivity, so Rep-Cal developed this Calcium Ultrafine Powder Reptile Supplement. Not getting enough calcium can result in slower growth, fertility complications and other issues. This formula is made with 100% natural oyster shell phosphorus-free calcium carbonate, plus vitamin D3 for normal calcium absorption. Add it to your buddy’s favorite fruits, vegetables and pastes to give him the calcium boost he needs.',
+                'price' => 523.00,
+                'in_stock' => 1,
+                'stock_quantity' => 31,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 18,
+                'created_at' => now(),
+            ],
+        
+            [
+                'product_name' => 'Zoo Med Electrolyte Reptile Soak, 8-oz jar',
+                'slug' => 'zoo-med-electrolyte-reptile-soak-8-oz-jar',
+                'description' => 'Formulated to provide reptiles with electrolytes, B vitamins, vitamin C, beta-carotene, a prebiotic and probiotics.
+        Helps regulate proper hydration and cellular function with electrolytes.
+        Beta-carotene (vitamin A) assists in color pigmentation.
+        B vitamins help support proper metabolism.
+        Antioxidant, vitamin C is important for your pet’s skin and immune health.
+        Zoo Med Electrolyte Reptile Soak provides your scaly sidekick with electrolytes, B vitamins, vitamin C, beta-carotene, a prebiotic and probiotics. Electrolytes can help regulate proper hydration and cellular function, beta-carotene can help assist in color pigmentation, B vitamins help promote proper metabolism and vitamin C helps support skin and immune health.',
+                'price' => 458.46,
+                'in_stock' => 1,
+                'stock_quantity' => 33,
+                'is_active' => 1,
+                'has_variant' => 0,
+                'category_id' => 18,
+                'created_at' => now(),
+            ],
+
         ]);
     }
 }
