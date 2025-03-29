@@ -1,9 +1,9 @@
-<div class="container" style="margin-left: -30px; margin-top: 2px; ">
+<div class="container" style=" margin-top: 2px; ">
     <div class="row">
         <!-- Read-Only Personal Information -->
         @if (!$isEditing)
 
-            <div class="col-md-12 px-5 py-3 mt-2 rounded shadow-sm custom-card-design">
+            <div class="col-md-12 px-5 py-3 mt-2 p-0 rounded shadow-sm custom-card-design">
                 <h4 class="mb-3 text-[#4F4F4F]"
                     style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 111.8c%; margin-left: -49px;">
                     <p class="personal">Personal Information</p>
