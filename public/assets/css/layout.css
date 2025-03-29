@@ -382,20 +382,32 @@ margin-left: 0px;
   align-items: center;
   text-decoration: none;
   margin-right: 20px; /* Spacing between icons */
+  transition: transform 0.3s ease; /* Add smooth transition for hover effect */
+}
+
+.icon-link:hover {
+  transform: scale(1.1); /* Slightly enlarge the icon on hover */
 }
 
 .iconify-cart, .iconify-heart, .iconify-user {
   font-size: 35px;
   color: white;
   margin-left: 20px;
-  
+  transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
-.iconify-cart{
+.iconify-cart {
   margin-left: 100px;
 }
+
 .iconify-user {
-  color: rgb(255, 255, 255); /* User icon is black */
+  color: rgb(255, 255, 255); /* User icon is white */
+}
+
+.iconify-cart:hover,
+.iconify-heart:hover,
+.iconify-user:hover {
+  color: rgb(235, 235, 235); /* Change icon color on hover */
 }
 
 .cart-container span:last-child {

@@ -70,7 +70,7 @@
                                 <img src="{{ $item['image'] ? url('storage', $item['image']) : '' }}" alt="Product Image" class="img-thumbnail rounded-lg" style="width: 100px; background-color: #E7FAFF; border: none;">
                             </div>
                             <div class="ms-3 flex-grow-1">
-                                <p><strong>{{ $item['name'] }}</strong></p>
+                                <p style ="color: #4F4F4F;"><strong>{{ $item['name'] }}</strong></p>
                                 <p>Variation: {{ $item['variant_name'] ?? 'N/A' }}</p>
                             </div>
                             <div class="text-end">
