@@ -1,5 +1,6 @@
 <div class="container mt-4 p-0">
-    <ul class="d-flex mb-4 p-0">
+    
+    <ul class="d-flex mb-2 bg-white rounded h-10 p-0 pt-2 p-0">
         <li class="nav-item flex-fill text-center">
             <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
                wire:click.prevent="filterOrders('all')" href="?status=all">

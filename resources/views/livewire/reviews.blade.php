@@ -1,7 +1,7 @@
 <div>
     <div class="container mt-4 p-0">
         <!-- Tab Navigation -->
-        <ul class="d-flex mb-4 p-0">
+        <ul class="d-flex mb-2 rounded  p-0 bg-white h-10 p-0 pt-2 p-0">
             <li class="nav-item flex-fill text-center">
                 <a class="custom-link py-2 {{ $activeTab === 'to_rate' ? 'active' : '' }}"
                     wire:click.prevent="switchTab('to_rate')" href="?tab=to_rate">

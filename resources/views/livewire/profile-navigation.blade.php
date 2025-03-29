@@ -1,6 +1,18 @@
 <div class="row main-box ">
     <nav id="" class="col-md-4 col-lg-3 d-md-block ">
-        <div class="position-sticky bg-light">
+    <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}">
+    <h4 class="section-title " style="color: #4F4F4F;">Manage Account Details</h4>
+    </div>
+    <div class="{{ $activeSection === 'my-purchases' ? '' : 'd-none' }}">
+    <h4 class="section-title"  style="color: #4F4F4F;">My Purchases</h4>
+    </div>
+    <div class="{{ $activeSection === 'ratings-reviews' ? '' : 'd-none' }}">
+    <h4 class="section-title" style="color: #4F4F4F;">Ratings and Reviews</h4>
+    </div>
+    <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}">
+    <h4 class="section-title" style="color: #4F4F4F;">Liked Products</h4>
+    </div>
+        <div class="position-sticky bg-white">
             @livewire('profile-settings')
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -33,21 +45,17 @@
     </nav>
 
     <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4  p-4 ">
-        <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}">
-            <h2 class="section-title">Manage Account Details</h2>
+        <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}"> 
             <p class="section-description">Update your account's profile information and email address.</p>
             @livewire('my-account')
         </div>
         <div class="{{ $activeSection === 'my-purchases' ? '' : 'd-none' }}">
-            <h2 class="section-title">My Purchases</h2>
             @livewire('orders')
         </div>
         <div class="{{ $activeSection === 'ratings-reviews' ? '' : 'd-none' }}">
-            <h2 class="ml-3">Ratings and Reviews</h2>
             @livewire('reviews')
         </div>
         <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}">
-            <h2 class="section-title">Liked Products</h2>
             @livewire('liked-product')
         </div>
     </main>
