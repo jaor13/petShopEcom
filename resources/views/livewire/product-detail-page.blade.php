@@ -127,7 +127,7 @@
               </div>
               <div class="flex items-center mt-4">
                 <span class="text-yellow-500" style="font-size: 1.2em;">&#9733;</span>
-                <span class="ml-1" style="font-size: 1.1em; font-weight: 500;">{{ number_format($averageRating, 1) }}</span>
+                <span class="ml-1" style="font-size: 1.1em; font-weight: 500; color:rgb(83, 82, 82);">{{ number_format($averageRating, 1) }}</span>
                 <span class="ml-1" style="color: #888;">|{{ $product->sold_count }} Sold</span>
               </div>
             </div>
