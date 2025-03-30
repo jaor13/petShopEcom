@@ -150,21 +150,21 @@
           <i class="fa-solid fa-cat"></i>
         </a>
 
-        <a href="{{ route('products', ['type' => 'bird']) }}" wire:navigate class="category-box">
+        <a href="{{ url('products?category=' . "Bird Products") }}" wire:navigate class="category-box">
           <i class="fa-solid fa-dove"></i>
         </a>
 
 
-        <a href="{{ route('products', ['type' => 'otter']) }}" wire:navigate class="category-box">
-          <i class="fa-solid fa-otter"></i>
-        </a>
-
-        <a href="{{ route('products', ['type' => 'fish']) }}" wire:navigate class="category-box">
+        <a href="{{ url('products?category=' . "Fish Feeders") }}" wire:navigate class="category-box">
           <i class="fa-solid fa-fish"></i>
         </a>
 
-        <a href="{{ route('products', ['type' => 'dragon']) }}" wire:navigate class="category-box">
+        <a href="{{ url('products?category=' . "Bearded Dragons") }}" wire:navigate class="category-box">
           <i class="fa-solid fa-dragon"></i>
+        </a>
+
+        <a href="{{ route('products', ['type' => 'dragon']) }}" wire:navigate class="category-box">
+          <i class="fa-solid fa-otter"></i>
         </a>
 
 
