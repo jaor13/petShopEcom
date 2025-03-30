@@ -190,7 +190,7 @@
                 {{ number_format($averageRating, 1) }} <span class="text-yellow-500">★</span> Product Ratings ({{ count($reviews) }})
             </h2>
         </div>
-        <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000; width: 100%;">
+        <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000; width: 102%;">
         <div class="space-y-4">
         @forelse ($reviews as $review)
         <div class="bg-white rounded-lg p-4 shadow-sm">
