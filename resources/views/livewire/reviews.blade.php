@@ -1,16 +1,16 @@
 <div>
-    <div class="container mt-3 p-0">
+    <div class="container -mt-4 p-0">
         <!-- Tab Navigation -->
-        <ul class="d-flex mb-2 bg-white h-10 p-0 pt-2">
+        <ul class="d-flex mb-2 bg-white h-10 p-8 pt-3 p-9">
     <li class="nav-item flex-fill text-center">
         <a class="custom-link py-2 {{ $activeTab === 'to_rate' ? 'active' : '' }}" 
-           wire:click.prevent="switchTab('to_rate')" href="?active_tab=to_rate" style="font-weight: normal;">
+           wire:click.prevent="switchTab('to_rate')" href="?active_tab=to_rate" style="font-weight: normal; font-size: 1.2em;">
             <i class="fas fa-star-half-alt me-2"></i> To Rate
         </a>
     </li>
     <li class="nav-item flex-fill text-center">
         <a class="custom-link py-2 {{ $activeTab === 'my_reviews' ? 'active' : '' }}" 
-           wire:click.prevent="switchTab('my_reviews')" href="?active_tab=my_reviews" style="font-weight: normal;">
+           wire:click.prevent="switchTab('my_reviews')" href="?active_tab=my_reviews" style="font-weight: normal; font-size: 1.2em;">
             <i class="fas fa-comments me-2"></i> My Reviews
         </a>
     </li>
