@@ -239,7 +239,7 @@ class Reviews extends Component
             $this->reset(['rating', 'comment', 'images', 'selectedOrderItemId', 'editingReviewId', 'state']);
             $this->dispatch('hide-review-modal');
 
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (ValidationException $e) {
             $this->dispatch('review-validation-error', $e->errors());
 
             foreach ($e->errors() as $field => $messages) {
