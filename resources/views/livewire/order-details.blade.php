@@ -1,10 +1,10 @@
 <div>
-    <div class="container mt-3 rounded-3 p-0">
+    <div class="container -mt-4 rounded-1 p-0">
        
         <div class="d-flex justify-content-between align-items-center">
             
             <h4 class="text-white text-center pt-2 w-100 h-12 m-0" style="background-color: #00DCE3;">
-                 <button class=" btn-secondary mb-3"   wire:click="goBack"><</button>
+                 <button class=" btn-secondary mb-3"   wire:click="goBack">Back</button>
                 @if($order['status'] == 'to_ship')
                     Your order is currently being prepared for shipment
                 @elseif($order['status'] == 'to_receive')
