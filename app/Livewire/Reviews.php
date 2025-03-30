@@ -19,8 +19,8 @@ class Reviews extends Component
     public $orderItem;
     public $rating;
     public $comment;
-    public $images = []; // Store images
-    public $newImages = []; // Temporarily hold new uploads
+    public $images = []; 
+    public $newImages = []; 
 
     public $reviews = [];
     public $selectedOrderItemId = null;
@@ -31,11 +31,12 @@ class Reviews extends Component
     public $imageUrl = null;
     public array $uploadedImages = [];
 
+    protected $queryString = [
+        'activeTab' => ['except' => 'to_rate'],
+    ];
 
     public function mount($orderedItemId = null)
     {
-        $this->activeTab = session('active_tab', 'to_rate');
-
         if ($orderedItemId) {
             $this->orderItem = OrderItem::find($orderedItemId);
             $this->product = $this->orderItem ? $this->orderItem->product : null;
@@ -44,26 +45,10 @@ class Reviews extends Component
         $this->fetchReviews();
     }
 
-
-    public function openImageModal($imageUrl)
-    {
-        $this->imageUrl = $imageUrl;
-        $this->isOpen = true;
-    }
-
-    public function closeImageModal()
-    {
-        $this->isOpen = false;
-        $this->imageUrl = null;
-    }
-
-
     public function switchTab($tab)
     {
         $this->activeTab = $tab;
-        session(['active_tab' => $tab]); // Store in session
     }
-
 
     public function fetchReviews()
     {
@@ -96,13 +81,11 @@ class Reviews extends Component
         $this->rating = $value;
     }
 
-
     public function resetReviewForm()
     {
         $this->reset(['rating', 'images', 'selectedOrderItemId', 'editingReviewId']);
         $this->comment = '';
     }
-
 
     public function deleteReview($reviewId)
     {
@@ -148,7 +131,6 @@ class Reviews extends Component
 
         $this->dispatch('show-review-modal');
     }
-
 
     public function submitReview()
     {
@@ -306,10 +288,21 @@ class Reviews extends Component
         }
     }
 
-
     public function refreshToRateList()
     {
         $this->render();
+    }
+
+    public function openImageModal($imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
+        $this->isOpen = true;
+    }
+
+    public function closeImageModal()
+    {
+        $this->isOpen = false;
+        $this->imageUrl = null;
     }
 
     public function render()
