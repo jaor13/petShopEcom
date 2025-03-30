@@ -4,7 +4,7 @@
     <h4 class="section-title " style="color: #4F4F4F;">Manage Account Details</h4>
     </div>
     <div class="{{ $activeSection === 'my-purchases' ? '' : 'd-none' }}">
-    <h4 class="section-title"  style="color: #4F4F4F; margin-bottom: -0.7em;">My Purchases</h4>
+    <h4 class="section-title"  style="color: #4F4F4F; margin-bottom: -0.64em;">My Purchases</h4>
     </div>
     <div class="{{ $activeSection === 'ratings-reviews' ? '' : 'd-none' }}">
     <h4 class="section-title" style="color: #4F4F4F;">Ratings and Reviews</h4>

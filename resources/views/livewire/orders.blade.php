@@ -1,6 +1,6 @@
-<div class="container mt-3 p-0">
+<div class="container -mt-4 ">
     
-    <ul class="d-flex mb-2 bg-white h-10 p-9 pt-3 p-10 gap-8 ">
+    <ul class="d-flex mb-2 -ml-3 bg-white h-10 p-9 pt-3 p-10 gap-8 ">
         <li class="nav-item flex-fill text-center text-lg">
             <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
             wire:click.prevent="filterOrders('all')" href="?status=all" style="font-weight: normal;">
