@@ -1,6 +1,6 @@
 <div class="container -mt-4 ">
     
-    <ul class="d-flex mb-2 -ml-3 bg-white h-10 p-9 pt-3 p-10 gap-8 ">
+    <ul class="d-flex mb-1 -ml-3 bg-white h-10 p-9 pt-3 p-10 gap-8 ">
         <li class="nav-item flex-fill text-center text-lg">
             <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
             wire:click.prevent="filterOrders('all')" href="?status=all" style="font-weight: normal;">
@@ -39,7 +39,7 @@
         </li>
     </ul>
 
-        <div class="w-100 p-0">
+        <div class="w-120 p-0 -ml-3">
             @if ($selectedOrderId)
                 @livewire('order-details', ['order' => collect($orders)->firstWhere('id', $selectedOrderId)])
             @else
@@ -56,7 +56,7 @@
                             </div>
                             <div>
                                 <p class="mb-1 mt-3">
-                                    <span class="font-bold text-[#00DCE3]">{{ ucfirst(str_replace('_', ' ', $order['status'])) }}</span>
+                                    <span class="font-semibold text-[#00DCE3]">{{ ucfirst(str_replace('_', ' ', $order['status'])) }}</span>
                                 </p>
                             </div>
                             <div class="">
@@ -88,7 +88,7 @@
                                     Order Received
                                 </button>
                                 @else
-                                    <p class="mb-0 rounded-3 px-3 py-2" style="border: 2px solid #00DCE3; color: #00DCE3; background-color: #f8f9fa; font-weight: bold;">
+                                    <p class="mb-0 rounded-3 px-3 py-2" style="border: 2px solid #00DCE3; color: #00DCE3; background-color:hsl(0, 0.00%, 100.00%); font-weight: bold;">
                                         {{ $order['message'] }}
                                     </p>
                                 @endif
