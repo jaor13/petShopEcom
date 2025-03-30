@@ -1,4 +1,4 @@
-<div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto pt-5 ">
+<div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto pt-5">
   <section class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7 font-normal font-['Afacad']">
     <div class="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
       <div class="flex flex-wrap -mx-6">
@@ -184,7 +184,7 @@
   </div>
 
   <div class="overflow-hidden bg-white py-11 dark:bg-gray-800 font-normal mb-7">
-    <div class="px-20 pb-6 mt-6">
+    <div class="px-20 pb-6 mt-6" >
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-semibold text-gray-900">
                 {{ number_format($averageRating, 1) }} <span class="text-yellow-500">★</span> Product Ratings ({{ count($reviews) }})
@@ -255,9 +255,9 @@
   </div>
 
 
-  <div class="container-fluid p-2 rounded-3" style="background-color: white; margin-bottom: 2em;">
+  <div class="container-fluid p-2 rounded-3" style="background-color: white; margin-bottom: 0.7em;">
     <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
-      <h1 style="font-weight: bold; color: #262525;" class="text-2xl"> Products of Same Category </h1>
+      <h1 style="font-weight: bold; color:rgb(83, 82, 82);" class="text-2xl"> Products of Same Category </h1>
       <a href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
         style="font-size: 18px; color: rgb(145, 143, 143); text-decoration: none;">
         View All >
@@ -271,7 +271,7 @@
 
   <div class="container-fluid p-2 rounded-3" style="background-color: white;">
     <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
-      <h1 style="font-weight: bold; color: #262525;" class="text-2xl"> 
+      <h1 style="font-weight: bold; color:rgb(83, 82, 82);" class="text-2xl"> 
         More Products You May Like 
       </h1>
     </div>
