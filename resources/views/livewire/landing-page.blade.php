@@ -241,6 +241,82 @@
       </div>
     </div>
 
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
+          <span
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+
+          Dry Food
+        </h1>
+        <a href="{{ route('products', ['category' => 'Dry Food']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;"
+          wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers', 'category' => 'Dry Food'])
+      </div>
+    </div>
+
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
+          <span
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+
+          Pet Snacks
+        </h1>
+        <a href="{{ route('products', ['category' => 'Pet Snacks']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;"
+          wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers', 'category' => 'Pet Snacks'])
+      </div>
+    </div>
+
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
+          <span
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+
+          Pet Grooming
+        </h1>
+        <a href="{{ route('products', ['category' => 'Pet Grooming']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;"
+          wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers', 'category' => 'Pet Grooming'])
+      </div>
+    </div>
+
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
+          <span
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+
+          Pet Health & Wellness
+        </h1>
+        <a href="{{ route('products', ['category' => 'Pet Health & Wellness']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;"
+          wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers', 'category' => 'Pet Health & Wellness'])
+      </div>
+    </div>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
 
