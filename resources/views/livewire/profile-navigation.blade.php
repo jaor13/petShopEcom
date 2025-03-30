@@ -1,13 +1,13 @@
 <div class="row main-box ">
     <nav id="" class="col-md-4 col-lg-3 d-md-block  p-1">
     <div class="{{ $activeSection === 'my-account' ? '' : 'd-none' }}">
-    <h4 class="section-title " style="color: #4F4F4F;">Manage Account Details</h4>
+    <h4 class="section-title " style="color: #4F4F4F; margin-bottom: -0.64em;">Manage Account Details</h4>
     </div>
     <div class="{{ $activeSection === 'my-purchases' ? '' : 'd-none' }}">
     <h4 class="section-title"  style="color: #4F4F4F; margin-bottom: -0.64em;">My Purchases</h4>
     </div>
     <div class="{{ $activeSection === 'ratings-reviews' ? '' : 'd-none' }}">
-    <h4 class="section-title" style="color: #4F4F4F;">Ratings and Reviews</h4>
+    <h4 class="section-title" style="color: #4F4F4F margin-bottom: 64em;">Ratings and Reviews</h4>
     </div>
     <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}">
     <h4 class="section-title" style="color: #4F4F4F;">My Likes</h4>

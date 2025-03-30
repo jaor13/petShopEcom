@@ -1,4 +1,4 @@
-<div class="container" style=" margin-top: 2px; ">
+<div class="container -mt-4" >
     <div class="row">
         <!-- Read-Only Personal Information -->
         @if (!$isEditing)
