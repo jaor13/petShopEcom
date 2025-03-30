@@ -170,7 +170,7 @@
         </a>
 
         <a href="{{ url('products?category=' . "Dog Toy") }}" wire:navigate class="category-box">
-          <i class="fa-solid fa-bone"></i>
+          <i class="fa-solid fa-carrot"></i>
         </a>
 
         <a href="{{ url('products?category=' . "Pet Shampoo & Bath Essentials") }}" wire:navigate class="category-box">
