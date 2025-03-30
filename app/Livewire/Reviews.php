@@ -14,7 +14,6 @@ use Illuminate\Validation\ValidationException;
 class Reviews extends Component
 {
     use WithFileUploads, LivewireAlert;
-
     public $product;
     public $orderedItemId;
     public $orderItem;
@@ -35,6 +34,8 @@ class Reviews extends Component
 
     public function mount($orderedItemId = null)
     {
+        $this->activeTab = session('active_tab', 'to_rate');
+
         if ($orderedItemId) {
             $this->orderItem = OrderItem::find($orderedItemId);
             $this->product = $this->orderItem ? $this->orderItem->product : null;
@@ -60,7 +61,9 @@ class Reviews extends Component
     public function switchTab($tab)
     {
         $this->activeTab = $tab;
+        session(['active_tab' => $tab]); // Store in session
     }
+
 
     public function fetchReviews()
     {
