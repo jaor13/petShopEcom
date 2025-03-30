@@ -8,7 +8,7 @@
             <div class="col-lg-8 mb-4">
                 <div>
                     <div class="card-body">
-                        <div class="border p-4 mb-1.5 rounded-1 shadow-sm bg-white">
+                        <div class="border p-4 mb-0.5 rounded-1 shadow-sm bg-white">
                             <!-- Check if the user has an address -->
                             @if (!$use_existing_address)
                                 <!-- Add Address Button -->
@@ -95,7 +95,7 @@
             </div>
 
             <div class="col-lg-4">
-                <div class=" bg-white border rounded-lg shadow-sm border-0 shadow-sm mb-4">
+                <div class=" bg-white border rounded-1 shadow-sm border-0 shadow-sm mb-1 -ml-5  mt-0.4">
                     <div class="card-body p-4 mr-3 ml-3">
                         <h5 class="text-lg font-bold text-gray-700 dark:text-gray mb-2">
                             Payment Methods
@@ -156,9 +156,9 @@
                     </div>
                 </div>
 
-                <div class=" bg-white border rounded-lg shadow-sm border-0 shadow-sm">
+                <div class=" bg-white border rounded-1 shadow-sm border-0 shadow-sm -ml-5">
                     <div class="card-body p-4 mr-3 ml-3">
-                        <h5 class="text-xl text-center font-bold  text-gray-700 dark:text-black mb-2">
+                        <h5 class="text-xl text-center font-bold  text-gray-700 dark:text-gray mb-2">
                             ORDER SUMMARY
                         </h5>
                         <div class="flex justify-between mt-3">
@@ -170,8 +170,8 @@
                             <span>{{ Number::currency($shipping_amount, 'PHP') }}</span>
                         </div>
                         <hr>
-                        <div class="d-flex justify-content-between  mb-2 font-bold pt-3">
-                            <span>Grand Total</span>
+                        <div class="d-flex justify-content-between  mb-2 font-bold pt-3" style="color: rgb(58, 58, 58);">
+                            <span >Grand Total</span>
                             <span>{{ Number::currency($grand_total, 'PHP') }}</span>
                         </div>
                         <button type="submit"
