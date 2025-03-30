@@ -119,6 +119,33 @@ class CategorySeeder extends Seeder
                 'is_active' => 1,
                 'created_at' => Carbon::now(),
             ],
+
+            [
+                'id' => 15,
+                'name' => 'Bird Products',
+                'slug' => 'bird-products',
+                'image' => null,
+                'is_active' => 1,
+                'created_at' => Carbon::now(),
+            ],
+
+            [
+                'id' => 16,
+                'name' => 'Fish Feeders',
+                'slug' => 'fish-feeders',
+                'image' => null,
+                'is_active' => 1,
+                'created_at' => Carbon::now(),
+            ],
+
+            [
+                'id' => 17,
+                'name' => 'Bearded Dragons',
+                'slug' => 'bearded-dragons',
+                'image' => null,
+                'is_active' => 1,
+                'created_at' => Carbon::now(),
+            ],
         ]);
     }
 }
