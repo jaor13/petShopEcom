@@ -199,7 +199,7 @@
         </a>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
-        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
+        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'latest'])
       </div>
     </div>
 
@@ -230,14 +230,14 @@
 
           Hygiene and Supply
         </h1>
-        <a href="{{ route('products', ['type' => 'best_sellers']) }}"
+        <a href="{{ route('products', ['category' => 'Hygiene Supplies']) }}"
           style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;"
           wire:navigate>
           View All >
         </a>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
-        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
+      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers', 'category' => 'Hygiene Supplies'])
       </div>
     </div>
 
