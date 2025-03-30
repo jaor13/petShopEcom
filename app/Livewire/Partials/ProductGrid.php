@@ -56,7 +56,7 @@ class ProductGrid extends Component
     public function render()
     {
         $products = Product::where('is_active', 1);
-
+    
         if ($this->category) {
             $products->whereHas('categories', function ($q) {
                 $q->where('name', 'like', '%' . $this->category . '%');
@@ -72,35 +72,32 @@ class ProductGrid extends Component
             });
         }
         
-        
-        if ($this->type === 'latest') {
-            $products->orderBy('created_at', 'desc'); 
-        } elseif ($this->type === 'best_sellers') {
-            $products->orderBy('sold_count', 'desc'); 
-        }
-        
         if ($this->excludeProductId) {
             $products->where('id', '!=', $this->excludeProductId);
         }
-
+    
+        // Sorting logic
         if ($this->type === 'latest') {
             $products->orderBy('created_at', 'desc');
         } elseif ($this->type === 'best_sellers') {
             $products->orderBy('sold_count', 'desc');
+        } elseif (!$this->type) {
+            // If no specific sorting type, randomize the results
+            $products->inRandomOrder();
         }
-
+    
         if ($this->sortPrice === 'asc') {
             $products->orderBy('price', 'asc');
         } elseif ($this->sortPrice === 'desc') {
             $products->orderBy('price', 'desc');
         }
-
+    
         if ($this->limit) {
             $products->limit($this->limit);
         }
-
+    
         return view('livewire.partials.product-grid', [
             'products' => $products->get()
         ]);
     }
-}
+}    

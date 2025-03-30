@@ -1,4 +1,4 @@
-<div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto pt-5 ">
+<div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto pt-5">
   <section class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7 font-normal font-['Afacad']">
     <div class="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
       <div class="flex flex-wrap -mx-6">
@@ -61,7 +61,7 @@
             <!-- Variant Images -->
             <div class="flex-wrap hidden md:flex">
               @foreach ($product->variants as $variant)
-                  <div class="w-1/2 mr-1 sm:w-1/4 border"
+                  <div class="w-1/2 mr-1 sm:w-1/4 border mb-1"
                       wire:click="selectVariant('{{ $variant->name }}', {{ $variant->price }}, {{ $variant->stock_quantity }})"
                       x-on:click="selectVariant('{{ $variant->name }}', '{{ url('storage', $variant->image) }}', {{ $variant->stock_quantity }}, {{ $variant->price }})"
                       :class="{ 'border-2 border-[#00DEC3]': selectedVariant === '{{ $variant->name }}' }">
@@ -161,38 +161,38 @@
     </div>
   </section>
 
-  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7">
+  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-2 -mt-5">
     <div class="px-20 pb-6 mt-6 ">
       <div class="flex flex-col mt-6">
-        <div style="background-color: #E0F2F7; padding: 10px; border-radius: 5px;">
+        <div style="background-color: #E0F2F7; padding: 10px; border-radius: 5px; margin-left: -1em;">
           <h2 class="text-xl font-light text-black-300 dark:text-black-400">Product Specification</h2>
         </div>
-        <p class="max-w-md text-black-300 dark:text-black-400 ml-4 mt-2">
+        <p class="max-w-md text-black-300 dark:text-black-400 ml-3  mt-2">
           Category: {{ $product->categories->pluck('name')->join(', ') }}
         </p>
-        <p class="max-w-md text-gray-300 dark:text-gray-400 ml-4 mt-2">
+        <p class="max-w-md text-gray-300 dark:text-gray-400 ml-3 mt-2">
           Stocks: {{ $product->stock_quantity }}
         </p>
       </div>
       <div class="flex flex-col mt-6 [&>ul]:list-disc [&>ul]:ml-8">
-        <div style="background-color: #E0F2F7;margin-bottom: 10px; padding: 10px; border-radius: 5px;">
+        <div style="background-color: #E0F2F7;margin-bottom: 10px; padding: 10px; border-radius: 5px; margin-left: -1em;">
           <h2 class="text-xl font-light text-black-300 dark:text-black-400">Product Description</h2>
         </div>
-        <p class="max-w-md text-gray-300 dark:text-gray-400">
+        <p class="max-w-md text-gray-300 dark:text-gray-400 ml-1">
           {!! Str::markdown(preg_replace('/^\s*-\s*/m', '- ', $product->description)) !!}
         </p>
       </div>
     </div>
   </div>
 
-  <div class="overflow-hidden bg-white py-11 dark:bg-gray-800 font-normal mb-7">
-    <div class="px-20 pb-6 mt-6">
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-semibold dark:text-[#4F4F4F] ">
+  <div class="overflow-hidden bg-white py-11 dark:bg-gray-800 font-normal ">
+    <div class="px-20 pb-6 -ml-5" >
+        <div class="flex items-center justify-between mb-2">
+            <h2 class="text-2xl font-semibold text-gray-600">
                 {{ number_format($averageRating, 1) }} <span class="text-yellow-500">★</span> Product Ratings ({{ count($reviews) }})
             </h2>
         </div>
-        <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000;">
+        <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000; width: 102%;">
         <div class="space-y-4">
         @forelse ($reviews as $review)
         <div class="bg-white rounded-lg p-4 shadow-sm">
@@ -256,19 +256,43 @@
     </div>
   </div>
 
-  <div class="container-fluid p-2 rounded-3" style="background-color: white;">
+  <div class="relative my-10 flex items-center w-[95%] mx-auto">
+    <div class="flex-grow border-t border-gray-300"></div>
+      <span class="mx-3 text-gray-500 font-semibold text-xl">More Products</span>
+    <div class="flex-grow border-t border-gray-300"></div>
+  </div>
+
+
+  <div class="container-fluid p-2 rounded-1" style="background-color: white; margin-bottom: 0.7em;">
     <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
-      <h1 style="font-weight: bold; color: #4F4F4F ;" class="text-2xl"> Products of Same Category </h1>
-        <a href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
-          style="font-size: 18px; color: rgb(145, 143, 143); text-decoration: none;">
-          View All > </a>
+      <h1 style="font-weight: bold; color:rgb(83, 82, 82); margin-left: 0.1em;" class="text-2xl"> Products of Same Category </h1>
+      <a href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
+        style="font-size: 18px; color: rgb(145, 143, 143); text-decoration: none;">
+        View All >
+      </a>
     </div>
 
     <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
       @livewire('partials.product-grid', ['category' => $product->categories->first()->name ?? '', 'limit' => 5, 'excludeProductId' => $product->id])
     </div>
   </div>
+
+  <div class="container-fluid p-2 rounded-1" style="background-color: white;">
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
+      <h1 style="font-weight: bold; color:rgb(83, 82, 82);  margin-left: 0.1em;" class="text-2xl"> 
+        More Products You May Like 
+      </h1>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      @livewire('partials.product-grid', ['limit' => 50,'excludeProductId' => $product->id,'random' => true])
+    </div>
+  </div>
 </div>
+
+
+
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {

@@ -4,16 +4,16 @@
     <div class="flex flex-col md:flex-row gap-4">
       <div class="md:w-3/4 mb-4">
         <div>
-          <div class="flex justify-between items-center mb-2 bg-white overflow-x-auto rounded-md py-2 px-4">
-            <div class="flex items-center space-x-2">
+          <div class="flex justify-between items-center mb-1 bg-white overflow-x-auto rounded-md py-2 px-4">
+            <div class="flex items-center space-x-2 ml-4">
             <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll"
-            class="w-3 h-3 cursor-pointer  checked:bg-[#00DCE3] checked:border-[#00DCE3] checked:opacity-100">
-            <span class="text-m font-thin ">
+            class="w-3 h-3 cursor-pointer  checked:bg-[#00DCE3] checked:border-[#00DCE3] checked:opacity-100 ">
+            <span class="text-m font-thin">
                 Select All</span>
             </div>
             <div class="mr-5">
             <button wire:click="removeSelectedItems" class="text-red-500  group  text-[#282828]">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 mr-5 pt-1 " viewBox="0 0 24 24" fill="none"
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 -mr-2 mt-2 pt-1 " viewBox="0 0 24 24" fill="none"
               stroke="#969696" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="bevel">
               <polyline points="3 6 5 6 21 6"></polyline>
               <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -24,16 +24,16 @@
             </div>
           </div>
 
-          <div class="bg-white overflow-x-auto rounded-md shadow-md p-6">
+          <div class="bg-white overflow-x-auto rounded-md shadow-md p-10">
             <table class="w-full ">
             <thead>
               <tr>
-              <th class="text-left font-semibold text-[ #4F4F4F]">Product</th>
+              <th class="text-left font-semibold">Product</th>
                 <th></th>
-                <th class="text-center font-semibold" style="width: 149px; color: #4F4F4F;">Price</th>
-                <th class="text-center font-semibold" style="width: 119px;  color:#4F4F4F;">Quantity</th>
-                <th class="text-center font-semibold" style="width: 149px;  color: #4F4F4F;">Total Price</th>
-                <th class="text-center font-semibold" style="width: 99px;  color: #4F4F4F;">Delete</th>
+                <th class="text-center font-semibold" style="width: 149px;">Price</th>
+                <th class="text-center font-semibold" style="width: 119px;">Quantity</th>
+                <th class="text-center font-semibold" style="width: 149px;">Total Price</th>
+                <th class="text-center font-semibold" style="width: 99px;">Delete</th>
                 </tr>
             </thead>
             <tr>

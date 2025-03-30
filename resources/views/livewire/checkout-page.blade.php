@@ -1,5 +1,5 @@
 <div class="container py-5">
-    <h1 class="h2 font-weight-bold text-dark mb-4">
+    <h1 class="h2 font-weight-bold text-dark mb-1">
         Checkout
     </h1>
     <form wire:submit.prevent="placeOrder">
@@ -8,7 +8,7 @@
             <div class="col-lg-8 mb-4">
                 <div>
                     <div class="card-body">
-                        <div class="border p-4 mb-3 rounded-3 shadow-sm bg-white">
+                        <div class="border p-4 mb-0.5 rounded-1 shadow-sm bg-white">
                             <!-- Check if the user has an address -->
                             @if (!$use_existing_address)
                                 <!-- Add Address Button -->
@@ -20,10 +20,10 @@
 
                                 <!-- Non-Editing View -->
                                 @if (!$is_editing)
-                                    <div class="d-flex align-items-center mr-3 ml-3">
+                                    <div class="d-flex align-items-center mr-3 ml-5">
                                         <!-- Location Pin Icon -->
-                                        <div class="text-primary flex-shrink-0 " style="margin-bottom: 35px;">
-                                            <i class="fa-solid fa-location-dot fa-lg " style="color:#00DCE3"></i>
+                                        <div class="text-primary flex-shrink-0 " style="margin-bottom: 40px;">
+                                            <i class="fa-solid fa-location-dot fa-lg " style="color:rgb(255, 29, 29)"></i>
                                         </div>
 
                                         <!-- Address Details -->
@@ -31,27 +31,27 @@
                                             <h5 class="font-semibold  mb-1 text-lg" style=" color:#4F4F4F;">
                                                 {{ $first_name }} {{ $last_name }}
                                             </h5>
-                                            <p class="text-muted small mb-0">
+                                            <p class="text-muted text-small mb-0">
                                                 (+63) {{ $phone }}
                                             </p>
-                                            <p class="text-muted small mb-0">
+                                            <p class="text-muted text-small mb-0">
                                                 {{ $street_address }}, {{ $city }}, {{ $zip_code }}, {{ $province }}
                                             </p>
                                         </div>
 
                                         <!-- Edit Icon -->
-                                        <div class="ml-auto">
+                                        <div class="ml-auto mr-3">
                                             <button type="button" class="btn btn-link text-primary p-0" wire:click="openAddressModal(true)">
                                             <i class="fas fa-edit" style="color: #00DCE3;"></i> 
-    </button>
-    <span style="color: #00DCE3;">Edit</span>
+                                        </button>
+                                        <span style="color: #00DCE3;">Edit</span>
                                         </div>
                                     </div>
                                 @endif
                             @endif
                         </div>
                     </div>
-                    <div class="card-body p-5 bg-white border rounded-lg shadow-sm">
+                    <div class="card-body p-5 bg-white border rounded-1 shadow-sm">
                         <div class="mt-0">
                             <h5 class="font-bold text-xl text-black-400 mb-3  border-bottom" style=" color:#4F4F4F;">
                                 Product Ordered
@@ -86,8 +86,8 @@
                         <div class="flex justify-between items-center pt-3">
     </div>
     <div class="flex justify-between items-center mt-2">
-        <p class="text-lg font-bold " style=" color:#4F4F4F;">Total {{ $total_items }} Item(s)</p>
-        <p class="text-lg font-semibold " style=" color:#4F4F4F;">{{ Number::currency($grand_total-$shipping_amount, 'PHP') }}</p>
+        <p class="text-lg font-bold text-gray-700">Total of {{ $total_items }} Item(s)</p>
+        <p class="text-lg font-semibold text-gray-900">{{ Number::currency($grand_total-$shipping_amount, 'PHP') }}</p>
     </div>
 </div>
                     </div>
@@ -95,7 +95,7 @@
             </div>
 
             <div class="col-lg-4">
-                <div class=" bg-white border rounded-lg shadow-sm border-0 shadow-sm mb-4">
+                <div class=" bg-white border rounded-1 shadow-sm border-0 shadow-sm mb-1 -ml-5  mt-0.4">
                     <div class="card-body p-4 mr-3 ml-3">
                         <h5 class="text-lg font-bold text-gray-700 dark:text-gray mb-2">
                             Payment Methods
@@ -156,7 +156,7 @@
                     </div>
                 </div>
 
-                <div class=" bg-white border rounded-lg shadow-sm border-0 shadow-sm">
+                <div class=" bg-white border rounded-1 shadow-sm border-0 shadow-sm -ml-5">
                     <div class="card-body p-4 mr-3 ml-3">
                         <h5 class="text-xl text-center font-bold   mb-2" style=" color:#4F4F4F;">
                             ORDER SUMMARY
