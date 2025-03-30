@@ -159,7 +159,7 @@
     </div>
   </section>
 
-  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7">
+  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-2 -mt-1">
     <div class="px-20 pb-6 mt-6 ">
       <div class="flex flex-col mt-6">
         <div style="background-color: #E0F2F7; padding: 10px; border-radius: 5px;">
@@ -183,14 +183,14 @@
     </div>
   </div>
 
-  <div class="overflow-hidden bg-white py-11 dark:bg-gray-800 font-normal mb-7">
-    <div class="px-20 pb-6 mt-6" >
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-semibold text-gray-900">
+  <div class="overflow-hidden bg-white py-11 dark:bg-gray-800 font-normal ">
+    <div class="px-20 pb-6 -ml-5" >
+        <div class="flex items-center justify-between mb-2">
+            <h2 class="text-2xl font-semibold text-gray-600">
                 {{ number_format($averageRating, 1) }} <span class="text-yellow-500">★</span> Product Ratings ({{ count($reviews) }})
             </h2>
         </div>
-        <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000;">
+        <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000; width: 100%;">
         <div class="space-y-4">
         @forelse ($reviews as $review)
         <div class="bg-white rounded-lg p-4 shadow-sm">
@@ -254,6 +254,12 @@
     </div>
   </div>
 
+  <div class="relative my-10 flex items-center w-[95%] mx-auto">
+    <div class="flex-grow border-t border-gray-300"></div>
+      <span class="mx-3 text-gray-500 font-semibold text-xl">More Products</span>
+    <div class="flex-grow border-t border-gray-300"></div>
+  </div>
+
 
   <div class="container-fluid p-2 rounded-3" style="background-color: white; margin-bottom: 0.7em;">
     <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
@@ -291,7 +297,5 @@
     if (window.FontAwesome) {
         window.FontAwesome.dom.i2svg();
     }
-});
-
-
+  });
 </script>
