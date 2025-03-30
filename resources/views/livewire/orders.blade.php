@@ -1,41 +1,41 @@
-<div class="container mt-3 p-0">
-
-    <ul class="d-flex mb-2 bg-white h-14 p-0 pt-3 p-0 px-4 ">
-        <li class="nav-item flex-fill text-center custom-link {{ $status === 'all' ? 'active' : '' }}"
-            wire:click.prevent="filterOrders('all')" href="?status=all"
-            style="font-weight: normal; max-width: 154px; font-size: 19px; ">
-            All Orders
-
+<div class="container -mt-4 ">
+    
+    <ul class="d-flex mb-1 -ml-3 bg-white h-10 p-9 pt-3 p-10 gap-8 ">
+        <li class="nav-item flex-fill text-center text-lg">
+            <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
+            wire:click.prevent="filterOrders('all')" href="?status=all" style="font-weight: normal;">
+                All Orders
+            </a>
         </li>
-        <li class="nav-item flex-fill text-center 
-        custom-link  {{ $status === 'to_ship' ? 'active' : '' }} " wire:click.prevent="filterOrders('to_ship')"
-            href="?status=to_ship" style="font-weight: normal; max-width: 154px; font-size: 19px;">
-            To Ship
-
+        <li class="nav-item flex-fill text-center text-lg">
+            <a class="custom-link py-2 {{ $status === 'to_ship' ? 'active' : '' }}" 
+            wire:click.prevent="filterOrders('to_ship')" href="?status=to_ship" style="font-weight: normal;">
+             To Ship
+            </a>
         </li>
-        <li class="nav-item flex-fill text-center custom-link  {{ $status === 'to_receive' ? 'active' : '' }}"
-            wire:click.prevent="filterOrders('to_receive')" href="?status=to_receive"
-            style="font-weight: normal; max-width: 154px; font-size: 19px;">
-            To Receive
-
+        <li class="nav-item flex-fill text-center text-lg">
+            <a class="custom-link py-2 {{ $status === 'to_receive' ? 'active' : '' }}" 
+            wire:click.prevent="filterOrders('to_receive')" href="?status=to_receive" style="font-weight: normal;">
+              To Receive
+            </a>
         </li>
-        <li class="nav-item flex-fill text-center custom-link {{ $status === 'delivered' ? 'active' : '' }}"
-            wire:click.prevent="filterOrders('delivered')" href="?status=delivered"
-            style="font-weight: normal; max-width: 154px; font-size: 19px;">
-            Delivered
-
+        <li class="nav-item flex-fill text-center text-lg">
+            <a class="custom-link py-2 {{ $status === 'delivered' ? 'active' : '' }}" 
+            wire:click.prevent="filterOrders('delivered')" href="?status=delivered" style="font-weight: normal;">
+                Delivered
+            </a>
         </li>
-        <li class="nav-item flex-fill text-center custom-link  {{ $status === 'completed' ? 'active' : '' }}"
-            wire:click.prevent="filterOrders('completed')" href="?status=completed"
-            style="font-weight: normal; max-width: 154px; font-size: 18px;">
-            Completed
-
+        <li class="nav-item flex-fill text-center text-lg">
+            <a class="custom-link py-2 {{ $status === 'completed' ? 'active' : '' }}" 
+            wire:click.prevent="filterOrders('completed')" href="?status=completed" style="font-weight: normal;">
+                Completed
+            </a>
         </li>
-        <li class="nav-item flex-fill text-center custom-link {{ $status === 'cancelled' ? 'active' : '' }}"
-            wire:click.prevent="filterOrders('cancelled')" href="?status=cancelled"
-            style="font-weight: normal; max-width: 154px; font-size: 19px;">
-            Cancelled
-
+        <li class="nav-item flex-fill text-center text-lg">
+            <a class="custom-link py-2 {{ $status === 'cancelled' ? 'active' : '' }}" 
+            wire:click.prevent="filterOrders('cancelled')" href="?status=cancelled" style="font-weight: normal;">
+                 Cancelled
+            </a>
         </li>
     </ul>
 
