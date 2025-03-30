@@ -190,11 +190,11 @@
             <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-xl  z-50">
                 <div class="modal-header border-bottom pb-2">
                     <h4 class="modal-title">{{ $is_editing ? 'Edit Address' : 'Add your deliver address.' }}</h4>
-                    <button type="button" class="btn-close" wire:click="closeAddressModal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" wire:click="closeAddressModal" aria-label="Close" style="font-size: 13px;"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body mt-3">
                     <form wire:submit.prevent="saveAddress">
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-md-6">
                                 <label for="first_name" class="form-label">First Name</label>
                                 <input wire:model="first_name" id="first_name" class="form-control" type="text">

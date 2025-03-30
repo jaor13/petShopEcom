@@ -1,41 +1,36 @@
 <div class="container mt-3 p-0">
-    
-<ul class="d-flex mb-2 bg-white h-10 p-0 pt-2 p-0">
-    <li class="nav-item flex-fill text-center">
-        <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
-           wire:click.prevent="filterOrders('all')" href="?status=all" style="font-weight: normal;">
+
+<ul class="d-flex mb-2 bg-white h-14 p-0 pt-3 p-0 px-4 ">
+    <li class="nav-item flex-fill text-center custom-link {{ $status === 'all' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('all')" href="?status=all" style="font-weight: normal; max-width: 154px; font-size: 19px; ">
             <i class="fas fa-list-alt me-2"></i> All Orders
-        </a>
+       
     </li>
-    <li class="nav-item flex-fill text-center">
-        <a class="custom-link py-2 {{ $status === 'to_ship' ? 'active' : '' }}" 
-           wire:click.prevent="filterOrders('to_ship')" href="?status=to_ship" style="font-weight: normal;">
-            <i class="fas fa-shipping-fast me-2"></i> To Ship
-        </a>
+    <li class="nav-item flex-fill text-center 
+        custom-link  {{ $status === 'to_ship' ? 'active' : '' }} " 
+           wire:click.prevent="filterOrders('to_ship')" href="?status=to_ship" style="font-weight: normal; max-width: 154px; font-size: 19px;">
+            <i class="fas fa-shipping-fast me-2 "></i> To Ship
+        
     </li>
-    <li class="nav-item flex-fill text-center">
-        <a class="custom-link py-2 {{ $status === 'to_receive' ? 'active' : '' }}" 
-           wire:click.prevent="filterOrders('to_receive')" href="?status=to_receive" style="font-weight: normal;">
+    <li class="nav-item flex-fill text-center custom-link  {{ $status === 'to_receive' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('to_receive')" href="?status=to_receive" style="font-weight: normal; max-width: 154px; font-size: 19px;">
             <i class="fas fa-box-open me-2"></i> To Receive
-        </a>
+       
     </li>
-    <li class="nav-item flex-fill text-center">
-        <a class="custom-link py-2 {{ $status === 'delivered' ? 'active' : '' }}" 
-           wire:click.prevent="filterOrders('delivered')" href="?status=delivered" style="font-weight: normal;">
+    <li class="nav-item flex-fill text-center custom-link {{ $status === 'delivered' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('delivered')" href="?status=delivered" style="font-weight: normal; max-width: 154px; font-size: 19px;">
             <i class="fas fa-check-square me-2"></i> Delivered
-        </a>
+      
     </li>
-    <li class="nav-item flex-fill text-center">
-        <a class="custom-link py-2 {{ $status === 'completed' ? 'active' : '' }}" 
-           wire:click.prevent="filterOrders('completed')" href="?status=completed" style="font-weight: normal;">
+    <li class="nav-item flex-fill text-center custom-link  {{ $status === 'completed' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('completed')" href="?status=completed" style="font-weight: normal; max-width: 154px; font-size: 18px;">
             <i class="fas fa-check-circle me-2"></i> Completed
-        </a>
+       
     </li>
-    <li class="nav-item flex-fill text-center">
-        <a class="custom-link py-2 {{ $status === 'cancelled' ? 'active' : '' }}" 
-           wire:click.prevent="filterOrders('cancelled')" href="?status=cancelled" style="font-weight: normal;">
+    <li class="nav-item flex-fill text-center custom-link {{ $status === 'cancelled' ? 'active' : '' }}" 
+           wire:click.prevent="filterOrders('cancelled')" href="?status=cancelled" style="font-weight: normal; max-width: 154px; font-size: 19px;">
             <i class="fas fa-times-circle me-2"></i> Cancelled
-        </a>
+     
     </li>
 </ul>
 
@@ -60,7 +55,7 @@
                             </p>
                         </div>
                         <div class="">
-                            <a href="#" class="btn btn-link text-secondary text-decoration-none mt-3" wire:click.prevent="selectOrder({{ $order['id'] }})">Order Details ></a>
+                            <a href="#" class="btn btn-link text-secondary p-0 text-decoration-none mt-3" wire:click.prevent="selectOrder({{ $order['id'] }})">Order Details ></a>
                         </div>
                     </div>
 
