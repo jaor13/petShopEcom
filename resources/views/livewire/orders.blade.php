@@ -1,6 +1,6 @@
 <div class="container mt-3 p-0">
 
-<ul class="d-flex mb-2 bg-white h-14 p-0 pt-3 p-0 px-4 ">
+<ul class="d-flex mb-2 bg-white h-14 p-0 pt-3 p-0 px-4 " >
     <li class="nav-item flex-fill text-center custom-link {{ $status === 'all' ? 'active' : '' }}" 
            wire:click.prevent="filterOrders('all')" href="?status=all" style="font-weight: normal; max-width: 154px; font-size: 19px; ">
             <i class="fas fa-list-alt me-2"></i> All Orders
@@ -76,7 +76,7 @@
 
                     <div class="text-end mb-4">
                         <p class="mb-0">Total Items: {{ count($order['items']) }}</p>
-                        <p><strong>Total Price: ₱{{ number_format($order['total_price'], 2) }}</strong></p>
+                        <p style="color: #4F4F4F;"><strong>Total Price: ₱{{ number_format($order['total_price'], 2) }}</strong></p>
                         <div class="d-inline-block">
                             @if ($order['status'] === 'delivered')
                             <button class="btn btn-success" onclick="openModal('testModal', {{ $order['id'] }})">
