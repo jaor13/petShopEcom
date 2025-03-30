@@ -1,5 +1,5 @@
 <div class="container py-5">
-    <h1 class="h2 font-weight-bold text-dark mb-4">
+    <h1 class="h2 font-weight-bold text-dark mb-1">
         Checkout
     </h1>
     <form wire:submit.prevent="placeOrder">
@@ -8,7 +8,7 @@
             <div class="col-lg-8 mb-4">
                 <div>
                     <div class="card-body">
-                        <div class="border p-4 mb-3 rounded-3 shadow-sm bg-white">
+                        <div class="border p-4 mb-1.5 rounded-1 shadow-sm bg-white">
                             <!-- Check if the user has an address -->
                             @if (!$use_existing_address)
                                 <!-- Add Address Button -->
@@ -20,9 +20,9 @@
 
                                 <!-- Non-Editing View -->
                                 @if (!$is_editing)
-                                    <div class="d-flex align-items-center mr-3 ml-3">
+                                    <div class="d-flex align-items-center mr-3 ml-5">
                                         <!-- Location Pin Icon -->
-                                        <div class="text-primary flex-shrink-0 " style="margin-bottom: 35px;">
+                                        <div class="text-primary flex-shrink-0 " style="margin-bottom: 40px;">
                                             <i class="fa-solid fa-location-dot fa-lg " style="color:#00DCE3"></i>
                                         </div>
 
@@ -40,21 +40,21 @@
                                         </div>
 
                                         <!-- Edit Icon -->
-                                        <div class="ml-auto">
+                                        <div class="ml-auto mr-3">
                                             <button type="button" class="btn btn-link text-primary p-0" wire:click="openAddressModal(true)">
                                             <i class="fas fa-edit" style="color: #00DCE3;"></i> 
-    </button>
-    <span style="color: #00DCE3;">Edit</span>
+                                        </button>
+                                        <span style="color: #00DCE3;">Edit</span>
                                         </div>
                                     </div>
                                 @endif
                             @endif
                         </div>
                     </div>
-                    <div class="card-body p-5 bg-white border rounded-lg shadow-sm">
+                    <div class="card-body p-5 bg-white border rounded-1 shadow-sm">
                         <div class="mt-0">
-                            <h5 class="font-bold text-xl text-black-400 mb-3  border-bottom">
-                                Product Ordered
+                            <h5 class="font-bold text-xl text-black-400 -mb-1  border-bottom">
+                                Products Ordered
                             </h5>
                             
                             <ul class="list-unstyled">
