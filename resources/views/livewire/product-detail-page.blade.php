@@ -254,19 +254,37 @@
     </div>
   </div>
 
-  <div class="container-fluid p-2 rounded-3" style="background-color: white;">
+
+  <div class="container-fluid p-2 rounded-3" style="background-color: white; margin-bottom: 2em;">
     <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
       <h1 style="font-weight: bold; color: #262525;" class="text-2xl"> Products of Same Category </h1>
-        <a href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
-          style="font-size: 18px; color: rgb(145, 143, 143); text-decoration: none;">
-          View All > </a>
+      <a href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
+        style="font-size: 18px; color: rgb(145, 143, 143); text-decoration: none;">
+        View All >
+      </a>
     </div>
 
     <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
       @livewire('partials.product-grid', ['category' => $product->categories->first()->name ?? '', 'limit' => 5, 'excludeProductId' => $product->id])
     </div>
   </div>
+
+  <div class="container-fluid p-2 rounded-3" style="background-color: white;">
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
+      <h1 style="font-weight: bold; color: #262525;" class="text-2xl"> 
+        More Products You May Like 
+      </h1>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      @livewire('partials.product-grid', ['limit' => 50,'excludeProductId' => $product->id,'random' => true])
+    </div>
+  </div>
 </div>
+
+
+
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
