@@ -23,18 +23,18 @@
                                     <div class="d-flex align-items-center mr-3 ml-5">
                                         <!-- Location Pin Icon -->
                                         <div class="text-primary flex-shrink-0 " style="margin-bottom: 40px;">
-                                            <i class="fa-solid fa-location-dot fa-lg " style="color:#00DCE3"></i>
+                                            <i class="fa-solid fa-location-dot fa-lg " style="color:rgb(255, 29, 29)"></i>
                                         </div>
 
                                         <!-- Address Details -->
                                         <div class="ml-3 flex-grow-1">
-                                            <h5 class="font-semibold text-dark mb-1 text-lg">
+                                            <h5 class="font-semibold text-dark mb-1 text-xl">
                                                 {{ $first_name }} {{ $last_name }}
                                             </h5>
-                                            <p class="text-muted small mb-0">
+                                            <p class="text-muted text-small mb-0">
                                                 (+63) {{ $phone }}
                                             </p>
-                                            <p class="text-muted small mb-0">
+                                            <p class="text-muted text-small mb-0">
                                                 {{ $street_address }}, {{ $city }}, {{ $zip_code }}, {{ $province }}
                                             </p>
                                         </div>
@@ -86,7 +86,7 @@
                         <div class="flex justify-between items-center pt-3">
     </div>
     <div class="flex justify-between items-center mt-2">
-        <p class="text-lg font-bold text-gray-700">Total {{ $total_items }} Item(s)</p>
+        <p class="text-lg font-bold text-gray-700">Total of {{ $total_items }} Item(s)</p>
         <p class="text-lg font-semibold text-gray-900">{{ Number::currency($grand_total-$shipping_amount, 'PHP') }}</p>
     </div>
 </div>
