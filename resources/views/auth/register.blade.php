@@ -15,7 +15,7 @@
 <body>
     <div class="container" id="main-container">
         <div class="form-container sign-up" id="signup-container">
-            <h2>Create Account</h2>
+            <h2 style=" color:#4F4F4F;">Create Account</h2>
             <p>Join us by filling out the details</p>
 
             <form method="POST" action="{{ route('register') }}">

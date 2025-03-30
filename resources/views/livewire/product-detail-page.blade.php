@@ -91,12 +91,14 @@
                 </div>
                 <div style="display: flex; align-items: center;">
                   <div wire:click="addToLiked({{ $product->id }})" class="like-button-container">
-                    <span class="like-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF8284"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="bevel" class="like-icon hover:fill-red-500 mr-2 ">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                        </svg>
-                    </span>
+                  <div class="like-button" id="likeButton" style="display: inline-flex; align-items: center; cursor: pointer;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" 
+       fill="none" stroke="#FF8284" stroke-width="1.5" stroke-linecap="round" 
+       stroke-linejoin="bevel" class="like-icon" 
+       style="transition: transform 0.3s ease, fill 0.3s ease;">
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+  </svg> 
+</div>
                   </div>
                   <span style="color: #374151;">Add to Favorites</span>
                 </div>
@@ -127,7 +129,7 @@
               </div>
               <div class="flex items-center mt-4">
                 <span class="text-yellow-500" style="font-size: 1.2em;">&#9733;</span>
-                <span class="ml-1" style="font-size: 1.1em; font-weight: 500;">{{ number_format($averageRating, 1) }}</span>
+                <span class="ml-1" style="font-size: 1.1em; font-weight: 500; color: #4F4F4F ">{{ number_format($averageRating, 1) }}</span>
                 <span class="ml-1" style="color: #888;">|{{ $product->sold_count }} Sold</span>
               </div>
             </div>
@@ -186,7 +188,7 @@
   <div class="overflow-hidden bg-white py-11 dark:bg-gray-800 font-normal mb-7">
     <div class="px-20 pb-6 mt-6">
         <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-semibold text-gray-900">
+            <h2 class="text-2xl font-semibold dark:text-[#4F4F4F] ">
                 {{ number_format($averageRating, 1) }} <span class="text-yellow-500">★</span> Product Ratings ({{ count($reviews) }})
             </h2>
         </div>
@@ -256,7 +258,7 @@
 
   <div class="container-fluid p-2 rounded-3" style="background-color: white;">
     <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
-      <h1 style="font-weight: bold; color: #262525;" class="text-2xl"> Products of Same Category </h1>
+      <h1 style="font-weight: bold; color: #4F4F4F ;" class="text-2xl"> Products of Same Category </h1>
         <a href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
           style="font-size: 18px; color: rgb(145, 143, 143); text-decoration: none;">
           View All > </a>
@@ -269,11 +271,38 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.FontAwesome) {
-        window.FontAwesome.dom.i2svg();
-    }
-});
+  document.addEventListener('DOMContentLoaded', function () {
+    const likeButton = document.getElementById('likeButton');
+    const likeIcon = likeButton.querySelector('.like-icon');
 
+    likeButton.addEventListener('click', () => {
+      let isLiked = likeButton.dataset.liked === "true"; // Read like state
 
+      if (!isLiked) {
+        likeIcon.setAttribute("fill", "#FF8284"); // Keep heart filled
+        likeIcon.style.transform = 'scale(1.2)';
+        likeIcon.style.animation = 'heartBeat 0.5s ease';
+        likeButton.dataset.liked = "true";
+      } else {
+        likeIcon.setAttribute("fill", "none"); // Remove fill when unliked
+        likeIcon.style.transform = '';
+        likeIcon.style.animation = '';
+        likeButton.dataset.liked = "false";
+      }
+
+      // Define animation only once
+      if (!document.getElementById("heartBeatStyle")) {
+        let style = document.createElement('style');
+        style.id = "heartBeatStyle";
+        style.innerHTML = `
+          @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    });
+  });
 </script>

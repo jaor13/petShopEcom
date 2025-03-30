@@ -18,11 +18,11 @@
     <div class="container" id="main-container">
         <div class="overlay-container">
             <img src="{{ asset('assets/images/overlay-logo.svg') }}" alt="Description of the image" style="width: 400px; height: 300px;">
-            <h1>Pawsome Essentials Delivered with Love!</h1>
+            <h1 >Pawsome Essentials Delivered with Love!</h1>
             <p>Login to quickly reorder your favorite essentials, and track your local delivery right to your doorstep.</p>
         </div>
         <div class="form-container sign-in" id="signin-container">
-            <h2>Welcome Back!</h2>
+            <h2 style=" color:#4F4F4F;">Welcome Back!</h2>
             <p>Log In To Your Account</p>
 
             <form method="POST" action="{{ route('login') }}">

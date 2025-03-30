@@ -1,6 +1,6 @@
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
 <div class="container mx-auto px-4">
-    <h1 class="text-2xl font-semibold mb-4">Shopping Cart</h1>
+    <h1 class="text-2xl font-semibold mb-4 text-[ #4F4F4F]">Shopping Cart</h1>
     <div class="flex flex-col md:flex-row gap-4">
       <div class="md:w-3/4 mb-4">
         <div>
@@ -28,12 +28,12 @@
             <table class="w-full ">
             <thead>
               <tr>
-              <th class="text-left font-semibold">Product</th>
+              <th class="text-left font-semibold text-[ #4F4F4F]">Product</th>
                 <th></th>
-                <th class="text-center font-semibold" style="width: 149px;">Price</th>
-                <th class="text-center font-semibold" style="width: 119px;">Quantity</th>
-                <th class="text-center font-semibold" style="width: 149px;">Total Price</th>
-                <th class="text-center font-semibold" style="width: 99px;">Delete</th>
+                <th class="text-center font-semibold" style="width: 149px; color: #4F4F4F;">Price</th>
+                <th class="text-center font-semibold" style="width: 119px;  color:#4F4F4F;">Quantity</th>
+                <th class="text-center font-semibold" style="width: 149px;  color: #4F4F4F;">Total Price</th>
+                <th class="text-center font-semibold" style="width: 99px;  color: #4F4F4F;">Delete</th>
                 </tr>
             </thead>
             <tr>
@@ -55,7 +55,7 @@
               <img class="h-16 w-16 mr-2 cursor-pointer" src="{{ url('storage', $item['image']) }}"   alt="{{ $item['name'] }}">
               </a>
               <div class="max-w-[350px] md:max-w-[400px] lg:max-w-[450px] truncate">
-              <span class="font-semibold block truncate">{{ $item['name'] }}</span>
+              <span class="font-semibold block truncate text-[ #4F4F4F]">{{ $item['name'] }}</span>
               @if (!empty($item['variant_name']))
               <span class="text-sm text-gray-500">Variant: {{ $item['variant_name'] }}</span>
               @endif
@@ -122,7 +122,7 @@
         </div>
       <div class="md:w-1/4">
         <div class="bg-white rounded-md shadow-md p-6">
-          <h2 class="text-lg font-semibold mb-4">Summary</h2>
+          <h2 class="text-lg font-semibold mb-4 text-[#4F4F4F]">Summary</h2>
           <div class="flex justify-between mb-2">
             <span>Subtotal</span>
             <span>{{ Number::currency($grand_total, 'PHP') }}</span>
@@ -133,8 +133,8 @@
           </div>
           <hr class="my-2">
           <div class="flex justify-between mb-2">
-            <span class="font-semibold">Grand Total</span>
-            <span class="font-semibold">{{ Number::currency($grand_total + $shipping_fee, 'PHP') }}</span>
+            <span class="font-semibold text-[#4F4F4F] ">Grand Total</span>
+            <span class="font-semibold text-[#4F4F4F]">{{ Number::currency($grand_total + $shipping_fee, 'PHP') }}</span>
           </div>
           @if($cart_items)
         <button wire:click="goToCheckout"

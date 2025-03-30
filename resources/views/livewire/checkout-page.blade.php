@@ -28,7 +28,7 @@
 
                                         <!-- Address Details -->
                                         <div class="ml-3 flex-grow-1">
-                                            <h5 class="font-semibold text-dark mb-1 text-lg">
+                                            <h5 class="font-semibold  mb-1 text-lg" style=" color:#4F4F4F;">
                                                 {{ $first_name }} {{ $last_name }}
                                             </h5>
                                             <p class="text-muted small mb-0">
@@ -53,7 +53,7 @@
                     </div>
                     <div class="card-body p-5 bg-white border rounded-lg shadow-sm">
                         <div class="mt-0">
-                            <h5 class="font-bold text-xl text-black-400 mb-3  border-bottom">
+                            <h5 class="font-bold text-xl text-black-400 mb-3  border-bottom" style=" color:#4F4F4F;">
                                 Product Ordered
                             </h5>
                             
@@ -63,7 +63,7 @@
                                         <div class="d-flex align-items-center">
                                             <img alt="{{ $ci['name'] }}" class="img-fluid bg-[#E7FAFF] rounded-lg " style="width: 15%; height: 15%;" src="{{ url('storage', $ci['image']) }}">
                                             <div class="ml-4 flex-grow-1">
-                                                <p class="text-xl font-medium text-gray-900 truncate">
+                                                <p class="text-xl font-medium  truncate" style=" color:#4F4F4F;">
                                                     {{ $ci['name'] }}
                                                 </p>
                                                 @if (!empty($ci['variant_name']))
@@ -71,7 +71,7 @@
                                                         Variant: {{ $ci['variant_name'] }}
                                                     </p>
                                                 @endif
-                                                <div class="inline-flex items-center pt-2 text-base font-semibold text-[#F93535]">
+                                                <div class="inline-flex items-center pt-2 text-base font-semibold " style=" color:#4F4F4F;">
                                                     {{ Number::currency($ci['total_amount'], 'PHP') }}
                                                 </div>
                                             </div>
@@ -86,8 +86,8 @@
                         <div class="flex justify-between items-center pt-3">
     </div>
     <div class="flex justify-between items-center mt-2">
-        <p class="text-lg font-bold text-gray-700">Total {{ $total_items }} Item(s)</p>
-        <p class="text-lg font-semibold text-gray-900">{{ Number::currency($grand_total-$shipping_amount, 'PHP') }}</p>
+        <p class="text-lg font-bold " style=" color:#4F4F4F;">Total {{ $total_items }} Item(s)</p>
+        <p class="text-lg font-semibold " style=" color:#4F4F4F;">{{ Number::currency($grand_total-$shipping_amount, 'PHP') }}</p>
     </div>
 </div>
                     </div>
@@ -158,7 +158,7 @@
 
                 <div class=" bg-white border rounded-lg shadow-sm border-0 shadow-sm">
                     <div class="card-body p-4 mr-3 ml-3">
-                        <h5 class="text-xl text-center font-bold  text-gray-700 dark:text-black mb-2">
+                        <h5 class="text-xl text-center font-bold   mb-2" style=" color:#4F4F4F;">
                             ORDER SUMMARY
                         </h5>
                         <div class="flex justify-between mt-3">
@@ -170,7 +170,7 @@
                             <span>{{ Number::currency($shipping_amount, 'PHP') }}</span>
                         </div>
                         <hr>
-                        <div class="d-flex justify-content-between  mb-2 font-bold pt-3">
+                        <div class="d-flex justify-content-between  mb-2 font-bold pt-3 " style=" color:#4F4F4F;">
                             <span>Grand Total</span>
                             <span>{{ Number::currency($grand_total, 'PHP') }}</span>
                         </div>
@@ -194,7 +194,7 @@
                 </div>
                 <div class="modal-body mt-3">
                     <form wire:submit.prevent="saveAddress">
-                        <div class="row mt-3">
+                        <div class="row ">
                             <div class="col-md-6">
                                 <label for="first_name" class="form-label">First Name</label>
                                 <input wire:model="first_name" id="first_name" class="form-control" type="text">
