@@ -1,5 +1,5 @@
 <div class="container py-5">
-    <h1 class="h2 font-weight-bold text-dark mb-1">
+    <h1 class="h2 font-weight-bold text-[#4F4F4F] mb-1">
         Checkout
     </h1>
     <form wire:submit.prevent="placeOrder">
@@ -86,8 +86,8 @@
                         <div class="flex justify-between items-center pt-3">
     </div>
     <div class="flex justify-between items-center mt-2">
-        <p class="text-lg font-bold text-gray-700">Total of {{ $total_items }} Item(s)</p>
-        <p class="text-lg font-semibold text-gray-900">{{ Number::currency($grand_total-$shipping_amount, 'PHP') }}</p>
+        <p class="text-lg font-bold " style="color: #4F4F4F;">Total of {{ $total_items }} Item(s)</p>
+        <p class="text-lg font-semibold "style="color: #4F4F4F;">{{ Number::currency($grand_total-$shipping_amount, 'PHP') }}</p>
     </div>
 </div>
                     </div>
@@ -97,7 +97,7 @@
             <div class="col-lg-4">
                 <div class=" bg-white border rounded-1 shadow-sm border-0 shadow-sm mb-1 -ml-5  mt-0.4">
                     <div class="card-body p-4 mr-3 ml-3">
-                        <h5 class="text-lg font-bold text-gray-700 dark:text-gray mb-2">
+                        <h5 class="text-lg font-bold text-gray-700 mb-2" style="color: #4F4F4F;">
                             Payment Methods
                         </h5>
                         <ul class="list-unstyled">
