@@ -163,20 +163,20 @@
           <i class="fa-solid fa-dragon"></i>
         </a>
 
-        <a href="{{ route('products', ['type' => 'dragon']) }}" wire:navigate class="category-box">
+        <a href="{{ url('products?category=' . "Bearded Dragons") }}" wire:navigate class="category-box">
           <i class="fa-solid fa-otter"></i>
         </a>
 
 
-        <a href="{{ route('products', ['type' => 'dog']) }}" wire:navigate class="category-box">
-          <i class="fa-solid fa-dog"></i>
+        <a href="{{ url('products?category=' . "Pet Shampoo & Bath Essentials") }}" wire:navigate class="category-box">
+          <i class="fa-solid fa-bath"></i>
         </a>
         
-        <a href="{{ route('products', ['type' => 'dragon']) }}" wire:navigate class="category-box">
-          <i class="fa-solid fa-dragon"></i>
+        <a href="{{ url('products?category=' . "Pet Grooming") }}" wire:navigate class="category-box">
+          <i class="fa-solid fa-scissors"></i>
 
-        <a href="{{ route('products', ['type' => 'cat']) }}" wire:navigate class="category-box">
-          <i class="fa-solid fa-cat"></i>
+        <a href="{{ url('products?category=' . "Dog Toy") }}" wire:navigate class="category-box">
+          <i class="fa-solid fa-bone"></i>
         </a>
 
         </a>
