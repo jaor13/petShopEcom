@@ -203,7 +203,7 @@
 
                 <div class=" bg-white border rounded-1 shadow-sm border-0 shadow-sm -ml-5">
                     <div class="card-body p-4 mr-3 ml-3">
-                        <h5 class="text-xl text-center font-bold   mb-2" style=" color:#4F4F4F;">
+                        <h5 class="text-lg text-center font-bold   mb-2" style=" color:#4F4F4F;">
                             ORDER SUMMARY
                         </h5>
                         <div class="flex justify-between mt-3">
