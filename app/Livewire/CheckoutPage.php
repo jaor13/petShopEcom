@@ -121,7 +121,7 @@ class CheckoutPage extends Component
         // Check if the cart is empty
         if (count($cart_items) === 0) {
             session()->flash('error', 'Your cart is empty!');
-            return redirect()->route('/');
+            return redirect()->route('/cart');
         }
 
         // Create Order
