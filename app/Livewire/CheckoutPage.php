@@ -29,11 +29,69 @@ class CheckoutPage extends Component
     public $use_existing_address = false;
     public $showAddressModal = false;
     public $is_editing = false;
+    public $product_id;
+    public $variant_name = null;
+    public $quantity = 1;
+    public $total_items;
+    public $subtotal;
+    public $grand_total;
 
     public function mount()
     {
-        $this->selected_items = session()->get('selected_cart_items', []);
-        $this->shipping_amount = session()->get('shipping_fee', 0); 
+        $product_id = request()->query('product_id');
+        $quantity = request()->query('quantity', 1);
+        $variant_name = request()->query('variant', null);
+
+        if ($product_id) {
+            // "Buy Now" logic
+            $product = Product::with('variants')->find($product_id);
+
+            if ($product) {
+                $variant = $product->variants->where('name', $variant_name)->first();
+                $unit_price = $variant ? $variant->price : $product->price;
+                $variant_id = $variant ? $variant->id : null;
+                $stock = $variant ? $variant->stock_quantity : $product->stock_quantity;
+                $image = $variant && !empty($variant->image) ? $variant->image : ($product->images[0] ?? 'default.png');
+
+                $this->selected_items = [
+                    [
+                        'product_id' => $product->id,
+                        'variant_id' => $variant_id,
+                        'name' => $product->product_name,
+                        'slug' => $product->slug,
+                        'image' => $image,
+                        'quantity' => $quantity,
+                        'unit_amount' => $unit_price,
+                        'total_amount' => $unit_price * $quantity,
+                        'variant_name' => $variant_name,
+                        'stock_quantity' => $stock,
+                    ]
+                ];
+
+                // Calculate totals for "Buy Now"
+                $this->subtotal = $unit_price * $quantity;
+                $total_quantity = array_sum(array_column($this->selected_items, 'quantity'));
+                $this->shipping_amount = 50 + max(0, ($total_quantity - 1) * 20);
+
+                $this->grand_total = $this->subtotal + $this->shipping_amount;
+                $this->total_items = count($this->selected_items);
+
+                // Store "Buy Now" items in session
+                session()->put('buy_now_items', $this->selected_items);
+            }
+        } else {
+            $cart_items = array_filter(CartManagement::getCartItemsFromDB(), function ($item) {
+                return in_array($item['cart_id'], $this->selected_items);
+            });
+            // Normal Cart Checkout
+            $this->selected_items = session()->get('selected_cart_items', []);
+
+            // Calculate totals from cart items
+            $this->subtotal = CartManagement::calculateGrandTotal($this->selected_items);
+            $this->shipping_amount = session()->get('shipping_fee', 0);
+            $this->grand_total = CartManagement::calculateGrandTotal($this->selected_items) + $this->shipping_amount;
+            $this->total_items = count($this->selected_items);
+        }
 
         $user = auth()->user();
         if ($user && $user->address_id) {
@@ -107,38 +165,44 @@ class CheckoutPage extends Component
 
     public function placeOrder()
     {
-        $cart_items = array_filter(CartManagement::getCartItemsFromDB(), function ($item) {
-            return in_array($item['cart_id'], $this->selected_items);
-        });
-        $grand_total = CartManagement::calculateGrandTotal($this->selected_items) + $this->shipping_amount;
+        if (empty($this->selected_items)) {
+            session()->flash('error', 'No items to checkout.');
+            return redirect()->route('/');
+        }
 
-        $shipping_amount = $this->shipping_amount;
+        // Calculate totals
+        // $grand_total = array_sum(array_column($this->selected_items, 'total_amount')) + $this->shipping_amount;
 
         $this->validate([
             'payment_method' => 'required',
         ]);
 
-        // Check if the cart is empty
-        if (count($cart_items) === 0) {
-            session()->flash('error', 'Your cart is empty!');
-            return redirect()->route('/cart');
-        }
+        $this->validate([
+            'payment_method' => 'required',
+        ]);
 
         // Create Order
         $order = Order::create([
             'user_id' => auth()->id(),
-            'grand_total' => $grand_total, 
-            'shipping_amount' => $shipping_amount,
+            'grand_total' => $this->grand_total,
+            'shipping_amount' => $this->shipping_amount,
             'payment_method' => $this->payment_method,
             'payment_status' => ($this->payment_method === 'cod') ? 'unpaid' : 'processing',
-            'status' => 'new', 
+            'status' => 'new',
             'currency' => 'PHP',
-            'notes' => null, 
+            'notes' => null,
             'shipping_method' => 'standard',
         ]);
 
-        // Clear only the selected cart items
-        CartManagement::clearCartItems($this->selected_items);
+        // Check if the selected items are from the cart
+        $cart_items = array_filter(CartManagement::getCartItemsFromDB(), function ($item) {
+            return in_array($item['cart_id'], $this->selected_items);
+        });
+
+        // Clear only if items were from the cart
+        if (!empty($cart_items)) {
+            CartManagement::clearCartItems($this->selected_items);
+        }
 
         ProcessOrderStatus::dispatch($order)->delay(now()->addMinutes(1));
 
@@ -170,7 +234,16 @@ class CheckoutPage extends Component
         }
 
         // Add Order Items
-        foreach ($cart_items as $item) {
+        $selected_items = is_array($this->selected_items) ? $this->selected_items : json_decode($this->selected_items, true);
+
+        // Combine cart items and "Buy Now" items
+        $order_items = !empty($cart_items) ? $cart_items : $selected_items;
+
+        foreach ($order_items as $item) {
+            if (!is_array($item)) {
+                continue; // Skip invalid items
+            }
+
             OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $item['product_id'],
@@ -188,7 +261,7 @@ class CheckoutPage extends Component
 
         // Handle Online Payment (PayMongo)
         $secretKey = config('services.paymongo.secret_key');
-        $amount = $grand_total  * 100; 
+        $amount = $this->grand_total * 100;
 
         $data = [
             "data" => [
@@ -218,7 +291,6 @@ class CheckoutPage extends Component
         if ($result === false) {
             $curlError = curl_error($ch);
             curl_close($ch);
-            
             Log::error('cURL error', ['error' => $curlError]);
             session()->flash('error', 'An error occurred while processing your payment. Please try again.');
             return redirect()->route('checkout');
@@ -251,11 +323,10 @@ class CheckoutPage extends Component
         $cart_items = array_filter(CartManagement::getCartItemsFromDB(), function ($item) {
             return in_array($item['cart_id'], $this->selected_items);
         });
-
         $grand_total = CartManagement::calculateGrandTotal($this->selected_items) + $this->shipping_amount;
         $shipping_amount = $this->shipping_amount; // Ensure shipping_amount is defined
         $total_items = count($cart_items); // Calculate total items
-
+        session()->forget('buy_now_items');
         return view('livewire.checkout-page', compact('cart_items', 'grand_total', 'shipping_amount', 'total_items'));
     }
 }
