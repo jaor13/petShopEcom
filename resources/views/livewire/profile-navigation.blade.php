@@ -10,7 +10,7 @@
     <h4 class="section-title" style="color: #4F4F4F; margin-bottom: -0.64em;">Ratings and Reviews</h4>
     </div>
     <div class="{{ $activeSection === 'liked-product' ? '' : 'd-none' }}">
-    <h4 class="section-title" style="color: #4F4F4F;">My Likes</h4>
+    <h4 class="section-title" style="color: #4F4F4F;margin-bottom: -0.64em;">My Likes</h4>
     </div>
         <div class="position-sticky bg-white">
             @livewire('profile-settings')
