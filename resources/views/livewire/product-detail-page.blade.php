@@ -270,7 +270,7 @@
   <div class="container-fluid p-2 rounded-1" style="background-color: white; margin-bottom: 0.7em;">
     <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
       <h1 style="font-weight: bold; color:rgb(83, 82, 82); margin-left: 0.1em;" class="text-2xl"> Products of Same Category </h1>
-      <a href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
+      <a wire:navigate href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
         style="font-size: 18px; color: rgb(145, 143, 143); text-decoration: none;">
         View All >
       </a>
