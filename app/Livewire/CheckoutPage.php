@@ -256,8 +256,8 @@ class CheckoutPage extends Component
 
         // Handle Cash on Delivery (COD)
         if ($this->payment_method === 'cod') {
-            return redirect()->route('my-purchases');
-        }
+            return redirect()->to(url('profile?activeSection=my-purchases'));
+        }        
 
         // Handle Online Payment (PayMongo)
         $secretKey = config('services.paymongo.secret_key');
