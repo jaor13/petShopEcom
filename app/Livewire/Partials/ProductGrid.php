@@ -81,7 +81,7 @@ class ProductGrid extends Component
             $products->orderBy('created_at', 'desc');
         } elseif ($this->type === 'best_sellers') {
             $products->orderBy('sold_count', 'desc');
-        } elseif (!$this->type) {
+        } elseif (!$this->type && !$this->sortPrice) {
             // If no specific sorting type, randomize the results
             $products->inRandomOrder();
         }
