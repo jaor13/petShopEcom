@@ -4,37 +4,37 @@
         <li class="nav-item flex-fill text-center text-lg">
             <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
             wire:click.prevent="filterOrders('all')" href="?status=all" style="font-weight: normal;">
-                All Orders
+            <i class="fas fa-list-alt me-2"></i>All Orders
             </a>
         </li>
         <li class="nav-item flex-fill text-center text-lg">
             <a class="custom-link py-2 {{ $status === 'to_ship' ? 'active' : '' }}" 
             wire:click.prevent="filterOrders('to_ship')" href="?status=to_ship" style="font-weight: normal;">
-             To Ship
+            <i class="fas fa-shipping-fast me-2 "></i>To Ship
             </a>
         </li>
         <li class="nav-item flex-fill text-center text-lg">
             <a class="custom-link py-2 {{ $status === 'to_receive' ? 'active' : '' }}" 
             wire:click.prevent="filterOrders('to_receive')" href="?status=to_receive" style="font-weight: normal;">
-              To Receive
+            <i class="fas fa-box-open me-2"></i>To Receive
             </a>
         </li>
         <li class="nav-item flex-fill text-center text-lg">
             <a class="custom-link py-2 {{ $status === 'delivered' ? 'active' : '' }}" 
             wire:click.prevent="filterOrders('delivered')" href="?status=delivered" style="font-weight: normal;">
-                Delivered
+            <i class="fas fa-check-square me-2"></i>  Delivered
             </a>
         </li>
         <li class="nav-item flex-fill text-center text-lg">
             <a class="custom-link py-2 {{ $status === 'completed' ? 'active' : '' }}" 
             wire:click.prevent="filterOrders('completed')" href="?status=completed" style="font-weight: normal;">
-                Completed
+            <i class="fas fa-check-circle me-2"></i> Completed
             </a>
         </li>
         <li class="nav-item flex-fill text-center text-lg">
             <a class="custom-link py-2 {{ $status === 'cancelled' ? 'active' : '' }}" 
             wire:click.prevent="filterOrders('cancelled')" href="?status=cancelled" style="font-weight: normal;">
-                 Cancelled
+            <i class="fas fa-times-circle me-2"></i> Cancelled
             </a>
         </li>
     </ul>
