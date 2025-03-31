@@ -145,7 +145,7 @@
                 <span wire:loading style="display: none; "
                   wire:target="addToCart({{ $product->id }}, {{ $quantity }}, '{{ $variant_name ?? 'null' }}')">Adding to cart</span>
                   </a>
-                  <a wire:navigate href="{{ auth()->check() ? route('checkout', ['product_id' => $product->id, 'quantity' => $quantity] + ($variant_name ? ['variant' => $variant_name] : [])) : route('login') }}" 
+                  <a href="{{ auth()->check() ? route('checkout', ['product_id' => $product->id, 'quantity' => $quantity] + ($variant_name ? ['variant' => $variant_name] : [])) : route('login') }}" 
                     @if(auth()->check())
                         wire:click.prevent="redirectToCheckout({{ $product->id }}, {{ $quantity }}, {{ $variant_name ? "'$variant_name'" : 'null' }})"
                     @endif
