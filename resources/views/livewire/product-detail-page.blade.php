@@ -142,18 +142,20 @@
                 <span wire:loading.remove style="display: block;"
                   wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Add to Cart</span>
                 <span wire:loading style="display: none; "
-                  wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Adding to cart</span>
-              </a>
-              <a href="{{ auth()->check() ? '#' : route('login') }}" @if(auth()->check())
-                wire:click.prevent="addToCart({{ $product->id }}, {{ $quantity }})" @endif
-                style="width: 47%; padding: 0.75rem; background-color: white; border-radius: 0.375rem; color: #00DCE3; border: 1px solid #00DCE3; font-size: 1.125rem; line-height: 1.75rem; font-weight: 700; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease, color 0.3s ease;"
-                onmouseover="this.style.backgroundColor='#E0F7FA'; this.style.color='#00B2B5';"
-                onmouseout="this.style.backgroundColor='white'; this.style.color='#00DCE3';">
-                <span wire:loading.remove style="display: block; align-items:center"
-                  wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Buy Now</span>
-                <span wire:loading style="display: none; "
-                  wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Processing...</span>
-              </a>
+                  wire:target="addToCart({{ $product->id }}, {{ $quantity }}, '{{ $variant_name ?? 'null' }}')">Adding to cart</span>
+                  <a href="{{ auth()->check() ? route('checkout', ['product_id' => $product->id, 'quantity' => $quantity] + ($variant_name ? ['variant' => $variant_name] : [])) : route('login') }}" 
+                    @if(auth()->check())
+                        wire:click.prevent="redirectToCheckout({{ $product->id }}, {{ $quantity }}, {{ $variant_name ? "'$variant_name'" : 'null' }})"
+                    @endif
+                    style="width: 47%; padding: 0.75rem; background-color: white; border-radius: 0.375rem; color: #00DCE3; border: 1px solid #00DCE3; font-size: 1.125rem; line-height: 1.75rem; font-weight: 700; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease, color 0.3s ease;"
+                    onmouseover="this.style.backgroundColor='#E0F7FA'; this.style.color='#00B2B5';"
+                    onmouseout="this.style.backgroundColor='white'; this.style.color='#00DCE3';">
+
+                    <span wire:loading.remove style="display: block; align-items:center" 
+                    wire:target="redirectToCheckout({{ $product->id }}, {{ $quantity }}, {{ $variant_name ? "'$variant_name'" : 'null' }})">Buy Now</span>
+                    <span wire:loading style="display: none; "
+                    wire:target="redirectToCheckout({{ $product->id }}, {{ $quantity }}, {{ $variant_name ? "'$variant_name'" : 'null' }})">Processing...</span>
+                </a>
             </div>
           </div>
         </div>
