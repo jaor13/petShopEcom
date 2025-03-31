@@ -48,11 +48,11 @@
                     <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
                         <div>
                             <p class="text-secondary mb-1">Order Number:</p>
-                            <p class="font-bold text-gray-600">{{ $order['id'] }}</p>
+                            <p class="font-bold text-[#4F4F4F]">{{ $order['id'] }}</p>
                         </div>
                         <div>
                             <p class="text-secondary mb-1">Date Ordered:</p>
-                            <p class="font-bold text-gray-600">{{ $order['date'] }}</p>
+                            <p class="font-bold text-[#4F4F4F]">{{ $order['date'] }}</p>
                         </div>
                         <div>
                             <p class="mb-1 mt-3">
@@ -84,7 +84,7 @@
 
                     <div class="text-end mb-4">
                         <p class="mb-0">Total Items: {{ count($order['items']) }}</p>
-                        <p><strong>Total Price: ₱{{ number_format($order['total_price'], 2) }}</strong></p>
+                        <p class="text-[#4F4F4F]"><strong>Total Price: ₱{{ number_format($order['total_price'], 2) }}</strong></p>
                         <div class="d-inline-block">
                             @if ($order['status'] === 'delivered')
                                 <button class="btn btn-success" onclick="openModal('testModal', {{ $order['id'] }})">

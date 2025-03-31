@@ -218,6 +218,7 @@
         </a>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+        
         @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
       </div>
     </div>
