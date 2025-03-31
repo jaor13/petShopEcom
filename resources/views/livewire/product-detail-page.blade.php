@@ -1,4 +1,4 @@
-<div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto pt-5 ">
+<div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto pt-5">
   <section class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7 font-normal font-['Afacad']">
     <div class="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
       <div class="flex flex-wrap -mx-6">
@@ -61,7 +61,7 @@
             <!-- Variant Images -->
             <div class="flex-wrap hidden md:flex">
               @foreach ($product->variants as $variant)
-                  <div class="w-1/2 mr-1 sm:w-1/4 border"
+                  <div class="w-1/2 mr-1 sm:w-1/4 border mb-1"
                       wire:click="selectVariant('{{ $variant->name }}', {{ $variant->price }}, {{ $variant->stock_quantity }})"
                       x-on:click="selectVariant('{{ $variant->name }}', '{{ url('storage', $variant->image) }}', {{ $variant->stock_quantity }}, {{ $variant->price }})"
                       :class="{ 'border-2 border-[#00DEC3]': selectedVariant === '{{ $variant->name }}' }">
@@ -79,7 +79,7 @@
         <div class="w-full px-4 md:w-1/2">
           <div class="lg:pl-5">
             <div class="mb-8">
-              <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-[#3E3939] md:text-4xl">
+              <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-[#4F4F4F] md:text-4xl">
                 {{ $product->product_name }}
               </h2>
 
@@ -91,15 +91,18 @@
                 </div>
                 <div style="display: flex; align-items: center;">
                   <div wire:click="addToLiked({{ $product->id }})" class="like-button-container">
-                    <span class="like-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF8284"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="bevel" class="like-icon hover:fill-red-500 mr-2 ">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                        </svg>
-                    </span>
+                      <div class="like-button" style="display: inline-flex; align-items: center; cursor: pointer;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                              fill="{{ in_array($product->id, $likedProducts) ? '#FF8284' : 'none' }}" 
+                              stroke="#FF8284" stroke-width="1.5"
+                              stroke-linecap="round" stroke-linejoin="bevel" class="like-icon"
+                              style="transition: transform 0.3s ease, fill 0.3s ease;">
+                              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                          </svg>
+                      </div>
                   </div>
                   <span style="color: #374151;">Add to Favorites</span>
-                </div>
+              </div>
               </div>
               <hr style="margin-top: 10px; margin-bottom: 30px; border: 0.6px solid #ccc;"></hr>
               <p class="inline-block mb-6  text-4xl font-bold  text-[#F93535] ">
@@ -127,7 +130,7 @@
               </div>
               <div class="flex items-center mt-4">
                 <span class="text-yellow-500" style="font-size: 1.2em;">&#9733;</span>
-                <span class="ml-1" style="font-size: 1.1em; font-weight: 500;">{{ number_format($averageRating, 1) }}</span>
+                <span class="ml-1" style="font-size: 1.1em; font-weight: 500; color: #4F4F4F ">{{ number_format($averageRating, 1) }}</span>
                 <span class="ml-1" style="color: #888;">|{{ $product->sold_count }} Sold</span>
               </div>
             </div>
@@ -140,18 +143,21 @@
                 <span wire:loading.remove style="display: block;"
                   wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Add to Cart</span>
                 <span wire:loading style="display: none; "
-                  wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Adding to cart</span>
-              </a>
-              <a href="{{ auth()->check() ? '#' : route('login') }}" @if(auth()->check())
-                wire:click.prevent="addToCart({{ $product->id }}, {{ $quantity }})" @endif
-                style="width: 47%; padding: 0.75rem; background-color: white; border-radius: 0.375rem; color: #00DCE3; border: 1px solid #00DCE3; font-size: 1.125rem; line-height: 1.75rem; font-weight: 700; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease, color 0.3s ease;"
-                onmouseover="this.style.backgroundColor='#E0F7FA'; this.style.color='#00B2B5';"
-                onmouseout="this.style.backgroundColor='white'; this.style.color='#00DCE3';">
-                <span wire:loading.remove style="display: block; align-items:center"
-                  wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Buy Now</span>
-                <span wire:loading style="display: none; "
-                  wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Processing...</span>
-              </a>
+                  wire:target="addToCart({{ $product->id }}, {{ $quantity }}, '{{ $variant_name ?? 'null' }}')">Adding to cart</span>
+                  </a>
+                  <a href="{{ auth()->check() ? route('checkout', ['product_id' => $product->id, 'quantity' => $quantity] + ($variant_name ? ['variant' => $variant_name] : [])) : route('login') }}" 
+                    @if(auth()->check())
+                        wire:click.prevent="redirectToCheckout({{ $product->id }}, {{ $quantity }}, {{ $variant_name ? "'$variant_name'" : 'null' }})"
+                    @endif
+                    style="width: 47%; padding: 0.75rem; background-color: white; border-radius: 0.375rem; color: #00DCE3; border: 1px solid #00DCE3; font-size: 1.125rem; line-height: 1.75rem; font-weight: 700; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease, color 0.3s ease;"
+                    onmouseover="this.style.backgroundColor='#E0F7FA'; this.style.color='#00B2B5';"
+                    onmouseout="this.style.backgroundColor='white'; this.style.color='#00DCE3';">
+
+                    <span wire:loading.remove style="display: block; align-items:center" 
+                    wire:target="redirectToCheckout({{ $product->id }}, {{ $quantity }}, {{ $variant_name ? "'$variant_name'" : 'null' }})">Buy Now</span>
+                    <span wire:loading style="display: none; "
+                    wire:target="redirectToCheckout({{ $product->id }}, {{ $quantity }}, {{ $variant_name ? "'$variant_name'" : 'null' }})">Processing...</span>
+                </a>
             </div>
           </div>
         </div>
@@ -159,38 +165,38 @@
     </div>
   </section>
 
-  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-7">
+  <div class="overflow-hidden bg-white py-11  dark:bg-gray-800 mb-2 -mt-5">
     <div class="px-20 pb-6 mt-6 ">
       <div class="flex flex-col mt-6">
-        <div style="background-color: #E0F2F7; padding: 10px; border-radius: 5px;">
+        <div style="background-color: #E0F2F7; padding: 10px; border-radius: 5px; margin-left: -1em;">
           <h2 class="text-xl font-light text-black-300 dark:text-black-400">Product Specification</h2>
         </div>
-        <p class="max-w-md text-black-300 dark:text-black-400 ml-4 mt-2">
+        <p class="max-w-md text-black-300 dark:text-black-400 ml-3  mt-2">
           Category: {{ $product->categories->pluck('name')->join(', ') }}
         </p>
-        <p class="max-w-md text-gray-300 dark:text-gray-400 ml-4 mt-2">
+        <p class="max-w-md text-gray-300 dark:text-gray-400 ml-3 mt-2">
           Stocks: {{ $product->stock_quantity }}
         </p>
       </div>
       <div class="flex flex-col mt-6 [&>ul]:list-disc [&>ul]:ml-8">
-        <div style="background-color: #E0F2F7;margin-bottom: 10px; padding: 10px; border-radius: 5px;">
+        <div style="background-color: #E0F2F7;margin-bottom: 10px; padding: 10px; border-radius: 5px; margin-left: -1em;">
           <h2 class="text-xl font-light text-black-300 dark:text-black-400">Product Description</h2>
         </div>
-        <p class="max-w-md text-gray-300 dark:text-gray-400">
+        <p class="max-w-md text-gray-300 dark:text-gray-400 ml-1">
           {!! Str::markdown(preg_replace('/^\s*-\s*/m', '- ', $product->description)) !!}
         </p>
       </div>
     </div>
   </div>
 
-  <div class="overflow-hidden bg-white py-11 dark:bg-gray-800 font-normal mb-7">
-    <div class="px-20 pb-6 mt-6">
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-semibold text-gray-900">
+  <div class="overflow-hidden bg-white py-11 dark:bg-gray-800 font-normal ">
+    <div class="px-20 pb-6 -ml-5" >
+        <div class="flex items-center justify-between mb-2">
+            <h2 class="text-2xl font-semibold text-gray-600">
                 {{ number_format($averageRating, 1) }} <span class="text-yellow-500">★</span> Product Ratings ({{ count($reviews) }})
             </h2>
         </div>
-        <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000;">
+        <hr style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #000000; width: 102%;">
         <div class="space-y-4">
         @forelse ($reviews as $review)
         <div class="bg-white rounded-lg p-4 shadow-sm">
@@ -225,12 +231,12 @@
                         @endforeach
                     </div>
 
-                    <!-- Review Image Modal -->
+                    <!-- Image Modal -->
                     @if($isOpen)
                     <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <div class="relative bg-white rounded-lg p-3 shadow-lg border border-gray-300 max-w-[90%] max-h-[90%]"> 
                             <button wire:click="closeImageModal" class="absolute top-0 right-1 text-gray-600 text-2xl">&times;</button>
-                            <img src="{{ $imageUrl }}" class="max-w-full max-h-screen rounded-lg">
+                            <img src="{{ $imageUrl }}" class="max-w-full max-h-[60vh] rounded-lg object-contain">                        
                         </div>
                     </div>
                     @endif
@@ -254,26 +260,77 @@
     </div>
   </div>
 
-  <div class="container-fluid p-2 rounded-3" style="background-color: white;">
+  <div class="relative my-10 flex items-center w-[95%] mx-auto">
+    <div class="flex-grow border-t border-gray-300"></div>
+      <span class="mx-3 text-gray-500 font-semibold text-xl">More Products</span>
+    <div class="flex-grow border-t border-gray-300"></div>
+  </div>
+
+
+  <div class="container-fluid p-2 rounded-1" style="background-color: white; margin-bottom: 0.7em;">
     <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
-      <h1 style="font-weight: bold; color: #262525;" class="text-2xl"> Products of Same Category </h1>
-        <a href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
-          style="font-size: 18px; color: rgb(145, 143, 143); text-decoration: none;">
-          View All > </a>
+      <h1 style="font-weight: bold; color:rgb(83, 82, 82); margin-left: 0.1em;" class="text-2xl"> Products of Same Category </h1>
+      <a wire:navigate href="{{ route('products', ['category' => $product->categories->first()->name ?? '']) }}"
+        style="font-size: 18px; color: rgb(145, 143, 143); text-decoration: none;">
+        View All >
+      </a>
     </div>
 
     <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
       @livewire('partials.product-grid', ['category' => $product->categories->first()->name ?? '', 'limit' => 5, 'excludeProductId' => $product->id])
     </div>
   </div>
+
+  <div class="container-fluid p-2 rounded-1" style="background-color: white;">
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 95%; margin: 0 auto; margin-top: 1.5em;">
+      <h1 style="font-weight: bold; color:rgb(83, 82, 82);  margin-left: 0.1em;" class="text-2xl"> 
+        More Products You May Like 
+      </h1>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      @livewire('partials.product-grid', ['limit' => 50,'excludeProductId' => $product->id,'random' => true])
+    </div>
+  </div>
 </div>
 
+
+
+
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.FontAwesome) {
-        window.FontAwesome.dom.i2svg();
-    }
-});
+  document.addEventListener('DOMContentLoaded', function () {
+    const likeButton = document.getElementById('likeButton');
+    const likeIcon = likeButton.querySelector('.like-icon');
 
+    likeButton.addEventListener('click', () => {
+      let isLiked = likeButton.dataset.liked === "true"; // Read like state
 
+      if (!isLiked) {
+        likeIcon.setAttribute("fill", "#FF8284"); // Keep heart filled
+        likeIcon.style.transform = 'scale(1.2)';
+        likeIcon.style.animation = 'heartBeat 0.5s ease';
+        likeButton.dataset.liked = "true";
+      } else {
+        likeIcon.setAttribute("fill", "none"); // Remove fill when unliked
+        likeIcon.style.transform = '';
+        likeIcon.style.animation = '';
+        likeButton.dataset.liked = "false";
+      }
+
+      // Define animation only once
+      if (!document.getElementById("heartBeatStyle")) {
+        let style = document.createElement('style');
+        style.id = "heartBeatStyle";
+        style.innerHTML = `
+          @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    });
+  });
 </script>

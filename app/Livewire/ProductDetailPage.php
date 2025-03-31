@@ -29,9 +29,14 @@ class ProductDetailPage extends Component
 
     public $isOpen = false;
     public $imageUrl;
+    public $likedProducts = [];
 
     public function mount($slug)
     {
+        if (Auth::check()) {
+            $this->likedProducts = LikedProductManagement::showLiked(); // Get liked product IDs
+        }
+
         $product = Product::where('slug', $slug)->firstOrFail();
         $this->slug = $slug;
         $this->variant_price = $product->price;
@@ -118,8 +123,15 @@ class ProductDetailPage extends Component
                 'timer' => 3000,
                 'toast' => true,
             ]);
+
+            if (in_array($productId, $this->likedProducts)) {
+                $this->likedProducts = array_diff($this->likedProducts, [$productId]); 
+            } else {
+                $this->likedProducts[] = $productId; 
+            }
         }
     }
+
 
     public function openImageModal($imageUrl)
     {
@@ -133,16 +145,39 @@ class ProductDetailPage extends Component
         $this->isOpen = false;
         $this->imageUrl = null;
     }
-    
-    public function render()
-{
-    $product = Product::with('reviews')->where('slug', $this->slug)->first();
 
-    return view('livewire.product-detail-page', [
-        'product' => $product,
-        'reviews' => $product ? $product->reviews()->latest()->get() : [],
-        'averageRating' => $product ? $product->reviews()->avg('rating') : 0,
-    ]);
-}
+    public function redirectToCheckout($product_id, $quantity, $variant_name = null)
+    {
+        $product = Product::with('variants')->find($product_id);
+
+        // Ensure that $variant_name is truly empty and not a string 'null'
+        if ($product && $product->variants->count() > 0 && empty($variant_name)) {
+            $this->alert('warning', 'Please select a variant before proceeding to checkout.', [
+                'position' => 'bottom-end',
+                'timer' => 5000,
+                'toast' => true,
+            ]);
+            return;
+        }
+
+        usleep(200000); // 0.2-second delay (200ms)
+
+        return redirect()->route('checkout', [
+            'product_id' => $product_id,
+            'quantity' => $quantity,
+            'variant' => $variant_name ?: null, // Ensures null is passed if no variant
+        ]);
+    }
+
+    public function render()
+    {
+        $product = Product::with('reviews')->where('slug', $this->slug)->first();
+
+        return view('livewire.product-detail-page', [
+            'product' => $product,
+            'reviews' => $product ? $product->reviews()->latest()->get() : [],
+            'averageRating' => $product ? $product->reviews()->avg('rating') : 0,
+        ]);
+    }
 
 }

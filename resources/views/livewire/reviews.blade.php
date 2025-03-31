@@ -1,32 +1,36 @@
 <div>
-    <div class="container mt-4 p-0">
+    <div class="container -mt-4 p-0">
         <!-- Tab Navigation -->
-        <ul class="d-flex mb-4 p-0">
-            <li class="nav-item flex-fill text-center">
-                <a class="custom-link py-2 {{ $activeTab === 'to_rate' ? 'active' : '' }}"
-                    wire:click.prevent="switchTab('to_rate')" href="?tab=to_rate">
-                    <i class="fas fa-star-half-alt me-2"></i> To Rate
-                </a>
-            </li>
-            <li class="nav-item flex-fill text-center">
-                <a class="custom-link py-2 {{ $activeTab === 'my_reviews' ? 'active' : '' }}"
-                    wire:click.prevent="switchTab('my_reviews')" href="?tab=my_reviews">
-                    <i class="fas fa-comments me-2"></i> My Reviews
-                </a>
-            </li>
-        </ul>
+        <ul class="d-flex mb-2 bg-white h-10 p-8 pt-3 p-9">
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $activeTab === 'to_rate' ? 'active' : '' }}" 
+           wire:click.prevent="switchTab('to_rate')" href="?active_tab=to_rate" style="font-weight: normal; font-size: 1.2em;">
+            <i class="fas fa-star-half-alt me-2"></i> To Rate
+        </a>
+    </li>
+    <li class="nav-item flex-fill text-center">
+        <a class="custom-link py-2 {{ $activeTab === 'my_reviews' ? 'active' : '' }}" 
+           wire:click.prevent="switchTab('my_reviews')" href="?active_tab=my_reviews" style="font-weight: normal; font-size: 1.2em;">
+            <i class="fas fa-comments me-2"></i> My Reviews
+        </a>
+    </li>
+</ul>
+
 
         <div class="w-100 p-0">
             <!-- "To Rate" Tab -->
             @if ($activeTab === 'to_rate')
                 @forelse ($orderedItems as $item)
-                    <div class="px-5 py-3 shadow-sm rounded mb-2 custom-card-design">
+                    <div class="px-5 py-3 shadow-sm mb-2 bg-white">
                         <div class="d-flex align-items-center">
-                            <img src="{{ $item->display_image }}" class="img-thumbnail rounded-lg me-3"
-                                style="width: 80px; height: 80px; background-color: #E7FAFF; border: none;">
-                            <div class="flex-grow-1">
-                                <p><strong>{{ $item->product->product_name ?? 'Unknown Product' }}</strong></p>
-                                <p>Variation: {{ $item->variant->name ?? 'N/A' }}</p>
+                            <div class="border  rounded p-1">
+                                <img src="{{ $item->display_image }}" class="img-thumbnail rounded-lg"
+                                    class="img-thumbnail rounded-lg"
+                                    style="width: 100px; background-color: #E7FAFF; border: none;">
+                            </div>
+                            <div class="ms-3 flex-grow-1">
+                                <p style="color: #4F4F4F;"><strong>{{ $item->product->product_name }}</strong></p>
+                                <p>Variation: {{ $item['variant_name'] ?? 'N/A' }}</p>
                             </div>
                             <button wire:click="selectOrderItem({{ $item->id }})" class="btn"
                                 style="background-color:#00DCE3; color:white;" data-bs-toggle="modal"
@@ -46,20 +50,21 @@
                     <div class="px-5 py-3 shadow-sm rounded mb-2 custom-card-design">
                         <!-- Product Info & Actions -->
                         <div class="d-flex align-items-center">
-                            <img src="{{ $review->display_image }}" class="img-thumbnail rounded-lg me-3"
-                                style="width: 80px; height: 80px; background-color: #E7FAFF; border: none;">
-                            <div class="flex-grow-1">
-                                <p class="mb-1">
-                                    <strong>{{ $review->orderItem->product->product_name ?? 'Unknown Product' }}</strong>
-                                </p>
-                                <p class="text-muted mb-0">Variation: {{ $review->variant->name ?? 'N/A' }}</p>
+                            <div class="border  rounded p-1">
+                                <img src="{{ $review->display_image }}" class="img-thumbnail rounded-lg"
+                                    class="img-thumbnail rounded-lg"
+                                    style="width: 100px; background-color: #E7FAFF; border: none;">
+                            </div>
+                            <div class="ms-3 flex-grow-1">
+                                <p style="color: #4F4F4F;"><strong>{{ $review->orderItem->product->product_name }}</strong></p>
+                                <p>Variation: {{ $review->variant->name ?? 'N/A' }}</p>
                             </div>
 
                             <!-- Dropdown Menu -->
                             <div class="dropdown">
                                 <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton{{ $review->id }}"
                                     data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background: none;">
-                                    <i class="fas fa-ellipsis-v"></i>
+                                    <i class="fas fa-ellipsis-v" style="font-size: 1rem;"></i>
                                 </button>
 
                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm"
@@ -78,7 +83,6 @@
                                     </li>
                                 </ul>
                             </div>
-
                         </div>
 
                         <!-- Divider -->
@@ -109,15 +113,15 @@
 
                             <!-- Image Modal -->
                             @if($isOpen)
-                                <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                                    <div class="relative bg-white rounded-lg p-4 shadow-lg max-w-[90%] max-h-[90%]">
+                                <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-10 z-50">
+                                    <div
+                                        class="relative bg-white rounded-lg p-3 shadow-lg border border-gray-300 max-w-[90%] max-h-[90%]">
                                         <button wire:click="closeImageModal"
-                                            class="absolute top-2 right-2 text-gray-600 text-2xl">&times;</button>
-                                        <img src="{{ $imageUrl }}" class="max-w-full max-h-screen rounded-lg">
+                                            class="absolute top-0 right-1 text-gray-600 text-2xl">&times;</button>
+                                        <img src="{{ $imageUrl }}" class="max-w-full max-h-[60vh] rounded-lg object-contain">
                                     </div>
                                 </div>
                             @endif
-
 
                             <!-- Date Info -->
                             <p class="text-muted mt-2" style="font-size: 12px;">
@@ -133,11 +137,6 @@
                     <p class="text-center mt-4">You haven't left any reviews yet.</p>
                 @endforelse
             @endif
-
-
-
-
-
         </div>
     </div>
 
@@ -167,14 +166,15 @@
 
                         <div class="mb-3">
                             <label for="comment" class="form-label">Comment</label>
-                            <textarea wire:model="comment" class="form-control" rows="3"></textarea>
+                            <textarea wire:model="comment" wire:key="comment-field-{{ $editingReviewId }}"
+                                class="form-control" rows="3"></textarea>
                         </div>
 
                         <!-- Image Upload Field -->
                         <div class="mb-3">
                             <label class="form-label">Upload Images</label>
-                            <input type="file" class="form-control" wire:model="images" multiple>
-                            @error('images.*') <span class="text-danger">{{ $message }}</span> @enderror
+                            <input type="file" class="form-control" wire:model="newImages" multiple>
+                            @error('newImages.*') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
                         <!-- Image Preview-->
@@ -182,15 +182,13 @@
                             <div class="d-flex flex-wrap mt-2">
                                 @foreach ($images as $index => $image)
                                     <div class="position-relative me-2 mb-2" style="width: 100px; height: 100px;">
-                                        @if ($state === 'new')
+                                        @if (is_object($image) && method_exists($image, 'temporaryUrl'))
                                             <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail w-100 h-100"
                                                 style="object-fit: cover;">
                                         @else
                                             <img src="{{ asset('storage/' . $image) }}" class="img-thumbnail w-100 h-100"
                                                 style="object-fit: cover;">
                                         @endif
-
-
 
                                         <!-- Delete Button Inside the Image -->
                                         <button type="button" class="btn-close position-absolute top-0 end-0 p-1"
@@ -216,8 +214,6 @@
 
 <script>
     document.addEventListener('livewire:load', function () {
-
-
         Livewire.on('hide-review-modal', () => {
             var modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
             if (modal) modal.hide();

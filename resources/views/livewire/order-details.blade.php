@@ -1,37 +1,31 @@
 <div>
-    <div class="container mt-5 rounded-3">
-        <button class="btn btn-secondary mb-3" wire:click="goBack">Back to Orders</button>
-        <div class="d-flex justify-content-between align-items-center">
-            <h4 class="text-white text-center pt-2 w-100 h-12 m-0" style="background-color: #00DCE3; 
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
-                border-bottom-left-radius: 0px;
-                border-bottom-right-radius: 0px;">
-                @if($order['status'] == 'to_ship')
-                    Your order is currently being prepared for shipment
-                @elseif($order['status'] == 'to_receive')
-                    Order has been shipped
-                @elseif($order['status'] == 'delivered')
-                    Order successfully delivered
-                @elseif($order['status'] == 'completed')
-                    Your order is complete
-                @elseif($order['status'] == 'cancelled')
-                    Order has been cancelled
-                @endif
-            </h4>
-        </div>
-        <div class="px-4 py-3 mb-2 border bg-white" style="
-            border-top-left-radius: 0px;
-            border-top-right-radius: 0px;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;">
-            <h6 class="w-100 border-bottom pb-2">Delivery Information</h6>
+    <div class="container -mt-4 rounded-1 p-0">
+    <div class="d-flex align-items-center px-5" style="background-color: #00DCE3; color: white; ">
+    <div style="margin-right: 300px;">
+    <button class="btn p-0" style="background-color: #00DCE3; border-radius: 5px; color: white;  font-size: 35px;" wire:click="goBack">&lt;</button>
+</div>
+    <h4 class="m-0 ">
+        @if($order['status'] == 'to_ship')
+            Your order is currently being prepared for shipment
+        @elseif($order['status'] == 'to_receive')
+            Order has been shipped
+        @elseif($order['status'] == 'delivered')
+            Order successfully delivered
+        @elseif($order['status'] == 'completed')
+            Your order is complete
+        @elseif($order['status'] == 'cancelled')
+            Order has been cancelled
+        @endif
+    </h4>
+</div>
+        <div class="px-5 py-3 mb-2  bg-white">
+            <h6 class="w-100 border-bottom pb-2 text-[#4F4F4F]">Delivery Information</h6>
             <div class="ms-4 d-flex align-items-center mt-3">
                 <div class="text-primary flex-shrink-0 " style="margin-bottom: 35px;">
                     <i class="fa-solid fa-location-dot fa-lg " style="color: #ED2A2A;"></i>
                 </div>
                 <div class="ms-3">
-                    <h6 class="mb-1">{{ $order['user']['first_name'] }} {{ $order['user']['last_name'] }}</h6>
+                    <h6 class="mb-1 text-[#4F4F4F]">{{ $order['user']['first_name'] }} {{ $order['user']['last_name'] }}</h6>
                     <p class="mb-1">{{ $order['user']['phone'] }}</p>
                     <p>{{ $order['user']['address']['street_address'] }}, {{ $order['user']['address']['city'] }}, {{ $order['user']['address']['province'] }}, {{ $order['user']['address']['zip_code'] }}</p>
                 </div>
@@ -40,10 +34,10 @@
             <table class="w-full">
                 <thead>
                     <tr>
-                        <th class="text-left font-semibold">Items Summary</th>
-                        <th style="text-align: center;">Quantity</th>
-                        <th style="text-align: center;">Price</th>
-                        <th style="text-align: right;">Total Price</th>
+                        <th class="text-left font-semibold text-[#4F4F4F]">Items Summary</th>
+                        <th style="text-align: center; color:#4F4F4F;">Quantity</th>
+                        <th style="text-align: center; color:#4F4F4F;">Price</th>
+                        <th style="text-align: right; color:#4F4F4F;">Total Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +49,7 @@
                                         <img src="{{ asset('storage/' . ltrim($item['image'], '/')) }}" alt="{{ $item['name'] }}" class="img-thumbnail rounded-lg" style="width: 100px; background-color: #E7FAFF; border: none;">
                                     </div>
                                     <div class="text-left ms-2">
-                                        <p><strong>{{ $item['name'] }}</strong></p>
+                                        <p class=" text-[#4F4F4F]"> <strong>{{ $item['name'] }}</strong></p>
                                         <p>Variation: {{ $item['variant_name'] ?? 'N/A' }}</p>
                                     </div>
                                 </div>
@@ -84,14 +78,14 @@
                     <p class="mb-0">₱{{ number_format($order['shipping_amount'], 2) }}</p>
                 </div>
                 <div class="text-end mt-3 mb-5">
-                    <p class="mb-0"><strong>Order Total: ₱ {{ number_format($order['total_price'], 2) }}</strong></p>
+                    <p class="mb-0  text-[#4F4F4F]"><strong>Order Total: ₱ {{ number_format($order['total_price'], 2) }}</strong></p>
                 </div>
             </div>
         </div>
 
-        <div class="px-4 py-3 border rounded bg-white">
+        <div class="px-5 py-3  bg-white">
             <div class="d-flex justify-content-between">
-                <h5 class="mb-1"><strong>Order ID:</strong></h5>
+                <h5 class="mb-1  text-[#4F4F4F]" ><strong>Order ID:</strong></h5>
                 <p class="mb-1">#{{ $order['id'] }}</p>
             </div>
 

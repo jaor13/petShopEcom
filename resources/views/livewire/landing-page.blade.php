@@ -36,16 +36,12 @@
       <div id="carouselExampleInterval" class="carousel slide  " data-bs-ride="carousel">
         <!-- Carousel Indicators -->
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3"
-            aria-label="Slide 4"></button>
-          <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4"
-            aria-label="Slide 5"></button>
+        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0"  aria-current="true" class="active" aria-label="Slide 1" style="width: 10px; height: 10px; border-radius: 50%; background-color: white; margin: 5px;"></button>
+    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2" style="width: 10px; height: 10px; border-radius: 50%; background-color: white; margin: 5px;"></button>
+    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3" style="width: 10px; height: 10px; border-radius: 50%; background-color: white; margin: 5px;"></button>
+    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4" style="width: 10px; height: 10px; border-radius: 50%; background-color: white; margin: 5px;"></button>
+    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5" style="width: 10px; height: 10px; border-radius: 50%; background-color: white; margin: 5px;"></button>
+ 
         </div>
 
         <div class="carousel-inner " style="border-radius: 20px;">
@@ -154,33 +150,33 @@
           <i class="fa-solid fa-cat"></i>
         </a>
 
-        <a href="{{ route('products', ['type' => 'bird']) }}" wire:navigate class="category-box">
+        <a href="{{ url('products?category=' . "Bird Products") }}" wire:navigate class="category-box">
           <i class="fa-solid fa-dove"></i>
         </a>
 
 
-        <a href="{{ route('products', ['type' => 'otter']) }}" wire:navigate class="category-box">
-          <i class="fa-solid fa-otter"></i>
-        </a>
-
-        <a href="{{ route('products', ['type' => 'fish']) }}" wire:navigate class="category-box">
+        <a href="{{ url('products?category=' . "Fish Feeders") }}" wire:navigate class="category-box">
           <i class="fa-solid fa-fish"></i>
         </a>
 
-        <a href="{{ route('products', ['type' => 'dragon']) }}" wire:navigate class="category-box">
+        <a href="{{ url('products?category=' . "Bearded Dragons") }}" wire:navigate class="category-box">
           <i class="fa-solid fa-dragon"></i>
         </a>
 
+        <a href="{{ url('products?category=' . "Bearded Dragons") }}" wire:navigate class="category-box">
+          <i class="fa-solid fa-otter"></i>
+        </a>
 
-        <a href="{{ route('products', ['type' => 'dog']) }}" wire:navigate class="category-box">
-          <i class="fa-solid fa-dog"></i>
+
+        <a href="{{ url('products?category=' . "Pet Shampoo & Bath Essentials") }}" wire:navigate class="category-box">
+          <i class="fa-solid fa-bath"></i>
         </a>
         
-        <a href="{{ route('products', ['type' => 'dragon']) }}" wire:navigate class="category-box">
-          <i class="fa-solid fa-dragon"></i>
+        <a href="{{ url('products?category=' . "Pet Grooming") }}" wire:navigate class="category-box">
+          <i class="fa-solid fa-scissors"></i>
 
-        <a href="{{ route('products', ['type' => 'cat']) }}" wire:navigate class="category-box">
-          <i class="fa-solid fa-cat"></i>
+        <a href="{{ url('products?category=' . "Dog Toy") }}" wire:navigate class="category-box">
+          <i class="fa-solid fa-bone"></i>
         </a>
 
         </a>
@@ -203,7 +199,7 @@
         </a>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
-        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
+        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'latest'])
       </div>
     </div>
 
@@ -222,6 +218,7 @@
         </a>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+        
         @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
       </div>
     </div>
@@ -234,14 +231,90 @@
 
           Hygiene and Supply
         </h1>
-        <a href="{{ route('products', ['type' => 'best_sellers']) }}"
+        <a href="{{ route('products', ['category' => 'Hygiene Supplies']) }}"
           style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;"
           wire:navigate>
           View All >
         </a>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
-        @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers'])
+      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers', 'category' => 'Hygiene Supplies'])
+      </div>
+    </div>
+
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
+          <span
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+
+          Dry Food
+        </h1>
+        <a href="{{ route('products', ['category' => 'Dry Food']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;"
+          wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers', 'category' => 'Dry Food'])
+      </div>
+    </div>
+
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
+          <span
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+
+          Pet Snacks
+        </h1>
+        <a href="{{ route('products', ['category' => 'Pet Snacks']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;"
+          wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers', 'category' => 'Pet Snacks'])
+      </div>
+    </div>
+
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
+          <span
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+
+          Pet Grooming
+        </h1>
+        <a href="{{ route('products', ['category' => 'Pet Grooming']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;"
+          wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers', 'category' => 'Pet Grooming'])
+      </div>
+    </div>
+
+    <div class="container-fluid p-2 rounded-3 mt-5" style="background-color: white;">
+      <div style=" display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: rgb(83, 82, 82); font-size: xx-large; margin:1em 0em 0em 1.1em;">
+          <span
+            style="display: inline-block; width: 13px; height: 23px; background-color: #00D4FF; border-radius: 3px; margin-right: 8px;"></span>
+
+          Pet Health & Wellness
+        </h1>
+        <a href="{{ route('products', ['category' => 'Pet Health & Wellness']) }}"
+          style="font-size: 1.2em; color: rgb(145, 143, 143); margin-top: 1.4em; margin-right: 1.7em; text-decoration: none;"
+          wire:navigate>
+          View All >
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.2em">
+      @livewire('partials.product-grid', ['limit' => 5, 'type' => 'best_sellers', 'category' => 'Pet Health & Wellness'])
       </div>
     </div>
 
