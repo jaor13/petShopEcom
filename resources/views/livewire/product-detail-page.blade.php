@@ -91,17 +91,18 @@
                 </div>
                 <div style="display: flex; align-items: center;">
                   <div wire:click="addToLiked({{ $product->id }})" class="like-button-container">
-                  <div class="like-button" id="likeButton" style="display: inline-flex; align-items: center; cursor: pointer;">
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" 
-       fill="none" stroke="#FF8284" stroke-width="1.5" stroke-linecap="round" 
-       stroke-linejoin="bevel" class="like-icon" 
-       style="transition: transform 0.3s ease, fill 0.3s ease;">
-    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-  </svg> 
-</div>
+                      <div class="like-button" style="display: inline-flex; align-items: center; cursor: pointer;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                              fill="{{ in_array($product->id, $likedProducts) ? '#FF8284' : 'none' }}" 
+                              stroke="#FF8284" stroke-width="1.5"
+                              stroke-linecap="round" stroke-linejoin="bevel" class="like-icon"
+                              style="transition: transform 0.3s ease, fill 0.3s ease;">
+                              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                          </svg>
+                      </div>
                   </div>
                   <span style="color: #374151;">Add to Favorites</span>
-                </div>
+              </div>
               </div>
               <hr style="margin-top: 10px; margin-bottom: 30px; border: 0.6px solid #ccc;"></hr>
               <p class="inline-block mb-6  text-4xl font-bold  text-[#F93535] ">
@@ -135,14 +136,14 @@
             </div>
 
             <div style="display: flex; flex-wrap: wrap; align-items: center;">
-                  <a href="{{ auth()->check() ? '#' : route('login') }}" @if(auth()->check())
-                  wire:click.prevent="addToCart({{ $product->id }}, {{ $quantity }})" @endif
-                  style="width: 47%; margin-right: 5%; padding: 0.75rem; background-color: #00DCE3; border-radius: 0.375rem; color: white; font-size: 1.125rem; line-height: 1.75rem; font-weight: 700; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease;"
-                  onmouseover="this.style.backgroundColor='#00B2B5';" onmouseout="this.style.backgroundColor='#00DCE3';">
-                  <span wire:loading.remove style="display: block;"
-                    wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Add to Cart</span>
-                  <span wire:loading style="display: none; "
-                    wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Adding to cart</span>
+              <a href="{{ auth()->check() ? '#' : route('login') }}" @if(auth()->check())
+                wire:click.prevent="addToCart({{ $product->id }}, {{ $quantity }})" @endif
+                style="width: 47%; margin-right: 5%; padding: 0.75rem; background-color: #00DCE3; border-radius: 0.375rem; color: white; font-size: 1.125rem; line-height: 1.75rem; font-weight: 700; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease;"
+                onmouseover="this.style.backgroundColor='#00B2B5';" onmouseout="this.style.backgroundColor='#00DCE3';">
+                <span wire:loading.remove style="display: block;"
+                  wire:target="addToCart({{ $product->id }}, {{ $quantity }})">Add to Cart</span>
+                <span wire:loading style="display: none; "
+                  wire:target="addToCart({{ $product->id }}, {{ $quantity }}, '{{ $variant_name ?? 'null' }}')">Adding to cart</span>
                   </a>
                   <a href="{{ auth()->check() ? route('checkout', ['product_id' => $product->id, 'quantity' => $quantity] + ($variant_name ? ['variant' => $variant_name] : [])) : route('login') }}" 
                     @if(auth()->check())
@@ -151,7 +152,8 @@
                     style="width: 47%; padding: 0.75rem; background-color: white; border-radius: 0.375rem; color: #00DCE3; border: 1px solid #00DCE3; font-size: 1.125rem; line-height: 1.75rem; font-weight: 700; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease, color 0.3s ease;"
                     onmouseover="this.style.backgroundColor='#E0F7FA'; this.style.color='#00B2B5';"
                     onmouseout="this.style.backgroundColor='white'; this.style.color='#00DCE3';">
-                    <span wire:loading.remove style="display: block;" 
+
+                    <span wire:loading.remove style="display: block; align-items:center" 
                     wire:target="redirectToCheckout({{ $product->id }}, {{ $quantity }}, {{ $variant_name ? "'$variant_name'" : 'null' }})">Buy Now</span>
                     <span wire:loading style="display: none; "
                     wire:target="redirectToCheckout({{ $product->id }}, {{ $quantity }}, {{ $variant_name ? "'$variant_name'" : 'null' }})">Processing...</span>
