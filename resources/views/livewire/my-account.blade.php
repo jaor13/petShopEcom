@@ -181,7 +181,7 @@
 
                     </div>
                     <div class="d-flex align-items-center gap-3 mb-4">
-                        <button type="submit" class="btn btn-success" >Save</button>
+                        <button type="submit" class="btn btn-save" >Save</button>
                         <button type="button" class="btn btn-secondary" wire:click="cancelEditing">Cancel</button>
                     </div>
                 </form>

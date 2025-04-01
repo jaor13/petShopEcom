@@ -688,10 +688,11 @@ main {
   margin-top: 10px;
 }
 
-.btn-success {
+.btn-save {
   background-color: #00DCE3;
   border: #00DCE3;
   width: 4.3em;
+  color: #f0f0f0;
 }
 
 .btn-secondary {
@@ -699,4 +700,10 @@ main {
   background-color: rgb(255, 255, 255);
   border-color: #00DCE3;
   width: 4.3em;
+}
+
+.btn-success {
+  background-color: #00DCE3;
+  border: #00DCE3;
+  color: #f0f0f0;
 }
