@@ -14,6 +14,7 @@ use App\Livewire\OrdersPage;
 use App\Livewire\ProductDetailPage;
 use App\Livewire\ProductsPage;
 use App\Livewire\SuccessPage;
+use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Controllers\CustomProfileController;
@@ -24,6 +25,8 @@ use App\Livewire\OrderDetails;
 use App\Livewire\Orders;
 use Namu\WireChat\Livewire\Pages\Chats;
 use Namu\WireChat\Livewire\Pages\Chat;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Controllers\InvoiceController;
 
 
 // admin
@@ -31,7 +34,12 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin', function () {
         return redirect()->route('filament.admin.pages.admin-dashboard');
     })->name('adminDashboard');
+
+    Route::get('/print-invoice/{id}',[InvoiceController::class,'printPurchaseInvoice'])->name('print-invoice');
+    Route::get('/download-invoice/{id}', [InvoiceController::class, 'downloadPurchaseInvoice'])->name('download-invoice');
+
 });
+
 
 
 // not admin
@@ -91,6 +99,9 @@ Route::middleware(['notAdmin'])->group(function () {
     Route::get('/', LandingPage::class)->name('home');
     Route::get('/products', ProductsPage::class)->name('products');
     Route::get('/product/{slug}', ProductDetailPage::class)->name('product.detail');
+
+
+
 });
 
 

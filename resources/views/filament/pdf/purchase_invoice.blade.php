@@ -1,0 +1,1 @@
+@include('filament.pdf.reusable.invoices.purchase')

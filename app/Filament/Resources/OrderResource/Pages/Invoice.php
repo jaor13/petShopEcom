@@ -28,6 +28,13 @@ class Invoice extends Page
                 ->label('Print')
                 ->icon('heroicon-o-printer')
                 ->requiresConfirmation()
+                ->url(route('print-invoice',['id' => $this->record])), 
+
+           Action::make('download')
+                ->label('Download PDF')
+                ->icon('heroicon-o-document-arrow-down')
+                ->url(route('download-invoice',['id' => $this->record]))
+                ->openUrlInNewTab(), // Optional: Opens the PDF in a new tab
         ];
     }
     
