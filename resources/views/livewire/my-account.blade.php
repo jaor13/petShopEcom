@@ -182,7 +182,7 @@
                     </div>
                     <div class="d-flex align-items-center gap-3 mb-4">
                         <button type="submit" class="btn btn-success" >Save</button>
-                        <button type="button" class="btn btn-secondary" style="color: #00DCE3; background-color:rgb(255, 255, 255); border-color: #00DCE3; width: 4.3em;" wire:click="cancelEditing">Cancel</button>
+                        <button type="button" class="btn btn-secondary" wire:click="cancelEditing">Cancel</button>
                     </div>
                 </form>
             </div>

@@ -693,3 +693,10 @@ main {
   border: #00DCE3;
   width: 4.3em;
 }
+
+.btn-secondary {
+  color: #00DCE3;
+  background-color: rgb(255, 255, 255);
+  border-color: #00DCE3;
+  width: 4.3em;
+}
