@@ -64,6 +64,7 @@
                 <a href="{{ route('chats') }}" wire:navigate
                     class="relative flex items-center space-x-1">
                     <span><iconify-icon icon="mdi:chat" class="iconify-message"></iconify-icon></span>
+                </a>
             </div>
 
             <!-- User Profile Icon with Dropdown (Alpine.js) -->

@@ -8,8 +8,8 @@
         <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-gray-100 rounded-t-lg p-6">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-2xl font-extrabold text-gray-700">Invoice for Order: #{{ $order->id }}</h1>
-                    <p class="text-gray-400">Date Ordered: {{ $order->created_at->format('F j, Y') }}</p>
+                    <h1 class="text-2xl font-extrabold white-700">Invoice for Order: #{{ $order->id }}</h1>
+                    <p class="text-white-400">Date Ordered: {{ $order->created_at->format('F j, Y') }}</p>
                 </div>
                 <div class="text-right">
                     <img src="{{ asset('assets/images/brand-logo.svg') }}" alt="Company Logo" class="w-30 h-30" style="width: 120px; height: 120px;">
@@ -18,15 +18,15 @@
         </div>
 
         <!-- Divider -->
-        <div class="border-t-4 border-gray-600 w-full"></div>
+        <div class="border-t-4 border-gray-600 w-full mb-5"></div>
 
         <!-- Billing and Payment Information -->
-        <div class="mt-0 grid grid-cols-2 gap-1">
+        <div class="mt-5 grid grid-cols-2 gap-1">
             <!-- Delivery Details -->
             <div class="bg-blue-50 p-6 rounded-lg">
                 <h2 class="font-bold text-blue-800 text-lg">Delivery Details</h2>
-                <p class="text-gray-700">{{ $order->user->address->full_name ?? 'N/A' }}</p>
-                <p class="text-gray-700">{{ $order->user->address->street_address ?? 'N/A' }}, {{ $order->user->address->city ?? '' }},{{ $order->user->address->zip_code ?? '' }} {{ $order->user->address->province ?? '' }} </p>
+                <p class="text-gray-700">Recipient: {{ $order->user->address->full_name ?? 'N/A' }}</p>
+                <p class="text-gray-700">Address: {{ $order->user->address->street_address ?? 'N/A' }}, {{ $order->user->address->city ?? '' }},{{ $order->user->address->zip_code ?? '' }} {{ $order->user->address->province ?? '' }} </p>
                 <p class="text-gray-700">Email: {{ $order->user->email ?? 'N/A' }}</p>
                 <p class="text-gray-700">Phone: {{ $order->user->address->phone ?? 'N/A' }}</p>
             </div>
