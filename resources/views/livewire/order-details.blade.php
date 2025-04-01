@@ -1,5 +1,5 @@
 <div>
-    <div class="container -mt-4 rounded-1 p-0">
+    <div class="container -mt-7 rounded-1 p-0">
     <div class="d-flex align-items-center px-5" style="background-color: #00DCE3; color: white; ">
     <div style="margin-right: 300px;">
     <button class="btn p-0" style="background-color: #00DCE3; border-radius: 5px; color: white;  font-size: 35px;" wire:click="goBack">&lt;</button>
