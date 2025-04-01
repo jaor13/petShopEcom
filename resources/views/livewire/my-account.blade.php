@@ -5,7 +5,7 @@
 
             <div class="col-md-12 px-5 py-3 mt-2 p-0 shadow-sm bg-white">
                 <h4 class="mb-3 text-[#4F4F4F]"
-                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 111%; margin-left: -48px;">
+                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 113%; margin-left: -48px;">
                     <p class="personal">Personal Information</p>
                 </h4>
                 <div class ="row mb-3">
