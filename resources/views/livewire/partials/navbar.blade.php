@@ -11,7 +11,7 @@
         <div class="d-none d-md-flex  align-items-center search-container">
             <form id="search-form" class="d-flex align-items-center w-100" action="{{ url('products') }}" method="GET">
                 <!-- Search Input -->
-                <input type="text" name="query" class="form-control search-input" placeholder="Search in Aricuz"
+                <input type="text" name="query" class="form-control search-input ml-2" placeholder="Search in Aricuz"
                     value="{{ request('query') }}">
 
                 <!-- Keep category when searching -->
