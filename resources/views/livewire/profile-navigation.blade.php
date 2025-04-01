@@ -1,6 +1,5 @@
 <div class="row main-box ">
-    <nav id="" class="col-md-4 col-lg-3 d-md-block  p-1">
-    
+    <nav id="" class="col-md-4 col-lg-3 d-md-block  p-1 -mt-1">
         <div class="position-sticky bg-white">
             @livewire('profile-settings')
             <ul class="nav flex-column">
