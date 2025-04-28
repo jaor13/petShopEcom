@@ -1,11 +1,11 @@
-<div class="container -mt-4" >
+<div class="container -mt-7" >
     <div class="row">
         <!-- Read-Only Personal Information -->
         @if (!$isEditing)
 
             <div class="col-md-12 px-5 py-3 mt-2 p-0 shadow-sm bg-white">
                 <h4 class="mb-3 text-[#4F4F4F]"
-                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 111%; margin-left: -48px;">
+                    style="border-bottom: 1px solid #ccc; padding-bottom: 10px; width: 113%; margin-left: -48px;">
                     <p class="personal">Personal Information</p>
                 </h4>
                 <div class ="row mb-3">
@@ -181,7 +181,7 @@
 
                     </div>
                     <div class="d-flex align-items-center gap-3 mb-4">
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-save" >Save</button>
                         <button type="button" class="btn btn-secondary" wire:click="cancelEditing">Cancel</button>
                     </div>
                 </form>

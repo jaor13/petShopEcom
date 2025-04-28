@@ -1,5 +1,5 @@
 <div>
-    <div class="container-fluid ms-0 me-3  px-4 py-3 mb-2 -mt-4 border border-light shadow-sm bg-white">
+    <div class="container-fluid ms-0 me-3  px-4 py-3 mb-2 -mt-7 border border-light shadow-sm bg-white">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-right: 11px; margin-left:11px;">
           <h4 class="section-description text-[#4F4F4F]" style="margin: 0;">Liked Products</h4>
             

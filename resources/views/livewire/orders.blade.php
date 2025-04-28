@@ -1,7 +1,7 @@
-<div class="container -mt-4 ">
+<div class="container -mt-7 ">
     
-    <ul class="d-flex mb-1 -ml-3 bg-white h-9 p-8 pt-3 p-10 gap-8 ">
-        <li class="nav-item flex-fill text-center text-base">
+    <ul class="d-flex mb-1 -ml-3 bg-white h-11 p-7 pt-2 gap-8 ">
+        <li class="nav-item flex-fill text-center text-lg">
             <a class="custom-link py-2 {{ $status === 'all' ? 'active' : '' }}" 
             wire:click.prevent="filterOrders('all')" href="?status=all" style="font-weight: normal;">
             <i class="fas fa-list-alt me-2"></i>All Orders
