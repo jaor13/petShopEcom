@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Namu\WireChat\Traits\Chatable;
 use Illuminate\Support\Collection;
- 
+use Illuminate\Auth\Notifications\ResetPassword;
 class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasName{
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -106,4 +106,10 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
     {
      return $this->hasVerifiedEmail();
     }
+
+    public function sendPasswordResetNotification($token)
+{
+    // The email will be queued because we're using the queue driver
+    $this->notify(new ResetPassword($token));
+}
 }

@@ -1,0 +1,20 @@
+  2025-04-28 23:33:24 Namu\WireChat\Events\MessageCreated ............ RUNNING
+  2025-04-28 23:33:24 Namu\WireChat\Events\MessageCreated ............ RUNNING
+  2025-04-28 23:33:24 Namu\WireChat\Jobs\NotifyParticipants .......... RUNNING
+  2025-04-28 23:33:24 Namu\WireChat\Events\MessageCreated ............ RUNNING
+  2025-04-28 23:33:24 App\Jobs\ProcessOrderStatus .................... RUNNING
+  2025-04-28 23:33:24 Namu\WireChat\Events\MessageCreated ...... 131.85ms DONE
+  2025-04-28 23:33:24 Namu\WireChat\Events\MessageCreated  2025-04-28 23:33:24 Namu\WireChat\Events\MessageCreated ...... 141.37ms DONE
+ ...... 141.47ms DONE
+  2025-04-28 23:33:24 App\Jobs\ProcessOrderStatus .............. 177.49ms DONE
+  2025-04-28 23:33:24 Namu\WireChat\Jobs\NotifyParticipants .... 258.36ms DONE
+  2025-04-29 11:54:19 App\Jobs\ProcessOrderStatus .................... RUNNING
+  2025-04-29 11:54:20 App\Jobs\ProcessOrderStatus .............. 179.22ms DONE
+  2025-04-29 14:35:30 Namu\WireChat\Events\MessageCreated ............ RUNNING
+  2025-04-29 14:35:30 Namu\WireChat\Events\MessageCreated ...... 143.46ms DONE
+  2025-04-29 14:35:30 Namu\WireChat\Jobs\NotifyParticipants .......... RUNNING
+  2025-04-29 14:35:30 Namu\WireChat\Jobs\NotifyParticipants .... 225.50ms DONE
+  2025-04-29 14:36:03 Namu\WireChat\Events\MessageCreated ............ RUNNING
+  2025-04-29 14:36:03 Namu\WireChat\Events\MessageCreated ........ 6.64ms DONE
+  2025-04-29 14:36:03 Namu\WireChat\Jobs\NotifyParticipants .......... RUNNING
+  2025-04-29 14:36:03 Namu\WireChat\Jobs\NotifyParticipants ..... 24.09ms DONE

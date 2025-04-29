@@ -10,13 +10,16 @@ body {
 
 #main-container {
     display: flex;
-    width: 60%; /* Adjust as needed */
+    width: 60%; 
     height: 80vh; /* Adjust as needed */
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     overflow: hidden;
     padding: 0;
-    
+    overflow-x: hidden;
+    height: auto;
+    margin: 7vh auto; /* This adds vertical margin (5% of viewport height) */
+
 }
 
 
@@ -29,19 +32,22 @@ body {
     justify-content: center;
     align-items: center;
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .overlay-container h1 {
-    font-size: 3em;
+    font-size: 2.3em; /* Reduced from 3em */
     font-weight: 600;
     text-align: center;
     color: #363636;
-    line-height: 1.0; /* Adjust this value to bring the lines closer */
-    margin-bottom: 10px; /* Optionally, reduce the bottom margin */
+    line-height: 1.1; /* Slightly increased for better readability */
+    margin-bottom: 10px;
 }
 
 .overlay-container p {
-    font-size: 1em;
+    font-size: 0.9em; /* Reduced from 1em */
     text-align: center;
     margin-top: 10px;
     color: #363636;
@@ -62,14 +68,14 @@ body {
 
 
 .form-container h2 {
-font-size: 3.5em;
+    font-size: 2.5em; /* Reduced from 3.5em */
     margin-bottom: 10px;
     color: #333;
     text-align: center;
 }
 
 .form-container p {
-    font-size: 1em;
+    font-size: 0.9em; /* Reduced from 1em */
     margin-bottom: 20px;
     color: #666;
     text-align: center;
@@ -117,12 +123,12 @@ font-size: 3.5em;
 .form-container .btn {
     background-color: #00DCE3;
     color: white;
-    padding: 12px 20px;
+    padding: 10px 20px; /* Slightly reduced padding */
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    font-size: 20px;
+    font-size: 16px; /* Reduced from 20px */
 }
 
 .form-container .btn:hover {
@@ -147,6 +153,8 @@ font-size: 3.5em;
     width: 100%;
     margin-bottom: 35px;
     align-items: center; /* Vertically align items */
+    font-size: smaller;
+    color:#666;
 }
 
 .form-container .remember-forgot label {
@@ -159,6 +167,14 @@ font-size: 3.5em;
     color: #006ae3;
     text-decoration: none;
 }
+
+.overlay-container img {
+    max-width: 500px;  /* Control the maximum width */
+    width: 90%;        /* Make it responsive */
+    height: auto;      /* Maintain aspect ratio */
+    margin-bottom: 20px;
+}
+
 
 @media (max-width: 768px) {
     #main-container {
@@ -173,11 +189,36 @@ font-size: 3.5em;
     }
 
     .overlay-container img {
-        max-width: 200px;
+        max-width: 300px;
     }
 
     .overlay-container h1,
     .form-container h2 {
-        font-size: 2em;
+        font-size: 1.8em; /* Further reduced for mobile */
     }
+}
+
+@media (max-width: 576px) {
+    .overlay-container, .form-container {
+        padding: 1.5rem;
+    }
+    
+    .overlay-container h1 {
+        font-size: 1.4rem; /* Even smaller on very small screens */
+    }
+}
+
+/* Ensure form elements are responsive */
+.form-container form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-container input.form-control {
+    width: 100%;
+}
+
+.btn {
+    width: 100%;
 }

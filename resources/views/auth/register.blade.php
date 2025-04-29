@@ -6,16 +6,20 @@
     <title>Register - Pawsome Essentials</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&display=swap">
     <link href="{{ asset('assets/css/Register.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container" id="main-container">
+        <div class="overlay-container">
+            <img src="{{ asset('assets/images/overlay-logo.svg') }}" alt="Pawsome Essentials Logo">
+            <h1>Pawsome Essentials Delivered with Love!</h1>
+            <p>Give your pet the best! Create an account for new foods, accessories, and loving delivery</p>
+        </div>
         <div class="form-container sign-up" id="signup-container">
-            <h2 style=" color:#4F4F4F;">Create Account</h2>
+            <h2 class="mt-5">Create Account</h2>
             <p>Join us by filling out the details</p>
 
             <form method="POST" action="{{ route('register') }}">
@@ -26,14 +30,15 @@
                     <x-input-error :messages="$errors->get('username')" class="mt-2" />
                 </div>
 
-                <div class="mb-3">
-                    <input type="text" name="fname" class="form-control" placeholder="First Name" value="{{ old('fname') }}" required autocomplete="fname">
-                    <x-input-error :messages="$errors->get('fname')" class="mt-2" />
-                </div>
-
-                <div class="mb-3">
-                    <input type="text" name="lname" class="form-control" placeholder="Last Name" value="{{ old('lname') }}" required autocomplete="lname">
-                    <x-input-error :messages="$errors->get('lname')" class="mt-2" />
+                <div class="row name-row">
+                    <div class="col-md-6 mb-md-0 mb-3">
+                        <input type="text" name="fname" class="form-control" placeholder="First Name" value="{{ old('fname') }}" required autocomplete="fname">
+                        <x-input-error :messages="$errors->get('fname')" class="mt-2" />
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" name="lname" class="form-control" placeholder="Last Name" value="{{ old('lname') }}" required autocomplete="lname">
+                        <x-input-error :messages="$errors->get('lname')" class="mt-2" />
+                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -62,11 +67,6 @@
                     <p class="signin-link">Already have an account? <a id="show-signup" href="{{ route('login') }}">Login</a></p>
                 </div>
             </form>
-        </div>
-        <div class="overlay-container">
-            <img src="{{ asset('assets/images/overlay-logo.svg') }}" alt="Description of the image" style="width: 400px; height: 300px;">
-            <h1>Pawsome Essentials Delivered with Love!</h1>
-            <p>Give your pet the best! Create an account for new foods, accessories, and loving delivery</p>
         </div>
     </div>
 
