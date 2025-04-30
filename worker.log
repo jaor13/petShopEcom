@@ -18,3 +18,141 @@
   2025-04-29 14:36:03 Namu\WireChat\Events\MessageCreated ........ 6.64ms DONE
   2025-04-29 14:36:03 Namu\WireChat\Jobs\NotifyParticipants .......... RUNNING
   2025-04-29 14:36:03 Namu\WireChat\Jobs\NotifyParticipants ..... 24.09ms DONE
+  2025-04-30 15:04:46 Namu\WireChat\Events\MessageCreated ............ RUNNING
+  2025-04-30 15:04:46 Namu\WireChat\Jobs\NotifyParticipants .......... RUNNING
+  2025-04-30 15:04:46 Namu\WireChat\Events\MessageCreated ...... 154.13ms DONE
+  2025-04-30 15:04:46 Namu\WireChat\Jobs\NotifyParticipants .... 299.32ms DONE
+  2025-04-30 16:15:01 App\Jobs\ProcessOrderStatus .................... RUNNING
+  2025-04-30 16:15:01 App\Jobs\ProcessOrderStatus .............. 214.11ms DONE
+  2025-04-30 23:51:30 Namu\WireChat\Events\MessageCreated ............ RUNNING
+  2025-04-30 23:51:30 Namu\WireChat\Events\MessageCreated ...... 142.65ms DONE
+  2025-04-30 23:51:30 Namu\WireChat\Jobs\NotifyParticipants .......... RUNNING
+  2025-04-30 23:51:30 Namu\WireChat\Jobs\NotifyParticipants .... 131.97ms DONE
+  2025-04-30 23:52:02 Namu\WireChat\Events\MessageCreated ............ RUNNING
+  2025-04-30 23:52:02 Namu\WireChat\Events\MessageCreated ....... 93.24ms DONE
+  2025-04-30 23:52:02 Namu\WireChat\Jobs\NotifyParticipants .......... RUNNING
+  2025-04-30 23:52:02 Namu\WireChat\Jobs\NotifyParticipants .... 277.57ms DONE
+  2025-04-30 23:53:39 Namu\WireChat\Events\MessageCreated ............ RUNNING
+  2025-04-30 23:53:39 Namu\WireChat\Events\MessageCreated ....... 16.14ms DONE
+  2025-04-30 23:53:39 Namu\WireChat\Jobs\NotifyParticipants .......... RUNNING
+  2025-04-30 23:53:39 Namu\WireChat\Jobs\NotifyParticipants ..... 85.32ms DONE
+  2025-05-01 00:40:54 Namu\WireChat\Jobs\NotifyParticipants .......... RUNNING
+  2025-05-01 00:40:54 Namu\WireChat\Events\MessageCreated ............ RUNNING
+  2025-05-01 00:40:54 Namu\WireChat\Jobs\NotifyParticipants .... 189.30ms DONE
+  2025-05-01 00:40:54 Namu\WireChat\Events\MessageCreated ...... 190.89ms DONE
+  2025-05-01 01:18:29 App\Jobs\ProcessOrderStatus .................... RUNNING
+  2025-05-01 01:18:29 App\Jobs\ProcessOrderStatus .............. 170.21ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ...... 111.75ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 3.06ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 2.95ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 2.80ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 3.12ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 4.06ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 4.03ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 3.92ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ....... 10.91ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 4.08ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 4.03ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 3.30ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+ ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 5.84ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ....... 75.11ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ........ 4.97ms DONE
+  2025-05-01 01:32:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:04 App\Jobs\CheckPaymongoPaymentStatus ...... 434.35ms DONE
+  2025-05-01 01:32:04 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:04 App\Jobs\CheckPaymongoPaymentStatus ...... 394.80ms DONE
+  2025-05-01 01:32:04 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:04 App\Jobs\CheckPaymongoPaymentStatus ........ 4.22ms DONE
+  2025-05-01 01:32:04 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:04 App\Jobs\CheckPaymongoPaymentStatus ...... 180.18ms DONE
+  2025-05-01 01:32:04 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:32:04 App\Jobs\CheckPaymongoPaymentStatus ...... 221.69ms DONE
+  2025-05-01 01:32:04 App\Jobs\CheckUnpaidPaymongoOrders ............. RUNNING
+  2025-05-01 01:32:04 App\Jobs\CheckUnpaidPaymongoOrders ........ 92.76ms DONE
+  2025-05-01 01:32:04 App\Jobs\CheckPaymongoPaymentStatus ...... 321.89ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ...... 124.26ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 4.65ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 4.79ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 3.94ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 4.03ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 3.55ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 3.84ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 4.08ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 4.14ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 3.68ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 3.73ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 3.62ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 4.71ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ........ 3.98ms DONE
+  2025-05-01 01:33:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:03 App\Jobs\CheckPaymongoPaymentStatus ...... 356.34ms DONE
+  2025-05-01 01:33:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:03 App\Jobs\CheckPaymongoPaymentStatus ........ 3.28ms DONE
+  2025-05-01 01:33:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:03 App\Jobs\CheckPaymongoPaymentStatus ...... 232.41ms DONE
+  2025-05-01 01:33:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:03 App\Jobs\CheckPaymongoPaymentStatus ...... 202.27ms DONE
+  2025-05-01 01:33:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:03 App\Jobs\CheckPaymongoPaymentStatus ........ 3.68ms DONE
+  2025-05-01 01:33:03 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:33:04 App\Jobs\CheckPaymongoPaymentStatus ...... 210.34ms DONE
+  2025-05-01 01:33:04 App\Jobs\CheckUnpaidPaymongoOrders ............. RUNNING
+  2025-05-01 01:33:04 App\Jobs\CheckUnpaidPaymongoOrders ......... 9.28ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ...... 111.81ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 5.45ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 5.82ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 4.90ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 4.86ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 5.27ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 9.75ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 8.05ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 9.39ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 8.31ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 6.34ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ...... 436.29ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ........ 3.40ms DONE
+  2025-05-01 01:34:02 App\Jobs\CheckPaymongoPaymentStatus ............ RUNNING
+  2025-05-01 01:34:03 App\Jobs\CheckPaymongoPaymentStatus ...... 192.43ms DONE
