@@ -36,7 +36,10 @@ return [
     */
 
     'mailers' => [
-
+ 'sendgrid' => [
+        'transport' => 'sendgrid',
+        'api_key' => env('SENDGRID_API_KEY'), // Make sure this matches your .env variable
+    ],
         'smtp' => [
             'transport' => 'smtp',
             'scheme' => env('MAIL_SCHEME'),

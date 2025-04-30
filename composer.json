@@ -16,7 +16,8 @@
         "livewire/livewire": "^3.6",
         "namu/wirechat": "*",
         "paymongo/paymongo-php": "^0.0.0",
-        "pusher/pusher-php-server": "^7.2"
+        "pusher/pusher-php-server": "^7.2",
+        "s-ichikawa/laravel-sendgrid-driver": "^4.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
