@@ -121723,3 +121723,1235 @@
 
    INFO  Starting server on 0.0.0.0:8080.  
 
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+
+
+   TypeError 
+
+  Laravel\Reverb\ConfigApplicationProvider::findById(): Argument #1 ($id) must be of type string, null given, called in /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php on line 27
+
+  at /var/www/html/vendor/laravel/reverb/src/ConfigApplicationProvider.php:36
+     32▕      * Find an application instance by ID.
+     33▕      *
+     34▕      * @throws \Laravel\Reverb\Exceptions\InvalidApplication
+     35▕      */
+  ➜  36▕     public function findById(string $id): Application
+     37▕     {
+     38▕         return $this->find('app_id', $id);
+     39▕     }
+     40▕
+
+      [2m+1 vendor frames [22m
+
+  2   [internal]:0
+      Laravel\Reverb\ConfigApplicationProvider::Laravel\Reverb\{closure}()
+      [2m+34 vendor frames [22m
+
+  37  /var/www/html/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   INFO  Starting server on 0.0.0.0:8080.  
+

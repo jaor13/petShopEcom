@@ -2,8 +2,10 @@
 <div class="mx-4 px-3 " style="display: flex; justify-content: space-between; align-items: center;">
             @if(!collect($products)->isEmpty() || request('query') || request('category') || request('type'))
                 <h1 style="font-weight: bold; color:#4F4F4F; font-size: xx-large; margin-bottom: 0; ">
-                <button class="btn p-0 me-4" style=" width: 15px; color: #4F4F4F; font-size: 35px;" onclick="history.back()"> <strong>&lt;</strong></button>
-                    @if(request('query') && request('category') && request('category') !== 'All Categories')
+                 <button class="btn p-0 me-2" style="color: #4F4F4F;" onclick="history.back()">
+                    <i class="fas fa-arrow-left" style="font-size: 24px;"></i>
+                </button>
+		  @if(request('query') && request('category') && request('category') !== 'All Categories')
                         Search results for "{{ request('query') }}" in "{{ request('category') }}"
         
                     @elseif(request('query') && request('category') === 'All Categories')
