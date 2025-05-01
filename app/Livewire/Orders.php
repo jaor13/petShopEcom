@@ -1,17 +1,23 @@
 <?php
 
 namespace App\Livewire;
+
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use Livewire\Attributes\On;
 use App\Models\User;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Illuminate\Support\Facades\Log;
 
 class Orders extends Component
 {
+    use LivewireAlert;
+
     public $status = 'all'; // Default tab
     public $orders = [];
     public $selectedOrderId = null;
+    public $orderIdToCancel = null;
 
     protected $queryString = ['status'];
 
@@ -167,6 +173,53 @@ class Orders extends Component
     
         // Optionally, you can refresh the orders list
         $this->filterOrders($this->status);
+    }
+
+    public function confirmCancelOrder($orderId)
+    {
+        $this->orderIdToCancel = $orderId;
+
+        $this->alert('warning', 'Are you sure you want to cancel this order?', [
+            'position' => 'center',
+            'toast' => false,
+            'showConfirmButton' => true,
+            'showCancelButton' => true,
+            'confirmButtonText' => 'Yes, cancel it!',
+            'cancelButtonText' => 'No, keep it',
+            'onConfirmed' => 'cancelOrderConfirmed',
+        ]);
+    }
+
+
+    #[On('cancelOrderConfirmed')]
+    public function cancelOrderConfirmed()
+    {
+        $this->cancelOrder($this->orderIdToCancel);
+    }
+
+
+    #[On('cancelOrder')]
+    public function cancelOrder($orderId)
+    {
+        $order = Order::find($orderId);
+        // dd('inside cancelOrder', $orderId);
+        if ($order && in_array($order->status, ['new', 'processing', 'to_ship'])) {
+            $order->status = 'cancelled';
+            $order->cancelled_at = now();
+            $order->save();
+            // dd('inside cancellation');
+            // Reset the orderIdToCancel after successful cancellation
+            $this->orderIdToCancel = null;
+
+            $this->alert('success', 'Order has been cancelled.', [
+                'position' => 'bottom-end',
+                'timer' => 3000,
+            ]);
+            $this->fetchOrders();
+        } else {
+            // dd('inside error');
+            $this->alert('error', 'Unable to cancel this order.');
+        }
     }
 
     public function render()
