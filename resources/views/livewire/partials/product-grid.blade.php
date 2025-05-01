@@ -46,7 +46,7 @@
                             </div>
                             <div>
                                 <span style="color: gold; font-size: 1.3em;  margin-left: -1px;">★</span> 
-                                4.5 | {{ $product->sold_count }} sold
+                                {{ number_format($product->averageRating, 1) }} | {{ $product->sold_count }} sold
                             </div>
                             <div style="display: flex; align-items: center; white-space: nowrap;">
                                 <i class="fa-solid fa-location-dot small" style="margin-right: 6px; margin-left: 3px; opacity: 0.5;"></i>
@@ -85,5 +85,6 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </div>

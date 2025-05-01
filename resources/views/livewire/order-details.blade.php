@@ -133,8 +133,8 @@
             @endif
         </div>
 
-        @if($order['status'] == 'to_ship')
-        <button class="btn btn-white mt-3" style="background-color: #00DCE3; color: white;" wire:click="cancelOrder">Cancel Order</button>
+        @if($order['status'] == 'to_ship' || $order['status'] === 'new')
+        <button class="btn btn-white mt-3" style="background-color: #00DCE3; color: white;" wire:click="confirmCancelOrder({{ $order['id'] }})">Cancel Order</button>
         @endif
 
         @if($order['status'] == 'delivered')
