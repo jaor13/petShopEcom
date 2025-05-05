@@ -6,6 +6,8 @@ use App\Helpers\CartManagement;
 use Filament\Forms\Components\Card;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -15,7 +17,8 @@ use App\Models\Product;
 
 #[Title("Checkout - Aricuz")]
 class CheckoutPage extends Component
-{
+{    
+    use LivewireAlert;
     public $first_name;
     public $last_name;
     public $phone;
@@ -170,6 +173,19 @@ class CheckoutPage extends Component
             return redirect()->route('/');
         }
 
+        // Check if address is added
+        if (!$this->use_existing_address) {
+            // Trigger SweetAlert to ask user to add address
+            $this->alert('warning', 'Please add an address before proceeding!', [
+                'position' => 'bottom-end',
+                'timer' => 3000,
+                'toast' => true,
+            ]);
+
+            // Prevent further processing of order placement
+            return;
+        }
+
         // Calculate totals
         // $grand_total = array_sum(array_column($this->selected_items, 'total_amount')) + $this->shipping_amount;
 
@@ -177,8 +193,23 @@ class CheckoutPage extends Component
             'payment_method' => 'required',
         ]);
 
+        // Validate address fields
         $this->validate([
-            'payment_method' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone' => 'required',
+            'street_address' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'zip_code' => 'required',
+        ], [
+            'first_name.required' => 'First name is required.',
+            'last_name.required' => 'Last name is required.',
+            'phone.required' => 'Phone number is required.',
+            'street_address.required' => 'Street address is required.',
+            'city.required' => 'City is required.',
+            'province.required' => 'Province is required.',
+            'zip_code.required' => 'Zip code is required.',
         ]);
 
         // Create Order

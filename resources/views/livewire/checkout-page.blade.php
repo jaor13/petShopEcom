@@ -244,41 +244,55 @@
                             <div class="col-md-6">
                                 <label for="first_name" class="form-label">First Name</label>
                                 <input wire:model="first_name" id="first_name" class="form-control" type="text">
-                                @error('first_name') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('first_name') 
+                                    <span class="text-danger">{{ $errors->first('first_name') }}</span> 
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <label for="last_name" class="form-label">Last Name</label>
                                 <input wire:model="last_name" id="last_name" class="form-control" type="text">
-                                @error('last_name') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('last_name') 
+                                    <span class="text-danger">{{ $errors->first('last_name') }}</span> 
+                                @enderror
                             </div>
                         </div>
                         <div class="mt-3">
                             <label for="street_address" class="form-label">Street Address</label>
                             <input wire:model="street_address" id="street_address" class="form-control" type="text">
-                            @error('street_address') <span class="text-danger">{{ $message }}</span> @enderror
+                            @error('street_address')
+                                <span class="text-danger">{{ $errors->first('street_address') }}</span>
+                            @enderror
                         </div>
                         <div class="mt-3">
                             <label for="city" class="form-label">City</label>
                             <input wire:model="city" id="city" class="form-control" type="text">
-                            @error('city') <span class="text-danger">{{ $message }}</span> @enderror
+                            @error('city') 
+                                <span class="text-danger">{{ $errors->first('city') }}</span> 
+                            @enderror
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <label for="province" class="form-label">Province</label>
                                 <input wire:model="province" id="province" class="form-control" type="text">
-                                @error('province') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('province') 
+                                    <span class="text-danger">{{ $errors->first('province') }}</span> 
+                                @enderror                            
                             </div>
                             <div class="col-md-6">
                                 <label for="zip_code" class="form-label">ZIP Code</label>
                                 <input wire:model="zip_code" id="zip_code" class="form-control" type="text">
-                                @error('zip_code') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('zip_code') 
+                                    <span class="text-danger">{{ $errors->first('zip_code') }}</span> 
+                                @enderror                               
                             </div>
                         </div>
                         <div class="mt-3">
                             <label for="phone" class="form-label">Phone</label>
                             <input wire:model="phone" id="phone" class="form-control" type="text">
-                            @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
+                            @error('zip_code') 
+                                <span class="text-danger">{{ $errors->first('zip_code') }}</span> 
+                            @enderror                         
+                            </div>
                         <div class="mt-4 flex justify-end">
                             <button type="submit"
                                 class="btn  btn-outline-success ">{{ $is_editing ? 'Save Changes' : 'Add Address' }}</button>
