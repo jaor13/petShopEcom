@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Helpers\CartManagement;
 use App\Helpers\LikedProductManagement;
 use App\Models\LikedProducts;
 use App\Models\Product;
@@ -9,6 +10,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use App\Livewire\Partials\Navbar;
 
 #[Title("Liked Products - Aricuz")]
 
@@ -75,6 +77,27 @@ class LikedProduct extends Component
                 'toast' => true,
             ]);
         }
+    }
+
+    public function addToCart($product_id)
+    {
+        $product = Product::with('variants')->find($product_id);
+
+        if ($product && $product->variants->count() > 0) {
+            return redirect()->to(url('product/' . $product->slug . '?variant_alert=1'));
+        }
+
+        usleep(200000); // 0.2 second delay (200ms)
+        $total_count = CartManagement::addItemToCart($product_id);
+        // dd($total_count, $product_id);
+
+        $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
+
+        $this->alert('success', 'Product added to cart successfully!', [
+            'position' => 'bottom-end',
+            'timer' => 3000,
+            'toast' => true,
+        ]);
     }
 
     public function render()
